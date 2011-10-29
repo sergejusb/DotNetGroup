@@ -11,11 +11,17 @@ namespace Api.Controllers
 
         public TwitterController()
         {
-            _hashtag = ConfigurationManager.AppSettings["twitter"];
             _service = new TwitterService();
+            _hashtag = ConfigurationManager.AppSettings["twitter"];
         }
 
-        public ActionResult Index()
+        public TwitterController(ITwitterService service, string hashtag)
+        {
+            _service = service;
+            _hashtag = hashtag;
+        }
+
+        public ActionResult Json()
         {
             return Json(_service.GetTweets(_hashtag), JsonRequestBehavior.AllowGet);
         }

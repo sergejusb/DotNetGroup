@@ -11,25 +11,26 @@ namespace Services.Rss
     public class RssAggregator : IRssAggregator
     {
         private readonly IRssService _rssService;
-        private readonly IEnumerable<string> _rssUrls;
+        private readonly IRssUrlProvider _urlProvider;
 
-        public RssAggregator(IEnumerable<string> rssUrls)
-            : this(new RssService(), rssUrls)
+        public RssAggregator()
+            : this(new RssService(), new ConfigRssUrlProvider())
         {
         }
 
-        public RssAggregator(IRssService rssService, IEnumerable<string> rssUrls)
+        public RssAggregator(IRssService rssService, IRssUrlProvider urlProvider)
         {
             _rssService = rssService;
-            _rssUrls = rssUrls;
+            _urlProvider = urlProvider;
         }
 
         public IEnumerable<Feed> GetLatestFeeds(int count = 25)
         {
-            return _rssUrls.SelectMany(url => _rssService.GetFeeds(url))
-                .OrderByDescending(f => f.Published)
-                .Take(count)
-                .ToList();
+            return _urlProvider.GetUrls()
+                    .SelectMany(url => _rssService.GetFeeds(url))
+                    .OrderByDescending(f => f.Published)
+                    .Take(count)
+                    .ToList();
         }
     }
 }

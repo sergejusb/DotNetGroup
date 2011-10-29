@@ -14,8 +14,7 @@ namespace Tests.Services
         [Test]
         public void RssAggregator_Can_Be_Successfully_Created_With_Default_Constructor()
         {
-            var urls = new[] { "http://atom1", "http://atom2", "http://atom3" };
-            new RssAggregator(urls);
+            new RssAggregator();
         }
 
         [Test]
@@ -79,8 +78,9 @@ namespace Tests.Services
                 var feed = urlFeed;
                 rssServiceFake.Setup(s => s.GetFeeds(feed.Key)).Returns(feed.Value);
             }
-            var rssService = rssServiceFake.Object;
-            return new RssAggregator(rssService, urlFeeds.Keys);
+            var rssUrlProviderFake = new Mock<IRssUrlProvider>();
+            rssUrlProviderFake.Setup(p => p.GetUrls()).Returns(urlFeeds.Keys);
+            return new RssAggregator(rssServiceFake.Object, rssUrlProviderFake.Object);
         }
 
         private static IEnumerable<Feed> BuildFeeds(int numberOfFeeds)

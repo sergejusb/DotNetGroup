@@ -15,13 +15,10 @@ namespace Api
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
-            routes.MapRoute("Twitter", "tweets/{id}", new { controller = "Twitter", action = "Index", id = UrlParameter.Optional });
-            routes.MapRoute("Rss", "feeds/{id}", new { controller = "Rss", action = "Index", id = UrlParameter.Optional });
-
             routes.MapRoute(
                 "Default", // Route name
                 "{controller}/{action}/{id}", // URL with parameters
-                new { controller = "Twitter", action = "Index", id = UrlParameter.Optional } // Parameter defaults
+                new { controller = "Twitter", action = "Json", id = UrlParameter.Optional } // Parameter defaults
             );
 
         }
