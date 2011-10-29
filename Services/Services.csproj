@@ -39,6 +39,7 @@
   </PropertyGroup>
   <ItemGroup />
   <ItemGroup>
+    <Compile Include="Rss\CachedRssAggregator.cs" />
     <Compile Include="Rss\Feed.cs" />
     <Compile Include="Rss\RssAggregator.cs" />
     <Compile Include="Rss\RssService.cs" />
@@ -52,6 +53,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
+    <Reference Include="System.Runtime.Caching" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml" />
   </ItemGroup>

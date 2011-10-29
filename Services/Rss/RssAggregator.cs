@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -6,6 +7,7 @@ namespace Services.Rss
     public interface IRssAggregator
     {
         IEnumerable<Feed> GetLatestFeeds(int count = 25);
+        IEnumerable<Feed> GetLatestFeeds(string url, int count = 25);
     }
 
     public class RssAggregator : IRssAggregator
@@ -24,12 +26,19 @@ namespace Services.Rss
             _urlProvider = urlProvider;
         }
 
-        public IEnumerable<Feed> GetLatestFeeds(int count = 25)
+        public virtual IEnumerable<Feed> GetLatestFeeds(int count = 25)
         {
             return _urlProvider.GetUrls()
                     .SelectMany(url => _rssService.GetFeeds(url))
                     .OrderByDescending(f => f.Published)
                     .Take(count)
+                    .ToList();
+        }
+
+        public IEnumerable<Feed> GetLatestFeeds(string url, int count = 25)
+        {
+            return GetLatestFeeds(count)
+                    .TakeWhile(f => !f.Url.Equals(url, StringComparison.InvariantCultureIgnoreCase))
                     .ToList();
         }
     }
