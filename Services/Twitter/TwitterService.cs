@@ -6,14 +6,12 @@ namespace Services.Twitter
 {
     public interface ITwitterService
     {
-        IEnumerable<Tweet> GetTweets(string query);
+        IEnumerable<Tweet> GetTweets(string query, int count);
     }
 
     public class TwitterService : ITwitterService
     {
-        private const int Count = 100;
-
-        public IEnumerable<Tweet> GetTweets(string query)
+        public IEnumerable<Tweet> GetTweets(string query, int count)
         {
             try
             {
@@ -23,8 +21,7 @@ namespace Services.Twitter
                               where search.Type == SearchType.Search
                               && search.Query == query
                               && search.WithRetweets == false
-                              && search.PageSize == Count
-                              && search.WordNot == "ltnet.tv" // workaround: ignore competing hashtag for ltnet.tv
+                              && search.PageSize == count
                               select search).First().Entries;
 
                 return result.Select(e => new Tweet

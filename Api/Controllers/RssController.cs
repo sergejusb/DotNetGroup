@@ -9,7 +9,7 @@ namespace Api.Controllers
 
         public RssController()
         {
-            _aggregator = new RssAggregator(new RssService(), new ConfigRssUrlProvider());
+            _aggregator = new RssAggregator();
         }
 
         public RssController(IRssAggregator aggregator)

@@ -45,6 +45,7 @@
     <Compile Include="Rss\RssService.cs" />
     <Compile Include="Rss\RssUrlProvider.cs" />
     <Compile Include="Twitter\Tweet.cs" />
+    <Compile Include="Twitter\TwitterAggregator.cs" />
     <Compile Include="Twitter\TwitterService.cs" />
   </ItemGroup>
   <ItemGroup>

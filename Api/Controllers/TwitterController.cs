@@ -1,29 +1,25 @@
-﻿using System.Configuration;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using Services.Twitter;
 
 namespace Api.Controllers
 {
     public class TwitterController : Controller
     {
-        private readonly string _hashtag;
-        private readonly ITwitterService _service;
+        private readonly ITwitterAggregator _aggregator;
 
         public TwitterController()
         {
-            _service = new TwitterService();
-            _hashtag = ConfigurationManager.AppSettings["twitter"];
+            _aggregator = new TwitterAggregator();
         }
 
-        public TwitterController(ITwitterService service, string hashtag)
+        public TwitterController(ITwitterAggregator aggregator)
         {
-            _service = service;
-            _hashtag = hashtag;
+            _aggregator = aggregator;
         }
 
         public ActionResult Json()
         {
-            return Json(_service.GetTweets(_hashtag), JsonRequestBehavior.AllowGet);
+            return Json(_aggregator.GetLatestTweets(), JsonRequestBehavior.AllowGet);
         }
     }
 }

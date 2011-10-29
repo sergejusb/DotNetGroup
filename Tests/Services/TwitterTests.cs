@@ -11,10 +11,11 @@ namespace Tests.Services
         [Test]
         public void GetTweets_Can_Successfully_Retrieve_Values_From_Twitter()
         {
-            var query = ConfigurationManager.AppSettings["twitter"];
+            var query = "@sergejusb";
+            var count = 10;
             var twitterService = new TwitterService();
 
-            var tweets = twitterService.GetTweets(query);
+            var tweets = twitterService.GetTweets(query, count);
 
             Assert.Greater(tweets.Count(), 0);
         }
@@ -24,9 +25,10 @@ namespace Tests.Services
         {
             var empty = 0;
             var query = "#hashtagfortesting";
+            var count = 10;
             var twitterService = new TwitterService();
 
-            var tweets = twitterService.GetTweets(query);
+            var tweets = twitterService.GetTweets(query, count);
 
             Assert.AreEqual(empty, tweets.Count());
         }
@@ -36,9 +38,10 @@ namespace Tests.Services
         {
             var empty = 0;
             string query = null;
+            var count = 10;
             var twitterService = new TwitterService();
 
-            var tweets = twitterService.GetTweets(query);
+            var tweets = twitterService.GetTweets(query, count);
 
             Assert.AreEqual(empty, tweets.Count());
         }
