@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Web.Mvc;
 using Services.Rss;
 
 namespace Api.Controllers
@@ -9,7 +10,7 @@ namespace Api.Controllers
 
         public RssController()
         {
-            _aggregator = new RssAggregator();
+            _aggregator = new CachedRssAggregator(TimeSpan.FromMinutes(10));
         }
 
         public RssController(IRssAggregator aggregator)

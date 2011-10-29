@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Web.Mvc;
 using Services.Twitter;
 
 namespace Api.Controllers
@@ -9,7 +10,7 @@ namespace Api.Controllers
 
         public TwitterController()
         {
-            _aggregator = new TwitterAggregator();
+            _aggregator = new CachedTwitterAggregator(TimeSpan.FromMinutes(1));
         }
 
         public TwitterController(ITwitterAggregator aggregator)
