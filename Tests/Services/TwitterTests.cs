@@ -30,5 +30,17 @@ namespace Tests.Services
 
             Assert.AreEqual(empty, tweets.Count());
         }
+
+        [Test]
+        public void GetTweers_Returns_Empty_List_When_Internal_Exception_Happens()
+        {
+            var empty = 0;
+            string query = null;
+            var twitterService = new TwitterService();
+
+            var tweets = twitterService.GetTweets(query);
+
+            Assert.AreEqual(empty, tweets.Count());
+        }
     }
 }

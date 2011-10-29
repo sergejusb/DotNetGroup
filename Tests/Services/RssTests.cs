@@ -20,7 +20,7 @@ namespace Tests.Services
         }
 
         [Test]
-        public void GetFeeds_Returns_Empty_List_When_No_Results_Found()
+        public void GetFeeds_Returns_Empty_List_When_Internal_Exception_Happens()
         {
             var empty = 0;
             var url = "http://sergejus.blogas.lt/tag/fakeltnet/atom";
