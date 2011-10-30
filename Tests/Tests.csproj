@@ -42,6 +42,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Api\RoutingTests.cs" />
+    <Compile Include="Api\RssControllerTests.cs" />
+    <Compile Include="Api\TwitterControllerTests.cs" />
     <Compile Include="Fakes\FakeControllerContext.cs" />
     <Compile Include="Fakes\FakeHttpContext.cs" />
     <Compile Include="Fakes\FakeHttpRequest.cs" />
@@ -81,6 +84,10 @@
     <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Api\Api.csproj">
+      <Project>{A993818E-11DF-4A9E-907C-50317D8D7A27}</Project>
+      <Name>Api</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Services\Services.csproj">
       <Project>{561C89BF-11C5-431B-B847-DCBE97D5E26A}</Project>
       <Name>Services</Name>

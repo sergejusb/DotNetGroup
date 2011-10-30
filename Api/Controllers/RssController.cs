@@ -9,8 +9,8 @@ namespace Api.Controllers
         private readonly IRssAggregator _aggregator;
 
         public RssController()
+            : this(new CachedRssAggregator(TimeSpan.FromMinutes(10)))
         {
-            _aggregator = new CachedRssAggregator(TimeSpan.FromMinutes(10));
         }
 
         public RssController(IRssAggregator aggregator)

@@ -18,7 +18,7 @@ namespace Api
             routes.MapRoute(
                 "Default", // Route name
                 "{controller}/{action}/{id}", // URL with parameters
-                new { controller = "Twitter", action = "Json", id = UrlParameter.Optional } // Parameter defaults
+                new { controller = "twitter", action = "json", id = UrlParameter.Optional } // Parameter defaults
             );
 
         }

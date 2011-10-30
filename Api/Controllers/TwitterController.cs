@@ -9,8 +9,8 @@ namespace Api.Controllers
         private readonly ITwitterAggregator _aggregator;
 
         public TwitterController()
+            : this(new CachedTwitterAggregator(TimeSpan.FromMinutes(1)))
         {
-            _aggregator = new CachedTwitterAggregator(TimeSpan.FromMinutes(1));
         }
 
         public TwitterController(ITwitterAggregator aggregator)
