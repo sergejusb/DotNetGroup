@@ -6,7 +6,7 @@ using NUnit.Framework;
 using Ploeh.AutoFixture;
 using Services.Rss;
 
-namespace Tests.Services
+namespace Tests.Services.Rss
 {
     [TestFixture]
     public class RssAggregatorTests
@@ -68,6 +68,40 @@ namespace Tests.Services
             var feeds = rssAggregator.GetLatestFeeds(maximumNumberOfFeeds).ToList();
 
             Assert.AreEqual(maximumNumberOfFeeds, feeds.Count);
+        }
+
+        [Test]
+        public void Given_30_Existing_Feeds_And_Since_Latest_Feed_Url_10_New_Feeds_Exist_GetLatestFeeds_Returns_10_Feeds()
+        {
+            var numberOfLatestFeeds = 10;
+            var feeds = BuildFeeds(30);
+            var latestFeed = feeds.OrderByDescending(f => f.Published).Skip(numberOfLatestFeeds).Take(1).Single();
+            var urlFeeds = new Dictionary<string, IEnumerable<Feed>>
+            {
+                {"http://atom1", feeds}
+            };
+            var rssAggregator = BuildRssAggregator(urlFeeds);
+
+            var latestFeeds = rssAggregator.GetLatestFeeds(latestFeed.Url);
+
+            Assert.AreEqual(numberOfLatestFeeds, latestFeeds.Count());
+        }
+
+        [Test]
+        public void Given_30_Existing_Feeds_And_Since_Latest_Feed_Url_25_New_Feeds_Exist_GetLatestFeeds_With_Maximum_Number_Of_25_Feeds_Returns_25_Feeds()
+        {
+            var maximumNumberOfFeeds = 25;
+            var feeds = BuildFeeds(30);
+            var latestFeed = feeds.OrderByDescending(f => f.Published).Skip(maximumNumberOfFeeds).Take(1).Single();
+            var urlFeeds = new Dictionary<string, IEnumerable<Feed>>
+            {
+                {"http://atom1", feeds}
+            };
+            var rssAggregator = BuildRssAggregator(urlFeeds);
+
+            var latestFeeds = rssAggregator.GetLatestFeeds(latestFeed.Url);
+
+            Assert.AreEqual(maximumNumberOfFeeds, latestFeeds.Count());
         }
 
         private static IRssAggregator BuildRssAggregator(IDictionary<string, IEnumerable<Feed>> urlFeeds)

@@ -3,7 +3,7 @@ using System.Linq;
 using NUnit.Framework;
 using Services.Rss;
 
-namespace Tests.Services
+namespace Tests.Services.Rss
 {
     [TestFixture]
     public class ConfigRssUrlProviderTests

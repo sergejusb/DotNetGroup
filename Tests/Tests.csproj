@@ -42,10 +42,19 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Services\ConfigRssUrlProviderTests.cs" />
-    <Compile Include="Services\RssAggregatorTests.cs" />
-    <Compile Include="Services\RssTests.cs" />
-    <Compile Include="Services\TwitterTests.cs" />
+    <Compile Include="Fakes\FakeControllerContext.cs" />
+    <Compile Include="Fakes\FakeHttpContext.cs" />
+    <Compile Include="Fakes\FakeHttpRequest.cs" />
+    <Compile Include="Fakes\FakeHttpSessionState.cs" />
+    <Compile Include="Fakes\FakeIdentity.cs" />
+    <Compile Include="Fakes\FakePrincipal.cs" />
+    <Compile Include="Services\Rss\CachedRssAggregatorTests.cs" />
+    <Compile Include="Services\Rss\ConfigRssUrlProviderTests.cs" />
+    <Compile Include="Services\Rss\RssAggregatorTests.cs" />
+    <Compile Include="Services\Rss\RssServiceTests.cs" />
+    <Compile Include="Services\Twitter\CachedTwitterAggregatorTests.cs" />
+    <Compile Include="Services\Twitter\TwitterAggregatorTests.cs" />
+    <Compile Include="Services\Twitter\TwitterServiceTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Moq">
@@ -68,6 +77,8 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Services\Services.csproj">
@@ -75,6 +86,7 @@
       <Name>Services</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

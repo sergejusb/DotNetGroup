@@ -1,18 +1,17 @@
-﻿using System.Configuration;
-using System.Linq;
+﻿using System.Linq;
 using NUnit.Framework;
 using Services.Twitter;
 
-namespace Tests.Services
+namespace Tests.Services.Twitter
 {
     [TestFixture]
-    public class TwitterTests
+    public class TwitterServiceTests
     {
         [Test]
         public void GetTweets_Can_Successfully_Retrieve_Values_From_Twitter()
         {
-            var query = "@sergejusb";
-            var count = 10;
+            var query = "#ltnet";
+            var count = 100;
             var twitterService = new TwitterService();
 
             var tweets = twitterService.GetTweets(query, count);

@@ -3,10 +3,10 @@ using System.Linq;
 using NUnit.Framework;
 using Services.Rss;
 
-namespace Tests.Services
+namespace Tests.Services.Rss
 {
     [TestFixture]
-    public class RssTests
+    public class RssServiceTests
     {
         [Test]
         public void GetFeeds_Can_Successfully_Retrieve_Values_From_Rss()

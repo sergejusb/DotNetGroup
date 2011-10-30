@@ -26,8 +26,9 @@ namespace Services.Twitter
 
         public virtual IEnumerable<Tweet> GetLatestTweets(int count = 50)
         {
-            return _twitterService.GetTweets("#ltnet", count)
-                    .Where(t => !t.Content.Contains("ltnet.tv")) // workaround: ignore competing hashtag for ltnet.tv
+            // workaround: ignore competing hashtag for ltnet.tv
+            return _twitterService.GetTweets("#ltnet -ltnet.tv", count)
+                    .Where(t => !t.Content.Contains("ltnet.tv"))
                     .ToList();
         }
 
