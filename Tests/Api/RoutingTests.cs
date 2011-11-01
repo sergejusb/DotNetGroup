@@ -40,7 +40,7 @@ namespace Tests.Api
         }
 
         [Test]
-        public void Given_Path_Is_Twitter_TwitterControler_Json_Action_With_No_Parameters_Is_Called()
+        public void Given_Path_Is_Twitter_Then_TwitterControler_Json_Action_With_No_Parameters_Is_Called()
         {
             var routeData = GetRouteDataForUrl("~/twitter");
 
