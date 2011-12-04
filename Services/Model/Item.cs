@@ -1,8 +1,8 @@
-using System;
+﻿using System;
 
-namespace Services.Twitter
+namespace Services.Model
 {
-    public class Tweet
+    public class Item
     {
         public string Url { get; set; }
 
@@ -17,7 +17,5 @@ namespace Services.Twitter
         public string Title { get; set; }
 
         public string Content { get; set; }
-
-        public string Location { get; set; }
     }
 }

@@ -20,22 +20,22 @@ namespace Tests.Api
         }
 
         [Test]
-        public void Given_Path_Is_Rss_Slash_Url_Then_RssControler_Json_Action_With_Id_Parameters_Is_Called()
+        public void Given_Path_Is_Rss_Slash_Xml_Then_RssControler_Xml_Action_With_No_Parameters_Is_Called()
         {
-            var routeData = GetRouteDataForUrl("~/rss/url");
+            var routeData = GetRouteDataForUrl("~/rss/xml");
 
             Assert.AreEqual("rss", routeData.Values["controller"]);
-            Assert.AreEqual("json", routeData.Values["action"]);
-            Assert.AreEqual("url", routeData.Values["id"]);
+            Assert.AreEqual("xml", routeData.Values["action"]);
+            Assert.AreEqual(UrlParameter.Optional, routeData.Values["id"]);
         }
 
         [Test]
-        public void Given_Path_Is_Rss_Dot_Json_Slash_Url_Then_RssControler_Json_Action_With_Id_Parameters_Is_Called()
+        public void Given_Path_Is_Rss_Slash_Xml_Slash_Url_Then_RssControler_Xml_Action_With_Id_Parameters_Is_Called()
         {
-            var routeData = GetRouteDataForUrl("~/rss.json/url");
+            var routeData = GetRouteDataForUrl("~/rss/xml/url");
 
             Assert.AreEqual("rss", routeData.Values["controller"]);
-            Assert.AreEqual("json", routeData.Values["action"]);
+            Assert.AreEqual("xml", routeData.Values["action"]);
             Assert.AreEqual("url", routeData.Values["id"]);
         }
 
@@ -50,22 +50,22 @@ namespace Tests.Api
         }
 
         [Test]
-        public void Given_Path_Is_Twitter_Slash_Url_Then_TwitterControler_Json_Action_With_Id_Parameters_Is_Called()
+        public void Given_Path_Is_Twitter_Slash_Xml_Then_TwitterControler_Json_Action_With_No_Parameters_Is_Called()
         {
-            var routeData = GetRouteDataForUrl("~/twitter/url");
+            var routeData = GetRouteDataForUrl("~/twitter/xml");
 
             Assert.AreEqual("twitter", routeData.Values["controller"]);
-            Assert.AreEqual("json", routeData.Values["action"]);
-            Assert.AreEqual("url", routeData.Values["id"]);
+            Assert.AreEqual("xml", routeData.Values["action"]);
+            Assert.AreEqual(UrlParameter.Optional, routeData.Values["id"]);
         }
 
         [Test]
-        public void Given_Path_Is_Twitter_Dot_Json_Slash_Url_Then_TwitterControler_Json_Action_With_Id_Parameters_Is_Called()
+        public void Given_Path_Is_Twitter_Slash_Xml_Slash_Url_Then_TwitterControler_Json_Action_With_Id_Parameters_Is_Called()
         {
-            var routeData = GetRouteDataForUrl("~/twitter.json/url");
+            var routeData = GetRouteDataForUrl("~/twitter/xml/url");
 
             Assert.AreEqual("twitter", routeData.Values["controller"]);
-            Assert.AreEqual("json", routeData.Values["action"]);
+            Assert.AreEqual("xml", routeData.Values["action"]);
             Assert.AreEqual("url", routeData.Values["id"]);
         }
 

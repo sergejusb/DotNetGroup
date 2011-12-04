@@ -56,6 +56,7 @@
     <Compile Include="Services\Rss\RssAggregatorTests.cs" />
     <Compile Include="Services\Rss\RssServiceTests.cs" />
     <Compile Include="Services\Twitter\CachedTwitterAggregatorTests.cs" />
+    <Compile Include="Services\Twitter\ConfigTwitterQueryProviderTests.cs" />
     <Compile Include="Services\Twitter\TwitterAggregatorTests.cs" />
     <Compile Include="Services\Twitter\TwitterServiceTests.cs" />
   </ItemGroup>
@@ -69,11 +70,13 @@
     <Reference Include="nunit.mocks">
       <HintPath>..\packages\NUnit.2.5.10.11092\lib\nunit.mocks.dll</HintPath>
     </Reference>
-    <Reference Include="Ploeh.AutoFixture">
-      <HintPath>..\packages\AutoFixture.2.4.1\lib\Ploeh.AutoFixture.dll</HintPath>
+    <Reference Include="Ploeh.AutoFixture, Version=2.5.1.0, Culture=neutral, PublicKeyToken=b24654c590009d4f, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\AutoFixture.2.5.1\lib\Ploeh.AutoFixture.dll</HintPath>
     </Reference>
-    <Reference Include="Ploeh.SemanticComparison">
-      <HintPath>..\packages\AutoFixture.2.4.1\lib\Ploeh.SemanticComparison.dll</HintPath>
+    <Reference Include="Ploeh.SemanticComparison, Version=2.5.1.0, Culture=neutral, PublicKeyToken=b24654c590009d4f, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\AutoFixture.2.5.1\lib\Ploeh.SemanticComparison.dll</HintPath>
     </Reference>
     <Reference Include="pnunit.framework">
       <HintPath>..\packages\NUnit.2.5.10.11092\lib\pnunit.framework.dll</HintPath>

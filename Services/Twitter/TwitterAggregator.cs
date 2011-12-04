@@ -1,41 +1,32 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
+using Services.Generic;
+using Services.Model;
 
 namespace Services.Twitter
 {
-    public interface ITwitterAggregator
-    {
-        IEnumerable<Tweet> GetLatestTweets(int count = 50);
-        IEnumerable<Tweet> GetLatestTweets(string url, int count = 50);
-    }
-
-    public class TwitterAggregator : ITwitterAggregator
+    public class TwitterAggregator : BaseItemAggregator
     {
         private readonly ITwitterService _twitterService;
+        private readonly IConfigProvider _queryProvider;
 
         public TwitterAggregator()
-            : this(new TwitterService())
+            : this(new TwitterService(), new QueryConfigProvider())
         {
         }
 
-        public TwitterAggregator(ITwitterService twitterService)
+        public TwitterAggregator(ITwitterService twitterService, IConfigProvider queryProvider)
         {
             _twitterService = twitterService;
+            _queryProvider = queryProvider;
         }
 
-        public virtual IEnumerable<Tweet> GetLatestTweets(int count = 50)
+        public override IEnumerable<Item> GetLatest(int count)
         {
-            // workaround: ignore competing hashtag for ltnet.tv
-            return _twitterService.GetTweets("#ltnet -ltnet.tv", count)
-                    .Where(t => !t.Content.Contains("ltnet.tv"))
-                    .ToList();
-        }
-
-        public IEnumerable<Tweet> GetLatestTweets(string url, int count = 50)
-        {
-            return GetLatestTweets(count)
-                    .TakeWhile(t => !t.Url.Equals(url, StringComparison.InvariantCultureIgnoreCase))
+            return _queryProvider.GetValues()
+                    .SelectMany(q => _twitterService.GetTweets(q, count))
+                    .OrderByDescending(t => t.Published)
+                    .Take(count)
                     .ToList();
         }
     }

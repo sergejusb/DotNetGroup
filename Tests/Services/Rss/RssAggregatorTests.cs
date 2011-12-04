@@ -4,6 +4,8 @@ using System.Linq;
 using Moq;
 using NUnit.Framework;
 using Ploeh.AutoFixture;
+using Services.Generic;
+using Services.Model;
 using Services.Rss;
 
 namespace Tests.Services.Rss
@@ -20,7 +22,7 @@ namespace Tests.Services.Rss
         [Test]
         public void Given_30_Existing_Feeds_GetLatestFeeds_Returns_Feeds_In_Correct_Order()
         {
-            var urlFeeds = new Dictionary<string, IEnumerable<Feed>>
+            var urlFeeds = new Dictionary<string, IEnumerable<Item>>
             {
                 {"http://atom1", BuildFeeds(5)},
                 {"http://atom2", BuildFeeds(10)},
@@ -30,7 +32,7 @@ namespace Tests.Services.Rss
             var maxDate = urlFeeds.SelectMany(kv => kv.Value).Select(f => f.Published).Max();
             var rssAggregator = BuildRssAggregator(urlFeeds);
 
-            var feeds = rssAggregator.GetLatestFeeds(5 + 10 + 15).ToList();
+            var feeds = rssAggregator.GetLatest(5 + 10 + 15).ToList();
 
             Assert.AreEqual(minDate, feeds.Last().Published);
             Assert.AreEqual(maxDate, feeds.First().Published);
@@ -40,7 +42,7 @@ namespace Tests.Services.Rss
         public void Given_30_Existing_Feeds_GetLatestFeeds_With_Maximum_Number_Of_100_Feeds_Returns_30_Feeds()
         {
             var maximumNumberOfFeeds = 100;
-            var urlFeeds = new Dictionary<string, IEnumerable<Feed>>
+            var urlFeeds = new Dictionary<string, IEnumerable<Item>>
             {
                 {"http://atom1", BuildFeeds(5)},
                 {"http://atom2", BuildFeeds(10)},
@@ -48,7 +50,7 @@ namespace Tests.Services.Rss
             };
             var rssAggregator = BuildRssAggregator(urlFeeds);
 
-            var feeds = rssAggregator.GetLatestFeeds(maximumNumberOfFeeds).ToList();
+            var feeds = rssAggregator.GetLatest(maximumNumberOfFeeds).ToList();
 
             Assert.AreEqual(5 + 10 + 15, feeds.Count);
         }
@@ -57,7 +59,7 @@ namespace Tests.Services.Rss
         public void Given_30_Existing_Feeds_GetLatestFeeds_With_Maximum_Number_Of_10_Feeds_Returns_10_Feeds()
         {
             var maximumNumberOfFeeds = 10;
-            var urlFeeds = new Dictionary<string, IEnumerable<Feed>>
+            var urlFeeds = new Dictionary<string, IEnumerable<Item>>
             {
                 {"http://atom1", BuildFeeds(5)},
                 {"http://atom2", BuildFeeds(10)},
@@ -65,7 +67,7 @@ namespace Tests.Services.Rss
             };
             var rssAggregator = BuildRssAggregator(urlFeeds);
 
-            var feeds = rssAggregator.GetLatestFeeds(maximumNumberOfFeeds).ToList();
+            var feeds = rssAggregator.GetLatest(maximumNumberOfFeeds).ToList();
 
             Assert.AreEqual(maximumNumberOfFeeds, feeds.Count);
         }
@@ -76,13 +78,13 @@ namespace Tests.Services.Rss
             var numberOfLatestFeeds = 10;
             var feeds = BuildFeeds(30);
             var latestFeed = feeds.OrderByDescending(f => f.Published).Skip(numberOfLatestFeeds).Take(1).Single();
-            var urlFeeds = new Dictionary<string, IEnumerable<Feed>>
+            var urlFeeds = new Dictionary<string, IEnumerable<Item>>
             {
                 {"http://atom1", feeds}
             };
             var rssAggregator = BuildRssAggregator(urlFeeds);
 
-            var latestFeeds = rssAggregator.GetLatestFeeds(latestFeed.Url);
+            var latestFeeds = rssAggregator.GetLatest(latestFeed.Url, feeds.Count());
 
             Assert.AreEqual(numberOfLatestFeeds, latestFeeds.Count());
         }
@@ -93,18 +95,18 @@ namespace Tests.Services.Rss
             var maximumNumberOfFeeds = 25;
             var feeds = BuildFeeds(30);
             var latestFeed = feeds.OrderByDescending(f => f.Published).Skip(maximumNumberOfFeeds).Take(1).Single();
-            var urlFeeds = new Dictionary<string, IEnumerable<Feed>>
+            var urlFeeds = new Dictionary<string, IEnumerable<Item>>
             {
                 {"http://atom1", feeds}
             };
             var rssAggregator = BuildRssAggregator(urlFeeds);
 
-            var latestFeeds = rssAggregator.GetLatestFeeds(latestFeed.Url);
+            var latestFeeds = rssAggregator.GetLatest(latestFeed.Url, feeds.Count());
 
             Assert.AreEqual(maximumNumberOfFeeds, latestFeeds.Count());
         }
 
-        private static IRssAggregator BuildRssAggregator(IDictionary<string, IEnumerable<Feed>> urlFeeds)
+        private static IItemAggregator BuildRssAggregator(IDictionary<string, IEnumerable<Item>> urlFeeds)
         {
             var rssServiceFake = new Mock<IRssService>();
             foreach (var urlFeed in urlFeeds)
@@ -112,16 +114,17 @@ namespace Tests.Services.Rss
                 var feed = urlFeed;
                 rssServiceFake.Setup(s => s.GetFeeds(feed.Key)).Returns(feed.Value);
             }
-            var rssUrlProviderFake = new Mock<IRssUrlProvider>();
-            rssUrlProviderFake.Setup(p => p.GetUrls()).Returns(urlFeeds.Keys);
+            var rssUrlProviderFake = new Mock<IConfigProvider>();
+            rssUrlProviderFake.Setup(p => p.GetValues()).Returns(urlFeeds.Keys);
             return new RssAggregator(rssServiceFake.Object, rssUrlProviderFake.Object);
         }
 
-        private static IEnumerable<Feed> BuildFeeds(int numberOfFeeds)
+        private static IList<Item> BuildFeeds(int numberOfFeeds)
         {
-            return new Fixture().Build<Feed>()
+            return new Fixture().Build<Item>()
                                 .Do(f => f.Published = DateTime.Now.AddDays(new Random().Next(numberOfFeeds)).AddHours(new Random().Next(numberOfFeeds)))
-                                .CreateMany(numberOfFeeds).ToList();
+                                .CreateMany(numberOfFeeds)
+                                .ToList();
         }
     }
 }

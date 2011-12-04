@@ -2319,16 +2319,43 @@
             Initializes a new instance of the <see cref="T:Ploeh.AutoFixture.FreezingCustomization"/> class.
             </summary>
             <param name="targetType">The <see cref="T:System.Type"/> to freeze.</param>
+            <exception cref="T:System.ArgumentNullException">
+            <paramref name="targetType"/> is null.
+            </exception>
+        </member>
+        <member name="M:Ploeh.AutoFixture.FreezingCustomization.#ctor(System.Type,System.Type)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Ploeh.AutoFixture.FreezingCustomization"/> class.
+            </summary>
+            <param name="targetType">The <see cref="T:System.Type"/> to freeze.</param>
+            <param name="registeredType">
+            The <see cref="T:System.Type"/> to map the frozen <paramref name="targetType"/> value to.
+            </param>
+            <exception cref="T:System.ArgumentNullException">
+            Either <paramref name="targetType"/> or <paramref name="registeredType"/> is null.
+            </exception>
+            <exception cref="T:System.ArgumentException">
+            <paramref name="registeredType"/> is not assignable from <paramref name="targetType"/>.
+            </exception>
         </member>
         <member name="M:Ploeh.AutoFixture.FreezingCustomization.Customize(Ploeh.AutoFixture.IFixture)">
             <summary>
             Customizes the fixture by freezing the value of <see cref="P:Ploeh.AutoFixture.FreezingCustomization.TargetType"/>.
             </summary>
             <param name="fixture">The fixture to customize.</param>
+            <exception cref="T:System.ArgumentNullException">
+            <paramref name="fixture"/> is null.
+            </exception>
         </member>
         <member name="P:Ploeh.AutoFixture.FreezingCustomization.TargetType">
             <summary>
             Gets the <see cref="T:System.Type"/> to freeze.
+            </summary>
+        </member>
+        <member name="P:Ploeh.AutoFixture.FreezingCustomization.RegisteredType">
+            <summary>
+            Gets the <see cref="T:System.Type"/> to which the frozen <see cref="P:Ploeh.AutoFixture.FreezingCustomization.TargetType"/> value
+            should be mapped to. Defaults to the same <see cref="T:System.Type"/> as <see cref="P:Ploeh.AutoFixture.FreezingCustomization.TargetType"/>.
             </summary>
         </member>
         <member name="T:Ploeh.AutoFixture.ConstructorCustomization">
@@ -2374,7 +2401,8 @@
         </member>
         <member name="M:Ploeh.AutoFixture.IFixture.Build``1">
             <summary>
-            Customizes the creation algorithm for a single object.
+            Customizes the creation algorithm for a single object, effectively turning off all
+            Customizations on the <see cref="T:Ploeh.AutoFixture.IFixture"/>.
             </summary>
             <typeparam name="T">
             The type of object for which the algorithm should be customized.
@@ -2383,6 +2411,13 @@
             A <see cref="T:Ploeh.AutoFixture.Dsl.ICustomizationComposer`1"/> that can be used to customize the creation
             algorithm before creating the object.
             </returns>
+            <remarks>
+            <para>
+            The Build method kicks off a Fluent API which is usually completed by invoking
+            <see cref="M:Ploeh.AutoFixture.SpecimenFactory.CreateAnonymous``1(Ploeh.AutoFixture.Dsl.IPostprocessComposer{``0})"/> on the method
+            chain.
+            </para>
+            </remarks>
         </member>
         <member name="M:Ploeh.AutoFixture.IFixture.Customize(Ploeh.AutoFixture.ICustomization)">
             <summary>
@@ -5650,7 +5685,8 @@
         </member>
         <member name="M:Ploeh.AutoFixture.Fixture.Build``1">
             <summary>
-            Customizes the creation algorithm for a single object.
+            Customizes the creation algorithm for a single object, effectively turning off all
+            Customizations on the <see cref="T:Ploeh.AutoFixture.IFixture"/>.
             </summary>
             <typeparam name="T">
             The type of object for which the algorithm should be customized.
@@ -5659,6 +5695,19 @@
             A <see cref="T:Ploeh.AutoFixture.Dsl.ICustomizationComposer`1"/> that can be used to customize the creation
             algorithm before creating the object.
             </returns>
+            <remarks>
+            <para>
+            The Build method kicks off a Fluent API which is usually completed by invoking
+            <see cref="M:Ploeh.AutoFixture.SpecimenFactory.CreateAnonymous``1(Ploeh.AutoFixture.Dsl.IPostprocessComposer{``0})"/> on the method
+            chain.
+            </para>
+            <para>
+            Note that the Build method chain is best understood as a one-off Customization. It
+            bypasses all Customizations on the <see cref="T:Ploeh.AutoFixture.Fixture"/> instance. Instead, it allows
+            fine-grained control when building a specific specimen. However, in most cases, adding
+            a convention-based <see cref="T:Ploeh.AutoFixture.ICustomization"/> is a better, more flexible option.
+            </para>
+            </remarks>
         </member>
         <member name="M:Ploeh.AutoFixture.Fixture.Customize(Ploeh.AutoFixture.ICustomization)">
             <summary>

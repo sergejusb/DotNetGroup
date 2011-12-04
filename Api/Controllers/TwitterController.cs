@@ -1,26 +1,27 @@
 ﻿using System;
 using System.Web.Mvc;
+using Services.Generic;
 using Services.Twitter;
 
 namespace Api.Controllers
 {
     public class TwitterController : Controller
     {
-        private readonly ITwitterAggregator _aggregator;
+        private readonly IItemAggregator _aggregator;
 
         public TwitterController()
-            : this(new CachedTwitterAggregator(TimeSpan.FromMinutes(1)))
+            : this(new CachedItemAggregator(new TwitterAggregator(), TimeSpan.FromMinutes(1)))
         {
         }
 
-        public TwitterController(ITwitterAggregator aggregator)
+        public TwitterController(IItemAggregator aggregator)
         {
             _aggregator = aggregator;
         }
 
-        public ActionResult Json()
+        public ActionResult Json(int count = 50)
         {
-            return Json(_aggregator.GetLatestTweets(), JsonRequestBehavior.AllowGet);
+            return Json(_aggregator.GetLatest(count), JsonRequestBehavior.AllowGet);
         }
     }
 }

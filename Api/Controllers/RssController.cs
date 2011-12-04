@@ -1,26 +1,27 @@
 ﻿using System;
 using System.Web.Mvc;
+using Services.Generic;
 using Services.Rss;
 
 namespace Api.Controllers
 {
     public class RssController : Controller
     {
-        private readonly IRssAggregator _aggregator;
+        private readonly IItemAggregator _aggregator;
 
         public RssController()
-            : this(new CachedRssAggregator(TimeSpan.FromMinutes(10)))
+            : this(new CachedItemAggregator(new RssAggregator(), TimeSpan.FromMinutes(10)))
         {
         }
 
-        public RssController(IRssAggregator aggregator)
+        public RssController(IItemAggregator aggregator)
         {
             _aggregator = aggregator;
         }
 
-        public ActionResult Json()
+        public ActionResult Json(int count = 20)
         {
-            return Json(_aggregator.GetLatestFeeds(), JsonRequestBehavior.AllowGet);
+            return Json(_aggregator.GetLatest(count), JsonRequestBehavior.AllowGet);
         }
     }
 }

@@ -1,17 +1,18 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using LinqToTwitter;
+using Services.Model;
 
 namespace Services.Twitter
 {
     public interface ITwitterService
     {
-        IEnumerable<Tweet> GetTweets(string query, int count);
+        IEnumerable<Item> GetTweets(string query, int count);
     }
 
     public class TwitterService : ITwitterService
     {
-        public IEnumerable<Tweet> GetTweets(string query, int count)
+        public IEnumerable<Item> GetTweets(string query, int count)
         {
             try
             {
@@ -24,7 +25,7 @@ namespace Services.Twitter
                               && search.PageSize == count
                               select search).First().Entries;
 
-                return result.Select(e => new Tweet
+                return result.Select(e => new Item
                 {
                     Url = e.Alternate,
                     Published = e.Published,
@@ -32,13 +33,12 @@ namespace Services.Twitter
                     AuthorName = e.Author.Name,
                     AuthorUri = e.Author.URI,
                     Title = e.Title,
-                    Content = e.Content,
-                    Location = e.Location
+                    Content = e.Content
                 }).ToList();
             }
             catch
             {
-                return new List<Tweet>();
+                return new List<Item>();
             }
         }
     }
