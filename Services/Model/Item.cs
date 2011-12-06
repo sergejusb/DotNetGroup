@@ -17,5 +17,7 @@ namespace Services.Model
         public string Title { get; set; }
 
         public string Content { get; set; }
+
+        public ItemType ItemType { get; set; }
     }
 }

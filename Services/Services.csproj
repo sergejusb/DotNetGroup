@@ -45,12 +45,14 @@
     <Compile Include="Generic\BaseConfigProvider.cs" />
     <Compile Include="Generic\CachedItemAggregator.cs" />
     <Compile Include="Model\Item.cs" />
+    <Compile Include="Model\ItemType.cs" />
     <Compile Include="Rss\RssAggregator.cs" />
     <Compile Include="Rss\RssService.cs" />
     <Compile Include="Rss\UrlConfigProvider.cs" />
     <Compile Include="Twitter\QueryConfigProvider.cs" />
     <Compile Include="Twitter\TwitterAggregator.cs" />
     <Compile Include="Twitter\TwitterService.cs" />
+    <Compile Include="Web\UrlResolver.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="LinqToTwitter, Version=2.0.22.0, Culture=neutral, PublicKeyToken=957107be965c25d9, processorArchitecture=MSIL">

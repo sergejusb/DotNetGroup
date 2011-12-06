@@ -33,7 +33,8 @@ namespace Services.Twitter
                     AuthorName = e.Author.Name,
                     AuthorUri = e.Author.URI,
                     Title = e.Title,
-                    Content = e.Content
+                    Content = e.Content,
+                    ItemType = ItemType.Twitter
                 }).ToList();
             }
             catch

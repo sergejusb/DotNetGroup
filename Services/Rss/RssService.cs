@@ -27,7 +27,8 @@ namespace Services.Rss
                         Published = i.LastUpdatedTime.DateTime,
                         AuthorName = i.Authors[0].Name,
                         Title = i.Title.Text,
-                        Content = ((TextSyndicationContent)i.Content).Text
+                        Content = ((TextSyndicationContent)i.Content).Text,
+                        ItemType = ItemType.Rss
                     }).ToList();
                 }
             }
