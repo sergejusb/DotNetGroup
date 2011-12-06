@@ -52,9 +52,14 @@
     <Compile Include="Twitter\QueryConfigProvider.cs" />
     <Compile Include="Twitter\TwitterAggregator.cs" />
     <Compile Include="Twitter\TwitterService.cs" />
+    <Compile Include="Web\CachedUrlResolver.cs" />
+    <Compile Include="Web\UrlContentProcessor.cs" />
     <Compile Include="Web\UrlResolver.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="HtmlAgilityPack">
+      <HintPath>..\packages\HtmlAgilityPack.1.4.3\lib\HtmlAgilityPack.dll</HintPath>
+    </Reference>
     <Reference Include="LinqToTwitter, Version=2.0.22.0, Culture=neutral, PublicKeyToken=957107be965c25d9, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\LinqToTwitter.2.0.22\lib\net40\LinqToTwitter.dll</HintPath>
