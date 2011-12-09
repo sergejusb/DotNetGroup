@@ -72,6 +72,21 @@ namespace Tests.Services.Rss
             Assert.AreEqual(numberOfLatestFeeds, latestFeeds.Count());
         }
 
+        [Test]
+        public void Given_30_Existing_Feeds_GetLatestFeeds_Returns_All_Feeds_When_Null_Is_Passed()
+        {
+            var feeds = BuildFeeds(30);
+            var urlFeeds = new Dictionary<string, IEnumerable<Item>>
+            {
+                {"http://atom1", feeds}
+            };
+            var rssAggregator = BuildRssAggregator(urlFeeds);
+
+            var latestFeeds = rssAggregator.GetLatest();
+
+            Assert.AreEqual(feeds.Count, latestFeeds.Count());
+        }
+
         private static IItemAggregator BuildRssAggregator(IDictionary<string, IEnumerable<Item>> urlFeeds)
         {
             var rssServiceFake = new Mock<IRssService>();

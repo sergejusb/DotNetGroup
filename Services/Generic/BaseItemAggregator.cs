@@ -17,9 +17,12 @@ namespace Services.Generic
         
         public virtual IEnumerable<Item> GetLatest(string url)
         {
-            return GetLatest()
-                    .TakeWhile(f => !f.Url.Equals(url, StringComparison.InvariantCultureIgnoreCase))
-                    .ToList();
+            var items = GetLatest();
+            if (url != null)
+            {
+                items = items.TakeWhile(f => !f.Url.Equals(url, StringComparison.InvariantCultureIgnoreCase));
+            }
+            return items;
         }
     }
 }

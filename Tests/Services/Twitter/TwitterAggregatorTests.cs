@@ -35,6 +35,19 @@ namespace Tests.Services.Twitter
             Assert.AreEqual(numberOfLatestTweets, latestTweets.Count());
         }
 
+        [Test]
+        public void Given_30_Existing_Tweets_GetLatestTweets_Returns_All_Tweets_When_Null_Is_Passed()
+        {
+            var tweets = BuildTweets(30);
+            var twitterServiceFake = GetTwitterServiceFake(tweets);
+            var queryProviderFake = GetQueryProviderFake();
+            var twitterAggregator = new TwitterAggregator(twitterServiceFake.Object, queryProviderFake.Object);
+
+            var latestTweets = twitterAggregator.GetLatest();
+
+            Assert.AreEqual(tweets.Count, latestTweets.Count());
+        }
+
         private static IList<Item> BuildTweets(int numberOfTweets)
         {
             return new Fixture().Build<Item>()

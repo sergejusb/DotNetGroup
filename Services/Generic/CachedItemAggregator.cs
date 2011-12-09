@@ -32,7 +32,9 @@ namespace Services.Generic
             else if (!cached)
             {
                 var cachedItems = _cache.Get(_key) as IEnumerable<Item>;
-                var items = cachedItems.Any() ? _aggregator.GetLatest(cachedItems.First().Url).Union(cachedItems) : _aggregator.GetLatest();
+                var items = cachedItems != null && cachedItems.Any() ? 
+                            _aggregator.GetLatest(cachedItems.First().Url).Union(cachedItems) : 
+                            _aggregator.GetLatest();
                 _cache.Set(_key, items, ObjectCache.InfiniteAbsoluteExpiration);
             }
 
