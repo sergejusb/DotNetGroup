@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using System;
+using NUnit.Framework;
 using Services.Web;
 
 namespace Tests.Services.Web
@@ -27,7 +28,18 @@ namespace Tests.Services.Web
             var resolvedUrl = resolver.Resolve(originalUrl);
 
             Assert.AreEqual(originalUrl, resolvedUrl);
-            
+
+        }
+
+        [Test]
+        public void Given_Web_Exception_Occures_Resolve_Returns_Original_Url()
+        {
+            var invalidUrl = "http";
+            var resolver = new UrlResolver();
+
+            var resolvedUrl = resolver.Resolve(invalidUrl);
+
+            Assert.AreEqual(invalidUrl, resolvedUrl);
         }
     }
 }

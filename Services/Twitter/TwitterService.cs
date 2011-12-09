@@ -7,12 +7,12 @@ namespace Services.Twitter
 {
     public interface ITwitterService
     {
-        IEnumerable<Item> GetTweets(string query, int count);
+        IEnumerable<Item> GetTweets(string query);
     }
 
     public class TwitterService : ITwitterService
     {
-        public IEnumerable<Item> GetTweets(string query, int count)
+        public IEnumerable<Item> GetTweets(string query)
         {
             try
             {
@@ -22,7 +22,6 @@ namespace Services.Twitter
                               where search.Type == SearchType.Search
                               && search.Query == query
                               && search.WithRetweets == false
-                              && search.PageSize == count
                               select search).First().Entries;
 
                 return result.Select(e => new Item

@@ -20,19 +20,18 @@ namespace Tests.Services.Twitter
         }
 
         [Test]
-        public void Given_30_Existing_Tweets_And_Since_Latest_Tweet_Url_10_New_Tweets_Exist_GetLatestTweets_With_Maximum_Number_Of_20_Tweets_Returns_10_Tweets()
+        public void Given_30_Existing_Tweets_And_Since_Latest_Tweet_Url_10_New_Tweets_Exist_GetLatestTweets_Returns_10_Tweets()
         {
             var numberOfLatestTweets = 10;
-            var maxNumberOfTweets = 20;
             var tweets = BuildTweets(30);
             var latestTweet = tweets.OrderByDescending(t => t.Published).Skip(numberOfLatestTweets).Take(1).Single();
             var twitterServiceFake = GetTwitterServiceFake(tweets);
             var queryProviderFake = GetQueryProviderFake();
             var twitterAggregator = new TwitterAggregator(twitterServiceFake.Object, queryProviderFake.Object);
 
-            var latestTweets = twitterAggregator.GetLatest(latestTweet.Url, maxNumberOfTweets);
+            var latestTweets = twitterAggregator.GetLatest(latestTweet.Url);
 
-            twitterServiceFake.Verify(s => s.GetTweets(It.IsAny<string>(), maxNumberOfTweets));
+            twitterServiceFake.Verify(s => s.GetTweets(It.IsAny<string>()));
             Assert.AreEqual(numberOfLatestTweets, latestTweets.Count());
         }
 
@@ -48,7 +47,7 @@ namespace Tests.Services.Twitter
         private static Mock<ITwitterService> GetTwitterServiceFake(IEnumerable<Item> tweets)
         {
             var twitterServiceFake = new Mock<ITwitterService>();
-            twitterServiceFake.Setup(s => s.GetTweets(It.IsAny<string>(), It.IsAny<int>())).Returns(tweets);
+            twitterServiceFake.Setup(s => s.GetTweets(It.IsAny<string>())).Returns(tweets);
             return twitterServiceFake;
         }
 

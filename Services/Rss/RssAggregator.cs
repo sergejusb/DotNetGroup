@@ -21,12 +21,11 @@ namespace Services.Rss
             _urlProvider = urlProvider;
         }
 
-        public override IEnumerable<Item> GetLatest(int count)
+        public override IEnumerable<Item> GetLatest()
         {
             return _urlProvider.GetValues()
                     .SelectMany(url => _rssService.GetFeeds(url))
                     .OrderByDescending(f => f.Published)
-                    .Take(count)
                     .ToList();
         }
     }

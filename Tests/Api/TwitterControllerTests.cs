@@ -20,12 +20,12 @@ namespace Tests.Api
         public void By_Calling_Json_Action_GetLatestTweets_Is_Called_Once()
         {
             var twitterAggregatorFake = new Mock<IItemAggregator>();
-            twitterAggregatorFake.Setup(a => a.GetLatest(It.IsAny<int>())).Returns(new List<Item>());
+            twitterAggregatorFake.Setup(a => a.GetLatest()).Returns(new List<Item>());
             var twitterController = new TwitterController(twitterAggregatorFake.Object);
 
             twitterController.Json();
 
-            twitterAggregatorFake.Verify(a => a.GetLatest(It.IsAny<int>()), Times.Once());
+            twitterAggregatorFake.Verify(a => a.GetLatest(), Times.Once());
         }
     }
 }

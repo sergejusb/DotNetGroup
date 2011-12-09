@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using System;
+using System.Net;
 
 namespace Services.Web
 {
@@ -12,18 +13,18 @@ namespace Services.Web
         public string Resolve(string url)
         {
             var resolvedUrl = url;
-            
-            var request = WebRequest.Create(url);
-            request.Method = WebRequestMethods.Http.Head;
-            
+
             try
             {
+                var request = WebRequest.Create(url);
+                request.Method = WebRequestMethods.Http.Head;
+
                 using (var response = request.GetResponse())
                 {
                     resolvedUrl = response.ResponseUri.AbsoluteUri;
                 }
             }
-            catch (WebException)
+            catch (Exception)
             {
             }
 

@@ -52,7 +52,6 @@
     <Compile Include="Twitter\QueryConfigProvider.cs" />
     <Compile Include="Twitter\TwitterAggregator.cs" />
     <Compile Include="Twitter\TwitterService.cs" />
-    <Compile Include="Web\CachedUrlResolver.cs" />
     <Compile Include="Web\UrlContentProcessor.cs" />
     <Compile Include="Web\UrlResolver.cs" />
   </ItemGroup>

@@ -10,7 +10,7 @@ namespace Api.Controllers
         private readonly IItemAggregator _aggregator;
 
         public RssController()
-            : this(new CachedItemAggregator(new RssAggregator(), TimeSpan.FromMinutes(10)))
+            : this(new CachedItemAggregator(new RssAggregator()))
         {
         }
 
@@ -19,9 +19,9 @@ namespace Api.Controllers
             _aggregator = aggregator;
         }
 
-        public ActionResult Json(int count = 20)
+        public ActionResult Json()
         {
-            return Json(_aggregator.GetLatest(count), JsonRequestBehavior.AllowGet);
+            return Json(_aggregator.GetLatest(), JsonRequestBehavior.AllowGet);
         }
     }
 }

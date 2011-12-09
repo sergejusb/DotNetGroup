@@ -10,7 +10,7 @@ namespace Api.Controllers
         private readonly IItemAggregator _aggregator;
 
         public TwitterController()
-            : this(new CachedItemAggregator(new TwitterAggregator(), TimeSpan.FromMinutes(1)))
+            : this(new CachedItemAggregator(new TwitterAggregator()))
         {
         }
 
@@ -19,9 +19,9 @@ namespace Api.Controllers
             _aggregator = aggregator;
         }
 
-        public ActionResult Json(int count = 50)
+        public ActionResult Json()
         {
-            return Json(_aggregator.GetLatest(count), JsonRequestBehavior.AllowGet);
+            return Json(_aggregator.GetLatest(), JsonRequestBehavior.AllowGet);
         }
     }
 }

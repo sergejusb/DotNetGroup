@@ -61,7 +61,7 @@
     <Compile Include="Services\Twitter\QueryConfigProviderTests.cs" />
     <Compile Include="Services\Twitter\TwitterAggregatorTests.cs" />
     <Compile Include="Services\Twitter\TwitterServiceTests.cs" />
-    <Compile Include="Services\Web\TwitterContentProcessorTests.cs" />
+    <Compile Include="Services\Web\UrlContentProcessorTests.cs" />
     <Compile Include="Services\Web\UrlResolverTests.cs" />
   </ItemGroup>
   <ItemGroup>

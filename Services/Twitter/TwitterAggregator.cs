@@ -21,12 +21,11 @@ namespace Services.Twitter
             _queryProvider = queryProvider;
         }
 
-        public override IEnumerable<Item> GetLatest(int count)
+        public override IEnumerable<Item> GetLatest()
         {
             return _queryProvider.GetValues()
-                    .SelectMany(q => _twitterService.GetTweets(q, count))
+                    .SelectMany(q => _twitterService.GetTweets(q))
                     .OrderByDescending(t => t.Published)
-                    .Take(count)
                     .ToList();
         }
     }

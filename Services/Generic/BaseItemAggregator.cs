@@ -7,17 +7,17 @@ namespace Services.Generic
 {
     public interface IItemAggregator
     {
-        IEnumerable<Item> GetLatest(int count);
-        IEnumerable<Item> GetLatest(string url, int count);
+        IEnumerable<Item> GetLatest();
+        IEnumerable<Item> GetLatest(string url);
     }
 
     public abstract class BaseItemAggregator : IItemAggregator
     {
-        public abstract IEnumerable<Item> GetLatest(int count);
+        public abstract IEnumerable<Item> GetLatest();
         
-        public virtual IEnumerable<Item> GetLatest(string url, int count)
+        public virtual IEnumerable<Item> GetLatest(string url)
         {
-            return GetLatest(count)
+            return GetLatest()
                     .TakeWhile(f => !f.Url.Equals(url, StringComparison.InvariantCultureIgnoreCase))
                     .ToList();
         }
