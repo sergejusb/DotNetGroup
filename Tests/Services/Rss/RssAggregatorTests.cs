@@ -93,7 +93,7 @@ namespace Tests.Services.Rss
             foreach (var urlFeed in urlFeeds)
             {
                 var feed = urlFeed;
-                rssServiceFake.Setup(s => s.GetFeeds(feed.Key)).Returns(feed.Value);
+                rssServiceFake.Setup(s => s.GetFeeds(feed.Key, It.IsAny<Item>())).Returns(feed.Value);
             }
             var rssUrlProviderFake = new Mock<IConfigProvider>();
             rssUrlProviderFake.Setup(p => p.GetValues()).Returns(urlFeeds.Keys);

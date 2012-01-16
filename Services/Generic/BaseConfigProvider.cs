@@ -16,8 +16,8 @@ namespace Services.Generic
         public IEnumerable<string> GetValues()
         {
             return ConfigurationManager.AppSettings.AllKeys
-                    .Where(k => k.StartsWith(Prefix))
-                    .Select(k => ConfigurationManager.AppSettings[k])
+                    .Where(key => key.StartsWith(Prefix))
+                    .Select(key => ConfigurationManager.AppSettings[key])
                     .ToList();
         }
     }

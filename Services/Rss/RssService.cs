@@ -8,18 +8,22 @@ namespace Services.Rss
 {
     public interface IRssService
     {
-        IEnumerable<Item> GetFeeds(string url);
+        IEnumerable<Item> GetFeeds(string url, Item last); 
     }
 
     public class RssService : IRssService
     {
-        public IEnumerable<Item> GetFeeds(string url)
+        public IEnumerable<Item> GetFeeds(string url, Item last = null)
         {
             try
             {
                 using (var reader = XmlReader.Create(url))
                 {
                     var result = SyndicationFeed.Load(reader).Items;
+                    if (last != null)
+                    {
+                        result = result.TakeWhile(i => i.Id != last.Url);
+                    }
 
                     return result.Select(i => new Item
                     {

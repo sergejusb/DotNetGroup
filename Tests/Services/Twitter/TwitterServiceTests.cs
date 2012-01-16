@@ -41,5 +41,21 @@ namespace Tests.Services.Twitter
 
             Assert.AreEqual(empty, tweets.Count());
         }
+
+        [Test]
+        public void Given_Last_Tweet_GetTweets_Can_Successfully_Retrieve_Latest_Values_From_Twitter()
+        {
+            var query = "#ltnet";
+            var twitterService = new TwitterService();
+
+            var tweets = twitterService.GetTweets(query).ToList();
+            if (tweets.Count() > 1)
+            {
+                var lastTweet = tweets.Last();
+                var latestTweets = twitterService.GetTweets(query, lastTweet);
+
+                Assert.AreEqual(tweets.Count(), latestTweets.Count() + 1);
+            }
+        }
     }
 }

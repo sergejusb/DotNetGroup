@@ -24,7 +24,7 @@ namespace Services.Twitter
         public override IEnumerable<Item> GetLatest()
         {
             return _queryProvider.GetValues()
-                    .SelectMany(q => _twitterService.GetTweets(q))
+                    .SelectMany(q => _twitterService.GetTweets(q, last: null))
                     .OrderByDescending(t => t.Published)
                     .ToList();
         }

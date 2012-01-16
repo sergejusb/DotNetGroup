@@ -39,7 +39,7 @@ namespace Tests.Services.Rss
         private static Mock<IRssService> GetRssServiceFake()
         {
             var rssServiceFake = new Mock<IRssService>();
-            rssServiceFake.Setup(s => s.GetFeeds(It.IsAny<string>())).Returns(new List<Item>());
+            rssServiceFake.Setup(s => s.GetFeeds(It.IsAny<string>(), It.IsAny<Item>())).Returns(new List<Item>());
             return rssServiceFake;
         }
 

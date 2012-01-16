@@ -30,5 +30,21 @@ namespace Tests.Services.Rss
 
             Assert.AreEqual(empty, feeds.Count());
         }
+
+        [Test]
+        public void Given_Last_Feed_GetFeeds_Can_Successfully_Retrieve_Latest_Values_From_Rss()
+        {
+            var url = ConfigurationManager.AppSettings["rss.sergejus"];
+            var rssService = new RssService();
+
+            var feeds = rssService.GetFeeds(url).ToList();
+            if (feeds.Count() > 1)
+            {
+                var lastFeed = feeds.Last();
+                var latestFeeds = rssService.GetFeeds(url, lastFeed);
+
+                Assert.AreEqual(feeds.Count(), latestFeeds.Count() + 1);
+            }
+        }
     }
 }

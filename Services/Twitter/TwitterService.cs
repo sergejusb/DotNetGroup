@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using LinqToTwitter;
 using Services.Model;
@@ -7,21 +8,24 @@ namespace Services.Twitter
 {
     public interface ITwitterService
     {
-        IEnumerable<Item> GetTweets(string query);
+        IEnumerable<Item> GetTweets(string query, Item last);
     }
 
     public class TwitterService : ITwitterService
     {
-        public IEnumerable<Item> GetTweets(string query)
+        private const int Count = 100;
+
+        public IEnumerable<Item> GetTweets(string query, Item last = null)
         {
             try
             {
                 var context = new TwitterContext();
-
                 var result = (from search in context.Search
                               where search.Type == SearchType.Search
                               && search.Query == query
+                              && search.SinceID == (last == null ? 0 : ExtractId(last))
                               && search.WithRetweets == false
+                              && search.PageSize == Count
                               select search).First().Entries;
 
                 return result.Select(e => new Item
@@ -40,6 +44,11 @@ namespace Services.Twitter
             {
                 return new List<Item>();
             }
+        }
+
+        private static ulong ExtractId(Item item)
+        {
+            return Convert.ToUInt64(item.Url.Split('/').Last(s => !String.IsNullOrEmpty(s)));
         }
     }
 }

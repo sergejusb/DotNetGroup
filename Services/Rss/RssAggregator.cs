@@ -24,7 +24,7 @@ namespace Services.Rss
         public override IEnumerable<Item> GetLatest()
         {
             return _urlProvider.GetValues()
-                    .SelectMany(url => _rssService.GetFeeds(url))
+                    .SelectMany(url => _rssService.GetFeeds(url, last: null))
                     .OrderByDescending(f => f.Published)
                     .ToList();
         }

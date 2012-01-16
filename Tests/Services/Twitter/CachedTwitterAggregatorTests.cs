@@ -31,13 +31,13 @@ namespace Tests.Services.Twitter
                 aggregator.GetLatest();
             }
 
-            twitterServiceFake.Verify(s => s.GetTweets(It.IsAny<string>()), Times.Once());
+            twitterServiceFake.Verify(s => s.GetTweets(It.IsAny<string>(), It.IsAny<Item>()), Times.Once());
         }
 
         private static Mock<ITwitterService> GetTwitterServiceFake()
         {
             var twitterServiceFake = new Mock<ITwitterService>();
-            twitterServiceFake.Setup(s => s.GetTweets(It.IsAny<string>())).Returns(new List<Item>());
+            twitterServiceFake.Setup(s => s.GetTweets(It.IsAny<string>(), It.IsAny<Item>())).Returns(new List<Item>());
             return twitterServiceFake;
         }
 

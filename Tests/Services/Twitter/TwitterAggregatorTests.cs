@@ -31,7 +31,7 @@ namespace Tests.Services.Twitter
 
             var latestTweets = twitterAggregator.GetLatest(latestTweet.Url);
 
-            twitterServiceFake.Verify(s => s.GetTweets(It.IsAny<string>()));
+            twitterServiceFake.Verify(s => s.GetTweets(It.IsAny<string>(), It.IsAny<Item>()));
             Assert.AreEqual(numberOfLatestTweets, latestTweets.Count());
         }
 
@@ -60,7 +60,7 @@ namespace Tests.Services.Twitter
         private static Mock<ITwitterService> GetTwitterServiceFake(IEnumerable<Item> tweets)
         {
             var twitterServiceFake = new Mock<ITwitterService>();
-            twitterServiceFake.Setup(s => s.GetTweets(It.IsAny<string>())).Returns(tweets);
+            twitterServiceFake.Setup(s => s.GetTweets(It.IsAny<string>(), It.IsAny<Item>())).Returns(tweets);
             return twitterServiceFake;
         }
 
