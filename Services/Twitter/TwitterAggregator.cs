@@ -18,6 +18,11 @@ namespace Services.Twitter
 
         public TwitterAggregator(ITwitterService twitterService, IConfigProvider queryProvider)
         {
+            if (twitterService == null)
+                throw new ArgumentNullException("twitterService");
+            if (queryProvider == null)
+                throw new ArgumentNullException("queryProvider");
+
             _twitterService = twitterService;
             _queryProvider = queryProvider;
         }

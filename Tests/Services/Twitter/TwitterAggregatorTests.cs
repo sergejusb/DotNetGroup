@@ -68,10 +68,11 @@ namespace Tests.Services.Twitter
             return new TwitterAggregator(twitterServiceFake.Object, urlProviderFake.Object);
         }
 
-        private static IList<Item> BuildTweets(int numberOfTweets)
+        private static IEnumerable<Item> BuildTweets(int numberOfTweets)
         {
             return new Fixture().Build<Item>()
-                                .Do(f => f.Published = DateTime.Now.AddDays(new Random().Next(numberOfTweets)).AddHours(new Random().Next(numberOfTweets)))
+                                .Without(i => i.Id)
+                                .Do(i => i.Published = DateTime.Now.AddDays(new Random().Next(numberOfTweets)).AddHours(new Random().Next(numberOfTweets)))
                                 .CreateMany(numberOfTweets)
                                 .OrderByDescending(t => t.Published)
                                 .ToList();

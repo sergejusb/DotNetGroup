@@ -25,7 +25,7 @@ namespace Tests.Services.Rss
 
             var feeds = rssService.GetFeeds(url, _date);
 
-            Assert.Greater(feeds.Count(), 0);
+            Assert.That(feeds.Count(), Is.GreaterThan(0));
         }
 
         [Test]

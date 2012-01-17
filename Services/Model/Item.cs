@@ -1,9 +1,17 @@
 ﻿using System;
+using MongoDB.Bson;
 
 namespace Services.Model
 {
     public class Item
     {
+        public Item()
+        {
+            Id = ObjectId.Empty;
+        }
+
+        public ObjectId Id { get; set; }
+
         public string Url { get; set; }
 
         public DateTime Published { get; set; }

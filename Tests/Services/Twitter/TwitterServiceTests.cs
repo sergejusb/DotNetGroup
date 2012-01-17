@@ -24,7 +24,7 @@ namespace Tests.Services.Twitter
 
             var tweets = twitterService.GetTweets(query, _date);
 
-            Assert.Greater(tweets.Count(), 0);
+            Assert.That(tweets.Count(), Is.GreaterThan(0));
         }
 
         [Test]

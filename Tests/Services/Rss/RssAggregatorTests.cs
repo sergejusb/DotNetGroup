@@ -71,7 +71,8 @@ namespace Tests.Services.Rss
         private static IEnumerable<Item> BuildFeeds(int numberOfFeeds)
         {
             return new Fixture().Build<Item>()
-                                .Do(f => f.Published = DateTime.Now.AddDays(new Random().Next(numberOfFeeds)).AddHours(new Random().Next(numberOfFeeds)))
+                                .Without(i => i.Id)
+                                .Do(i => i.Published = DateTime.Now.AddDays(new Random().Next(numberOfFeeds)).AddHours(new Random().Next(numberOfFeeds)))
                                 .CreateMany(numberOfFeeds)
                                 .ToList();
         }

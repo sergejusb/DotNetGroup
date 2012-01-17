@@ -18,6 +18,11 @@ namespace Services.Rss
 
         public RssAggregator(IRssService rssService, IConfigProvider urlProvider)
         {
+            if (rssService == null)
+                throw new ArgumentNullException("rssService");
+            if (urlProvider == null)
+                throw new ArgumentNullException("urlProvider");
+
             _rssService = rssService;
             _urlProvider = urlProvider;
         }

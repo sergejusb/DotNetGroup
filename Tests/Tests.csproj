@@ -54,16 +54,27 @@
     <Compile Include="Fakes\FakeHttpSessionState.cs" />
     <Compile Include="Fakes\FakeIdentity.cs" />
     <Compile Include="Fakes\FakePrincipal.cs" />
+    <Compile Include="Helpers\IntegrationAttribute.cs" />
+    <Compile Include="Services\Storage\ItemStorageTests.cs" />
     <Compile Include="Services\Rss\UrlConfigProviderTests.cs" />
     <Compile Include="Services\Rss\RssAggregatorTests.cs" />
     <Compile Include="Services\Rss\RssServiceTests.cs" />
     <Compile Include="Services\Twitter\QueryConfigProviderTests.cs" />
     <Compile Include="Services\Twitter\TwitterAggregatorTests.cs" />
     <Compile Include="Services\Twitter\TwitterServiceTests.cs" />
-    <Compile Include="Services\Web\UrlContentProcessorTests.cs" />
+    <Compile Include="Services\Content\UrlContentProcessorTests.cs" />
     <Compile Include="Services\Web\UrlResolverTests.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="FluentMongo">
+      <HintPath>..\packages\FluentMongo.1.3.1\lib\FluentMongo.dll</HintPath>
+    </Reference>
+    <Reference Include="MongoDB.Bson">
+      <HintPath>..\packages\mongocsharpdriver.1.3.1\lib\net35\MongoDB.Bson.dll</HintPath>
+    </Reference>
+    <Reference Include="MongoDB.Driver">
+      <HintPath>..\packages\mongocsharpdriver.1.3.1\lib\net35\MongoDB.Driver.dll</HintPath>
+    </Reference>
     <Reference Include="Moq">
       <HintPath>..\packages\Moq.4.0.10827\lib\NET40\Moq.dll</HintPath>
     </Reference>
@@ -86,6 +97,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
+    <Reference Include="System.Data" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
   </ItemGroup>
