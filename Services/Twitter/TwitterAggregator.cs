@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Services.Generic;
@@ -5,7 +6,7 @@ using Services.Model;
 
 namespace Services.Twitter
 {
-    public class TwitterAggregator : BaseItemAggregator
+    public class TwitterAggregator : IItemAggregator
     {
         private readonly ITwitterService _twitterService;
         private readonly IConfigProvider _queryProvider;
@@ -21,11 +22,11 @@ namespace Services.Twitter
             _queryProvider = queryProvider;
         }
 
-        public override IEnumerable<Item> GetLatest()
+        public IEnumerable<Item> GetLatest(DateTime fromDate)
         {
             return _queryProvider.GetValues()
-                    .SelectMany(q => _twitterService.GetTweets(q, last: null))
-                    .OrderByDescending(t => t.Published)
+                    .SelectMany(q => _twitterService.GetTweets(q, fromDate))
+                    .OrderBy(t => t.Published)
                     .ToList();
         }
     }

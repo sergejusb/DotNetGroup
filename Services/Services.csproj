@@ -42,9 +42,8 @@
   </PropertyGroup>
   <ItemGroup />
   <ItemGroup>
-    <Compile Include="Generic\BaseItemAggregator.cs" />
+    <Compile Include="Generic\IItemAggregator.cs" />
     <Compile Include="Generic\BaseConfigProvider.cs" />
-    <Compile Include="Generic\CachedItemAggregator.cs" />
     <Compile Include="Model\Item.cs" />
     <Compile Include="Model\ItemType.cs" />
     <Compile Include="Rss\RssAggregator.cs" />

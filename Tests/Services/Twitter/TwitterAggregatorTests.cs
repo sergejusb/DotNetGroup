@@ -20,32 +20,52 @@ namespace Tests.Services.Twitter
         }
 
         [Test]
-        public void Given_30_Existing_Tweets_And_Since_Latest_Tweet_Url_10_New_Tweets_Exist_GetLatestTweets_Returns_10_Tweets()
+        public void Given_30_New_Tweets_GetLatest_Returns_Tweets_In_Correct_Order()
         {
-            var numberOfLatestTweets = 10;
-            var tweets = BuildTweets(30);
-            var latestTweet = tweets.OrderByDescending(t => t.Published).Skip(numberOfLatestTweets).Take(1).Single();
-            var twitterServiceFake = GetTwitterServiceFake(tweets);
-            var queryProviderFake = GetQueryProviderFake();
-            var twitterAggregator = new TwitterAggregator(twitterServiceFake.Object, queryProviderFake.Object);
+            var queryTweets = new Dictionary<string, IEnumerable<Item>>
+            {
+                {"#hashtag", BuildTweets(5)},
+                {"@user", BuildTweets(10)},
+                {"text", BuildTweets(15)}
+            };
+            var minDate = queryTweets.SelectMany(kv => kv.Value).Select(f => f.Published).Min();
+            var maxDate = queryTweets.SelectMany(kv => kv.Value).Select(f => f.Published).Max();
+            var twitterAggregator = BuildTwitterAggregator(queryTweets);
 
-            var latestTweets = twitterAggregator.GetLatest(latestTweet.Url);
+            var tweets = twitterAggregator.GetLatest(DateTime.MinValue).ToList();
 
-            twitterServiceFake.Verify(s => s.GetTweets(It.IsAny<string>(), It.IsAny<Item>()));
-            Assert.AreEqual(numberOfLatestTweets, latestTweets.Count());
+            Assert.AreEqual(minDate, tweets.First().Published);
+            Assert.AreEqual(maxDate, tweets.Last().Published);
         }
 
         [Test]
-        public void Given_30_Existing_Tweets_GetLatestTweets_Returns_All_Tweets_When_Null_Is_Passed()
+        public void Given_30_New_Tweets_GetLatest_Returns_All_30_Tweets()
         {
-            var tweets = BuildTweets(30);
-            var twitterServiceFake = GetTwitterServiceFake(tweets);
-            var queryProviderFake = GetQueryProviderFake();
-            var twitterAggregator = new TwitterAggregator(twitterServiceFake.Object, queryProviderFake.Object);
+            var numberOfTweets = 30;
+            var queryTweets = new Dictionary<string, IEnumerable<Item>>
+            {
+                {"#hashtag", BuildTweets(5)},
+                {"@user", BuildTweets(10)},
+                {"text", BuildTweets(15)}
+            };
+            var twitterAggregator = BuildTwitterAggregator(queryTweets);
 
-            var latestTweets = twitterAggregator.GetLatest();
+            var tweets = twitterAggregator.GetLatest(DateTime.MinValue).ToList();
 
-            Assert.AreEqual(tweets.Count, latestTweets.Count());
+            Assert.AreEqual(numberOfTweets, tweets.Count);
+        }
+
+        private static IItemAggregator BuildTwitterAggregator(IDictionary<string, IEnumerable<Item>> queryTweets)
+        {
+            var twitterServiceFake = new Mock<ITwitterService>();
+            foreach (var queryTweet in queryTweets)
+            {
+                var tweet = queryTweet;
+                twitterServiceFake.Setup(s => s.GetTweets(tweet.Key, It.IsAny<DateTime>())).Returns(tweet.Value);
+            }
+            var urlProviderFake = new Mock<IConfigProvider>();
+            urlProviderFake.Setup(p => p.GetValues()).Returns(queryTweets.Keys);
+            return new TwitterAggregator(twitterServiceFake.Object, urlProviderFake.Object);
         }
 
         private static IList<Item> BuildTweets(int numberOfTweets)
@@ -55,20 +75,6 @@ namespace Tests.Services.Twitter
                                 .CreateMany(numberOfTweets)
                                 .OrderByDescending(t => t.Published)
                                 .ToList();
-        }
-
-        private static Mock<ITwitterService> GetTwitterServiceFake(IEnumerable<Item> tweets)
-        {
-            var twitterServiceFake = new Mock<ITwitterService>();
-            twitterServiceFake.Setup(s => s.GetTweets(It.IsAny<string>(), It.IsAny<Item>())).Returns(tweets);
-            return twitterServiceFake;
-        }
-
-        private static Mock<IConfigProvider> GetQueryProviderFake()
-        {
-            var urlProviderFake = new Mock<IConfigProvider>();
-            urlProviderFake.Setup(p => p.GetValues()).Returns(new List<string> { "%23ltnet+-ltnet.tv" });
-            return urlProviderFake;
         }
     }
 }

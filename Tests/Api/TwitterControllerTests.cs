@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Api.Controllers;
 using Moq;
@@ -20,12 +21,12 @@ namespace Tests.Api
         public void By_Calling_Json_Action_GetLatestTweets_Is_Called_Once()
         {
             var twitterAggregatorFake = new Mock<IItemAggregator>();
-            twitterAggregatorFake.Setup(a => a.GetLatest()).Returns(new List<Item>());
+            twitterAggregatorFake.Setup(a => a.GetLatest(It.IsAny<DateTime>())).Returns(new List<Item>());
             var twitterController = new TwitterController(twitterAggregatorFake.Object);
 
-            twitterController.Json();
+            twitterController.Json(null);
 
-            twitterAggregatorFake.Verify(a => a.GetLatest(), Times.Once());
+            twitterAggregatorFake.Verify(a => a.GetLatest(It.IsAny<DateTime>()), Times.Once());
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using NUnit.Framework;
 using Services.Twitter;
 
@@ -7,13 +8,21 @@ namespace Tests.Services.Twitter
     [TestFixture]
     public class TwitterServiceTests
     {
+        private DateTime _date;
+
+        [TestFixtureSetUp]
+        public void SetupFixture()
+        {
+            _date = DateTime.UtcNow.AddMonths(-2).Date;
+        }
+
         [Test]
         public void GetTweets_Can_Successfully_Retrieve_Values_From_Twitter()
         {
             var query = "#ltnet";
             var twitterService = new TwitterService();
 
-            var tweets = twitterService.GetTweets(query);
+            var tweets = twitterService.GetTweets(query, _date);
 
             Assert.Greater(tweets.Count(), 0);
         }
@@ -25,7 +34,7 @@ namespace Tests.Services.Twitter
             var query = "#hashtagfortesting";
             var twitterService = new TwitterService();
 
-            var tweets = twitterService.GetTweets(query);
+            var tweets = twitterService.GetTweets(query, _date);
 
             Assert.AreEqual(empty, tweets.Count());
         }
@@ -37,24 +46,24 @@ namespace Tests.Services.Twitter
             string query = null;
             var twitterService = new TwitterService();
 
-            var tweets = twitterService.GetTweets(query);
+            var tweets = twitterService.GetTweets(query, _date);
 
             Assert.AreEqual(empty, tweets.Count());
         }
 
         [Test]
-        public void Given_Last_Tweet_GetTweets_Can_Successfully_Retrieve_Latest_Values_From_Twitter()
+        public void Given_Last_Tweet_Date_GetTweets_Can_Successfully_Retrieve_Latest_Values_From_Twitter()
         {
             var query = "#ltnet";
             var twitterService = new TwitterService();
 
-            var tweets = twitterService.GetTweets(query).ToList();
+            var tweets = twitterService.GetTweets(query, _date).ToList();
             if (tweets.Count() > 1)
             {
-                var lastTweet = tweets.Last();
-                var latestTweets = twitterService.GetTweets(query, lastTweet);
+                var fromDate = tweets.Last().Published;
+                var latestTweets = twitterService.GetTweets(query, fromDate);
 
-                Assert.AreEqual(tweets.Count(), latestTweets.Count() + 1);
+                Assert.That(tweets.Count(), Is.GreaterThan(latestTweets.Count()));
             }
         }
     }

@@ -10,7 +10,7 @@ namespace Api.Controllers
         private readonly IItemAggregator _aggregator;
 
         public TwitterController()
-            : this(new CachedItemAggregator(new TwitterAggregator()))
+            : this(new TwitterAggregator())
         {
         }
 
@@ -19,9 +19,10 @@ namespace Api.Controllers
             _aggregator = aggregator;
         }
 
-        public ActionResult Json()
+        public ActionResult Json(DateTime? from)
         {
-            return Json(_aggregator.GetLatest(), JsonRequestBehavior.AllowGet);
+            var fromDate = from ?? DateTime.UtcNow.AddMonths(-1);
+            return Json(_aggregator.GetLatest(fromDate), JsonRequestBehavior.AllowGet);
         }
     }
 }

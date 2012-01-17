@@ -10,7 +10,7 @@ namespace Api.Controllers
         private readonly IItemAggregator _aggregator;
 
         public RssController()
-            : this(new CachedItemAggregator(new RssAggregator()))
+            : this(new RssAggregator())
         {
         }
 
@@ -19,9 +19,10 @@ namespace Api.Controllers
             _aggregator = aggregator;
         }
 
-        public ActionResult Json()
+        public ActionResult Json(DateTime? from)
         {
-            return Json(_aggregator.GetLatest(), JsonRequestBehavior.AllowGet);
+            var fromDate = from ?? DateTime.UtcNow.AddMonths(-2);
+            return Json(_aggregator.GetLatest(fromDate), JsonRequestBehavior.AllowGet);
         }
     }
 }

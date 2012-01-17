@@ -54,11 +54,9 @@
     <Compile Include="Fakes\FakeHttpSessionState.cs" />
     <Compile Include="Fakes\FakeIdentity.cs" />
     <Compile Include="Fakes\FakePrincipal.cs" />
-    <Compile Include="Services\Rss\CachedRssAggregatorTests.cs" />
     <Compile Include="Services\Rss\UrlConfigProviderTests.cs" />
     <Compile Include="Services\Rss\RssAggregatorTests.cs" />
     <Compile Include="Services\Rss\RssServiceTests.cs" />
-    <Compile Include="Services\Twitter\CachedTwitterAggregatorTests.cs" />
     <Compile Include="Services\Twitter\QueryConfigProviderTests.cs" />
     <Compile Include="Services\Twitter\TwitterAggregatorTests.cs" />
     <Compile Include="Services\Twitter\TwitterServiceTests.cs" />

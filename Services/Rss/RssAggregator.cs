@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Services.Generic;
@@ -5,7 +6,7 @@ using Services.Model;
 
 namespace Services.Rss
 {
-    public class RssAggregator : BaseItemAggregator
+    public class RssAggregator : IItemAggregator
     {
         private readonly IRssService _rssService;
         private readonly IConfigProvider _urlProvider;
@@ -21,11 +22,11 @@ namespace Services.Rss
             _urlProvider = urlProvider;
         }
 
-        public override IEnumerable<Item> GetLatest()
+        public IEnumerable<Item> GetLatest(DateTime fromDate)
         {
             return _urlProvider.GetValues()
-                    .SelectMany(url => _rssService.GetFeeds(url, last: null))
-                    .OrderByDescending(f => f.Published)
+                    .SelectMany(url => _rssService.GetFeeds(url, fromDate))
+                    .OrderBy(f => f.Published)
                     .ToList();
         }
     }

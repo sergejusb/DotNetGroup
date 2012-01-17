@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.ServiceModel.Syndication;
 using System.Xml;
@@ -8,23 +9,19 @@ namespace Services.Rss
 {
     public interface IRssService
     {
-        IEnumerable<Item> GetFeeds(string url, Item last); 
+        IEnumerable<Item> GetFeeds(string url, DateTime fromDate); 
     }
 
     public class RssService : IRssService
     {
-        public IEnumerable<Item> GetFeeds(string url, Item last = null)
+        public IEnumerable<Item> GetFeeds(string url, DateTime fromDate)
         {
             try
             {
                 using (var reader = XmlReader.Create(url))
                 {
-                    var result = SyndicationFeed.Load(reader).Items;
-                    if (last != null)
-                    {
-                        result = result.TakeWhile(i => i.Id != last.Url);
-                    }
-
+                    var result = SyndicationFeed.Load(reader).Items.TakeWhile(i => i.PublishDate.DateTime > fromDate);
+                    
                     return result.Select(i => new Item
                     {
                         Url = i.Id,

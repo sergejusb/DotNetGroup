@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Api.Controllers;
 using Moq;
 using NUnit.Framework;
@@ -20,12 +21,12 @@ namespace Tests.Api
         public void By_Calling_Json_Action_GetLatestTweets_Is_Called_Once()
         {
             var rssAggregatorFake = new Mock<IItemAggregator>();
-            rssAggregatorFake.Setup(a => a.GetLatest()).Returns(new List<Item>());
+            rssAggregatorFake.Setup(a => a.GetLatest(It.IsAny<DateTime>())).Returns(new List<Item>());
             var rssController = new RssController(rssAggregatorFake.Object);
 
-            rssController.Json();
+            rssController.Json(null);
 
-            rssAggregatorFake.Verify(a => a.GetLatest(), Times.Once());
+            rssAggregatorFake.Verify(a => a.GetLatest(It.IsAny<DateTime>()), Times.Once());
         }
     }
 }
