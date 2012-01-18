@@ -55,6 +55,13 @@ namespace Tests.Services.Twitter
             Assert.AreEqual(numberOfTweets, tweets.Count);
         }
 
+        [Test]
+        public void Given_Null_Arguments_Constructor_Throws()
+        {
+            Assert.Throws<ArgumentNullException>(() => new TwitterAggregator(null, new Mock<IConfigProvider>().Object));
+            Assert.Throws<ArgumentNullException>(() => new TwitterAggregator(new Mock<ITwitterService>().Object, null));
+        }
+
         private static IItemAggregator BuildTwitterAggregator(IDictionary<string, IEnumerable<Item>> queryTweets)
         {
             var twitterServiceFake = new Mock<ITwitterService>();

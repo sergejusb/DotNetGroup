@@ -55,6 +55,7 @@
     <Compile Include="Fakes\FakeIdentity.cs" />
     <Compile Include="Fakes\FakePrincipal.cs" />
     <Compile Include="Helpers\IntegrationAttribute.cs" />
+    <Compile Include="Services\Generic\StreamAggregatorTests.cs" />
     <Compile Include="Services\Storage\ItemStorageTests.cs" />
     <Compile Include="Services\Rss\UrlConfigProviderTests.cs" />
     <Compile Include="Services\Rss\RssAggregatorTests.cs" />

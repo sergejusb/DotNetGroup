@@ -55,6 +55,13 @@ namespace Tests.Services.Rss
             Assert.AreEqual(numberOfFeeds, feeds.Count);
         }
 
+        [Test]
+        public void Given_Null_Arguments_Constructor_Throws()
+        {
+            Assert.Throws<ArgumentNullException>(() => new RssAggregator(null, new Mock<IConfigProvider>().Object));
+            Assert.Throws<ArgumentNullException>(() => new RssAggregator(new Mock<IRssService>().Object, null));
+        }
+
         private static IItemAggregator BuildRssAggregator(IDictionary<string, IEnumerable<Item>> urlFeeds)
         {
             var rssServiceFake = new Mock<IRssService>();

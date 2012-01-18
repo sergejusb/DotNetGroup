@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using FluentMongo.Linq;
 using MongoDB.Driver;
 using NUnit.Framework;
@@ -50,6 +51,13 @@ namespace Tests.Services.Storage
             var gotItems = storage.Get().ToList();
 
             Assert.That(items.Count, Is.EqualTo(gotItems.Count));
+        }
+
+        [Integration, Test]
+        public void Given_Null_Arguments_Constructor_Throws()
+        {
+            Assert.Throws<ArgumentNullException>(() => new ItemStorage(null, DatabaseName));
+            Assert.Throws<ArgumentNullException>(() => new ItemStorage(ConnectionString, null));
         }
 
         [SetUp]
