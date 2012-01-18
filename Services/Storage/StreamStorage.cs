@@ -7,11 +7,11 @@ using Services.Model;
 
 namespace Services.Storage
 {
-    public class ItemStorage
+    public class StreamStorage
     {
         private readonly MongoDatabase _database;
 
-        public ItemStorage(string connectionString, string database)
+        public StreamStorage(string connectionString, string database)
         {
             if (String.IsNullOrEmpty(connectionString))
                 throw new ArgumentNullException("connectionString");
@@ -21,14 +21,24 @@ namespace Services.Storage
             _database = MongoServer.Create(connectionString).GetDatabase(database);
         }
 
+        public Item Top()
+        {
+            return Items.AsQueryable()
+                        .OrderBy(i => i.Published)
+                        .FirstOrDefault();
+        }
+
+        public IEnumerable<Item> Get(DateTime fromDate)
+        {
+            return Items.AsQueryable()
+                        .Where(i => i.Published > fromDate)
+                        .OrderBy(i => i.Published)
+                        .ToList();
+        }
+
         public void Save(IEnumerable<Item> items)
         {
             Items.InsertBatch(items);
-        }
-
-        public IEnumerable<Item> Get()
-        {
-            return Items.AsQueryable().ToList();
         }
 
         private MongoCollection<Item> Items
