@@ -77,12 +77,14 @@ namespace Tests.Services.Twitter
 
         private static IEnumerable<Item> BuildTweets(int numberOfTweets)
         {
-            return new Fixture().Build<Item>()
-                                .Without(i => i.Id)
-                                .Do(i => i.Published = DateTime.Now.AddDays(new Random().Next(numberOfTweets)).AddHours(new Random().Next(numberOfTweets)))
-                                .CreateMany(numberOfTweets)
-                                .OrderByDescending(t => t.Published)
-                                .ToList();
+            return new Fixture()
+                .Build<Item>()
+                .Without(i => i.Id)
+                .Without(i => i.Tags)
+                .Do(i => i.Published = DateTime.Now.AddDays(new Random().Next(numberOfTweets)).AddHours(new Random().Next(numberOfTweets)))
+                .CreateMany(numberOfTweets)
+                .OrderByDescending(t => t.Published)
+                .ToList();
         }
     }
 }

@@ -7,7 +7,14 @@ using Services.Model;
 
 namespace Services.Storage
 {
-    public class StreamStorage
+    public interface IStreamStorage
+    {
+        Item Top();
+        IEnumerable<Item> Get(DateTime fromDate);
+        void Save(IEnumerable<Item> items);
+    }
+
+    public class StreamStorage : IStreamStorage
     {
         private readonly MongoDatabase _database;
 
@@ -24,7 +31,7 @@ namespace Services.Storage
         public Item Top()
         {
             return Items.AsQueryable()
-                        .OrderBy(i => i.Published)
+                        .OrderByDescending(i => i.Published)
                         .FirstOrDefault();
         }
 
@@ -32,7 +39,7 @@ namespace Services.Storage
         {
             return Items.AsQueryable()
                         .Where(i => i.Published > fromDate)
-                        .OrderBy(i => i.Published)
+                        .OrderByDescending(i => i.Published)
                         .ToList();
         }
 

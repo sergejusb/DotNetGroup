@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using MongoDB.Bson;
 
 namespace Services.Model
@@ -8,6 +9,7 @@ namespace Services.Model
         public Item()
         {
             Id = ObjectId.Empty;
+            Tags = new List<string>();
         }
 
         public ObjectId Id { get; set; }
@@ -25,6 +27,8 @@ namespace Services.Model
         public string Title { get; set; }
 
         public string Content { get; set; }
+
+        public IList<string> Tags { get; set; }
 
         public ItemType ItemType { get; set; }
     }

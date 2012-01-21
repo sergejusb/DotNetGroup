@@ -63,6 +63,7 @@ namespace Tests.Services.Generic
             return new Fixture()
                 .Build<Item>()
                 .Without(i => i.Id)
+                .Without(i => i.Tags)
                 .With(i => i.Published, date)
                 .CreateMany(count: 1);
         }

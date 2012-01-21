@@ -23,7 +23,7 @@ namespace Services.Twitter
                 var result = (from search in context.Search
                               where search.Type == SearchType.Search
                               && search.Query == query
-                              && search.Since == fromDate
+                              && search.Since == (fromDate == DateTime.MinValue ? DateTime.UtcNow.AddMonths(-1).Date : fromDate)
                               && search.WithRetweets == false
                               && search.PageSize == Count
                               select search).First().Entries;

@@ -16,17 +16,17 @@ namespace Services.Generic
     {
         private readonly IItemAggregator[] _itemAggregators;
 
+        public StreamAggregator()
+            : this(new RssAggregator(), new TwitterAggregator())
+        {
+        }
+
         public StreamAggregator(params IItemAggregator[] itemAggregators)
         {
             if (itemAggregators == null)
                 throw new ArgumentNullException("itemAggregators");
 
             _itemAggregators = itemAggregators;
-        }
-
-        public StreamAggregator()
-            : this(new RssAggregator(), new TwitterAggregator())
-        {
         }
 
         public IEnumerable<Item> GetLatest(DateTime fromDate)

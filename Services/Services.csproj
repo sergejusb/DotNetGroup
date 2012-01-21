@@ -46,14 +46,17 @@
     <Compile Include="Generic\BaseConfigProvider.cs" />
     <Compile Include="Model\Item.cs" />
     <Compile Include="Model\ItemType.cs" />
+    <Compile Include="Processors\IItemProcessor.cs" />
+    <Compile Include="Processors\TagsProcessor.cs" />
     <Compile Include="Rss\RssAggregator.cs" />
     <Compile Include="Rss\RssService.cs" />
     <Compile Include="Rss\UrlConfigProvider.cs" />
-    <Compile Include="Storage\ItemStorage.cs" />
+    <Compile Include="Storage\StreamStorage.cs" />
+    <Compile Include="StreamPersister.cs" />
     <Compile Include="Twitter\QueryConfigProvider.cs" />
     <Compile Include="Twitter\TwitterAggregator.cs" />
     <Compile Include="Twitter\TwitterService.cs" />
-    <Compile Include="Content\UrlContentProcessor.cs" />
+    <Compile Include="Processors\UrlContentProcessor.cs" />
     <Compile Include="Web\UrlResolver.cs" />
   </ItemGroup>
   <ItemGroup>
