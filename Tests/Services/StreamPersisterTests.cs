@@ -26,19 +26,19 @@ namespace Tests.Services
             var fakeStreamAggregator = new Mock<IItemAggregator>();
             fakeStreamAggregator.Setup(a => a.GetLatest(DateTime.MinValue)).Returns(items);
 
-            var fakeItemProcessor = new Mock<IItemProcessor>(MockBehavior.Loose);
+            var fakeStreamProcessor = new Mock<IItemProcessor>(MockBehavior.Loose);
 
             var fakeStreamStorage = new Mock<IStreamStorage>();
             fakeStreamStorage.Setup(s => s.Top()).Returns(oldItem);
             fakeStreamStorage.Setup(s => s.Save(It.IsAny<IEnumerable<Item>>())).Callback<IEnumerable<Item>>(savedItems.AddRange);
 
-            var streamPersister = new StreamPersister(fakeStreamAggregator.Object, fakeItemProcessor.Object, fakeStreamStorage.Object);
+            var streamPersister = new StreamPersister(fakeStreamAggregator.Object, fakeStreamProcessor.Object, fakeStreamStorage.Object);
             streamPersister.PersistLatest();
 
             CollectionAssert.AreEquivalent(items, savedItems);
 
             fakeStreamAggregator.Verify(a => a.GetLatest(oldItem.Published), Times.Once());
-            fakeItemProcessor.Verify(p => p.Process(It.IsAny<Item>()), Times.Exactly(items.Count));
+            fakeStreamProcessor.Verify(p => p.Process(It.IsAny<Item>()), Times.Exactly(items.Count));
             fakeStreamStorage.Verify(s => s.Top(), Times.Once());
             fakeStreamStorage.Verify(s => s.Save(It.IsAny<IEnumerable<Item>>()), Times.Once());
         }
