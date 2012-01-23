@@ -34,7 +34,7 @@ namespace Services
         public void PersistLatest()
         {
             var latestItem = _streamStorage.Top();
-            var fromDate = latestItem != null ? latestItem.Published : DateTime.MinValue;
+            var fromDate = latestItem != null ? latestItem.Published.ToLocalTime() : DateTime.MinValue;
 
             var items = _streamAggregator.GetLatest(fromDate).ToList();
             items.ForEach(_itemProcessor.Process);
