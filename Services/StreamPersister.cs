@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using Services.Generic;
+using Services.Model;
 using Services.Processors;
 using Services.Storage;
 
@@ -9,7 +10,7 @@ namespace Services
     public class StreamPersister
     {
         private readonly IItemAggregator _streamAggregator;
-        private readonly IItemProcessor _itemProcessor;
+        private readonly IItemProcessor _streamProcessor;
         private readonly IStreamStorage _streamStorage;
 
         public StreamPersister(string connectionString, string database)
@@ -17,27 +18,26 @@ namespace Services
         {
         }
 
-        public StreamPersister(IItemAggregator streamAggregator, IItemProcessor itemProcessor, IStreamStorage streamStorage)
+        public StreamPersister(IItemAggregator streamAggregator, IItemProcessor streamProcessor, IStreamStorage streamStorage)
         {
             if (streamAggregator == null)
                 throw new ArgumentNullException("streamAggregator");
-            if (itemProcessor == null)
-                throw new ArgumentNullException("itemProcessor");
+            if (streamProcessor == null)
+                throw new ArgumentNullException("streamProcessor");
             if (streamStorage == null)
                 throw new ArgumentNullException("streamStorage");
 
             _streamAggregator = streamAggregator;
-            _itemProcessor = itemProcessor;
+            _streamProcessor = streamProcessor;
             _streamStorage = streamStorage;
         }
 
         public void PersistLatest()
         {
-            var latestItem = _streamStorage.Top();
-            var fromDate = latestItem != null ? latestItem.Published.ToLocalTime() : DateTime.MinValue;
-
-            var items = _streamAggregator.GetLatest(fromDate).ToList();
-            items.ForEach(_itemProcessor.Process);
+            var latestItem = _streamStorage.Top() ?? new Item();
+            var items = _streamAggregator.GetLatest(latestItem.Published).ToList();
+            
+            items.ForEach(_streamProcessor.Process);
 
             _streamStorage.Save(items);
         }
