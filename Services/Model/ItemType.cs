@@ -2,7 +2,7 @@ namespace Services.Model
 {
     public enum ItemType
     {
-        Unknown,
+        Any,
         Rss,
         Twitter
     }

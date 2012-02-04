@@ -58,6 +58,7 @@
     <Compile Include="Fakes\FakePrincipal.cs" />
     <Compile Include="Helpers\ActionResultExtensions.cs" />
     <Compile Include="Helpers\DBAttribute.cs" />
+    <Compile Include="Services\StreamApiTests.cs" />
     <Compile Include="Services\Processors\ItemProcessorTests.cs" />
     <Compile Include="Services\StreamPersisterTests.cs" />
     <Compile Include="Services\Processors\TagsProcessorTests.cs" />
@@ -102,6 +103,7 @@
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.Caching" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
   </ItemGroup>
