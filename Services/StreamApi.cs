@@ -17,12 +17,20 @@ namespace Services
 
     public class StreamApi : IStreamApi
     {
-        private readonly IStreamStorage _storage;
+        private readonly IStreamStorage _streamStorage;
         private readonly int _limit;
 
-        public StreamApi(IStreamStorage storage, int limit = 100)
+        public StreamApi(string connectionString, string database, int limit = 100)
+            : this(new StreamStorage(connectionString, database), limit)
         {
-            _storage = storage;
+        }
+
+        public StreamApi(IStreamStorage streamStorage, int limit = 100)
+        {
+            if (streamStorage == null)
+                throw new ArgumentNullException("streamStorage");
+
+            _streamStorage = streamStorage;
             _limit = limit;
         }
 
@@ -32,27 +40,27 @@ namespace Services
             if (!ObjectId.TryParse(id, out objectId))
                 throw new ArgumentException("ID is of not valid format", "id");
 
-            return _storage.Get(objectId);
+            return _streamStorage.Get(objectId);
         }
 
         public IEnumerable<Item> Get(DateTime fromDate)
         {
-            return _storage.GetLatest(fromDate, ItemType.Any, _limit);
+            return _streamStorage.GetLatest(fromDate, ItemType.Any, _limit);
         }
 
         public IEnumerable<Item> Get(DateTime fromDate, int limit)
         {
-            return _storage.GetLatest(fromDate, ItemType.Any, limit);
+            return _streamStorage.GetLatest(fromDate, ItemType.Any, limit);
         }
 
         public IEnumerable<Item> Get(DateTime fromDate, ItemType type)
         {
-            return _storage.GetLatest(fromDate, type, _limit);
+            return _streamStorage.GetLatest(fromDate, type, _limit);
         }
 
         public IEnumerable<Item> Get(DateTime fromDate, ItemType type, int limit)
         {
-            return _storage.GetLatest(fromDate, type, limit);
+            return _streamStorage.GetLatest(fromDate, type, limit);
         }
     }
 }

@@ -1,16 +1,41 @@
 ﻿using System;
 using MongoDB.Bson;
+using MongoDB.Driver;
 using Moq;
 using NUnit.Framework;
 using Services;
 using Services.Model;
 using Services.Storage;
+using Tests.Helpers;
 
 namespace Tests.Services
 {
     [TestFixture]
     public class StreamApiTests
     {
+        [Test]
+        public void Given_Null_Argument_Constructor_Throws()
+        {
+            Assert.Throws<ArgumentNullException>(() => new StreamApi(null));
+        }
+
+        [DB, Test]
+        public void StreamApi_Can_Connect_To_Database()
+        {
+            var connectionString = "mongodb://localhost";
+            var databaseName = "Test";
+
+            try
+            {
+                var streamApi = new StreamApi(connectionString, databaseName);
+                streamApi.Get(DateTime.MinValue);
+            }
+            finally
+            {
+                MongoServer.Create(connectionString).DropDatabase(databaseName);
+            }
+        }
+
         [Test]
         public void Given_Invalid_Id_Api_Throws()
         {
