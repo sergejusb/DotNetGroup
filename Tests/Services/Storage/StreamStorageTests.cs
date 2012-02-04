@@ -16,7 +16,6 @@ namespace Tests.Services.Storage
     {
         private const string ConnectionString = "mongodb://localhost";
         private const string DatabaseName = "Test";
-        private const int NoLimit = -1;
 
         private MongoServer _server;
 
@@ -48,7 +47,7 @@ namespace Tests.Services.Storage
 
             var storage = new StreamStorage(ConnectionString, DatabaseName);
 
-            var gotItems = storage.GetLatest(DateTime.MinValue, ItemType.Any, NoLimit).ToList();
+            var gotItems = storage.GetLatest(null, null, null).ToList();
 
             Assert.That(items.Count, Is.EqualTo(gotItems.Count));
         }
@@ -61,7 +60,7 @@ namespace Tests.Services.Storage
 
             var storage = new StreamStorage(ConnectionString, DatabaseName);
 
-            var gotItems = storage.GetLatest(DateTime.MinValue, ItemType.Any, NoLimit).ToList();
+            var gotItems = storage.GetLatest(null, null, null).ToList();
 
             Assert.That(gotItems, Is.Ordered.Descending.By("Published"));
         }
@@ -76,7 +75,7 @@ namespace Tests.Services.Storage
 
             var storage = new StreamStorage(ConnectionString, DatabaseName);
 
-            var gotItems = storage.GetLatest(fromDate, ItemType.Any, NoLimit).ToList();
+            var gotItems = storage.GetLatest(fromDate, null, null).ToList();
 
             Assert.AreEqual(numberOfItems, gotItems.Count);
         }
@@ -90,7 +89,7 @@ namespace Tests.Services.Storage
 
             var storage = new StreamStorage(ConnectionString, DatabaseName);
 
-            var gotItems = storage.GetLatest(DateTime.MinValue, ItemType.Rss, NoLimit).ToList();
+            var gotItems = storage.GetLatest(null, ItemType.Rss, null).ToList();
 
             Assert.AreEqual(numberOfRssItems, gotItems.Count);
         }
@@ -104,7 +103,7 @@ namespace Tests.Services.Storage
 
             var storage = new StreamStorage(ConnectionString, DatabaseName);
 
-            var gotItems = storage.GetLatest(DateTime.MinValue, ItemType.Any, limit).ToList();
+            var gotItems = storage.GetLatest(null, null, limit).ToList();
 
             Assert.AreEqual(limit, gotItems.Count);
         }

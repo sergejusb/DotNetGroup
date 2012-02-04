@@ -48,8 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Api\RoutingTests.cs" />
-    <Compile Include="Api\RssControllerTests.cs" />
-    <Compile Include="Api\TwitterControllerTests.cs" />
+    <Compile Include="Api\StreamApiControllerTests.cs" />
     <Compile Include="Fakes\FakeControllerContext.cs" />
     <Compile Include="Fakes\FakeHttpContext.cs" />
     <Compile Include="Fakes\FakeHttpRequest.cs" />

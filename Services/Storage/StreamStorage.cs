@@ -12,7 +12,7 @@ namespace Services.Storage
     {
         Item Top();
         Item Get(ObjectId id);
-        IEnumerable<Item> GetLatest(DateTime fromDate, ItemType type, int limit);
+        IEnumerable<Item> GetLatest(DateTime? fromDate, ItemType? type, int? limit);
         void Save(IEnumerable<Item> items);
     }
 
@@ -42,13 +42,13 @@ namespace Services.Storage
             return Items.AsQueryable().SingleOrDefault(i => i.Id == id);
         }
 
-        public IEnumerable<Item> GetLatest(DateTime fromDate, ItemType type, int limit)
+        public IEnumerable<Item> GetLatest(DateTime? fromDate, ItemType? type, int? limit)
         {
             var query = Items.AsQueryable();
-            query = query.Where(i => i.Published > fromDate);
-            query = type == ItemType.Any ? query : query.Where(i => i.ItemType == type);
+            if (fromDate.HasValue) query = query.Where(i => i.Published > fromDate.Value);
+            if (type.HasValue) query = query.Where(i => i.ItemType == type.Value);
             query = query.OrderByDescending(i => i.Published);
-            query = limit > 0 ? query.Take(limit) : query;
+            if (limit.HasValue) query = query.Take(limit.Value);
 
             return query.ToList();
         }

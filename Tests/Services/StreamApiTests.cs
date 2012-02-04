@@ -60,25 +60,27 @@ namespace Tests.Services
         [Test]
         public void Given_Date_Api_Returns_Items()
         {
+            var limit = 10;
             var dateFrom = DateTime.UtcNow.AddDays(-1);
             var fakeStorage = new Mock<IStreamStorage>();
-            var streamApi = new StreamApi(fakeStorage.Object);
+            var streamApi = new StreamApi(fakeStorage.Object, limit);
 
             streamApi.Get(dateFrom);
 
-            fakeStorage.Verify(s => s.GetLatest(dateFrom, ItemType.Any, It.IsAny<int>()), Times.Once());
+            fakeStorage.Verify(s => s.GetLatest(dateFrom, null, limit), Times.Once());
         }
 
         [Test]
         public void Given_Date_Api_Returns_Rss_Items()
         {
+            var limit = 10;
             var dateFrom = DateTime.UtcNow.AddDays(-1);
             var fakeStorage = new Mock<IStreamStorage>();
-            var streamApi = new StreamApi(fakeStorage.Object);
+            var streamApi = new StreamApi(fakeStorage.Object, limit);
 
             streamApi.Get(dateFrom, ItemType.Rss);
 
-            fakeStorage.Verify(s => s.GetLatest(dateFrom, ItemType.Rss, It.IsAny<int>()), Times.Once());
+            fakeStorage.Verify(s => s.GetLatest(dateFrom, ItemType.Rss, limit), Times.Once());
         }
 
         [Test]
@@ -91,7 +93,7 @@ namespace Tests.Services
 
             streamApi.Get(dateFrom, limit);
 
-            fakeStorage.Verify(s => s.GetLatest(dateFrom, ItemType.Any, limit), Times.Once());
+            fakeStorage.Verify(s => s.GetLatest(dateFrom, null, limit), Times.Once());
         }
 
         [Test]

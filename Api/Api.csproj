@@ -80,8 +80,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controllers\RssController.cs" />
-    <Compile Include="Controllers\TwitterController.cs" />
+    <Compile Include="Controllers\StreamApiController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

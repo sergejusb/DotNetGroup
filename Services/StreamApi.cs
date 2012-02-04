@@ -45,12 +45,12 @@ namespace Services
 
         public IEnumerable<Item> Get(DateTime fromDate)
         {
-            return _streamStorage.GetLatest(fromDate, ItemType.Any, _limit);
+            return _streamStorage.GetLatest(fromDate, null, _limit);
         }
 
         public IEnumerable<Item> Get(DateTime fromDate, int limit)
         {
-            return _streamStorage.GetLatest(fromDate, ItemType.Any, limit);
+            return _streamStorage.GetLatest(fromDate, null, limit);
         }
 
         public IEnumerable<Item> Get(DateTime fromDate, ItemType type)

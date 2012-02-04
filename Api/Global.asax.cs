@@ -16,15 +16,15 @@ namespace Api
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
-                "Explicit", // Route name
-                "{controller}/{action}/{id}", // URL with parameters
-                new { controller = "twitter", id = UrlParameter.Optional } // Parameter defaults
+                "GetById",
+                "get/{id}",
+                new { controller = "StreamApi", action = "Get" }
             );
 
             routes.MapRoute(
-                "Implicit", // Route name
-                "{controller}/{id}", // URL with parameters
-                new { controller = "twitter", action = "json", id = UrlParameter.Optional } // Parameter defaults
+                "GetByDate",
+                "{type}",
+                new { controller = "StreamApi", action = "Stream", type = UrlParameter.Optional }
             );
         }
 
