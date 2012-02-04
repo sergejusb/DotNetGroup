@@ -1,0 +1,23 @@
+﻿@model ItemView
+<div data-role="content">
+    <div class="content-primary">
+        <div class="media">
+            <a href="#{author posts}" class="img prs" title="@Model.AuthorName">
+                <img src="@(Model.AuthorImage ?? "http://placehold.it/64x64")" alt="@Model.AuthorName" height="64" width="64" /></a>
+            <div class="bd post">
+                <b>@Model.Title</b>
+                <div class="item-type">
+                    <i class="icon @(Model.ItemType.ToString().ToLower())"></i><a href="{author posts}">@Model.AuthorName</a>
+                </div>
+            </div>
+        </div>
+        <div class="media">
+            <div class="bd">
+                <p class="ptn">
+                    @Html.Raw(Model.Content)
+                </p>
+            </div>
+        </div>
+        @Html.DisplayFor(x => x.Tags, "Tags")
+    </div>
+</div>

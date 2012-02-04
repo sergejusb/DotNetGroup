@@ -1,0 +1,91 @@
+﻿.ui-li-desc
+{
+    margin: auto;
+    white-space: normal;
+}
+
+.post
+{
+    height: 64px;
+    position: relative;
+}
+
+ul.tags
+{
+    list-style: none;
+}
+
+ul.tags li
+{
+    display: inline;
+}
+
+.nav-main .ui-btn .ui-btn-inner
+{
+    padding-top: 40px !important;
+}
+
+.nav-main .ui-btn .ui-icon
+{
+    background-image: url(../img/icons.png);
+    background-color: transparent;
+    background-repeat:  no-repeat;    
+    width: 26px !important;
+    height: 26px !important;
+    margin-left: -15px !important;
+    box-shadow: none !important;
+    -moz-box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+    -webkit-border-radius: 0 !important;
+    border-radius: 0 !important;
+}
+
+#home .ui-icon
+{
+    background-position: -0px -0px;
+}
+#rss .ui-icon
+{
+    background-position: -25px -0px;
+}
+
+#twitter .ui-icon
+{
+    background-position: -50px -0px;
+}
+
+#search .ui-icon
+{
+    background-position: -75px -0px;
+}
+
+.item-type
+{
+    bottom: 0;
+    position: absolute;
+    left: 68px;
+}
+
+.item-type .icon 
+{
+    display: block;
+    float: left;    
+    background: url(../img/icons.png);
+    background-color: transparent;
+    background-repeat:  no-repeat;
+    width: 19px;
+    height: 16px;
+}
+
+.item-type .rss {
+    background-position: -18px -26px;   
+}
+
+.item-type .twitter {
+    background-position: -0px -26px;   
+}
+
+a {
+    font-size: 14px;        
+    color: #2489CE;
+}
