@@ -98,11 +98,5 @@ namespace Tests.Services
 
             fakeStorage.Verify(s => s.GetLatest(dateFrom, ItemType.Twitter, limit), Times.Once());
         }
-
-        private static StreamApi GetStreamApi()
-        {
-            var fakeStorage = new Mock<IStreamStorage>();
-            return new StreamApi(fakeStorage.Object);
-        }
     }
 }
