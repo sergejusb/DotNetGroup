@@ -9,7 +9,10 @@ namespace Services.Processors
         {
             if (item.Tags != null)
             {
-                item.Tags = item.Tags.Select(t => t.ToLowerInvariant()).ToList();
+                item.Tags = item.Tags
+                                .Select(t => t.ToLowerInvariant())
+                                .Where(t => !t.Equals("ltnet"))
+                                .ToList();
             }
         }
     }

@@ -19,5 +19,18 @@ namespace Tests.Services.Processors
 
             CollectionAssert.AreEquivalent(tagsAfterProcessing, item.Tags);
         }
+
+        [Test]
+        public void Given_ltnet_Tag_It_Is_Remvoed()
+        {
+            var tagsBeforeProcessing = new[] { "ASP.NET MVC", "ltnet" };
+            var tagsAfterProcessing = new[] { "asp.net mvc" };
+
+            var item = new Item { Tags = tagsBeforeProcessing };
+
+            new TagsProcessor().Process(item);
+
+            CollectionAssert.AreEquivalent(tagsAfterProcessing, item.Tags);
+        }
     }
 }

@@ -57,7 +57,7 @@ namespace Services.Twitter
         private static IList<string> ExtractTags(string content)
         {
             var matches = HashtagPattern.Matches(content);
-            return matches.Count > 0 ? matches.Cast<Match>().Select(m => m.Value).Distinct().ToList() : new List<string>();
+            return matches.Count > 0 ? matches.Cast<Match>().Select(m => m.Groups[1].Value).Distinct().ToList() : new List<string>();
         }
     }
 }

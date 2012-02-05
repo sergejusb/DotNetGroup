@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Threading.Tasks;
 using Services.Generic;
 using Services.Model;
 using Services.Processors;
@@ -36,8 +37,8 @@ namespace Services
         {
             var latestItem = _streamStorage.Top() ?? new Item();
             var items = _streamAggregator.GetLatest(latestItem.Published).ToList();
-            
-            items.ForEach(_streamProcessor.Process);
+
+            Parallel.ForEach(items, item => _streamProcessor.Process(item));
 
             _streamStorage.Save(items);
         }
