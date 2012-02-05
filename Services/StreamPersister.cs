@@ -8,7 +8,13 @@ using Services.Storage;
 
 namespace Services
 {
-    public class StreamPersister
+    public interface IStreamPersister
+    {
+        void PersistLatest();
+        void Reprocess();
+    }
+
+    public class StreamPersister : IStreamPersister
     {
         private readonly IItemAggregator _streamAggregator;
         private readonly IItemProcessor _streamProcessor;
@@ -37,6 +43,15 @@ namespace Services
         {
             var latestItem = _streamStorage.Top() ?? new Item();
             var items = _streamAggregator.GetLatest(latestItem.Published).ToList();
+
+            Parallel.ForEach(items, item => _streamProcessor.Process(item));
+
+            _streamStorage.Save(items);
+        }
+
+        public void Reprocess()
+        {
+            var items = _streamStorage.GetLatest(fromDate: null, type: null, limit: null).ToList();
 
             Parallel.ForEach(items, item => _streamProcessor.Process(item));
 

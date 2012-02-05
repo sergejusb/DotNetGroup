@@ -15,7 +15,7 @@ namespace Web.Mobile.Models.ViewModels
 
         public string Content { get; set; }
 
-        public IList<string> Tags { get; set; }
+        public IEnumerable<string> Tags { get; set; }
 
         public ItemType ItemType { get; set; }
 

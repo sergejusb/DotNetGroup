@@ -46,7 +46,8 @@
     <Compile Include="Generic\BaseConfigProvider.cs" />
     <Compile Include="Model\Item.cs" />
     <Compile Include="Model\ItemType.cs" />
-    <Compile Include="Processors\IItemProcessor.cs" />
+    <Compile Include="Processors\FacebookProcessor.cs" />
+    <Compile Include="Processors\ItemProcessor.cs" />
     <Compile Include="Processors\TagsProcessor.cs" />
     <Compile Include="Rss\RssAggregator.cs" />
     <Compile Include="Rss\RssService.cs" />

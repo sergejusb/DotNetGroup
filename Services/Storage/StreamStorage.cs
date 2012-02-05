@@ -54,7 +54,10 @@ namespace Services.Storage
 
         public void Save(IEnumerable<Item> items)
         {
-            Items.InsertBatch(items);
+            foreach (var item in items)
+            {
+                Items.Save(item);
+            }
         }
 
         private MongoCollection<Item> Items

@@ -13,7 +13,7 @@ namespace Services.Processors
         private readonly IItemProcessor[] _itemProcessors;
 
         public ItemProcessor()
-            : this(new UrlContentProcessor(), new TagsProcessor())
+            : this(new UrlContentProcessor(), new TagsProcessor(), new FacebookProcessor())
         {
         }
 

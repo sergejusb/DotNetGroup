@@ -58,6 +58,7 @@
     <Compile Include="Helpers\ActionResultExtensions.cs" />
     <Compile Include="Helpers\DBAttribute.cs" />
     <Compile Include="Services\Model\ItemTests.cs" />
+    <Compile Include="Services\Processors\FacebookProcessorTests.cs" />
     <Compile Include="Services\StreamApiTests.cs" />
     <Compile Include="Services\Processors\ItemProcessorTests.cs" />
     <Compile Include="Services\StreamPersisterTests.cs" />

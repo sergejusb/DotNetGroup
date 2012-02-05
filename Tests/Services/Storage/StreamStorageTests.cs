@@ -146,6 +146,51 @@ namespace Tests.Services.Storage
         }
 
         [DB, Test]
+        public void ItemStorage_Can_Save_5_New_And_5_Modified_Items()
+        {
+            Items.InsertBatch(BuildItems(count: 5));
+
+            var existingItems = Items.AsQueryable().ToList();
+            foreach (var item in existingItems)
+            {
+                item.Tags.Add("test");
+            }
+            var newItems = BuildItems(count: 5);
+            var items = existingItems.Union(newItems);
+
+            var storage = new StreamStorage(ConnectionString, DatabaseName);
+            
+            storage.Save(items);
+
+            var savedItems = Items.AsQueryable().ToList();
+
+            Assert.That(items.Count(), Is.EqualTo(savedItems.Count));
+        }
+
+        [DB, Test]
+        public void ItemStorage_Can_Save_5_Modified_Items_And_Retrieve_Them_Back()
+        {
+            Items.InsertBatch(BuildItems(count: 5));
+
+            var items = Items.AsQueryable().ToList();
+            foreach (var item in items)
+            {
+                item.Tags.Add("test");
+            }
+            
+            var storage = new StreamStorage(ConnectionString, DatabaseName);
+
+            storage.Save(items);
+
+            var savedItems = Items.AsQueryable().ToList();
+
+            foreach (var item in savedItems)
+            {
+                Assert.IsTrue(item.Tags.Contains("test"));
+            }
+        }
+
+        [DB, Test]
         public void Given_Null_Arguments_Constructor_Throws()
         {
             Assert.Throws<ArgumentNullException>(() => new StreamStorage(null, DatabaseName));
