@@ -9,8 +9,6 @@ namespace Host
     {
         static void Main()
         {
-            Console.WriteLine("Running...");
-
             var refreshPeriod = TimeSpan.FromSeconds(Int32.Parse(ConfigurationManager.AppSettings["sys.refreshPeriodInSec"] ?? "60"));
             var connectionString = ConfigurationManager.AppSettings["db.connection"];
             var database = ConfigurationManager.AppSettings["db.database"];
@@ -18,7 +16,11 @@ namespace Host
 
             while(true)
             {
+                Console.WriteLine("Running...");
+                
                 streamPersister.PersistLatest();
+
+                Console.WriteLine("Sleeping for " + refreshPeriod.Seconds + " sec");
                 Thread.Sleep(refreshPeriod);
             }
         }

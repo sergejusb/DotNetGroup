@@ -23,23 +23,30 @@ namespace Services.Processors
         {
             if (!String.IsNullOrEmpty(item.Content))
             {
-                var html = new HtmlDocument();
-                html.LoadHtml(item.Content);
-
-                var hrefs = html.DocumentNode.SelectNodes("//a");
-                if (hrefs != null)
-                {
-                    foreach (var href in hrefs)
-                    {
-                        if (Uri.IsWellFormedUriString(href.InnerText, UriKind.Absolute))
-                        {
-                            href.InnerHtml = _urlResolver.Resolve(href.InnerText);
-                        }
-                    }
-
-                    item.Content = html.DocumentNode.InnerHtml;
-                }
+                item.Content = ExpandUrls(item.Content);
             }
+        }
+
+        private string ExpandUrls(string content)
+        {
+            var html = new HtmlDocument();
+            html.LoadHtml(content);
+
+            var hrefs = html.DocumentNode.SelectNodes("//a");
+            if (hrefs != null)
+            {
+                foreach (var href in hrefs)
+                {
+                    if (Uri.IsWellFormedUriString(href.InnerText, UriKind.Absolute))
+                    {
+                        href.InnerHtml = _urlResolver.Resolve(href.InnerText);
+                    }
+                }
+
+                return html.DocumentNode.InnerHtml;
+            }
+
+            return content;
         }
     }
 }
