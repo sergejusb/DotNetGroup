@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using FluentMongo.Linq;
-using MongoDB.Bson;
 using MongoDB.Driver;
 using Services.Model;
 
@@ -11,7 +10,7 @@ namespace Services.Storage
     public interface IStreamStorage
     {
         Item Top();
-        Item Get(ObjectId id);
+        Item Get(string id);
         IEnumerable<Item> GetLatest(DateTime? fromDate, ItemType? type, int? limit);
         void Save(IEnumerable<Item> items);
     }
@@ -37,7 +36,7 @@ namespace Services.Storage
                         .FirstOrDefault();
         }
 
-        public Item Get(ObjectId id)
+        public Item Get(string id)
         {
             return Items.AsQueryable().SingleOrDefault(i => i.Id == id);
         }

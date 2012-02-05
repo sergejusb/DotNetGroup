@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using MongoDB.Bson;
 using Services.Model;
 using Services.Storage;
 
@@ -36,11 +35,7 @@ namespace Services
 
         public Item Get(string id)
         {
-            ObjectId objectId;
-            if (!ObjectId.TryParse(id, out objectId))
-                throw new ArgumentException("ID is of not valid format", "id");
-
-            return _streamStorage.Get(objectId);
+            return _streamStorage.Get(id);
         }
 
         public IEnumerable<Item> Get(DateTime fromDate)

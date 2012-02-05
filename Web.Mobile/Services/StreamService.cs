@@ -1,69 +1,52 @@
 ﻿using System.Collections.Generic;
 using System.Net;
+using System.Web;
 using Services.Model;
 using Web.Mobile.Models;
 
 namespace Web.Mobile.Services
 {
-    using System;
-    using System.Linq;
     using System.Text;
     using System.Web.Script.Serialization;
 
-    using MongoDB.Bson;
-
     public interface IStreamService
     {
+        Item GetItem(string objectId);
         IEnumerable<Item> GetItems(StreamFilter filter);
-        Item GetItem(ObjectId objectId);
     }
 
     public class StreamService : IStreamService
     {
+        private readonly JavaScriptSerializer _jsonSerializer;
+
+        public StreamService()
+        {
+            _jsonSerializer = new JavaScriptSerializer();
+        }
+
         public IEnumerable<Item> GetItems(StreamFilter filter)
         {
-            // TODO replace with actual implementation, that gives combined sream by using filter
-            using (var webClient = new WebClient())
+            using (var webClient = new WebClient { Encoding = Encoding.UTF8 })
             {
-                webClient.Encoding = Encoding.UTF8;
-                var jsonSerializer = new JavaScriptSerializer();
-                var rssItems = jsonSerializer.Deserialize<IEnumerable<Item>>(webClient.DownloadString("http://api.dotnetgroup.dev/rss/json"));
-                var twitterItems = jsonSerializer.Deserialize<IEnumerable<Item>>(webClient.DownloadString("http://api.dotnetgroup.dev/twitter/json?from=2010-01-01"));
-                var items = rssItems.Union(twitterItems).OrderBy(x => Guid.NewGuid()).AsQueryable();
-
-                if (filter == null)
-                {
-                    return items;
-                }
-
-                if (filter.DateFrom.HasValue)
-                {
-                    items = items.Where(x => x.Published >= filter.DateFrom.Value.Date);
-                }
-
-                if (filter.DateTo.HasValue)
-                {
-                    items = items.Where(x => x.Published <= filter.DateFrom.Value.Date.AddDays(1));
-                }
-
+                var url = "http://api.dotnetgroup.dev/";
                 if (filter.ItemType.HasValue)
-                {
-                    items = items.Where(x => x.ItemType == filter.ItemType);
-                }
+                    url += filter.ItemType + "/";
+                url += "?limit=" + filter.PageSize;
+                if (filter.DateFrom.HasValue)
+                    url += "&from=" + HttpUtility.UrlEncodeUnicode(filter.DateFrom.Value.ToString());
 
-                if (filter.PageIndex.HasValue)
-                {
-                    items = items.Skip(filter.PageIndex.Value * filter.PageSize).Take(filter.PageSize);
-                }
 
-                return items;
+                return _jsonSerializer.Deserialize<IEnumerable<Item>>(webClient.DownloadString(url));
             }
         }
 
-        public Item GetItem(ObjectId objectId)
+        public Item GetItem(string id)
         {
-            // todo: replace with actual implementation
-            return this.GetItems(null).FirstOrDefault(x => x.Id == objectId);
+            using (var webClient = new WebClient { Encoding = Encoding.UTF8 })
+            {
+                var url = "http://api.dotnetgroup.dev/get/" + id;
+                return _jsonSerializer.Deserialize<Item>(webClient.DownloadString(url));
+            }
         }
     }
 }

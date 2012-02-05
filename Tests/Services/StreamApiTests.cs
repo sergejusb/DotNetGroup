@@ -1,5 +1,4 @@
 ﻿using System;
-using MongoDB.Bson;
 using MongoDB.Driver;
 using Moq;
 using NUnit.Framework;
@@ -37,24 +36,15 @@ namespace Tests.Services
         }
 
         [Test]
-        public void Given_Invalid_Id_Api_Throws()
-        {
-            var streamApi = GetStreamApi();
-            var id = "invalid";
-
-            Assert.Throws<ArgumentException>(() => streamApi.Get(id));
-        }
-
-        [Test]
         public void Given_Valid_Id_Api_Returns_Item()
         {
-            var id = ObjectId.GenerateNewId().ToString();
+            var id = new Item().Id;
             var fakeStorage = new Mock<IStreamStorage>();
             var streamApi = new StreamApi(fakeStorage.Object);
 
             streamApi.Get(id);
 
-            fakeStorage.Verify(s => s.Get(ObjectId.Parse(id)), Times.Once());
+            fakeStorage.Verify(s => s.Get(id), Times.Once());
         }
 
         [Test]

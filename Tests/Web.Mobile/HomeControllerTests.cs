@@ -1,8 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Web.Mvc;
-
-using MongoDB.Bson;
-
 using Moq;
 
 using NUnit.Framework;
@@ -40,33 +37,26 @@ namespace Tests.Web.Mobile
         [Test]
         public void Item_Action_Should_Return_ViewResult_With_ItemView()
         {
+            var id = "000000000000000000000000";
             var streamServiceFake = new Mock<IStreamService>();
-            streamServiceFake.Setup(x => x.GetItem(It.IsAny<ObjectId>())).Returns(new Item());
+            streamServiceFake.Setup(x => x.GetItem(id)).Returns(new Item());
 
             var controller = new HomeController(streamServiceFake.Object);
 
-            var returnsViewResult = controller.Item("000000000000000000000000").ReturnsViewResult();
+            var returnsViewResult = controller.Item(id).ReturnsViewResult();
 
             Assert.IsTrue(returnsViewResult.Model is ItemView);
         }
-
-        [Test]
-        public void Given_Wrong_Id_Format_Item_Action_Should_Return_HttpNotFoundResult()
-        {            
-            var controller = new HomeController(null);
-            var viewResult = controller.Item("0");
-
-            Assert.IsTrue(viewResult is HttpNotFoundResult);
-        }
-
+        
         [Test]
         public void Given_Not_Existing_Id_Item_Action_Should_Return_HttpNotFoundResult()
         {
+            var id = "000000000000000000000000";
             var streamServiceFake = new Mock<IStreamService>();
-            streamServiceFake.Setup(x => x.GetItem(It.IsAny<ObjectId>())).Returns((Item)null);
+            streamServiceFake.Setup(x => x.GetItem(id)).Returns((Item)null);
             var controller = new HomeController(streamServiceFake.Object);
 
-            var viewResult = controller.Item("000000000000000000000000");
+            var viewResult = controller.Item(id);
 
             Assert.IsTrue(viewResult is HttpNotFoundResult);
         }

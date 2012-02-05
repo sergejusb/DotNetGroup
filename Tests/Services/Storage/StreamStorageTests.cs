@@ -24,7 +24,17 @@ namespace Tests.Services.Storage
         {
             new StreamStorage(ConnectionString, DatabaseName);
         }
-        
+
+        [DB, Test]
+        public void Given_Non_Valid_Id_Get_Returns_Null()
+        {
+            var storage = new StreamStorage(ConnectionString, DatabaseName);
+
+            var gotItem = storage.Get("id");
+
+            Assert.IsNull(gotItem);
+        }
+
         [DB, Test]
         public void Given_Existing_Item_Get_Returns_It_By_Id()
         {

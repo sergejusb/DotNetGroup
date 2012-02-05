@@ -6,13 +6,26 @@ namespace Services.Model
 {
     public class Item
     {
+        private ObjectId _id;
+
         public Item()
         {
-            Id = ObjectId.Empty;
+            _id = ObjectId.GenerateNewId();
             Tags = new List<string>();
         }
 
-        public ObjectId Id { get; set; }
+        public string Id
+        {
+            get
+            {
+                return _id.ToString();
+            }
+            set
+            {
+                if (!ObjectId.TryParse(value, out _id))
+                    throw new ArgumentException("ID is of not valid format", "value");
+            }
+        }
 
         public string Url { get; set; }
 
