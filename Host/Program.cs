@@ -16,7 +16,7 @@ namespace Host
             var database = ConfigurationManager.AppSettings["db.database"];
             var streamPersister = new StreamPersister(connectionString, database);
 
-            if (args != null && reprocessArgs.Contains(args[0].ToLower()))
+            if (args != null && args.Length == 1 && reprocessArgs.Contains(args[0].ToLower()))
             {
                 streamPersister.Reprocess();
             }
@@ -28,7 +28,7 @@ namespace Host
 
                     streamPersister.PersistLatest();
 
-                    Console.WriteLine("Sleeping for " + refreshPeriod.Seconds + " sec");
+                    Console.WriteLine("Sleeping for " + refreshPeriod.TotalSeconds + " sec");
                     Thread.Sleep(refreshPeriod);
                 }
             }

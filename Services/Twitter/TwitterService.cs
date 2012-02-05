@@ -42,7 +42,7 @@ namespace Services.Twitter
                     AuthorImage = e.Image,
                     AuthorName = e.Author.Name,
                     AuthorUri = e.Author.URI,
-                    Title = e.Title,
+                    Title = String.Empty,
                     Content = e.Content,
                     Tags = ExtractTags(e.Content),
                     ItemType = ItemType.Twitter

@@ -1,4 +1,6 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Web.Mvc;
+using Services.Model;
 using Web.Services;
 
 namespace Web.Controllers
@@ -17,10 +19,10 @@ namespace Web.Controllers
             _streamService = streamService;
         }
 
-        public ActionResult Index()
+        public virtual ActionResult Index(ItemType? type, DateTime? from, int? limit)
         {
-            var items = _streamService.GetItems();
-            return View(items);
+            var items = _streamService.GetItems(type, from, limit);
+            return View("Index", items);
         }
     }
 }
