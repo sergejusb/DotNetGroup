@@ -6,11 +6,11 @@ namespace Api.Controllers
 
     public class StreamFilter
     {
-        private const int MaxItems = 100;
         private const int PastDays = 7;
+        private const int MaxItems = 100;
 
-        private int? limit;
         private DateTime? from;
+        private int? limit;
 
         public ItemType? Type { get; set; }
         
