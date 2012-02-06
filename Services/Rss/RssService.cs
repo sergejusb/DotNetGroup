@@ -20,9 +20,7 @@ namespace Services.Rss
             {
                 using (var reader = XmlReader.Create(url))
                 {
-                    var result = SyndicationFeed.Load(reader).Items.TakeWhile(i => i.PublishDate.DateTime > fromDate);
-                    
-                    return result.Select(i => new Item
+                    return SyndicationFeed.Load(reader).Items.Select(i => new Item
                     {
                         Url = i.Id,
                         Published = i.LastUpdatedTime.DateTime,
@@ -32,7 +30,7 @@ namespace Services.Rss
                         Content = ((TextSyndicationContent)i.Content).Text,
                         Tags = i.Categories.Select(c => c.Name).ToList(),
                         ItemType = ItemType.Rss
-                    }).ToList();
+                    }).TakeWhile(i => i.Published > fromDate).ToList();
                 }
             }
             catch
