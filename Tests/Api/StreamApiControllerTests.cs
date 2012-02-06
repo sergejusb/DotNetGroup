@@ -40,7 +40,7 @@
             try
             {
                 var streamApi = new StreamApiController(connectionString, databaseName);
-                streamApi.Stream();
+                streamApi.Stream(new StreamFilter());
             }
             finally
             {
@@ -61,55 +61,79 @@
         }
 
         [Test]
-        public void Given_Date_Api_Returns_Items()
+        public void With_No_Arguments_Api_Returns_Items()
         {
-            var maxItems = 100;
-            var dateFrom = DateTime.UtcNow.AddDays(-1);
+            var filter = new StreamFilter();
             var fakeStorage = new Mock<IStreamStorage>();
             var streamApi = new StreamApiController(fakeStorage.Object);
 
-            streamApi.Stream(dateFrom);
+            streamApi.Stream(filter);
 
-            fakeStorage.Verify(s => s.GetLatest(dateFrom, null, maxItems), Times.Once());
+            fakeStorage.Verify(s => s.GetLatest(filter.From, filter.Type, filter.Limit), Times.Once());
+        }
+
+        [Test]
+        public void Given_Date_Api_Returns_Items()
+        {
+            var filter = new StreamFilter
+            {
+                From = DateTime.UtcNow.AddDays(-1)
+            };
+            var fakeStorage = new Mock<IStreamStorage>();
+            var streamApi = new StreamApiController(fakeStorage.Object);
+
+            streamApi.Stream(filter);
+
+            fakeStorage.Verify(s => s.GetLatest(filter.From, filter.Type, filter.Limit), Times.Once());
         }
 
         [Test]
         public void Given_Date_Api_Returns_Rss_Items()
         {
-            var maxItems = 100;
-            var dateFrom = DateTime.UtcNow.AddDays(-1);
+            var filter = new StreamFilter
+            {
+                Type = ItemType.Rss,
+                From = DateTime.UtcNow.AddDays(-1)
+            };
             var fakeStorage = new Mock<IStreamStorage>();
             var streamApi = new StreamApiController(fakeStorage.Object);
 
-            streamApi.Stream(dateFrom, ItemType.Rss);
+            streamApi.Stream(filter);
 
-            fakeStorage.Verify(s => s.GetLatest(dateFrom, ItemType.Rss, maxItems), Times.Once());
+            fakeStorage.Verify(s => s.GetLatest(filter.From, filter.Type, filter.Limit), Times.Once());
         }
 
         [Test]
         public void Given_Date_And_Limit_Api_Returns_Limited_Number_Of_Items()
         {
-            var limit = 10;
-            var dateFrom = DateTime.UtcNow.AddDays(-1);
+            var filter = new StreamFilter
+            {
+                From = DateTime.UtcNow.AddDays(-1),
+                Limit = 10
+            };
             var fakeStorage = new Mock<IStreamStorage>();
             var streamApi = new StreamApiController(fakeStorage.Object);
 
-            streamApi.Stream(dateFrom, limit: limit);
+            streamApi.Stream(filter);
 
-            fakeStorage.Verify(s => s.GetLatest(dateFrom, null, limit), Times.Once());
+            fakeStorage.Verify(s => s.GetLatest(filter.From, filter.Type, filter.Limit), Times.Once());
         }
 
         [Test]
         public void Given_Date_And_Limit_Api_Returns_Limited_Number_Of_Tweets()
         {
-            var limit = 10;
-            var dateFrom = DateTime.UtcNow.AddDays(-1);
+            var filter = new StreamFilter
+            {
+                Type = ItemType.Twitter,
+                From = DateTime.UtcNow.AddDays(-1),
+                Limit = 10
+            };
             var fakeStorage = new Mock<IStreamStorage>();
             var streamApi = new StreamApiController(fakeStorage.Object);
 
-            streamApi.Stream(dateFrom, ItemType.Twitter, limit);
+            streamApi.Stream(filter);
 
-            fakeStorage.Verify(s => s.GetLatest(dateFrom, ItemType.Twitter, limit), Times.Once());
+            fakeStorage.Verify(s => s.GetLatest(filter.From, filter.Type, filter.Limit), Times.Once());
         }
     }
 }

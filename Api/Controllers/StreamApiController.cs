@@ -4,12 +4,10 @@
     using System.Configuration;
     using System.Web.Mvc;
 
-    using Services.Model;
     using Services.Storage;
 
     public class StreamApiController : Controller
     {
-        private const int MaxItems = 100;
         private readonly IStreamStorage streamStorage;
 
         public StreamApiController()
@@ -37,10 +35,9 @@
             return Json(this.streamStorage.Get(id), JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult Stream(DateTime? from = null, ItemType? type = null, int limit = MaxItems)
+        public ActionResult Stream(StreamFilter filter)
         {
-            from = from ?? DateTime.UtcNow.AddDays(-7).Date;
-            var items = this.streamStorage.GetLatest(from, type, limit);
+            var items = this.streamStorage.GetLatest(filter.From, filter.Type, filter.Limit);
 
             return Json(items, JsonRequestBehavior.AllowGet);
         }

@@ -1,9 +1,9 @@
-﻿using System.Web;
-using System.Web.Mvc;
-using System.Web.Routing;
-
-namespace Api
+﻿namespace Api
 {
+    using System.Web;
+    using System.Web.Mvc;
+    using System.Web.Routing;
+
     public class MvcApplication : HttpApplication
     {
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
@@ -18,14 +18,12 @@ namespace Api
             routes.MapRoute(
                 "GetById",
                 "get/{id}",
-                new { controller = "StreamApi", action = "Get" }
-            );
+                new { controller = "StreamApi", action = "Get" });
 
             routes.MapRoute(
-                "GetByDate",
-                "{type}",
-                new { controller = "StreamApi", action = "Stream", type = UrlParameter.Optional }
-            );
+                "GetStream",
+                "{controller}/{action}",
+                new { controller = "StreamApi", action = "Stream" });
         }
 
         protected void Application_Start()

@@ -49,6 +49,7 @@
   <ItemGroup>
     <Compile Include="Api\RoutingTests.cs" />
     <Compile Include="Api\StreamApiControllerTests.cs" />
+    <Compile Include="Api\StreamFilterTests.cs" />
     <Compile Include="Fakes\FakeControllerContext.cs" />
     <Compile Include="Fakes\FakeHttpContext.cs" />
     <Compile Include="Fakes\FakeHttpRequest.cs" />

@@ -30,16 +30,6 @@
             Assert.AreEqual("Stream", routeData.Values["action"]);
         }
 
-        [Test]
-        public void Given_Root_Slash_Rss_Path_Then_StreamApi_Stream_Action_Is_Called()
-        {
-            var routeData = GetRouteDataForUrl("~/rss");
-
-            Assert.AreEqual("StreamApi", routeData.Values["controller"]);
-            Assert.AreEqual("Stream", routeData.Values["action"]);
-            Assert.AreEqual("rss", routeData.Values["type"]);
-        }
-
         private static RouteData GetRouteDataForUrl(string relativeUrl)
         {
             var routes = new RouteCollection();
