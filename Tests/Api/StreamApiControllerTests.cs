@@ -69,7 +69,7 @@
 
             streamApi.Stream(filter);
 
-            fakeStorage.Verify(s => s.GetLatest(filter.From, filter.Type, filter.Limit), Times.Once());
+            fakeStorage.Verify(s => s.GetLatest(filter.Type, filter.From, filter.To, filter.Limit), Times.Once());
         }
 
         [Test]
@@ -84,7 +84,7 @@
 
             streamApi.Stream(filter);
 
-            fakeStorage.Verify(s => s.GetLatest(filter.From, filter.Type, filter.Limit), Times.Once());
+            fakeStorage.Verify(s => s.GetLatest(filter.Type, filter.From, filter.To, filter.Limit), Times.Once());
         }
 
         [Test]
@@ -100,7 +100,7 @@
 
             streamApi.Stream(filter);
 
-            fakeStorage.Verify(s => s.GetLatest(filter.From, filter.Type, filter.Limit), Times.Once());
+            fakeStorage.Verify(s => s.GetLatest(filter.Type, filter.From, filter.To, filter.Limit), Times.Once());
         }
 
         [Test]
@@ -116,7 +116,7 @@
 
             streamApi.Stream(filter);
 
-            fakeStorage.Verify(s => s.GetLatest(filter.From, filter.Type, filter.Limit), Times.Once());
+            fakeStorage.Verify(s => s.GetLatest(filter.Type, filter.From, filter.To, filter.Limit), Times.Once());
         }
 
         [Test]
@@ -133,7 +133,7 @@
 
             streamApi.Stream(filter);
 
-            fakeStorage.Verify(s => s.GetLatest(filter.From, filter.Type, filter.Limit), Times.Once());
+            fakeStorage.Verify(s => s.GetLatest(filter.Type, filter.From, filter.To, filter.Limit), Times.Once());
         }
     }
 }

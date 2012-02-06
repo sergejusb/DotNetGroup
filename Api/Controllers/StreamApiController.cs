@@ -37,7 +37,7 @@
 
         public ActionResult Stream(StreamFilter filter)
         {
-            var items = this.streamStorage.GetLatest(filter.From, filter.Type, filter.Limit);
+            var items = this.streamStorage.GetLatest(filter.Type, filter.From, filter.To, filter.Limit);
 
             return Json(items, JsonRequestBehavior.AllowGet);
         }

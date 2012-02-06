@@ -91,13 +91,13 @@
             var fakeStreamAggregator = new Mock<IItemAggregator>();
             var fakeStreamProcessor = new Mock<IItemProcessor>(MockBehavior.Loose);
             var fakeStreamStorage = new Mock<IStreamStorage>(MockBehavior.Loose);
-            fakeStreamStorage.Setup(s => s.GetLatest(null, null, null)).Returns(items);
+            fakeStreamStorage.Setup(s => s.GetLatest(null, null, null, null)).Returns(items);
 
             var streamPersister = new StreamPersister(fakeStreamAggregator.Object, fakeStreamProcessor.Object, fakeStreamStorage.Object);
             streamPersister.Reprocess();
 
             fakeStreamProcessor.Verify(p => p.Process(It.IsAny<Item>()), Times.Exactly(items.Count));
-            fakeStreamStorage.Verify(s => s.GetLatest(null, null, null), Times.Once());
+            fakeStreamStorage.Verify(s => s.GetLatest(null, null, null, null), Times.Once());
             fakeStreamStorage.Verify(s => s.Save(It.IsAny<IEnumerable<Item>>()), Times.Once());
         }
 

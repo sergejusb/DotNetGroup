@@ -89,7 +89,7 @@
 
             var storage = new StreamStorage(ConnectionString, DatabaseName);
 
-            var gotItems = storage.GetLatest(null, null, null).ToList();
+            var gotItems = storage.GetLatest(null, null, null, null).ToList();
 
             Assert.That(items.Count, Is.EqualTo(gotItems.Count));
         }
@@ -102,9 +102,23 @@
 
             var storage = new StreamStorage(ConnectionString, DatabaseName);
 
-            var gotItems = storage.GetLatest(null, null, null).ToList();
+            var gotItems = storage.GetLatest(null, null, null, null).ToList();
 
             Assert.That(gotItems, Is.Ordered.Descending.By("Published"));
+        }
+
+        [DB, Test] 
+        public void Given_Existing_10_Items_GetLatest_Returns_Rss_Items_Only()
+        {
+            var items = BuildItems(count: 10).OrderBy(i => i.Published);
+            var numberOfRssItems = items.Count(i => i.ItemType == ItemType.Rss);
+            this.Items.InsertBatch(items);
+
+            var storage = new StreamStorage(ConnectionString, DatabaseName);
+
+            var gotItems = storage.GetLatest(ItemType.Rss, null, null, null).ToList();
+
+            Assert.AreEqual(numberOfRssItems, gotItems.Count);
         }
 
         [DB, Test]
@@ -117,23 +131,24 @@
 
             var storage = new StreamStorage(ConnectionString, DatabaseName);
 
-            var gotItems = storage.GetLatest(fromDate, null, null).ToList();
+            var gotItems = storage.GetLatest(null, fromDate, null, null).ToList();
 
             Assert.AreEqual(numberOfItems, gotItems.Count);
         }
-
-        [DB, Test] 
-        public void Given_Existing_10_Items_GetLatest_Returns_Rss_Items_Only()
+        
+        [DB, Test]
+        public void Given_Existing_10_Items_GetLatest_Returns_Items_Older_Than_Given_Date()
         {
-            var items = BuildItems(count: 10).OrderBy(i => i.Published);
-            var numberOfRssItems = items.Count(i => i.ItemType == ItemType.Rss);
+            var items = BuildItems(count: 10).OrderByDescending(i => i.Published);
+            var toDate = items.First().Published;
+            var numberOfItems = items.Count(i => i.Published < toDate);
             this.Items.InsertBatch(items);
 
             var storage = new StreamStorage(ConnectionString, DatabaseName);
 
-            var gotItems = storage.GetLatest(null, ItemType.Rss, null).ToList();
+            var gotItems = storage.GetLatest(null, null, toDate, null).ToList();
 
-            Assert.AreEqual(numberOfRssItems, gotItems.Count);
+            Assert.AreEqual(numberOfItems, gotItems.Count);
         }
 
         [DB, Test]
@@ -145,7 +160,7 @@
 
             var storage = new StreamStorage(ConnectionString, DatabaseName);
 
-            var gotItems = storage.GetLatest(null, null, limit).ToList();
+            var gotItems = storage.GetLatest(null, null, null, limit).ToList();
 
             Assert.AreEqual(limit, gotItems.Count);
         }
