@@ -60,18 +60,13 @@
     <Compile Include="Services\StreamService.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\bootstrap.min.responsive.css" />
-    <Content Include="Content\bootstrap.responsive.css" />
-    <Content Include="Content\images\glyphicons-halflings-white.png" />
-    <Content Include="Content\images\glyphicons-halflings.png" />
     <Content Include="Global.asax" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Scripts\jquery-1.7.1-vsdoc.js" />
-    <Content Include="Scripts\jquery-1.7.1.js" />
-    <Content Include="Scripts\jquery-1.7.1.min.js" />
+    <Content Include="Public\css\bootstrap.css" />
+    <Content Include="Public\css\bootstrap.min.css" />
+    <Content Include="Public\css\bootstrap.min.responsive.css" />
+    <Content Include="Public\css\bootstrap.responsive.css" />
+    <Content Include="Public\css\images\glyphicons-halflings-white.png" />
+    <Content Include="Public\css\images\glyphicons-halflings.png" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -91,9 +86,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -101,6 +93,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\ViewModels\" />
+    <Folder Include="Public\img\" />
+    <Folder Include="Public\js\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

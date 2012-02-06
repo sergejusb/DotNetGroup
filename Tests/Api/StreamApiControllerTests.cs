@@ -4,6 +4,8 @@
 
     using global::Api.Controllers;
 
+    using global::Api.Models;
+
     using MongoDB.Driver;
 
     using Moq;

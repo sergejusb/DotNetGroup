@@ -61,7 +61,7 @@
 
         public void Reprocess()
         {
-            var items = this.streamStorage.GetLatest(type: null, from: null, to: null, limit: null).ToList();
+            var items = this.streamStorage.GetLatest(type: null, fromDate: null, toDate: null, limit: null).ToList();
 
             Parallel.ForEach(items, item => this.streamProcessor.Process(item));
 

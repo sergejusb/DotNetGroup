@@ -4,6 +4,8 @@
     using System.Configuration;
     using System.Web.Mvc;
 
+    using Api.Models;
+
     using Services.Storage;
 
     public class StreamApiController : Controller

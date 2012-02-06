@@ -1,4 +1,4 @@
-namespace Api.Controllers
+namespace Api.Models
 {
     using System;
 
