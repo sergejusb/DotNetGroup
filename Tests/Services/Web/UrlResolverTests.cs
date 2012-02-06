@@ -1,8 +1,9 @@
-﻿using NUnit.Framework;
-using Services.Web;
-
-namespace Tests.Services.Web
+﻿namespace Tests.Services.Web
 {
+    using NUnit.Framework;
+
+    using global::Services.Web;
+
     [TestFixture]
     public class UrlResolverTests
     {

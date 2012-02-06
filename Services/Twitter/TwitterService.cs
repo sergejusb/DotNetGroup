@@ -1,12 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text.RegularExpressions;
-using LinqToTwitter;
-using Services.Model;
-
-namespace Services.Twitter
+﻿namespace Services.Twitter
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text.RegularExpressions;
+
+    using LinqToTwitter;
+
+    using Services.Model;
+
     public interface ITwitterService
     {
         IEnumerable<Item> GetTweets(string query, DateTime fromDate);
@@ -22,6 +24,7 @@ namespace Services.Twitter
             try
             {
                 var context = new TwitterContext();
+
                 // for some reasons only Date part of DateTime is accepted as an argument for Twitter's since query
                 var date = fromDate == DateTime.MinValue ? DateTime.UtcNow.AddMonths(-1).Date : fromDate.Date;
                 
@@ -32,6 +35,7 @@ namespace Services.Twitter
                               && search.WithRetweets == false
                               && search.PageSize == Count
                               select search).First().Entries;
+
                 // due to the aforementioned limitation need to perform additional filtering
                 result = result.Where(e => e.Published > fromDate).ToList();
 
@@ -42,7 +46,7 @@ namespace Services.Twitter
                     AuthorImage = e.Image,
                     AuthorName = e.Author.Name,
                     AuthorUri = e.Author.URI,
-                    Title = String.Empty,
+                    Title = string.Empty,
                     Content = e.Content,
                     Tags = ExtractTags(e.Content),
                     ItemType = ItemType.Twitter

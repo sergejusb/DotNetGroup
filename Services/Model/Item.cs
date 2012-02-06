@@ -1,29 +1,32 @@
-﻿using System;
-using System.Collections.Generic;
-using MongoDB.Bson;
-
-namespace Services.Model
+﻿namespace Services.Model
 {
+    using System;
+    using System.Collections.Generic;
+
+    using MongoDB.Bson;
+
     public class Item
     {
-        private ObjectId _id;
+        private ObjectId id;
 
         public Item()
         {
-            _id = ObjectId.GenerateNewId();
-            Tags = new List<string>();
+            this.id = ObjectId.GenerateNewId();
+            this.Tags = new List<string>();
         }
 
         public string Id
         {
             get
             {
-                return _id.ToString();
+                return this.id.ToString();
             }
             set
             {
-                if (!ObjectId.TryParse(value, out _id))
+                if (!ObjectId.TryParse(value, out this.id))
+                {
                     throw new ArgumentException("ID is of not valid format", "value");
+                }
             }
         }
 

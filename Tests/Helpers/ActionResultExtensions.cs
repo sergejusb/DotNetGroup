@@ -1,8 +1,8 @@
-﻿using System;
-using System.Web.Mvc;
-
-namespace Tests.Helpers
+﻿namespace Tests.Helpers
 {
+    using System;
+    using System.Web.Mvc;
+
     public static class ActionResultExtensions
     {
         public static ViewResult ReturnsViewResult(this ActionResult result)
@@ -10,7 +10,7 @@ namespace Tests.Helpers
             var viewResult = result as ViewResult;
             if (viewResult == null)
             {
-                throw new Exception("result is not a ViewResult");
+                throw new ArgumentException("Result is not a ViewResult", "result");
             }
 
             return viewResult;

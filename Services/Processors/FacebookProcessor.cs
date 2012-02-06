@@ -1,16 +1,16 @@
-﻿using System;
-using HtmlAgilityPack;
-using Services.Model;
-
-namespace Services.Processors
+﻿namespace Services.Processors
 {
+    using HtmlAgilityPack;
+
+    using Services.Model;
+
     public class FacebookProcessor : IItemProcessor
     {
         public void Process(Item item)
         {
-            if (!String.IsNullOrEmpty(item.Content))
+            if (!string.IsNullOrEmpty(item.Content))
             {
-                item.Content = RemoveFrames(item.Content);
+                item.Content = this.RemoveFrames(item.Content);
             }
         }
 

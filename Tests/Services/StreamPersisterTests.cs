@@ -1,26 +1,48 @@
-﻿using System;
-using System.Collections.Generic;
-using MongoDB.Driver;
-using Moq;
-using NUnit.Framework;
-using Ploeh.AutoFixture;
-using Services;
-using Services.Generic;
-using Services.Model;
-using Services.Processors;
-using Services.Storage;
-using Tests.Helpers;
-
-namespace Tests.Services
+﻿namespace Tests.Services
 {
+    using System;
+    using System.Collections.Generic;
+
+    using MongoDB.Driver;
+
+    using Moq;
+
+    using NUnit.Framework;
+
+    using Ploeh.AutoFixture;
+
+    using global::Services;
+
+    using global::Services.Generic;
+
+    using global::Services.Model;
+
+    using global::Services.Processors;
+
+    using global::Services.Storage;
+
+    using Tests.Helpers;
+
     [TestFixture]
     public class StreamPersisterTests
     {
         [Test]
+        public void Given_Null_Argument_Constructor_Throws()
+        {
+            var fakeStreamAggregator = new Mock<IItemAggregator>(MockBehavior.Loose).Object;
+            var fakeItemProcessor = new Mock<IItemProcessor>(MockBehavior.Loose).Object;
+            var fakeStreamStorage = new Mock<IStreamStorage>(MockBehavior.Loose).Object;
+
+            Assert.Throws<ArgumentNullException>(() => new StreamPersister(null, fakeItemProcessor, fakeStreamStorage));
+            Assert.Throws<ArgumentNullException>(() => new StreamPersister(fakeStreamAggregator, null, fakeStreamStorage));
+            Assert.Throws<ArgumentNullException>(() => new StreamPersister(fakeStreamAggregator, fakeItemProcessor, null));
+        }
+
+        [Test]
         public void Persister_Can_Successfully_Persist_New_Items_In_Memory()
         {
-            var items = BuildItems(numberOfFeeds: 10, numberOfTweets: 20);
-            var oldItem = BuildItem(DateTime.MinValue);
+            var items = this.BuildItems(numberOfFeeds: 10, numberOfTweets: 20);
+            var oldItem = this.BuildItem(DateTime.MinValue);
             var savedItems = new List<Item>();
 
             var fakeStreamAggregator = new Mock<IItemAggregator>();
@@ -64,7 +86,7 @@ namespace Tests.Services
         [DB, Test]
         public void Persister_Can_Reprocess_Existing_Items_In_Memory()
         {
-            var items = BuildItems(numberOfFeeds: 10, numberOfTweets: 20);
+            var items = this.BuildItems(numberOfFeeds: 10, numberOfTweets: 20);
             
             var fakeStreamAggregator = new Mock<IItemAggregator>();
             var fakeStreamProcessor = new Mock<IItemProcessor>(MockBehavior.Loose);
@@ -98,18 +120,6 @@ namespace Tests.Services
             }
         }
 
-        [Test]
-        public void Given_Null_Argument_Constructor_Throws()
-        {
-            var fakeStreamAggregator = new Mock<IItemAggregator>(MockBehavior.Loose).Object;
-            var fakeItemProcessor = new Mock<IItemProcessor>(MockBehavior.Loose).Object;
-            var fakeStreamStorage = new Mock<IStreamStorage>(MockBehavior.Loose).Object;
-
-            Assert.Throws<ArgumentNullException>(() => new StreamPersister(null, fakeItemProcessor, fakeStreamStorage));
-            Assert.Throws<ArgumentNullException>(() => new StreamPersister(fakeStreamAggregator, null, fakeStreamStorage));
-            Assert.Throws<ArgumentNullException>(() => new StreamPersister(fakeStreamAggregator, fakeItemProcessor, null));
-        }
-
         private Item BuildItem(DateTime date)
         {
             return new Fixture()
@@ -131,8 +141,7 @@ namespace Tests.Services
                 .With(i => i.Tags, new List<string> { "ASP.NET MVC", "Windows Azure" })
                 .With(i => i.Published, DateTime.Now.AddDays(new Random().Next(numberOfFeeds)))
                 .With(i => i.ItemType, ItemType.Rss)
-                .CreateMany(numberOfFeeds)
-            );
+                .CreateMany(numberOfFeeds));
 
             items.AddRange(new Fixture()
                 .Build<Item>()
@@ -140,8 +149,7 @@ namespace Tests.Services
                 .With(i => i.Tags, new List<string> { "Hadoop 1.0", "Windows Azure" })
                 .With(i => i.Published, DateTime.Now.AddDays(new Random().Next(numberOfTweets)))
                 .With(i => i.ItemType, ItemType.Twitter)
-                .CreateMany(numberOfTweets)
-            );
+                .CreateMany(numberOfTweets));
 
             return items;
         }

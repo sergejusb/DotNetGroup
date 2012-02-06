@@ -1,9 +1,11 @@
-﻿using System;
-using NUnit.Framework;
-using Services.Model;
-
-namespace Tests.Services.Model
+﻿namespace Tests.Services.Model
 {
+    using System;
+
+    using NUnit.Framework;
+
+    using global::Services.Model;
+
     [TestFixture]
     public class ItemTests
     {

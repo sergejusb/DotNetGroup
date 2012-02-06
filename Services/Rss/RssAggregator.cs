@@ -1,15 +1,16 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using Services.Generic;
-using Services.Model;
-
 namespace Services.Rss
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+
+    using Services.Generic;
+    using Services.Model;
+
     public class RssAggregator : IItemAggregator
     {
-        private readonly IRssService _rssService;
-        private readonly IConfigProvider _urlProvider;
+        private readonly IRssService rssService;
+        private readonly IConfigProvider urlProvider;
 
         public RssAggregator()
             : this(new RssService(), new UrlConfigProvider())
@@ -19,20 +20,25 @@ namespace Services.Rss
         public RssAggregator(IRssService rssService, IConfigProvider urlProvider)
         {
             if (rssService == null)
+            {
                 throw new ArgumentNullException("rssService");
-            if (urlProvider == null)
-                throw new ArgumentNullException("urlProvider");
+            }
 
-            _rssService = rssService;
-            _urlProvider = urlProvider;
+            if (urlProvider == null)
+            {
+                throw new ArgumentNullException("urlProvider");
+            }
+
+            this.rssService = rssService;
+            this.urlProvider = urlProvider;
         }
 
         public IEnumerable<Item> GetLatest(DateTime fromDate)
         {
-            return _urlProvider.GetValues()
-                    .SelectMany(url => _rssService.GetFeeds(url, fromDate))
-                    .OrderBy(f => f.Published)
-                    .ToList();
+            return this.urlProvider.GetValues()
+                                   .SelectMany(url => this.rssService.GetFeeds(url, fromDate))
+                                   .OrderBy(f => f.Published)
+                                   .ToList();
         }
     }
 }

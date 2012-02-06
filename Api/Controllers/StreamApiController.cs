@@ -1,36 +1,47 @@
-﻿using System;
-using System.Configuration;
-using System.Web.Mvc;
-using Services;
-using Services.Model;
-
-namespace Api.Controllers
+﻿namespace Api.Controllers
 {
+    using System;
+    using System.Configuration;
+    using System.Web.Mvc;
+
+    using Services.Model;
+    using Services.Storage;
+
     public class StreamApiController : Controller
     {
         private const int MaxItems = 100;
-        private readonly IStreamApi _streamApi;
+        private readonly IStreamStorage streamStorage;
 
         public StreamApiController()
-            : this(new StreamApi(ConfigurationManager.AppSettings["db.connection"], ConfigurationManager.AppSettings["db.database"]))
+            : this(ConfigurationManager.AppSettings["db.connection"], ConfigurationManager.AppSettings["db.database"])
         {
         }
 
-        public StreamApiController(IStreamApi streamApi)
+        public StreamApiController(string connectionString, string database)
+            : this(new StreamStorage(connectionString, database))
         {
-            _streamApi = streamApi;
+        }
+
+        public StreamApiController(IStreamStorage streamStorage)
+        {
+            if (streamStorage == null)
+            {
+                throw new ArgumentNullException("streamStorage");
+            }
+
+            this.streamStorage = streamStorage;
         }
 
         public ActionResult Get(string id)
         {
-            return Json(_streamApi.Get(id), JsonRequestBehavior.AllowGet);
+            return Json(this.streamStorage.Get(id), JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult Stream(DateTime? from = null, ItemType? type = null, int limit = MaxItems)
         {
             from = from ?? DateTime.UtcNow.AddDays(-7).Date;
-            var items = type.HasValue ? _streamApi.Get(from.Value, type.Value, limit) : _streamApi.Get(from.Value, limit);
-            
+            var items = this.streamStorage.GetLatest(from, type, limit);
+
             return Json(items, JsonRequestBehavior.AllowGet);
         }
     }

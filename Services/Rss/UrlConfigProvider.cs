@@ -1,7 +1,7 @@
-﻿using Services.Generic;
-
-namespace Services.Rss
+﻿namespace Services.Rss
 {
+    using Services.Generic;
+
     public class UrlConfigProvider : BaseConfigProvider
     {
         protected override string Prefix

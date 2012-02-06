@@ -1,23 +1,55 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using FluentMongo.Linq;
-using MongoDB.Driver;
-using NUnit.Framework;
-using Ploeh.AutoFixture;
-using Services.Model;
-using Services.Storage;
-using Tests.Helpers;
-
-namespace Tests.Services.Storage
+﻿namespace Tests.Services.Storage
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+
+    using FluentMongo.Linq;
+
+    using MongoDB.Driver;
+
+    using NUnit.Framework;
+
+    using Ploeh.AutoFixture;
+
+    using global::Services.Model;
+
+    using global::Services.Storage;
+
+    using Tests.Helpers;
+
     [TestFixture]
     public class StreamStorageTests
     {
         private const string ConnectionString = "mongodb://localhost";
         private const string DatabaseName = "Test";
 
-        private MongoServer _server;
+        private MongoServer server;
+
+        private MongoCollection<Item> Items
+        {
+            get { return this.server.GetDatabase(DatabaseName).GetCollection<Item>("Items"); }
+        }
+
+        [SetUp]
+        public void SetupTest()
+        {
+            this.server = MongoServer.Create(ConnectionString);
+        }
+
+        [TearDown]
+        public void CleanupTest()
+        {
+            this.server.DropDatabase(DatabaseName);
+            this.server.Disconnect();
+        }
+
+        [DB, Test]
+        public void Given_Null_Arguments_Constructor_Throws()
+        {
+            Assert.Throws<ArgumentNullException>(() => new StreamStorage(null, DatabaseName));
+            Assert.Throws<ArgumentNullException>(() => new StreamStorage(ConnectionString, null));
+        }
 
         [DB, Test]
         public void Given_MongoDB_Is_Running_ItemStorage_Can_Successfully_Connect()
@@ -39,7 +71,7 @@ namespace Tests.Services.Storage
         public void Given_Existing_Item_Get_Returns_It_By_Id()
         {
             var item = BuildItems(count: 1).Single();
-            Items.Insert(item);
+            this.Items.Insert(item);
 
             var storage = new StreamStorage(ConnectionString, DatabaseName);
 
@@ -53,7 +85,7 @@ namespace Tests.Services.Storage
         public void Given_Existing_10_Items_GetLatest_Returns_All_10_Items()
         {
             var items = BuildItems(count: 10);
-            Items.InsertBatch(items);
+            this.Items.InsertBatch(items);
 
             var storage = new StreamStorage(ConnectionString, DatabaseName);
 
@@ -66,7 +98,7 @@ namespace Tests.Services.Storage
         public void Given_Existing_10_Items_GetLatest_Returns_Them_Sorted_By_Date_Descending()
         {
             var items = BuildItems(count: 10);
-            Items.InsertBatch(items);
+            this.Items.InsertBatch(items);
 
             var storage = new StreamStorage(ConnectionString, DatabaseName);
 
@@ -81,7 +113,7 @@ namespace Tests.Services.Storage
             var items = BuildItems(count: 10).OrderBy(i => i.Published);
             var fromDate = items.First().Published;
             var numberOfItems = items.Count(i => i.Published > fromDate);
-            Items.InsertBatch(items);
+            this.Items.InsertBatch(items);
 
             var storage = new StreamStorage(ConnectionString, DatabaseName);
 
@@ -95,7 +127,7 @@ namespace Tests.Services.Storage
         {
             var items = BuildItems(count: 10).OrderBy(i => i.Published);
             var numberOfRssItems = items.Count(i => i.ItemType == ItemType.Rss);
-            Items.InsertBatch(items);
+            this.Items.InsertBatch(items);
 
             var storage = new StreamStorage(ConnectionString, DatabaseName);
 
@@ -109,7 +141,7 @@ namespace Tests.Services.Storage
         {
             var limit = 1;
             var items = BuildItems(count: 10).OrderBy(i => i.Published);
-            Items.InsertBatch(items);
+            this.Items.InsertBatch(items);
 
             var storage = new StreamStorage(ConnectionString, DatabaseName);
 
@@ -123,7 +155,7 @@ namespace Tests.Services.Storage
         {
             var items = BuildItems(count: 10).OrderBy(i => i.Published);
             var recentItem = items.Last();
-            Items.InsertBatch(items);
+            this.Items.InsertBatch(items);
 
             var storage = new StreamStorage(ConnectionString, DatabaseName);
 
@@ -140,7 +172,7 @@ namespace Tests.Services.Storage
 
             storage.Save(items);
 
-            var savedItems = Items.AsQueryable().ToList();
+            var savedItems = this.Items.AsQueryable().ToList();
 
             Assert.That(items.Count, Is.EqualTo(savedItems.Count));
         }
@@ -148,21 +180,22 @@ namespace Tests.Services.Storage
         [DB, Test]
         public void ItemStorage_Can_Save_5_New_And_5_Modified_Items()
         {
-            Items.InsertBatch(BuildItems(count: 5));
+            this.Items.InsertBatch(BuildItems(count: 5));
 
-            var existingItems = Items.AsQueryable().ToList();
+            var existingItems = this.Items.AsQueryable().ToList();
             foreach (var item in existingItems)
             {
                 item.Tags.Add("test");
             }
+
             var newItems = BuildItems(count: 5);
-            var items = existingItems.Union(newItems);
+            var items = existingItems.Union(newItems).ToList();
 
             var storage = new StreamStorage(ConnectionString, DatabaseName);
             
             storage.Save(items);
 
-            var savedItems = Items.AsQueryable().ToList();
+            var savedItems = this.Items.AsQueryable().ToList();
 
             Assert.That(items.Count(), Is.EqualTo(savedItems.Count));
         }
@@ -170,9 +203,9 @@ namespace Tests.Services.Storage
         [DB, Test]
         public void ItemStorage_Can_Save_5_Modified_Items_And_Retrieve_Them_Back()
         {
-            Items.InsertBatch(BuildItems(count: 5));
+            this.Items.InsertBatch(BuildItems(count: 5));
 
-            var items = Items.AsQueryable().ToList();
+            var items = this.Items.AsQueryable().ToList();
             foreach (var item in items)
             {
                 item.Tags.Add("test");
@@ -182,37 +215,12 @@ namespace Tests.Services.Storage
 
             storage.Save(items);
 
-            var savedItems = Items.AsQueryable().ToList();
+            var savedItems = this.Items.AsQueryable().ToList();
 
             foreach (var item in savedItems)
             {
                 Assert.IsTrue(item.Tags.Contains("test"));
             }
-        }
-
-        [DB, Test]
-        public void Given_Null_Arguments_Constructor_Throws()
-        {
-            Assert.Throws<ArgumentNullException>(() => new StreamStorage(null, DatabaseName));
-            Assert.Throws<ArgumentNullException>(() => new StreamStorage(ConnectionString, null));
-        }
-
-        [SetUp]
-        public void SetupTest()
-        {
-            _server = MongoServer.Create(ConnectionString);
-        }
-
-        [TearDown]
-        public void CleanupTest()
-        {
-            _server.DropDatabase(DatabaseName);
-            _server.Disconnect();
-        }
-
-        private MongoCollection<Item> Items
-        {
-            get { return _server.GetDatabase(DatabaseName).GetCollection<Item>("Items"); }
         }
 
         private static IList<Item> BuildItems(int count)

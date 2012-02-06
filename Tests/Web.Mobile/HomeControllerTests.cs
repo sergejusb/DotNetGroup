@@ -1,19 +1,22 @@
-﻿using System.Collections.Generic;
-using System.Web.Mvc;
-using Moq;
+﻿namespace Tests.Web.Mobile
+{
+    using System.Collections.Generic;
+    using System.Web.Mvc;
 
-using NUnit.Framework;
+    using Moq;
 
-using Services.Model;
+    using NUnit.Framework;
 
-using Tests.Helpers;
+    using global::Services.Model;
 
-using Web.Mobile.Controllers;
-using Web.Mobile.Models.ViewModels;
-using Web.Mobile.Services;
+    using Tests.Helpers;
 
-namespace Tests.Web.Mobile
-{    
+    using global::Web.Mobile.Controllers;
+
+    using global::Web.Mobile.Models.ViewModels;
+
+    using global::Web.Mobile.Services;
+
     [TestFixture]
     public class HomeControllerTests
     {

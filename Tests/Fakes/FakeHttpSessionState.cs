@@ -3,45 +3,35 @@
  * The source code has been taken from his MVC Tip blog series http://stephenwalther.com/blog/archive/2008/07/02/asp-net-mvc-tip-13-unit-test-your-custom-routes.aspx
  */
 
-using System.Collections;
-using System.Collections.Specialized;
-using System.Web;
-using System.Web.SessionState;
-
 namespace Tests.Fakes
 {
+    using System.Collections;
+    using System.Collections.Specialized;
+    using System.Web;
+    using System.Web.SessionState;
+
     public class FakeHttpSessionState : HttpSessionStateBase
     {
-        private readonly SessionStateItemCollection _sessionItems;
+        private readonly SessionStateItemCollection sessionItems;
 
         public FakeHttpSessionState(SessionStateItemCollection sessionItems)
         {
-            _sessionItems = sessionItems;
-        }
-
-        public override void Add(string name, object value)
-        {
-            _sessionItems[name] = value;
+            this.sessionItems = sessionItems;
         }
 
         public override int Count
         {
             get
             {
-                return _sessionItems.Count;
+                return this.sessionItems.Count;
             }
-        }
-
-        public override IEnumerator GetEnumerator()
-        {
-            return _sessionItems.GetEnumerator();
         }
 
         public override NameObjectCollectionBase.KeysCollection Keys
         {
             get
             {
-                return _sessionItems.Keys;
+                return this.sessionItems.Keys;
             }
         }
 
@@ -49,11 +39,11 @@ namespace Tests.Fakes
         {
             get
             {
-                return _sessionItems[name];
+                return this.sessionItems[name];
             }
             set
             {
-                _sessionItems[name] = value;
+                this.sessionItems[name] = value;
             }
         }
 
@@ -61,17 +51,27 @@ namespace Tests.Fakes
         {
             get
             {
-                return _sessionItems[index];
+                return this.sessionItems[index];
             }
             set
             {
-                _sessionItems[index] = value;
+                this.sessionItems[index] = value;
             }
+        }
+
+        public override void Add(string name, object value)
+        {
+            this.sessionItems[name] = value;
         }
 
         public override void Remove(string name)
         {
-            _sessionItems.Remove(name);
+            this.sessionItems.Remove(name);
+        }
+
+        public override IEnumerator GetEnumerator()
+        {
+            return this.sessionItems.GetEnumerator();
         }
     }
 }

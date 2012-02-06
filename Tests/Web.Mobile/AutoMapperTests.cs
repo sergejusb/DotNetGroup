@@ -1,8 +1,8 @@
-﻿using NUnit.Framework;
-
-namespace Tests.Web.Mobile
+﻿namespace Tests.Web.Mobile
 {
     using AutoMapper;
+
+    using NUnit.Framework;
 
     using global::Web.Mobile.Services;
 

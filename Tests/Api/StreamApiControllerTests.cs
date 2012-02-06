@@ -1,12 +1,21 @@
-﻿using System;
-using Api.Controllers;
-using Moq;
-using NUnit.Framework;
-using Services;
-using Services.Model;
-
-namespace Tests.Api
+﻿namespace Tests.Api
 {
+    using System;
+
+    using global::Api.Controllers;
+
+    using MongoDB.Driver;
+
+    using Moq;
+
+    using NUnit.Framework;
+
+    using global::Services.Model;
+
+    using global::Services.Storage;
+
+    using Tests.Helpers;
+
     [TestFixture]
     public class StreamApiControllerTests
     {
@@ -17,37 +26,90 @@ namespace Tests.Api
         }
 
         [Test]
-        public void By_Calling_Get_With_Id_StreamApi_Called_Once()
+        public void Given_Null_Argument_Constructor_Throws()
         {
-            var id = "id";
-            var fakeStreamApi = new Mock<IStreamApi>();
-            var streamApiController = new StreamApiController(fakeStreamApi.Object);
-            
-            streamApiController.Get(id);
+            Assert.Throws<ArgumentNullException>(() => new StreamApiController(null));
+        }
 
-            fakeStreamApi.Verify(a => a.Get(id), Times.Once());
+        [DB, Test]
+        public void StreamApiController_Can_Connect_To_Database()
+        {
+            var connectionString = "mongodb://localhost";
+            var databaseName = "Test";
+
+            try
+            {
+                var streamApi = new StreamApiController(connectionString, databaseName);
+                streamApi.Stream();
+            }
+            finally
+            {
+                MongoServer.Create(connectionString).DropDatabase(databaseName);
+            }
         }
 
         [Test]
-        public void By_Calling_Stream_With_No_Arguments_StreamApi_Get_With_Two_Overloads_Called_Once()
+        public void Given_Valid_Id_Api_Returns_Item()
         {
-            var fakeStreamApi = new Mock<IStreamApi>();
-            var streamApiController = new StreamApiController(fakeStreamApi.Object);
+            var id = new Item().Id;
+            var fakeStorage = new Mock<IStreamStorage>();
+            var streamApi = new StreamApiController(fakeStorage.Object);
 
-            streamApiController.Stream();
+            streamApi.Get(id);
 
-            fakeStreamApi.Verify(a => a.Get(It.IsAny<DateTime>(), It.IsAny<int>()), Times.Once());
+            fakeStorage.Verify(s => s.Get(id), Times.Once());
         }
 
         [Test]
-        public void By_Calling_Stream_With_Item_Type_StreamApi_Get_With_Three_Overloads_Called_Once()
+        public void Given_Date_Api_Returns_Items()
         {
-            var fakeStreamApi = new Mock<IStreamApi>();
-            var streamApiController = new StreamApiController(fakeStreamApi.Object);
+            var maxItems = 100;
+            var dateFrom = DateTime.UtcNow.AddDays(-1);
+            var fakeStorage = new Mock<IStreamStorage>();
+            var streamApi = new StreamApiController(fakeStorage.Object);
 
-            streamApiController.Stream(type: ItemType.Twitter);
+            streamApi.Stream(dateFrom);
 
-            fakeStreamApi.Verify(a => a.Get(It.IsAny<DateTime>(), ItemType.Twitter, It.IsAny<int>()), Times.Once());
+            fakeStorage.Verify(s => s.GetLatest(dateFrom, null, maxItems), Times.Once());
+        }
+
+        [Test]
+        public void Given_Date_Api_Returns_Rss_Items()
+        {
+            var maxItems = 100;
+            var dateFrom = DateTime.UtcNow.AddDays(-1);
+            var fakeStorage = new Mock<IStreamStorage>();
+            var streamApi = new StreamApiController(fakeStorage.Object);
+
+            streamApi.Stream(dateFrom, ItemType.Rss);
+
+            fakeStorage.Verify(s => s.GetLatest(dateFrom, ItemType.Rss, maxItems), Times.Once());
+        }
+
+        [Test]
+        public void Given_Date_And_Limit_Api_Returns_Limited_Number_Of_Items()
+        {
+            var limit = 10;
+            var dateFrom = DateTime.UtcNow.AddDays(-1);
+            var fakeStorage = new Mock<IStreamStorage>();
+            var streamApi = new StreamApiController(fakeStorage.Object);
+
+            streamApi.Stream(dateFrom, limit: limit);
+
+            fakeStorage.Verify(s => s.GetLatest(dateFrom, null, limit), Times.Once());
+        }
+
+        [Test]
+        public void Given_Date_And_Limit_Api_Returns_Limited_Number_Of_Tweets()
+        {
+            var limit = 10;
+            var dateFrom = DateTime.UtcNow.AddDays(-1);
+            var fakeStorage = new Mock<IStreamStorage>();
+            var streamApi = new StreamApiController(fakeStorage.Object);
+
+            streamApi.Stream(dateFrom, ItemType.Twitter, limit);
+
+            fakeStorage.Verify(s => s.GetLatest(dateFrom, ItemType.Twitter, limit), Times.Once());
         }
     }
 }

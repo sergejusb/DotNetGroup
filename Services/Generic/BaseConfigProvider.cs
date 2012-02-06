@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Configuration;
-using System.Linq;
-
-namespace Services.Generic
+﻿namespace Services.Generic
 {
+    using System.Collections.Generic;
+    using System.Configuration;
+    using System.Linq;
+
     public interface IConfigProvider
     {
         IEnumerable<string> GetValues();
@@ -16,7 +16,7 @@ namespace Services.Generic
         public IEnumerable<string> GetValues()
         {
             return ConfigurationManager.AppSettings.AllKeys
-                    .Where(key => key.StartsWith(Prefix))
+                    .Where(key => key.StartsWith(this.Prefix))
                     .Select(key => ConfigurationManager.AppSettings[key])
                     .ToList();
         }

@@ -1,9 +1,11 @@
-﻿using NUnit.Framework;
-using Services.Model;
-using Services.Processors;
-
-namespace Tests.Services.Processors
+﻿namespace Tests.Services.Processors
 {
+    using NUnit.Framework;
+
+    using global::Services.Model;
+
+    using global::Services.Processors;
+
     [TestFixture]
     public class FacebookProcessorTests
     {

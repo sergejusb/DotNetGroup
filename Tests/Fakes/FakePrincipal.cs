@@ -3,33 +3,30 @@
  * The source code has been taken from his MVC Tip blog series http://stephenwalther.com/blog/archive/2008/07/02/asp-net-mvc-tip-13-unit-test-your-custom-routes.aspx
  */
 
-using System.Linq;
-using System.Security.Principal;
-
 namespace Tests.Fakes
 {
+    using System.Linq;
+    using System.Security.Principal;
 
     public class FakePrincipal : IPrincipal
     {
-        private readonly IIdentity _identity;
-        private readonly string[] _roles;
+        private readonly IIdentity identity;
+        private readonly string[] roles;
 
         public FakePrincipal(IIdentity identity, string[] roles)
         {
-            _identity = identity;
-            _roles = roles;
+            this.identity = identity;
+            this.roles = roles;
         }
 
         public IIdentity Identity
         {
-            get { return _identity; }
+            get { return this.identity; }
         }
 
         public bool IsInRole(string role)
         {
-            if (_roles == null)
-                return false;
-            return _roles.Contains(role);
+            return this.roles != null && this.roles.Contains(role);
         }
     }
 }

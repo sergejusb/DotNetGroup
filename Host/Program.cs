@@ -1,17 +1,18 @@
-﻿using System;
-using System.Configuration;
-using System.Linq;
-using System.Threading;
-using Services;
-
-namespace Host
+﻿namespace Host
 {
+    using System;
+    using System.Configuration;
+    using System.Linq;
+    using System.Threading;
+
+    using Services;
+
     public class Program
     {
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
             var reprocessArgs = new[] { "-r", "-reprocess" };
-            var refreshPeriod = TimeSpan.FromSeconds(Int32.Parse(ConfigurationManager.AppSettings["sys.refreshPeriodInSec"] ?? "60"));
+            var refreshPeriod = TimeSpan.FromSeconds(int.Parse(ConfigurationManager.AppSettings["sys.refreshPeriodInSec"] ?? "60"));
             var connectionString = ConfigurationManager.AppSettings["db.connection"];
             var database = ConfigurationManager.AppSettings["db.database"];
             var streamPersister = new StreamPersister(connectionString, database);

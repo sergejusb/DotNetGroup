@@ -1,13 +1,15 @@
-﻿using System;
-using HtmlAgilityPack;
-using Services.Model;
-using Services.Web;
-
-namespace Services.Processors
+﻿namespace Services.Processors
 {
+    using System;
+
+    using HtmlAgilityPack;
+
+    using Services.Model;
+    using Services.Web;
+
     public class UrlContentProcessor : IItemProcessor
     {
-        private readonly IUrlResolver _urlResolver;
+        private readonly IUrlResolver urlResolver;
 
         public UrlContentProcessor()
             : this(new UrlResolver())
@@ -16,14 +18,19 @@ namespace Services.Processors
 
         public UrlContentProcessor(IUrlResolver urlResolver)
         {
-            _urlResolver = urlResolver;
+            if (urlResolver == null)
+            {
+                throw new ArgumentNullException("urlResolver");
+            }
+
+            this.urlResolver = urlResolver;
         }
 
         public void Process(Item item)
         {
-            if (!String.IsNullOrEmpty(item.Content))
+            if (!string.IsNullOrEmpty(item.Content))
             {
-                item.Content = ExpandUrls(item.Content);
+                item.Content = this.ExpandUrls(item.Content);
             }
         }
 
@@ -39,7 +46,7 @@ namespace Services.Processors
                 {
                     if (Uri.IsWellFormedUriString(href.InnerText, UriKind.Absolute))
                     {
-                        href.InnerHtml = _urlResolver.Resolve(href.InnerText);
+                        href.InnerHtml = this.urlResolver.Resolve(href.InnerText);
                     }
                 }
 

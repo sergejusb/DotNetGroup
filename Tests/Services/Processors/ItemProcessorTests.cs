@@ -1,11 +1,15 @@
-﻿using System;
-using Moq;
-using NUnit.Framework;
-using Services.Model;
-using Services.Processors;
-
-namespace Tests.Services.Processors
+﻿namespace Tests.Services.Processors
 {
+    using System;
+
+    using Moq;
+
+    using NUnit.Framework;
+
+    using global::Services.Model;
+
+    using global::Services.Processors;
+
     [TestFixture]
     public class ItemProcessorTests
     {
@@ -13,6 +17,12 @@ namespace Tests.Services.Processors
         public void ItemProcessor_Can_Be_Successfully_Created_With_Default_Constructor()
         {
             new ItemProcessor();
+        }
+
+        [Test]
+        public void Given_Null_Argument_Constructor_Throws()
+        {
+            Assert.Throws<ArgumentNullException>(() => new ItemProcessor(null));
         }
 
         [Test]
@@ -27,12 +37,6 @@ namespace Tests.Services.Processors
 
             fakeProcessor1.Verify(p => p.Process(It.IsAny<Item>()), Times.Once());
             fakeProcessor2.Verify(p => p.Process(It.IsAny<Item>()), Times.Once());
-        }
-
-        [Test]
-        public void Given_Null_Argument_Constructor_Throws()
-        {
-            Assert.Throws<ArgumentNullException>(() => new ItemProcessor(null));
         }
     }
 }

@@ -1,7 +1,7 @@
-﻿using Services.Generic;
-
-namespace Services.Twitter
+﻿namespace Services.Twitter
 {
+    using Services.Generic;
+
     public class QueryConfigProvider : BaseConfigProvider
     {
         protected override string Prefix

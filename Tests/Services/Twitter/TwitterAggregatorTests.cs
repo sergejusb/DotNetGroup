@@ -1,15 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Moq;
-using NUnit.Framework;
-using Ploeh.AutoFixture;
-using Services.Generic;
-using Services.Model;
-using Services.Twitter;
-
-namespace Tests.Services.Twitter
+﻿namespace Tests.Services.Twitter
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+
+    using Moq;
+
+    using NUnit.Framework;
+
+    using Ploeh.AutoFixture;
+
+    using global::Services.Generic;
+
+    using global::Services.Model;
+
+    using global::Services.Twitter;
+
     [TestFixture]
     public class TwitterAggregatorTests
     {
@@ -20,13 +26,20 @@ namespace Tests.Services.Twitter
         }
 
         [Test]
+        public void Given_Null_Arguments_Constructor_Throws()
+        {
+            Assert.Throws<ArgumentNullException>(() => new TwitterAggregator(null, new Mock<IConfigProvider>().Object));
+            Assert.Throws<ArgumentNullException>(() => new TwitterAggregator(new Mock<ITwitterService>().Object, null));
+        }
+
+        [Test]
         public void Given_30_New_Tweets_GetLatest_Returns_Tweets_In_Correct_Order()
         {
             var queryTweets = new Dictionary<string, IEnumerable<Item>>
             {
-                {"#hashtag", BuildTweets(5)},
-                {"@user", BuildTweets(10)},
-                {"text", BuildTweets(15)}
+                { "#hashtag", BuildTweets(5) },
+                { "@user", BuildTweets(10) },
+                { "text", BuildTweets(15) }
             };
             var minDate = queryTweets.SelectMany(kv => kv.Value).Select(f => f.Published).Min();
             var maxDate = queryTweets.SelectMany(kv => kv.Value).Select(f => f.Published).Max();
@@ -44,22 +57,15 @@ namespace Tests.Services.Twitter
             var numberOfTweets = 30;
             var queryTweets = new Dictionary<string, IEnumerable<Item>>
             {
-                {"#hashtag", BuildTweets(5)},
-                {"@user", BuildTweets(10)},
-                {"text", BuildTweets(15)}
+                { "#hashtag", BuildTweets(5) },
+                { "@user", BuildTweets(10) },
+                { "text", BuildTweets(15) }
             };
             var twitterAggregator = BuildTwitterAggregator(queryTweets);
 
             var tweets = twitterAggregator.GetLatest(DateTime.MinValue).ToList();
 
             Assert.AreEqual(numberOfTweets, tweets.Count);
-        }
-
-        [Test]
-        public void Given_Null_Arguments_Constructor_Throws()
-        {
-            Assert.Throws<ArgumentNullException>(() => new TwitterAggregator(null, new Mock<IConfigProvider>().Object));
-            Assert.Throws<ArgumentNullException>(() => new TwitterAggregator(new Mock<ITwitterService>().Object, null));
         }
 
         private static IItemAggregator BuildTwitterAggregator(IDictionary<string, IEnumerable<Item>> queryTweets)

@@ -1,19 +1,21 @@
-﻿using System;
-using System.Linq;
-using NUnit.Framework;
-using Services.Twitter;
-
-namespace Tests.Services.Twitter
+﻿namespace Tests.Services.Twitter
 {
+    using System;
+    using System.Linq;
+
+    using NUnit.Framework;
+
+    using global::Services.Twitter;
+
     [TestFixture]
     public class TwitterServiceTests
     {
-        private DateTime _date;
+        private DateTime date;
 
         [TestFixtureSetUp]
         public void SetupFixture()
         {
-            _date = DateTime.UtcNow.AddMonths(-2).Date;
+            this.date = DateTime.UtcNow.AddMonths(-2).Date;
         }
 
         [Test]
@@ -22,7 +24,7 @@ namespace Tests.Services.Twitter
             var query = "#ltnet";
             var twitterService = new TwitterService();
 
-            var tweets = twitterService.GetTweets(query, _date);
+            var tweets = twitterService.GetTweets(query, this.date);
 
             Assert.That(tweets.Count(), Is.GreaterThan(0));
         }
@@ -34,7 +36,7 @@ namespace Tests.Services.Twitter
             var query = "#hashtagfortesting";
             var twitterService = new TwitterService();
 
-            var tweets = twitterService.GetTweets(query, _date);
+            var tweets = twitterService.GetTweets(query, this.date);
 
             Assert.AreEqual(empty, tweets.Count());
         }
@@ -46,7 +48,7 @@ namespace Tests.Services.Twitter
             string query = null;
             var twitterService = new TwitterService();
 
-            var tweets = twitterService.GetTweets(query, _date);
+            var tweets = twitterService.GetTweets(query, this.date);
 
             Assert.AreEqual(empty, tweets.Count());
         }
@@ -57,7 +59,7 @@ namespace Tests.Services.Twitter
             var query = "#ltnet";
             var twitterService = new TwitterService();
 
-            var tweets = twitterService.GetTweets(query, _date).ToList();
+            var tweets = twitterService.GetTweets(query, this.date).ToList();
             if (tweets.Count() > 1)
             {
                 var fromDate = tweets.Last().Published;

@@ -1,8 +1,7 @@
-﻿using System;
-using System.Net;
-
-namespace Services.Web
+﻿namespace Services.Web
 {
+    using System.Net;
+
     public interface IUrlResolver
     {
         string Resolve(string url);
@@ -24,8 +23,9 @@ namespace Services.Web
                     resolvedUrl = response.ResponseUri.AbsoluteUri;
                 }
             }
-            catch (Exception)
+            catch
             {
+                // ignore
             }
 
             return resolvedUrl;

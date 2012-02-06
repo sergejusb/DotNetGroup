@@ -1,7 +1,7 @@
-using NUnit.Framework;
-
 namespace Tests.Helpers
 {
+    using NUnit.Framework;
+
     public class DBAttribute : CategoryAttribute
     {
     }

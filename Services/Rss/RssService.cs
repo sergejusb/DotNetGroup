@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.ServiceModel.Syndication;
-using System.Xml;
-using Services.Model;
-
-namespace Services.Rss
+﻿namespace Services.Rss
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.ServiceModel.Syndication;
+    using System.Xml;
+
+    using Services.Model;
+
     public interface IRssService
     {
         IEnumerable<Item> GetFeeds(string url, DateTime fromDate); 

@@ -53,7 +53,6 @@
     <Compile Include="Rss\RssService.cs" />
     <Compile Include="Rss\UrlConfigProvider.cs" />
     <Compile Include="Storage\StreamStorage.cs" />
-    <Compile Include="StreamApi.cs" />
     <Compile Include="StreamPersister.cs" />
     <Compile Include="Twitter\QueryConfigProvider.cs" />
     <Compile Include="Twitter\TwitterAggregator.cs" />

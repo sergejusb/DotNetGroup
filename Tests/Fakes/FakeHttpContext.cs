@@ -3,21 +3,21 @@
  * The source code has been taken from his MVC Tip blog series http://stephenwalther.com/blog/archive/2008/07/02/asp-net-mvc-tip-13-unit-test-your-custom-routes.aspx
  */
 
-using System.Collections.Specialized;
-using System.Security.Principal;
-using System.Web;
-using System.Web.SessionState;
-
 namespace Tests.Fakes
 {
+    using System.Collections.Specialized;
+    using System.Security.Principal;
+    using System.Web;
+    using System.Web.SessionState;
+
     public class FakeHttpContext : HttpContextBase
     {
-        private readonly string _relativeUrl;
-        private readonly FakePrincipal _principal;
-        private readonly NameValueCollection _formParams;
-        private readonly NameValueCollection _queryStringParams;
-        private readonly HttpCookieCollection _cookies;
-        private readonly SessionStateItemCollection _sessionItems;
+        private readonly string relativeUrl;
+        private readonly FakePrincipal principal;
+        private readonly NameValueCollection formParams;
+        private readonly NameValueCollection queryStringParams;
+        private readonly HttpCookieCollection cookies;
+        private readonly SessionStateItemCollection sessionItems;
 
         public FakeHttpContext(string relativeUrl)
             : this(relativeUrl, null, null, null, null, null)
@@ -26,19 +26,19 @@ namespace Tests.Fakes
 
         public FakeHttpContext(string relativeUrl, FakePrincipal principal, NameValueCollection formParams, NameValueCollection queryStringParams, HttpCookieCollection cookies, SessionStateItemCollection sessionItems)
         {
-            _relativeUrl = relativeUrl;
-            _principal = principal;
-            _formParams = formParams;
-            _queryStringParams = queryStringParams;
-            _cookies = cookies;
-            _sessionItems = sessionItems;
+            this.relativeUrl = relativeUrl;
+            this.principal = principal;
+            this.formParams = formParams;
+            this.queryStringParams = queryStringParams;
+            this.cookies = cookies;
+            this.sessionItems = sessionItems;
         }
 
         public override HttpRequestBase Request
         {
             get
             {
-                return new FakeHttpRequest(_relativeUrl, _formParams, _queryStringParams, _cookies);
+                return new FakeHttpRequest(this.relativeUrl, this.formParams, this.queryStringParams, this.cookies);
             }
         }
 
@@ -46,7 +46,7 @@ namespace Tests.Fakes
         {
             get
             {
-                return _principal;
+                return this.principal;
             }
             set
             {
@@ -58,7 +58,7 @@ namespace Tests.Fakes
         {
             get
             {
-                return new FakeHttpSessionState(_sessionItems);
+                return new FakeHttpSessionState(this.sessionItems);
             }
         }
     }

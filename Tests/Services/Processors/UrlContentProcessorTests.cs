@@ -1,12 +1,22 @@
-﻿using NUnit.Framework;
-using Services.Model;
-using Services.Processors;
-
-namespace Tests.Services.Processors
+﻿namespace Tests.Services.Processors
 {
+    using System;
+
+    using NUnit.Framework;
+
+    using global::Services.Model;
+
+    using global::Services.Processors;
+
     [TestFixture]
     public class UrlContentProcessorTests
     {
+        [Test]
+        public void Given_Null_Argument_Constructor_Throws()
+        {
+            Assert.Throws<ArgumentNullException>(() => new UrlContentProcessor(null));
+        }
+
         [Test]
         public void Given_Tweet_With_The_Sorten_Url_Content_After_Processing_Href_Tag_Is_Successfully_Replaced_With_The_Original()
         {

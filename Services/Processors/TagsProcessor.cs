@@ -1,8 +1,9 @@
-﻿using System.Linq;
-using Services.Model;
-
-namespace Services.Processors
+﻿namespace Services.Processors
 {
+    using System.Linq;
+
+    using Services.Model;
+
     public class TagsProcessor : IItemProcessor
     {
         public void Process(Item item)

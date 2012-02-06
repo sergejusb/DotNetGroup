@@ -1,8 +1,9 @@
-using System;
-using Services.Model;
-
 namespace Services.Processors
 {
+    using System;
+
+    using Services.Model;
+
     public interface IItemProcessor
     {
         void Process(Item item);
@@ -10,7 +11,7 @@ namespace Services.Processors
 
     public class ItemProcessor : IItemProcessor
     {
-        private readonly IItemProcessor[] _itemProcessors;
+        private readonly IItemProcessor[] itemProcessors;
 
         public ItemProcessor()
             : this(new UrlContentProcessor(), new TagsProcessor(), new FacebookProcessor())
@@ -20,14 +21,16 @@ namespace Services.Processors
         public ItemProcessor(params IItemProcessor[] itemProcessors)
         {
             if (itemProcessors == null)
+            {
                 throw new ArgumentNullException("itemProcessors");
+            }
 
-            _itemProcessors = itemProcessors;
+            this.itemProcessors = itemProcessors;
         }
 
         public void Process(Item item)
         {
-            foreach (var itemProcessor in _itemProcessors)
+            foreach (var itemProcessor in this.itemProcessors)
             {
                 itemProcessor.Process(item);
             }

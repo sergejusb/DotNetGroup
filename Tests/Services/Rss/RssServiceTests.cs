@@ -1,20 +1,22 @@
-﻿using System;
-using System.Configuration;
-using System.Linq;
-using NUnit.Framework;
-using Services.Rss;
-
-namespace Tests.Services.Rss
+﻿namespace Tests.Services.Rss
 {
+    using System;
+    using System.Configuration;
+    using System.Linq;
+
+    using NUnit.Framework;
+
+    using global::Services.Rss;
+
     [TestFixture]
     public class RssServiceTests
     {
-        private DateTime _date;
+        private DateTime date;
 
         [TestFixtureSetUp]
         public void SetupFixture()
         {
-            _date = DateTime.UtcNow.AddMonths(-2).Date;
+            this.date = DateTime.UtcNow.AddMonths(-2).Date;
         }
 
         [Test]
@@ -23,7 +25,7 @@ namespace Tests.Services.Rss
             var url = ConfigurationManager.AppSettings["rss.sergejus"];
             var rssService = new RssService();
 
-            var feeds = rssService.GetFeeds(url, _date);
+            var feeds = rssService.GetFeeds(url, this.date);
 
             Assert.That(feeds.Count(), Is.GreaterThan(0));
         }
@@ -35,7 +37,7 @@ namespace Tests.Services.Rss
             var url = "http://sergejus.blogas.lt/tag/fakeltnet/atom";
             var rssService = new RssService();
 
-            var feeds = rssService.GetFeeds(url, _date);
+            var feeds = rssService.GetFeeds(url, this.date);
 
             Assert.AreEqual(empty, feeds.Count());
         }
@@ -46,7 +48,7 @@ namespace Tests.Services.Rss
             var url = ConfigurationManager.AppSettings["rss.sergejus"];
             var rssService = new RssService();
 
-            var feeds = rssService.GetFeeds(url, _date).ToList();
+            var feeds = rssService.GetFeeds(url, this.date).ToList();
             if (feeds.Count() > 1)
             {
                 var fromDate = feeds.Last().Published;

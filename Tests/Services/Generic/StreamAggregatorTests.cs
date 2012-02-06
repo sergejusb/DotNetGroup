@@ -1,14 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Moq;
-using NUnit.Framework;
-using Ploeh.AutoFixture;
-using Services.Generic;
-using Services.Model;
-
-namespace Tests.Services.Generic
+﻿namespace Tests.Services.Generic
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+
+    using Moq;
+
+    using NUnit.Framework;
+
+    using Ploeh.AutoFixture;
+
+    using global::Services.Generic;
+
+    using global::Services.Model;
+
     [TestFixture]
     public class StreamAggregatorTests
     {
@@ -16,6 +21,12 @@ namespace Tests.Services.Generic
         public void StreamAggregator_Can_Be_Successfully_Created_With_Default_Constructor()
         {
             new StreamAggregator();
+        }
+
+        [Test]
+        public void Given_Null_Argument_Constructor_Throws()
+        {
+            Assert.Throws<ArgumentNullException>(() => new StreamAggregator(null));
         }
 
         [Test]
@@ -39,9 +50,9 @@ namespace Tests.Services.Generic
             var beforeYesterday = DateTime.UtcNow.AddDays(-2);
 
             var fakeAggregator1 = new Mock<IItemAggregator>();
-            fakeAggregator1.Setup(a => a.GetLatest(It.IsAny<DateTime>())).Returns(BuildItems(yesterday));
+            fakeAggregator1.Setup(a => a.GetLatest(It.IsAny<DateTime>())).Returns(this.BuildItems(yesterday));
             var fakeAggregator2 = new Mock<IItemAggregator>();
-            fakeAggregator2.Setup(a => a.GetLatest(It.IsAny<DateTime>())).Returns(BuildItems(beforeYesterday));
+            fakeAggregator2.Setup(a => a.GetLatest(It.IsAny<DateTime>())).Returns(this.BuildItems(beforeYesterday));
 
             var streamAggregator = new StreamAggregator(fakeAggregator1.Object, fakeAggregator2.Object);
 
@@ -50,12 +61,6 @@ namespace Tests.Services.Generic
             Assert.AreEqual(items.Count, 2);
             Assert.AreEqual(items[0].Published, beforeYesterday);
             Assert.AreEqual(items[1].Published, yesterday);
-        }
-
-        [Test]
-        public void Given_Null_Argument_Constructor_Throws()
-        {
-            Assert.Throws<ArgumentNullException>(() => new StreamAggregator(null));
         }
 
         private IEnumerable<Item> BuildItems(DateTime date)

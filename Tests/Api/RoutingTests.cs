@@ -1,10 +1,13 @@
-﻿using System.Web.Routing;
-using Api;
-using NUnit.Framework;
-using Tests.Fakes;
-
-namespace Tests.Api
+﻿namespace Tests.Api
 {
+    using System.Web.Routing;
+
+    using global::Api;
+
+    using NUnit.Framework;
+
+    using Tests.Fakes;
+
     [TestFixture]
     public class RoutingTests
     {
