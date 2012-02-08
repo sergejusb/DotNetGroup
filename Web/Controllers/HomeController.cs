@@ -1,27 +1,28 @@
-﻿using System;
-using System.Web.Mvc;
-using Services.Model;
-using Web.Services;
-
-namespace Web.Controllers
+﻿namespace Web.Controllers
 {
+    using System.Configuration;
+    using System.Web.Mvc;
+
+    using Web.Models;
+    using Web.Services;
+
     public class HomeController : Controller
     {
-        private readonly StreamService _streamService;
+        private readonly IStreamService streamService;
 
         public HomeController()
-            : this(new StreamService())
+            : this(new StreamService(ConfigurationManager.AppSettings["api.url"]))
         {
         }
 
-        public HomeController(StreamService streamService)
+        public HomeController(IStreamService streamService)
         {
-            _streamService = streamService;
+            this.streamService = streamService;
         }
 
-        public virtual ActionResult Index(ItemType? type, DateTime? from, int? limit)
+        public virtual ActionResult Index(StreamFilter filter)
         {
-            var items = _streamService.GetItems(type, from, limit);
+            var items = this.streamService.GetItems(filter.Type, filter.From, filter.To, filter.Limit);
             return View("Index", items);
         }
     }

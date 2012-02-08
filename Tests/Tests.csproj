@@ -76,6 +76,8 @@
     <Compile Include="Web.Mobile\AutoMapperTests.cs" />
     <Compile Include="Web.Mobile\HomeControllerTests.cs" />
     <Compile Include="Web.Mobile\SampleContentResolverTests.cs" />
+    <Compile Include="Services\Web\JsonClientTests.cs" />
+    <Compile Include="Services\Web\UrlBuilderTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="AutoMapper">
@@ -106,6 +108,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Runtime.Caching" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
   </ItemGroup>
   <ItemGroup>
@@ -121,11 +124,17 @@
       <Project>{F7ACDA42-418F-4EAE-AC08-62C4EC93AACA}</Project>
       <Name>Web.Mobile</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Web\Web.csproj">
+      <Project>{1B3B0EA5-CDDC-4BBA-A829-209A9355466C}</Project>
+      <Name>Web</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Web\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
