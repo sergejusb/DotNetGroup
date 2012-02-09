@@ -33,19 +33,24 @@
 
         public IEnumerable<Item> GetItems(StreamFilter filter)
         {
-            var urlBuilder = new UrlBuilder(this.baseUrl)
+            var url = new UrlBuilder(this.baseUrl)
                 .WithParameter("type", filter.Type)
                 .WithParameter("from", filter.From)
                 .WithParameter("to", filter.To)
-                .WithParameter("limit", filter.Limit);
+                .WithParameter("limit", filter.Limit)
+                .Build();
 
-            return this.jsonClient.Get<IEnumerable<Item>>(urlBuilder.Build());
+            return this.jsonClient.Get<IEnumerable<Item>>(url);
         }
 
         public Item GetItem(string objectId)
         {
-            var urlBuilder = new UrlBuilder(this.baseUrl);
-            return this.jsonClient.Get<Item>(urlBuilder.Build());
-        }       
+            var url = new UrlBuilder(this.baseUrl)
+                .WithPart("get")
+                .WithPart(objectId)
+                .Build();
+            
+            return this.jsonClient.Get<Item>(url);
+        }
     }
 }

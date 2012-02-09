@@ -1,17 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Web.Mvc;
-using AutoMapper;
-using Web.Mobile.Models.ViewModels;
-using Web.Mobile.Services;
-
-namespace Web.Mobile.Controllers
+﻿namespace Web.Mobile.Controllers
 {
+    using System.Collections.Generic;
+    using System.Web.Mvc;
+
+    using AutoMapper;
+
     using Web.Mobile.Models;
+    using Web.Mobile.Models.ViewModels;
+    using Web.Mobile.Services;
 
     public partial class HomeController : Controller
     {
-        private readonly IStreamService _streamService;
+        private readonly IStreamService streamService;
 
         public HomeController()
             : this(new StreamService("http://api.dotnetgroup.dev"))
@@ -20,24 +20,23 @@ namespace Web.Mobile.Controllers
 
         public HomeController(IStreamService streamService)
         {
-            this._streamService = streamService;
+            this.streamService = streamService;
         }
 
         public virtual ActionResult Index(StreamFilter filter)
         {
-            var enumerable = Mapper.Map<IEnumerable<ItemCompactView>>(_streamService.GetItems(filter));
-            return View(enumerable);
+            var items = Mapper.Map<IEnumerable<ItemCompactView>>(this.streamService.GetItems(filter));
+            return View(items);
         }
 
         public virtual ActionResult Item(string id)
         {
-            if (String.IsNullOrEmpty(id))
+            if (string.IsNullOrEmpty(id))
             {
                 return HttpNotFound();
             }
 
-            var item = _streamService.GetItem(id);
-
+            var item = this.streamService.GetItem(id);
             if (item == null)
             {
                 return HttpNotFound();
