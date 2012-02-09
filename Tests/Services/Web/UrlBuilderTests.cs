@@ -75,5 +75,46 @@
 
             Assert.AreEqual(expectedUrl, url);
         }
+
+        [Test]
+        public void Given_Fluent_Part_Part_Correct_Url_Is_Generated()
+        {            
+            var url = new UrlBuilder(BaseUrl)
+                .WithPart("get")
+                .WithPart(1)
+                .Build();            
+
+            Assert.AreEqual("http://api.dotnetgroup.dev/get/1", url);
+        }
+
+        [Test]
+        public void Given_Parameter_With_Correct_Url_Is_Generated()
+        {
+            var url = new UrlBuilder(BaseUrl)
+                .With("limit", 10)
+                .Build();
+
+            Assert.AreEqual("http://api.dotnetgroup.dev/?limit=10", url);
+        }
+
+        [Test]
+        public void Given_Empty_Parameter_WithIfNotBlank_Correct_Url_Is_Generated()
+        {
+            var url = new UrlBuilder(BaseUrl)
+                .WithIfNotBlank("limit", null)
+                .Build();
+
+            Assert.AreEqual("http://api.dotnetgroup.dev/", url);
+        }
+
+        [Test]
+        public void Given_Not_Empty_Parameter_WithIfNotEmpty_Correct_Url_Is_Generated()
+        {
+            var url = new UrlBuilder(BaseUrl)
+                .WithIfNotBlank("limit", 10)
+                .Build();
+
+            Assert.AreEqual("http://api.dotnetgroup.dev/?limit=10", url);
+        }
     }
 }

@@ -7,27 +7,26 @@ namespace Web.Mobile.Models
 
     public class StreamFilter
     {
-        private int pageSize = 10;
+        private const int MaxItems = 100;        
+        private int? limit;
 
-        public DateTime? DateFrom { get; set; }
+        public DateTime? From { get; set; }
 
-        public DateTime? DateTo { get; set; }
+        public DateTime? To { get; set; }
 
-        public int PageSize
+        public int? Limit
         {
             get
             {
-                return this.pageSize;
+                return this.limit ?? MaxItems;
             }
             set
             {
-                this.pageSize = value;
+                this.limit = value;
             }
-        }
+        }    
 
-        public int? PageIndex { get; set; }
-
-        public ItemType? ItemType { get; set; }
+        public ItemType? Type { get; set; }
 
         public RouteValueDictionary AsRouteValuesDictionary()  
         {
@@ -36,7 +35,7 @@ namespace Web.Mobile.Models
 
         public StreamFilter WithItemType(ItemType itemType)
         {
-            ItemType = itemType;
+            this.Type = itemType;
             return this;
         }
     }

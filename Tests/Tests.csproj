@@ -78,6 +78,9 @@
     <Compile Include="Web.Mobile\SampleContentResolverTests.cs" />
     <Compile Include="Services\Web\JsonClientTests.cs" />
     <Compile Include="Services\Web\UrlBuilderTests.cs" />
+    <Compile Include="Web.Mobile\StreamServiceTests.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="AutoMapper">

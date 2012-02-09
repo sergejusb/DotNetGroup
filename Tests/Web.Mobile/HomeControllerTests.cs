@@ -63,5 +63,18 @@
 
             Assert.IsTrue(viewResult is HttpNotFoundResult);
         }
+
+        [Test]
+        public void Given_No_Id_Item_Action_Should_Return_HttpNotFoundResult()
+        {
+            string id = null;
+            var streamServiceFake = new Mock<IStreamService>();
+            streamServiceFake.Setup(x => x.GetItem(id)).Returns((Item)null);
+            var controller = new HomeController(streamServiceFake.Object);
+
+            var viewResult = controller.Item(id);
+
+            Assert.IsTrue(viewResult is HttpNotFoundResult);
+        }
     }
 }
