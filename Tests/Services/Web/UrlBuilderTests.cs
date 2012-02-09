@@ -77,7 +77,7 @@
         }
 
         [Test]
-        public void Given_Fluent_Part_Part_Correct_Url_Is_Generated()
+        public void Given_Parts_To_WithPart_Correct_Url_Is_Generated()
         {            
             var url = new UrlBuilder(BaseUrl)
                 .WithPart("get")
@@ -88,30 +88,20 @@
         }
 
         [Test]
-        public void Given_Parameter_With_Correct_Url_Is_Generated()
+        public void Given_Empty_Parameter_To_WithParamenter_Correct_Url_Is_Generated()
         {
             var url = new UrlBuilder(BaseUrl)
-                .With("limit", 10)
-                .Build();
-
-            Assert.AreEqual("http://api.dotnetgroup.dev/?limit=10", url);
-        }
-
-        [Test]
-        public void Given_Empty_Parameter_WithIfNotBlank_Correct_Url_Is_Generated()
-        {
-            var url = new UrlBuilder(BaseUrl)
-                .WithIfNotBlank("limit", null)
+                .WithParameter("limit", null)
                 .Build();
 
             Assert.AreEqual("http://api.dotnetgroup.dev/", url);
         }
 
         [Test]
-        public void Given_Not_Empty_Parameter_WithIfNotEmpty_Correct_Url_Is_Generated()
+        public void Given_Not_Empty_Parameter_To_WithParamenter_Correct_Url_Is_Generated()
         {
             var url = new UrlBuilder(BaseUrl)
-                .WithIfNotBlank("limit", 10)
+                .WithParameter("limit", 10)
                 .Build();
 
             Assert.AreEqual("http://api.dotnetgroup.dev/?limit=10", url);

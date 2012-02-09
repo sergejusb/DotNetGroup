@@ -1,13 +1,17 @@
-﻿using System.Collections.Generic;
-using Services.Model;
-using Services.Web;
-using Web.Mobile.Models;
+﻿namespace Web.Mobile.Services
+{
+    using System.Collections.Generic;
 
-namespace Web.Mobile.Services
-{    
+    using global::Services.Model;
+
+    using global::Services.Web;
+
+    using Web.Mobile.Models;
+
     public interface IStreamService
     {
         Item GetItem(string objectId);
+
         IEnumerable<Item> GetItems(StreamFilter filter);
     }
 
@@ -29,13 +33,11 @@ namespace Web.Mobile.Services
 
         public IEnumerable<Item> GetItems(StreamFilter filter)
         {
-            var urlBuilder = new UrlBuilder(this.baseUrl);
-
-            urlBuilder
-                .WithIfNotBlank("type", filter.Type)
-                .WithIfNotBlank("from", filter.From)
-                .WithIfNotBlank("to", filter.To)
-                .WithIfNotBlank("limit", filter.Limit);         
+            var urlBuilder = new UrlBuilder(this.baseUrl)
+                .WithParameter("type", filter.Type)
+                .WithParameter("from", filter.From)
+                .WithParameter("to", filter.To)
+                .WithParameter("limit", filter.Limit);
 
             return this.jsonClient.Get<IEnumerable<Item>>(urlBuilder.Build());
         }

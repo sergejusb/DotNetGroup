@@ -1,15 +1,16 @@
 ﻿namespace Web.Services
 {
-    using System;
     using System.Collections.Generic;
 
     using global::Services.Model;
 
     using global::Services.Web;
 
+    using Web.Models;
+
     public interface IStreamService
     {
-        IEnumerable<Item> GetItems(ItemType? type, DateTime? from, DateTime? to, int? limit);
+        IEnumerable<Item> GetItems(StreamFilter filter);
     }
 
     public class StreamService : IStreamService
@@ -28,29 +29,13 @@
             this.jsonClient = jsonClient;
         }
 
-        public IEnumerable<Item> GetItems(ItemType? type, DateTime? from, DateTime? to, int? limit)
+        public IEnumerable<Item> GetItems(StreamFilter filter)
         {
-            var urlBuilder = new UrlBuilder(this.baseUrl);
-            
-            if (type.HasValue)
-            {
-                urlBuilder.AddParameter("type", type);
-            }
-
-            if (from.HasValue)
-            {
-                urlBuilder.AddParameter("from", from);
-            }
-
-            if (to.HasValue)
-            {
-                urlBuilder.AddParameter("to", from);
-            }
-
-            if (limit.HasValue)
-            {
-                urlBuilder.AddParameter("limit", from);
-            }
+            var urlBuilder = new UrlBuilder(this.baseUrl)
+                .WithParameter("type", filter.Type)
+                .WithParameter("from", filter.From)
+                .WithParameter("to", filter.To)
+                .WithParameter("limit", filter.Limit);
 
             return this.jsonClient.Get<IEnumerable<Item>>(urlBuilder.Build());
         }

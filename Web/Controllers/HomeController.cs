@@ -22,7 +22,7 @@
 
         public virtual ActionResult Index(StreamFilter filter)
         {
-            var items = this.streamService.GetItems(filter.Type, filter.From, filter.To, filter.Limit);
+            var items = this.streamService.GetItems(filter);
             return View("Index", items);
         }
     }
