@@ -24,7 +24,7 @@
                     return SyndicationFeed.Load(reader).Items.Select(i => new Item
                     {
                         Url = i.Id,
-                        Published = i.LastUpdatedTime.DateTime,
+                        Published = i.LastUpdatedTime.UtcDateTime,
                         AuthorName = i.Authors[0].Name,
                         AuthorUri = i.Authors[0].Uri,
                         Title = i.Title.Text,

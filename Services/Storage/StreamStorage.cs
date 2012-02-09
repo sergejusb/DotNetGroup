@@ -90,6 +90,13 @@ namespace Services.Storage
         {
             foreach (var item in items)
             {
+                // if item with same URL already exists, update existing item instead of inserting new
+                var publishedEarlier = this.Items.AsQueryable().SingleOrDefault(i => i.Url == item.Url);
+                if (publishedEarlier != null)
+                {
+                    item.Id = publishedEarlier.Id;
+                }
+
                 this.Items.Save(item);
             }
         }

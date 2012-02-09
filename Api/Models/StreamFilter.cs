@@ -13,7 +13,7 @@ namespace Api.Models
         private int? limit;
 
         public ItemType? Type { get; set; }
-        
+
         public DateTime? To { get; set; }
 
         public DateTime? From
