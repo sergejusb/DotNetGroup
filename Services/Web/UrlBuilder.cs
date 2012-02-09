@@ -3,16 +3,7 @@ namespace Services.Web
     using System;
     using System.Collections.Generic;
 
-    public interface IUrlBuilder
-    {
-        void AddPart(object value);
-
-        void AddParameter(string name, object value);
-
-        string Build();
-    }
-
-    public class UrlBuilder : IUrlBuilder
+    public class UrlBuilder
     {
         private readonly Uri baseUrl;
         private readonly IList<string> relativeUrlParts;
@@ -35,16 +26,6 @@ namespace Services.Web
             this.queryStringParameters = new List<string>();
         }
 
-        public void AddPart(object value)
-        {
-            this.relativeUrlParts.Add(value.ToString());
-        }
-
-        public void AddParameter(string name, object value)
-        {
-            this.queryStringParameters.Add(name + "=" + value);
-        }
-
         public string Build()
         {
             var relativeUrl = new Uri(string.Join("/", this.relativeUrlParts), UriKind.Relative);
@@ -62,7 +43,7 @@ namespace Services.Web
         {
             if (value != null && value.ToString() != string.Empty)
             {
-                this.AddParameter(name, value);
+                this.queryStringParameters.Add(name + "=" + value);
             }
 
             return this;
@@ -70,7 +51,7 @@ namespace Services.Web
 
         public UrlBuilder WithPart(object value)
         {
-            this.AddPart(value);            
+            this.relativeUrlParts.Add(value.ToString());
             return this;
         }
     }
