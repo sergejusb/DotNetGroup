@@ -14,7 +14,7 @@ namespace Web.Mobile.Controllers
         private readonly IStreamService _streamService;
 
         public HomeController()
-            : this(new StreamService())
+            : this(new StreamService("http://api.dotnetgroup.dev"))
         {
         }
 

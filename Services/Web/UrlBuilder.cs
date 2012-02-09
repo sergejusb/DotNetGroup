@@ -57,5 +57,27 @@ namespace Services.Web
 
             return uriBuilder.Uri.AbsoluteUri;
         }
+
+        public UrlBuilder With(string name, object value)
+        {
+            AddParameter(name, value);
+            return this;
+        }
+
+        public UrlBuilder WithIfNotBlank(string name, object value)
+        {
+            if (value != null && value.ToString() != string.Empty)
+            {
+                AddParameter(name, value);
+            }
+
+            return this;
+        }
+
+        public UrlBuilder WithPart(object value)
+        {
+            this.AddPart(value);            
+            return this;
+        }
     }
 }

@@ -1,19 +1,13 @@
-﻿namespace Tests.Web.Mobile
-{
-    using System.Linq;
+﻿using System.Linq;
+using AutoMapper;
+using NUnit.Framework;
+using Services.Model;
+using Web.Mobile.Models.ViewModels;
+using Web.Mobile.Services;
+using Web.Mobile.Services.Resolvers;
 
-    using AutoMapper;
-
-    using NUnit.Framework;
-
-    using global::Services.Model;
-
-    using global::Web.Mobile.Models.ViewModels;
-
-    using global::Web.Mobile.Services;
-
-    using global::Web.Mobile.Services.Resolvers;
-
+namespace Tests.Web.Mobile
+{  
     [TestFixture]
     public class SampleContentResolverTests
     {
@@ -21,6 +15,19 @@
         public void Init()
         {
             MappingService.Init();            
+        }
+
+        [Test]
+        public void Given_No_Content_After_Resolving_Return_No_Content()
+        {
+            var source = new Item
+            {
+                Content = null
+            };
+
+            var view = Mapper.Map<Item, ItemCompactView>(source);
+
+            Assert.AreEqual(null, view.SampleContent);
         }
 
         [Test]         

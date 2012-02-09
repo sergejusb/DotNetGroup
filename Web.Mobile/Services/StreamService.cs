@@ -1,14 +1,10 @@
 ﻿using System.Collections.Generic;
-using System.Net;
-using System.Web;
 using Services.Model;
+using Services.Web;
 using Web.Mobile.Models;
 
 namespace Web.Mobile.Services
-{
-    using System.Text;
-    using System.Web.Script.Serialization;
-
+{    
     public interface IStreamService
     {
         Item GetItem(string objectId);
@@ -17,36 +13,37 @@ namespace Web.Mobile.Services
 
     public class StreamService : IStreamService
     {
-        private readonly JavaScriptSerializer _jsonSerializer;
+        private readonly string baseUrl;
+        private readonly IJsonClient jsonClient;
 
-        public StreamService()
+        public StreamService(string baseUrl)
+            : this(baseUrl, new JsonClient())
         {
-            _jsonSerializer = new JavaScriptSerializer();
+        }
+
+        public StreamService(string baseUrl, IJsonClient jsonClient)
+        {
+            this.baseUrl = baseUrl;
+            this.jsonClient = jsonClient;
         }
 
         public IEnumerable<Item> GetItems(StreamFilter filter)
         {
-            using (var webClient = new WebClient { Encoding = Encoding.UTF8 })
-            {
-                var url = "http://api.dotnetgroup.dev/";
-                if (filter.ItemType.HasValue)
-                    url += filter.ItemType + "/";
-                url += "?limit=" + filter.PageSize;
-                if (filter.DateFrom.HasValue)
-                    url += "&from=" + HttpUtility.UrlEncodeUnicode(filter.DateFrom.Value.ToString());
+            var urlBuilder = new UrlBuilder(this.baseUrl);
 
+            urlBuilder
+                .WithIfNotBlank("type", filter.Type)
+                .WithIfNotBlank("from", filter.From)
+                .WithIfNotBlank("to", filter.To)
+                .WithIfNotBlank("limit", filter.Limit);         
 
-                return _jsonSerializer.Deserialize<IEnumerable<Item>>(webClient.DownloadString(url));
-            }
+            return this.jsonClient.Get<IEnumerable<Item>>(urlBuilder.Build());
         }
 
-        public Item GetItem(string id)
+        public Item GetItem(string objectId)
         {
-            using (var webClient = new WebClient { Encoding = Encoding.UTF8 })
-            {
-                var url = "http://api.dotnetgroup.dev/get/" + id;
-                return _jsonSerializer.Deserialize<Item>(webClient.DownloadString(url));
-            }
-        }
+            var urlBuilder = new UrlBuilder(this.baseUrl);
+            return this.jsonClient.Get<Item>(urlBuilder.Build());
+        }       
     }
 }
