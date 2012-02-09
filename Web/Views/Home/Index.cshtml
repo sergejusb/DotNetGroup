@@ -4,23 +4,7 @@
     ViewBag.Title = "#ltnet - All development news, links and posts on the single page";
     Layout = "../Shared/_Layout.cshtml";
 }
-<div class="navbar navbar-fixed-top">
-    <div class="navbar-inner">
-        <div class="container">
-            <a class="brand" href="/">#ltnet</a>
-            <div class="nav-collapse">
-                <ul class="nav">
-                    <li class=""><a href="@Url.Action("Index", "Home")">Stream</a> </li>
-                    <li class=""><a href="@Url.Action("Index", "Home", new { type = "rss" })">Rss</a></li>
-                    <li class=""><a href="@Url.Action("Index", "Home", new { type = "twitter" })">Twitter</a></li>
-                </ul>
-                <ul class="nav pull-right">
-                    <li><a href="/"><sub>by dotnetgroup.lt</sub></a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</div>
+
 <div class="container">
     <div style="height: 50px">
     </div>
@@ -28,30 +12,11 @@
         @foreach (var item in Model)
         {
             <tr>
-                <td style="width: 50px">
-                    <img alt="Author Image" src="@(item.AuthorImage ?? "http://placehold.it/48x48")" />
+                <td style="width: 25px">
+                    <img src="../../Public/img/icon-@(item.ItemType).png" alt="@item.ItemType" />
                 </td>
                 <td>
-                    <h3>
-                        @if (item.ItemType == ItemType.Rss)
-                        {
-                            <img src="../../Public/img/icon-rss.png" alt="RSS" />
-                            @*<span class="label label-warning">RSS</span>*@ 
-                        }
-                        else if (item.ItemType == ItemType.Twitter)
-                        {
-                            <img src="../../Public/img/icon-twitter.png" alt="Twitter" />
-                            @*<span class="label label-info">Twitter</span>*@
-                        }
-                        @Html.Raw(item.Title)
-                    </h3>
-                    <a href="@item.AuthorUri">@item.AuthorName</a> | @item.Published | @String.Join(", ", @item.Tags)
-                    <br/>
-                    @Html.Raw(item.Content)
-                </td>
-                <td>
-                    <a href="@item.Url" title="Read original post" target="_blank"><i class="icon-share-alt">
-                    </i></a>
+                    @{ Html.RenderPartial("Item", item); }
                 </td>
             </tr>
         }

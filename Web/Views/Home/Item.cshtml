@@ -1,0 +1,23 @@
+﻿@model Services.Model.Item
+<div>
+    <div style="float: left; padding-right: 10px">
+        <img alt="Author Image" src="@(Model.AuthorImage ?? "http://placehold.it/48x48")" />
+    </div>
+    <div style="float: right">
+        <a href="@Model.Url" title="Read original post" target="_blank"><i class="icon-share-alt">
+        </i></a>
+    </div>
+    <div>
+        <a href="@Model.AuthorUri">@Model.AuthorName</a> | <span style="font-size: .9em">@Model.Published</span>
+    </div>
+    <div>
+        @foreach(var tag in @Model.Tags)
+        {
+            <span class="label">@tag</span>
+        }
+    </div>
+    <div style="clear: both">
+        <h3>@Html.Raw(Model.Title)</h3>
+        @Html.Raw(Model.Content)
+    </div>
+</div>
