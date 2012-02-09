@@ -1,6 +1,7 @@
 ﻿namespace Web.Mobile.Controllers
 {
     using System.Collections.Generic;
+    using System.Configuration;
     using System.Web.Mvc;
 
     using AutoMapper;
@@ -14,7 +15,7 @@
         private readonly IStreamService streamService;
 
         public HomeController()
-            : this(new StreamService("http://api.dotnetgroup.dev"))
+            : this(new StreamService(ConfigurationManager.AppSettings["api.url"]))
         {
         }
 

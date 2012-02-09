@@ -27,6 +27,12 @@
         }
 
         [Test]
+        public void Controller_Can_Be_Created_With_Default_Contructor()
+        {
+            new HomeController();
+        }
+
+        [Test]
         public void Index_Action_Should_Return_ViewResult_With_ItemCompactView_List()
         {
             var streamServiceFake = new Mock<IStreamService>();
