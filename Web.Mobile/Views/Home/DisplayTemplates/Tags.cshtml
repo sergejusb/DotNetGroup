@@ -5,7 +5,7 @@
         <ul class="tags mas pas">
             @foreach (var tag in @Model)
             {
-                <li><a href="{tag posts}">@tag.ToLower()</a></li>
+                <li><a href="{tag posts}" class="tag">@tag</a></li>
             }
         </ul>
     </div>

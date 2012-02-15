@@ -26,8 +26,17 @@
 
         public virtual ActionResult Index(StreamFilter filter)
         {
+            return View(filter);
+        } 
+       
+        public virtual ActionResult Items(StreamFilter filter)
+        {
             var items = Mapper.Map<IEnumerable<ItemCompactView>>(this.streamService.GetItems(filter));
-            return View(items);
+            return View(new ItemsView
+                {
+                    Items = items, 
+                    Filter = filter
+                });
         }
 
         public virtual ActionResult Item(string id)
@@ -46,5 +55,5 @@
             var itemView = Mapper.Map<ItemView>(item);
             return View(itemView);
         }
-    }
+    }    
 }

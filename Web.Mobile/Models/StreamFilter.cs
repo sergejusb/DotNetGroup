@@ -7,7 +7,7 @@ namespace Web.Mobile.Models
 
     public class StreamFilter
     {
-        private const int MaxItems = 100;        
+        private const int DefaultLimit = 10;        
         private int? limit;
 
         public DateTime? From { get; set; }
@@ -18,7 +18,7 @@ namespace Web.Mobile.Models
         {
             get
             {
-                return this.limit ?? MaxItems;
+                return this.limit ?? DefaultLimit;
             }
             set
             {
@@ -35,7 +35,19 @@ namespace Web.Mobile.Models
 
         public StreamFilter WithItemType(ItemType itemType)
         {
-            this.Type = itemType;
+            Type = itemType;
+            return this;
+        }        
+
+        public StreamFilter WithToDate(DateTime date)
+        {
+            To = date;
+            return this;
+        }
+
+        public StreamFilter WithFromDate(DateTime date)
+        {
+            From = date;
             return this;
         }
     }

@@ -1,6 +1,8 @@
 ﻿namespace Tests.Web.Mobile
 {
+    using System;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Web.Mvc;
 
     using Moq;
@@ -12,7 +14,7 @@
     using Tests.Helpers;
 
     using global::Web.Mobile.Controllers;
-
+    using global::Web.Mobile.Models;
     using global::Web.Mobile.Models.ViewModels;
 
     using global::Web.Mobile.Services;
@@ -33,14 +35,30 @@
         }
 
         [Test]
-        public void Index_Action_Should_Return_ViewResult_With_ItemCompactView_List()
+        public void Index_Action_Should_Return_ViewResult_With_Filter()
         {
             var streamServiceFake = new Mock<IStreamService>();
             var controller = new HomeController(streamServiceFake.Object);
+            var streamFilter = new StreamFilter { From = new DateTime(2005, 5, 5) };
 
-            var returnsViewResult = controller.Index(null).ReturnsViewResult();
+            var returnsViewResult = controller.Index(streamFilter).ReturnsViewResult();
+            
+            Assert.AreEqual(new DateTime(2005, 5, 5), ((StreamFilter)returnsViewResult.Model).From);
+        }
 
-            Assert.IsTrue(returnsViewResult.Model is IEnumerable<ItemCompactView>);             
+        [Test]
+        public void Items_Action_Should_Return_ViewResult_With_ItemsView()
+        {
+            var streamServiceFake = new Mock<IStreamService>();
+            streamServiceFake.Setup(x => x.GetItems(It.IsAny<StreamFilter>())).Returns(new List<Item> { new Item() });
+            var controller = new HomeController(streamServiceFake.Object);
+            var streamFilter = new StreamFilter { From = new DateTime(2005, 5, 5) };
+
+            var returnsViewResult = controller.Items(streamFilter).ReturnsViewResult();
+            var itemsView = (ItemsView)returnsViewResult.Model;
+
+            Assert.AreEqual(new DateTime(2005, 5, 5), itemsView.Filter.From);            
+            Assert.AreEqual(1, itemsView.Items.Count());
         }
 
         [Test]

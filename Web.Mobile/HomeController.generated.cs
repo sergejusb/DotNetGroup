@@ -38,6 +38,11 @@ namespace Web.Mobile.Controllers {
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.ActionResult Items() {
+            return new T4MVC_ActionResult(Area, Name, ActionNames.Items);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public System.Web.Mvc.ActionResult Item() {
             return new T4MVC_ActionResult(Area, Name, ActionNames.Item);
         }
@@ -57,12 +62,14 @@ namespace Web.Mobile.Controllers {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNamesClass {
             public readonly string Index = "Index";
+            public readonly string Items = "Items";
             public readonly string Item = "Item";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNameConstants {
             public const string Index = "Index";
+            public const string Items = "Items";
             public const string Item = "Item";
         }
 
@@ -74,6 +81,7 @@ namespace Web.Mobile.Controllers {
         public class ViewNames {
             public readonly string Index = "~/Views/Home/Index.cshtml";
             public readonly string Item = "~/Views/Home/Item.cshtml";
+            public readonly string Items = "~/Views/Home/Items.cshtml";
             static readonly _DisplayTemplates s_DisplayTemplates = new _DisplayTemplates();
             public _DisplayTemplates DisplayTemplates { get { return s_DisplayTemplates; } }
             public partial class _DisplayTemplates{
@@ -89,6 +97,12 @@ namespace Web.Mobile.Controllers {
 
         public override System.Web.Mvc.ActionResult Index(Web.Mobile.Models.StreamFilter filter) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Index);
+            callInfo.RouteValueDictionary.Add("filter", filter);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult Items(Web.Mobile.Models.StreamFilter filter) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Items);
             callInfo.RouteValueDictionary.Add("filter", filter);
             return callInfo;
         }

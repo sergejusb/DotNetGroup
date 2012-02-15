@@ -1,10 +1,9 @@
-﻿<div data-role="content">
+﻿@model StreamFilter
+<span class="js-module" data-module="Home_Index"></span>
+<div data-role="content">
     <div class="content-primary">
-        <ul data-role="listview">
-            @foreach (var itemView in Model)
-            {
-                @Html.DisplayFor(x => itemView)
-            }
+        <ul class="stream-item-list" data-role="listview">
+            @Html.Action(MVC.Home.ActionNames.Items, Model.AsRouteValuesDictionary())
         </ul>
-    </div>    
+    </div>
 </div>

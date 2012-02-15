@@ -20,6 +20,20 @@ ul.tags li
     display: inline;
 }
 
+a.tag.ui-link
+{
+    background-color: #999999;
+    border-radius: 3px 3px 3px 3px;
+    color: #FFFFFF;
+    font-size: 9.75px;
+    font-weight: normal;
+    padding: 2px 3px 2px;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    text-shadow: none;
+}
+
 .nav-main .ui-btn .ui-btn-inner
 {
     padding-top: 40px !important;
@@ -29,8 +43,8 @@ ul.tags li
 {
     background-image: url(../img/icons.png);
     background-color: transparent;
-    background-repeat:  no-repeat;    
-    width: 26px !important;
+    background-repeat: no-repeat;
+    width: 27px !important;
     height: 26px !important;
     margin-left: -15px !important;
     box-shadow: none !important;
@@ -46,17 +60,17 @@ ul.tags li
 }
 #rss .ui-icon
 {
-    background-position: -25px -0px;
+    background-position: -27px -0px;
 }
 
 #twitter .ui-icon
 {
-    background-position: -50px -0px;
+    background-position: -53px -0px;
 }
 
 #search .ui-icon
 {
-    background-position: -75px -0px;
+    background-position: -80px -0px;
 }
 
 .item-type
@@ -66,26 +80,29 @@ ul.tags li
     left: 68px;
 }
 
-.item-type .icon 
+.item-type .icon
 {
     display: block;
-    float: left;    
+    float: left;
     background: url(../img/icons.png);
     background-color: transparent;
-    background-repeat:  no-repeat;
+    background-repeat: no-repeat;
     width: 19px;
     height: 16px;
 }
 
-.item-type .rss {
-    background-position: -18px -26px;   
+.item-type .rss
+{
+    background-position: -19px -26px;
 }
 
-.item-type .twitter {
-    background-position: -0px -26px;   
+.item-type .twitter
+{
+    background-position: -0px -26px;
 }
 
-a {
-    font-size: 14px;        
+a
+{
+    font-size: 14px;
     color: #2489CE;
 }

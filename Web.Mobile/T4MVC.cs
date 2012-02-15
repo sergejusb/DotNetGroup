@@ -327,6 +327,8 @@ namespace Links {
             private const string URLPATH = "~/Public/js";
             public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
             public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+            public static readonly string views_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/views.min.js") ? Url("views.min.js") : Url("views.js");
+                          
         }
     
     }
