@@ -1,0 +1,37 @@
+﻿.navbar
+{
+    font-family: SegoeWPRegular;
+    font-size: 1.1em;
+}
+
+.item .author-image
+{
+    float: left;
+    padding-right: 10px;
+}
+.item .author-info span
+{
+    font-size: .9em;
+}
+.item .read-more
+{
+    float: right;
+}
+.item .tags
+{
+}
+.item .content
+{
+    clear: both;
+}
+
+
+.item .author-info, .item .tags
+{
+    font-family: SegoeWPRegular;
+    font-size: 1.1em;
+}
+.label
+{
+    padding-top: 2px;
+}

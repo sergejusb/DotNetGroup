@@ -1,6 +1,7 @@
 ﻿namespace Web.Controllers
 {
     using System.Configuration;
+    using System.Dynamic;
     using System.Web.Mvc;
 
     using Web.Models;
@@ -20,10 +21,12 @@
             this.streamService = streamService;
         }
 
-        public virtual ActionResult Index(StreamFilter filter)
+        public ActionResult Index(StreamFilter filter)
         {
-            var items = this.streamService.GetItems(filter);
-            return View("Index", items);
+            dynamic model = new ExpandoObject();
+            model.Items = this.streamService.GetItems(filter);
+
+            return View("Index", model);
         }
     }
 }

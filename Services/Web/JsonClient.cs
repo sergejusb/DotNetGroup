@@ -6,6 +6,8 @@ namespace Services.Web
 
     public interface IJsonClient
     {
+        string Get(string url);
+
         TResult Get<TResult>(string url);
     }
 
@@ -18,12 +20,19 @@ namespace Services.Web
             this.jsonSerializer = new JavaScriptSerializer();
         }
 
-        public TResult Get<TResult>(string url)
+        public string Get(string url)
         {
             using (var webClient = new WebClient { Encoding = Encoding.UTF8 })
             {
-                return this.jsonSerializer.Deserialize<TResult>(webClient.DownloadString(url));
+                return webClient.DownloadString(url);
             }
+        }
+
+        public TResult Get<TResult>(string url)
+        {
+            var json = this.Get(url);
+
+            return this.jsonSerializer.Deserialize<TResult>(json);
         }
     }
 }

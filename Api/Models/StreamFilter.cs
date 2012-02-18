@@ -6,7 +6,7 @@ namespace Api.Models
 
     public class StreamFilter
     {
-        private const int PastDays = 7;
+        private const int PastDays = 14;
         private const int MaxItems = 100;
 
         private DateTime? from;

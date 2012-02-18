@@ -19,5 +19,15 @@
 
             CollectionAssert.IsNotEmpty(items);
         }
+
+        [Test]
+        public void Given_Valid_Url_Api_Returns_Serialized_Items()
+        {
+            var url = "http://api.dotnetgroup.dev/?type=rss";
+
+            var json = new JsonClient().Get(url);
+
+            CollectionAssert.IsNotEmpty(json);
+        }
     }
 }

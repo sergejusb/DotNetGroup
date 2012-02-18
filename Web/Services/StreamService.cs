@@ -1,16 +1,12 @@
 ﻿namespace Web.Services
 {
-    using System.Collections.Generic;
-
-    using global::Services.Model;
-
     using global::Services.Web;
 
     using Web.Models;
 
     public interface IStreamService
     {
-        IEnumerable<Item> GetItems(StreamFilter filter);
+        string GetItems(StreamFilter filter);
     }
 
     public class StreamService : IStreamService
@@ -29,16 +25,21 @@
             this.jsonClient = jsonClient;
         }
 
-        public IEnumerable<Item> GetItems(StreamFilter filter)
+        public string GetItems(StreamFilter filter)
         {
-            var url = new UrlBuilder(this.baseUrl)
+            var url = this.BuildUrl(filter);
+
+            return this.jsonClient.Get(url);
+        }
+
+        private string BuildUrl(StreamFilter filter)
+        {
+            return new UrlBuilder(this.baseUrl)
                 .WithParameter("type", filter.Type)
                 .WithParameter("from", filter.From)
                 .WithParameter("to", filter.To)
                 .WithParameter("limit", filter.Limit)
                 .Build();
-
-            return this.jsonClient.Get<IEnumerable<Item>>(url);
         }
     }
 }

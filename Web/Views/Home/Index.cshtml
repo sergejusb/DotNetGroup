@@ -1,25 +1,15 @@
-﻿@using Services.Model
-@model IEnumerable<Item>
+﻿@model dynamic
 @{
     ViewBag.Title = "#ltnet - All development news, links and posts on the single page";
     Layout = "../Shared/_Layout.cshtml";
 }
+<div id="container" class="container" style="margin-top: 50px"></div>
 
-<div class="container">
-    <div style="height: 50px">
-    </div>
-    <table class="table">
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td style="width: 25px">
-                    <img src="../../Public/img/icon-@(item.ItemType).png" alt="@item.ItemType" />
-                </td>
-                <td>
-                    @{ Html.RenderPartial("Item", item); }
-                </td>
-            </tr>
-        }
-    </table>
-</div>
-@{ Html.RenderPartial("UserVoice"); }
+@{ Html.RenderPartial("Templates"); }
+
+<script type="text/javascript">
+    var Model = Model || { };
+    Model.Items = Model.Items || @Html.Raw(Model.Items);
+    
+    $("#container").html($("#containerTemplate").render(Model));
+</script>
