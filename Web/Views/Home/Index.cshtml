@@ -7,5 +7,6 @@
 @{ Html.RenderPartial("Templates"); }
 
 <script type="text/javascript">
+    Items.setApiUrl("@System.Configuration.ConfigurationManager.AppSettings["api.url"]");
     Items.load($("#container"));
 </script>

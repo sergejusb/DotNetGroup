@@ -1,7 +1,10 @@
 ﻿(function (global, undefined) {
-    var apiBase = "http://api.dotnetgroup.dev";
+    var apiBase = "http://api.dotnetgroup.lt";
 
     global.Items = {
+        setApiUrl: function (apiUrl) {
+            apiBase = apiUrl;
+        },
         load: function (container) {
             var apiQuery = $.query.load(apiBase);
 
