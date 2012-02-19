@@ -1,12 +1,12 @@
 ﻿@font-face
 {
     font-family: "SegoeWPRegular";
-    src: url("fonts/segeo-wp-semilight-webfont.eot");
+    src: url("../fonts/segeo-wp-semilight-webfont.eot");
     src: local("☺"), 
-         url("fonts/segeo-wp-semilight-webfont.woff") format("woff"), 
-         url("fonts/segeo-wp-semilight-webfont.ttf") format("truetype"), 
-         url("fonts/segeo-wp-semilight-webfont.svgz#SegoeWPSemiLight") format("svg"), 
-         url("fonts/segeo-wp-semilight-webfont.svg#SegoeWPSemiLight") format("svg");
+         url("../fonts/segeo-wp-semilight-webfont.woff") format("woff"), 
+         url("../fonts/segeo-wp-semilight-webfont.ttf") format("truetype"), 
+         url("../fonts/segeo-wp-semilight-webfont.svgz#SegoeWPSemiLight") format("svg"), 
+         url("../fonts/segeo-wp-semilight-webfont.svg#SegoeWPSemiLight") format("svg");
     font-weight: 200;
     font-style: normal;
 }
@@ -14,12 +14,12 @@
 @font-face
 {
     font-family: "SegoeWPRegular";
-    src: url("fonts/segeo-wp-webfont.eot");
+    src: url("../fonts/segeo-wp-webfont.eot");
     src: local("☺"), 
-         url("fonts/segeo-wp-webfont.woff") format("woff"), 
-         url("fonts/segeo-wp-webfont.ttf") format("truetype"), 
-         url("fonts/segeo-wp-webfont.svgz#SegoeWPRegular") format("svg"), 
-         url("fonts/segeo-wp-webfont.svg#SegoeWPRegular") format("svg");
+         url("../fonts/segeo-wp-webfont.woff") format("woff"), 
+         url("../fonts/segeo-wp-webfont.ttf") format("truetype"), 
+         url("../fonts/segeo-wp-webfont.svgz#SegoeWPRegular") format("svg"), 
+         url("../fonts/segeo-wp-webfont.svg#SegoeWPRegular") format("svg");
     font-weight: 400;
     font-style: normal;
 }
@@ -27,12 +27,12 @@
 @font-face
 {
     font-family: "SegoeWPRegular";
-    src: url("fonts/segeo-wp-semibold-webfont.eot");
+    src: url("../fonts/segeo-wp-semibold-webfont.eot");
     src: local("☺"), 
-         url("fonts/segeo-wp-semibold-webfont.woff") format("woff"), 
-         url("fonts/segeo-wp-semibold-webfont.ttf") format("truetype"), 
-         url("fonts/segeo-wp-semibold-webfont.svgz#SegoeWPSemibold") format("svg"), 
-         url("fonts/segeo-wp-semibold-webfont.svg#SegoeWPSemibold") format("svg");
+         url("../fonts/segeo-wp-semibold-webfont.woff") format("woff"), 
+         url("../fonts/segeo-wp-semibold-webfont.ttf") format("truetype"), 
+         url("../fonts/segeo-wp-semibold-webfont.svgz#SegoeWPSemibold") format("svg"), 
+         url("../fonts/segeo-wp-semibold-webfont.svg#SegoeWPSemibold") format("svg");
     font-weight: 500;
     font-style: normal;
 }

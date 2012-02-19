@@ -4,16 +4,16 @@
     <meta charset="utf-8" />
     <title>@ViewBag.Title</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
     <link href="@Url.Content("~/Public/css/bootstrap.css")" rel="stylesheet" type="text/css" />
     <link href="@Url.Content("~/Public/css/bootstrap.responsive.css")" rel="stylesheet" type="text/css" />
     <link href="@Url.Content("~/Public/css/font.css")" rel="stylesheet" type="text/css" />
-    <link href="@Url.Content("~/Public/css/style.css")" rel="stylesheet" type="text/css" />    
-
+    <link href="@Url.Content("~/Public/css/style.css")" rel="stylesheet" type="text/css" />
     <script src="@Url.Content("http://code.jquery.com/jquery-1.7.1.js")" type="text/javascript"></script>
     <script src="@Url.Content("~/Public/js/jquery.dateFormat.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Public/js/jquery.query.js")" type="text/javascript"></script>
     <script src="@Url.Content("~/Public/js/bootstrap.js")" type="text/javascript"></script>
     <script src="@Url.Content("~/Public/js/jsrender.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Public/js/scripts.js")" type="text/javascript"></script>
     @{ Html.RenderPartial("GoogleAnalytics"); }
 
 </head>
@@ -29,7 +29,7 @@
                         <li class=""><a href="@Url.Action("Index", "Home", new { type = "twitter" })">Twitter</a></li>
                     </ul>
                     <ul class="nav pull-right">
-                        <li><a href="/" style="font-size: .9em">early preview</a></li>
+                        <li><a href="/" style="font-size: .8em">by dotnetgroup.lt</a></li>
                     </ul>
                 </div>
             </div>
@@ -37,7 +37,7 @@
     </div>
     @RenderBody()
 
-    @{ Html.RenderPartial("UserVoice"); }
-
 </body>
+@{ Html.RenderPartial("UserVoice"); }
+
 </html>

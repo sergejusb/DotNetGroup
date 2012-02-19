@@ -1,5 +1,4 @@
-﻿@model dynamic
-@{
+﻿@{
     ViewBag.Title = "#ltnet - All development news, links and posts on the single page";
     Layout = "../Shared/_Layout.cshtml";
 }
@@ -8,8 +7,5 @@
 @{ Html.RenderPartial("Templates"); }
 
 <script type="text/javascript">
-    var Model = Model || { };
-    Model.Items = Model.Items || @Html.Raw(Model.Items);
-    
-    $("#container").html($("#containerTemplate").render(Model));
+    Items.load($("#container"));
 </script>

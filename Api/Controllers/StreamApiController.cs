@@ -4,6 +4,7 @@
     using System.Configuration;
     using System.Web.Mvc;
 
+    using Api.Extensions;
     using Api.Models;
 
     using Services.Storage;
@@ -41,7 +42,7 @@
         {
             var items = this.streamStorage.GetLatest(filter.Type, filter.From, filter.To, filter.Limit);
 
-            return Json(items, JsonRequestBehavior.AllowGet);
+            return this.Jsonp(items);
         }
     }
 }

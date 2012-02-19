@@ -56,9 +56,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\StreamFilter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\StreamService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
@@ -66,11 +64,11 @@
     <Content Include="Public\css\font.css" />
     <Content Include="Public\css\bootstrap.css" />
     <Content Include="Public\css\bootstrap.responsive.css" />
-    <Content Include="Public\css\fonts\segeo-wp-semibold-webfont.svg" />
-    <Content Include="Public\css\fonts\segeo-wp-semilight-webfont.svg" />
-    <Content Include="Public\css\fonts\segeo-wp-webfont.svg" />
-    <Content Include="Public\css\images\glyphicons-halflings-white.png" />
-    <Content Include="Public\css\images\glyphicons-halflings.png" />
+    <Content Include="Public\fonts\segeo-wp-semibold-webfont.svg" />
+    <Content Include="Public\fonts\segeo-wp-semilight-webfont.svg" />
+    <Content Include="Public\fonts\segeo-wp-webfont.svg" />
+    <Content Include="Public\img\glyphicons-halflings-white.png" />
+    <Content Include="Public\img\glyphicons-halflings.png" />
     <Content Include="Public\img\icon-email.png" />
     <Content Include="Public\img\icon-facebook.png" />
     <Content Include="Public\img\icon-github.png" />
@@ -78,6 +76,8 @@
     <Content Include="Public\img\icon-rss.png" />
     <Content Include="Public\img\icon-tags.png" />
     <Content Include="Public\img\icon-twitter.png" />
+    <Content Include="Public\js\jquery.query.js" />
+    <Content Include="Public\js\scripts.js" />
     <Content Include="Public\js\jquery.dateFormat.js" />
     <Content Include="Public\js\bootstrap.js" />
     <Content Include="Public\js\jquery-1.7.1-vsdoc.js" />
@@ -107,9 +107,7 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\ViewModels\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="Views\Shared\UserVoice.cshtml" />
   </ItemGroup>
@@ -117,18 +115,18 @@
     <Content Include="Views\Shared\GoogleAnalytics.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Public\css\fonts\segeo-wp-semibold-webfont.eot" />
-    <None Include="Public\css\fonts\segeo-wp-semibold-webfont.svgz" />
-    <None Include="Public\css\fonts\segeo-wp-semibold-webfont.ttf" />
-    <None Include="Public\css\fonts\segeo-wp-semibold-webfont.woff" />
-    <None Include="Public\css\fonts\segeo-wp-semilight-webfont.eot" />
-    <None Include="Public\css\fonts\segeo-wp-semilight-webfont.svgz" />
-    <None Include="Public\css\fonts\segeo-wp-semilight-webfont.ttf" />
-    <None Include="Public\css\fonts\segeo-wp-semilight-webfont.woff" />
-    <None Include="Public\css\fonts\segeo-wp-webfont.eot" />
-    <None Include="Public\css\fonts\segeo-wp-webfont.svgz" />
-    <None Include="Public\css\fonts\segeo-wp-webfont.ttf" />
-    <None Include="Public\css\fonts\segeo-wp-webfont.woff" />
+    <None Include="Public\fonts\segeo-wp-semibold-webfont.eot" />
+    <None Include="Public\fonts\segeo-wp-semibold-webfont.svgz" />
+    <None Include="Public\fonts\segeo-wp-semibold-webfont.ttf" />
+    <None Include="Public\fonts\segeo-wp-semibold-webfont.woff" />
+    <None Include="Public\fonts\segeo-wp-semilight-webfont.eot" />
+    <None Include="Public\fonts\segeo-wp-semilight-webfont.svgz" />
+    <None Include="Public\fonts\segeo-wp-semilight-webfont.ttf" />
+    <None Include="Public\fonts\segeo-wp-semilight-webfont.woff" />
+    <None Include="Public\fonts\segeo-wp-webfont.eot" />
+    <None Include="Public\fonts\segeo-wp-webfont.svgz" />
+    <None Include="Public\fonts\segeo-wp-webfont.ttf" />
+    <None Include="Public\fonts\segeo-wp-webfont.woff" />
     <Content Include="Views\Home\Templates.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

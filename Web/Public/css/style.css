@@ -4,23 +4,26 @@
     font-size: 1.1em;
 }
 
-.item .author-image
+.item .item-author-image
 {
     float: left;
     padding-right: 10px;
 }
-.item .author-info span
+.item .item-author-info span
 {
     font-size: .9em;
 }
-.item .read-more
+.item .item-read-more
 {
     float: right;
 }
-.item .tags
+.item .item-date
 {
 }
-.item .content
+.item .item-tags
+{
+}
+.item .item-content
 {
     clear: both;
 }
