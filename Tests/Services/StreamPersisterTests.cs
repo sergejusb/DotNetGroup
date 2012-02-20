@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Configuration;
 
     using MongoDB.Driver;
 
@@ -26,6 +27,9 @@
     [TestFixture]
     public class StreamPersisterTests
     {
+        private static readonly string ConnectionString = ConfigurationManager.AppSettings["db.connection"];
+        private static readonly string DatabaseName = ConfigurationManager.AppSettings["db.database"];
+
         [Test]
         public void Given_Null_Argument_Constructor_Throws()
         {
@@ -68,18 +72,15 @@
         [DB, Test]
         public void Persister_Can_Successfully_Persist_New_Items_In_Database()
         {
-            var connectionString = "mongodb://localhost";
-            var databaseName = "Test";
-
             try
             {
-                var streamPersister = new StreamPersister(connectionString, databaseName);
+                var streamPersister = new StreamPersister(ConnectionString, DatabaseName);
 
                 streamPersister.PersistLatest();
             }
             finally
             {
-                MongoServer.Create(connectionString).DropDatabase(databaseName);
+                MongoServer.Create(ConnectionString).DropDatabase(DatabaseName);
             }
         }
 
@@ -104,19 +105,16 @@
         [DB, Test]
         public void Persister_Can_Reprocess_Existing_Items_In_Database()
         {
-            var connectionString = "mongodb://localhost";
-            var databaseName = "Test";
-
             try
             {
-                var streamPersister = new StreamPersister(connectionString, databaseName);
+                var streamPersister = new StreamPersister(ConnectionString, DatabaseName);
                 streamPersister.PersistLatest();
                 
                 streamPersister.Reprocess();
             }
             finally
             {
-                MongoServer.Create(connectionString).DropDatabase(databaseName);
+                MongoServer.Create(ConnectionString).DropDatabase(DatabaseName);
             }
         }
 

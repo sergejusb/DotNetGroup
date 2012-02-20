@@ -57,13 +57,9 @@ namespace Api.Extensions
 
             if (this.Data != null)
             {
-                // The JavaScriptSerializer type was marked as obsolete
-                // prior to .NET Framework 3.5 SP1 
-#pragma warning disable 0618
                 var serializer = new JavaScriptSerializer();
                 var json = serializer.Serialize(this.Data);
                 response.Write(this.Callback + "(" + json + ");");
-#pragma warning restore 0618
             }
         }
     }

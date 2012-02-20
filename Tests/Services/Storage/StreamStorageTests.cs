@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Configuration;
     using System.Linq;
 
     using FluentMongo.Linq;
@@ -21,8 +22,8 @@
     [TestFixture]
     public class StreamStorageTests
     {
-        private const string ConnectionString = "mongodb://localhost";
-        private const string DatabaseName = "Test";
+        private static readonly string ConnectionString = ConfigurationManager.AppSettings["db.connection"];
+        private static readonly string DatabaseName = ConfigurationManager.AppSettings["db.database"];
 
         private MongoServer server;
 

@@ -4,12 +4,11 @@
     using System.Configuration;
     using System.Web.Mvc;
 
-    using Api.Extensions;
     using Api.Models;
 
     using Services.Storage;
 
-    public class StreamApiController : Controller
+    public class StreamApiController : ApiController
     {
         private readonly IStreamStorage streamStorage;
 
@@ -33,16 +32,22 @@
             this.streamStorage = streamStorage;
         }
 
-        public ActionResult Get(string id)
+        public ActionResult Get(GetFilter filter)
         {
-            return Json(this.streamStorage.Get(id), JsonRequestBehavior.AllowGet);
+            var item = this.streamStorage.Get(filter.Id);
+
+            return string.IsNullOrEmpty(filter.Callback) ?
+                    Json(item, JsonRequestBehavior.AllowGet) :
+                    Jsonp(item, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult Stream(StreamFilter filter)
         {
             var items = this.streamStorage.GetLatest(filter.Type, filter.From, filter.To, filter.Limit);
 
-            return this.Jsonp(items);
+            return string.IsNullOrEmpty(filter.Callback) ? 
+                    Json(items, JsonRequestBehavior.AllowGet) : 
+                    Jsonp(items, JsonRequestBehavior.AllowGet);
         }
     }
 }

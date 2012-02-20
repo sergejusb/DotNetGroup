@@ -39,5 +39,7 @@ namespace Api.Models
                 this.limit = value;
             }
         }
+
+        public string Callback { get; set; }
     }
 }

@@ -80,9 +80,10 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Extensions\ContollerExtensions.cs" />
+    <Compile Include="Controllers\ApiController.cs" />
     <Compile Include="Extensions\JsonpResult.cs" />
     <Compile Include="Controllers\StreamApiController.cs" />
+    <Compile Include="Models\GetFilter.cs" />
     <Compile Include="Models\StreamFilter.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
