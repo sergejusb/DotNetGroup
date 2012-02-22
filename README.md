@@ -1,6 +1,6 @@
 # DotNetGroup.lt
 
-DotNetGroup.lt social platform.
+DotNetGroup.lt is a social aggregation platform. Our moto is -all development news, links and posts on the single page
 
 # Dependencies
 
@@ -21,7 +21,7 @@ DotNetGroup.lt is not beeing built by [single code ninja](https://github.com/ser
 
 ## Copyright
 
-Copyright © 2012 Sergėjus Barinovas and contributors
+Copyright © 2012 Sergejus Barinovas and contributors
 
 ## License
 
