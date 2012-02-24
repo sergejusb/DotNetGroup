@@ -8,5 +8,10 @@
 
 <script type="text/javascript">
     Items.setApiUrl("@System.Configuration.ConfigurationManager.AppSettings["api.url"]");
-    Items.load($("#container"));
+    Items.bind($(".nav:first"), $("#container"));
+
+//    (function loop() {
+//        Items.load($("#container"));
+//        window.setTimeout(loop, 60000);
+//    })();
 </script>

@@ -4,18 +4,23 @@
     <meta charset="utf-8" />
     <title>@ViewBag.Title</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="@Url.Content("~/Public/css/bootstrap.css")" rel="stylesheet" type="text/css" />
-    <link href="@Url.Content("~/Public/css/bootstrap.responsive.css")" rel="stylesheet" type="text/css" />
-    <link href="@Url.Content("~/Public/css/font.css")" rel="stylesheet" type="text/css" />
-    <link href="@Url.Content("~/Public/css/style.css")" rel="stylesheet" type="text/css" />
-    <script src="@Url.Content("http://code.jquery.com/jquery-1.7.1.js")" type="text/javascript"></script>
-    <script src="@Url.Content("~/Public/js/jquery.dateFormat.js")" type="text/javascript"></script>
-    <script src="@Url.Content("~/Public/js/jquery.query.js")" type="text/javascript"></script>
-    <script src="@Url.Content("~/Public/js/bootstrap.js")" type="text/javascript"></script>
-    <script src="@Url.Content("~/Public/js/jsrender.js")" type="text/javascript"></script>
-    <script src="@Url.Content("~/Public/js/scripts.js")" type="text/javascript"></script>
+    @Html.Raw(SquishIt.Framework.Bundle.Css()
+            .Add("~/Public/css/bootstrap.css")
+            .Add("~/Public/css/bootstrap-responsive.css")
+            .Add("~/Public/css/font.css")
+            .Add("~/Public/css/styles.less")
+            //.ForceRelease()
+            .Render("~/Public/styles_#.css"))
+    @Html.Raw(SquishIt.Framework.Bundle.JavaScript()
+            .AddRemote("~/Public/js/jquery-1.7.1.js", "http://code.jquery.com/jquery-1.7.1.js")
+            .Add("~/Public/js/jquery.dateFormat.js")
+            .Add("~/Public/js/jquery.query.js")
+            .Add("~/Public/js/bootstrap.js")
+            .Add("~/Public/js/jsrender.js")
+            .Add("~/Public/js/scripts.js")
+            //.ForceRelease()
+            .Render("~/Public/scripts_#.js"))
     @{ Html.RenderPartial("GoogleAnalytics"); }
-
 </head>
 <body data-offset="50">
     <div class="navbar navbar-fixed-top">
@@ -24,9 +29,9 @@
                 <a class="brand" href="/">#ltnet</a>
                 <div class="nav-collapse">
                     <ul class="nav">
-                        <li class=""><a href="@Url.Action("Index", "Home")">Stream</a> </li>
-                        <li class=""><a href="@Url.Action("Index", "Home", new { type = "rss" })">Rss</a></li>
-                        <li class=""><a href="@Url.Action("Index", "Home", new { type = "twitter" })">Twitter</a></li>
+                        <li class="active"><a href="#" data-item-type="">Stream</a></li>
+                        <li><a href="#" data-item-type="rss">Rss</a></li>
+                        <li><a href="#" data-item-type="twitter">Twitter</a></li>
                     </ul>
                     <ul class="nav pull-right">
                         <li><a href="/" style="font-size: .8em">by dotnetgroup.lt</a></li>
@@ -36,8 +41,6 @@
         </div>
     </div>
     @RenderBody()
-
 </body>
 @{ Html.RenderPartial("UserVoice"); }
-
 </html>

@@ -36,6 +36,21 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AjaxMin">
+      <HintPath>..\packages\AjaxMin.4.46.4422.26284\lib\net20\AjaxMin.dll</HintPath>
+    </Reference>
+    <Reference Include="dotless.Core">
+      <HintPath>..\packages\dotless.1.2.2.0\lib\dotless.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="EcmaScript.NET.modified">
+      <HintPath>..\packages\YUICompressor.NET.1.7.0.0\lib\net35\EcmaScript.NET.modified.dll</HintPath>
+    </Reference>
+    <Reference Include="Jurassic">
+      <HintPath>..\packages\Jurassic.2.1.1\lib\Jurassic.dll</HintPath>
+    </Reference>
+    <Reference Include="SquishIt.Framework">
+      <HintPath>..\packages\SquishIt.0.8.6\lib\SquishIt.Framework.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Web.WebPages, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Web.Helpers, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
@@ -50,6 +65,9 @@
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
+    <Reference Include="Yahoo.Yui.Compressor">
+      <HintPath>..\packages\YUICompressor.NET.1.7.0.0\lib\net35\Yahoo.Yui.Compressor.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\HomeController.cs" />
@@ -60,10 +78,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
-    <Content Include="Public\css\style.css" />
+    <None Include="Public\css\styles.less" />
+    <Content Include="Public\css\bootstrap-responsive.css" />
     <Content Include="Public\css\font.css" />
     <Content Include="Public\css\bootstrap.css" />
-    <Content Include="Public\css\bootstrap.responsive.css" />
     <Content Include="Public\fonts\segeo-wp-semibold-webfont.svg" />
     <Content Include="Public\fonts\segeo-wp-semilight-webfont.svg" />
     <Content Include="Public\fonts\segeo-wp-webfont.svg" />
@@ -76,6 +94,7 @@
     <Content Include="Public\img\icon-rss.png" />
     <Content Include="Public\img\icon-tags.png" />
     <Content Include="Public\img\icon-twitter.png" />
+    <Content Include="Public\js\tests.scripts.js" />
     <Content Include="Public\js\jquery.query.js" />
     <Content Include="Public\js\scripts.js" />
     <Content Include="Public\js\jquery.dateFormat.js" />
@@ -115,6 +134,7 @@
     <Content Include="Views\Shared\GoogleAnalytics.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="packages.config" />
     <None Include="Public\fonts\segeo-wp-semibold-webfont.eot" />
     <None Include="Public\fonts\segeo-wp-semibold-webfont.svgz" />
     <None Include="Public\fonts\segeo-wp-semibold-webfont.ttf" />

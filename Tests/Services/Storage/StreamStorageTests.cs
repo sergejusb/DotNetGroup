@@ -108,7 +108,7 @@
             Assert.That(gotItems, Is.Ordered.Descending.By("Published"));
         }
 
-        [DB, Test] 
+        [DB, Test]
         public void Given_Existing_10_Items_GetLatest_Returns_Rss_Items_Only()
         {
             var items = BuildItems(count: 10).OrderBy(i => i.Published);
@@ -136,7 +136,7 @@
 
             Assert.AreEqual(numberOfItems, gotItems.Count);
         }
-        
+
         [DB, Test]
         public void Given_Existing_10_Items_GetLatest_Returns_Items_Older_Than_Given_Date()
         {
@@ -208,7 +208,7 @@
             var items = existingItems.Union(newItems).ToList();
 
             var storage = new StreamStorage(ConnectionString, DatabaseName);
-            
+
             storage.Save(items);
 
             var savedItems = this.Items.AsQueryable().ToList();
@@ -226,7 +226,7 @@
             {
                 item.Tags.Add("test");
             }
-            
+
             var storage = new StreamStorage(ConnectionString, DatabaseName);
 
             storage.Save(items);
@@ -237,6 +237,19 @@
             {
                 Assert.IsTrue(item.Tags.Contains("test"));
             }
+        }
+
+        [DB, Test]
+        public void Given_Existing_10_Items_Count_Returns_Same_Number()
+        {
+            var count = 10;
+            this.Items.InsertBatch(BuildItems(count));
+
+            var storage = new StreamStorage(ConnectionString, DatabaseName);
+
+            var actualCount = storage.Count(null, null, null, null);
+
+            Assert.That(actualCount, Is.EqualTo(count));
         }
 
         private static IList<Item> BuildItems(int count)

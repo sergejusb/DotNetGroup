@@ -31,3 +31,9 @@ _ReSharper*/
 *.ncrunchproject
 packages
 !.nuget/NuGet.exe
+#ignore bundled javascript and css files
+scripts_*.js
+styles_*.css
+#ignore compiled javascript and css files
+*.debug.js
+*.debug.css
