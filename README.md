@@ -38,6 +38,8 @@ DotNetGroup.lt is not beeing built by [single code ninja](https://github.com/ser
 
 [Giedrius Banaitis](https://github.com/dziedrius)
 
+[Mindaugas Mozūras](https://github.com/mmozuras)
+
 ## Copyright
 
 Copyright © 2012 Sergejus Barinovas and contributors
