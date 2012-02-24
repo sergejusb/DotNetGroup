@@ -30,3 +30,4 @@ _ReSharper*/
 *.ReSharper
 *.ncrunchproject
 packages
+!.nuget/NuGet.exe
