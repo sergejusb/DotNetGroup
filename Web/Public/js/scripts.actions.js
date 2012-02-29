@@ -6,9 +6,9 @@
         nav.find("li.active").removeClass("active");
         (li.length ? li.parent() : nav.find("li:first")).addClass("active");
     };
-    var load = function(baseUrl, callback) {
+    var load = function (baseUrl, callback) {
         var url = Api.getUrl(baseUrl);
-        Items.get(url, function(data) {
+        Items.get(url, function (data) {
             callback(data);
             setActiveMenu();
         });
@@ -25,24 +25,22 @@
                 var type = $(this).data("item-type");
                 var query = Api.buildQuery(type);
                 if (!type) query = query.remove("type");
-                window.location.hash = query.toString();
+                
+                window.location.hash = decodeURIComponent(query.toString());
             });
 
             $(window).trigger("hashchange");
         },
-        loadMore: function (baseUrl, callback) {
-            debugger;
-            var oldest = $("tr.item:last .item-date").text();
-            var to = oldest ? new Date(oldest) : new Date();
-            var from = to.setMonth(to.getMonth() - 1);
-            to = $.format.date(to, "yyyy-MM-dd hh:mm:ss");
-            from = $.format.date(from, "yyyy-MM-dd hh:mm:ss");
-            var limit = 10;
-            var query = Api.buildQuery(null, from, to, limit);
-            var url = Api.getUrl(baseUrl, query);
+        bindLoadMore: function () {
+            $(".load-more a").live("click", function (e) {
+                e.preventDefault();
+                var from = $.query.load(window.location.hash).get("from");
+                if (!from) from = $("tr.item:last .item-date").text();
+                from = from ? Date.parse(from) : new Date();
+                from = from.add(-7).days();
+                var query = Api.buildQuery(/*type*/null, $.format.date(from, "yyyy-MM-dd"));
 
-            Items.get(url, function (data) {
-                callback(data);
+                window.location.hash = decodeURIComponent(query.toString());
             });
         }
     };

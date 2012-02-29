@@ -9,7 +9,7 @@
             if (!limit) limit = query.get("limit");
             query = type ? query.set("type", type) : query.remove("type");
             query = from ? query.set("from", from) : query.remove("from");
-            query = to ? query.set("to", to) : query.remove("from");
+            query = to ? query.set("to", to) : query.remove("to");
             query = limit ? query.set("limit", limit) : query.remove("limit");
             return query;
         },
