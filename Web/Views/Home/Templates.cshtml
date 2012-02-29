@@ -1,14 +1,18 @@
-﻿@*<tr class="load-more well">
-    <td colspan="2">
-        <button id="btnLoadMore" class="btn btn-inverse" data-loading-text="Loading items..." data-complete-text="Load more...">Load more...</button>
-    </td>
-</tr>*@
-    <script id="containerTemplate" type="text/x-jquery-tmpl">
-        <table class="table">
-            {{each Items tmpl="#itemTemplate"}}
-        </table>
-    </script>
-    <script id="itemTemplate" type="text/x-jquery-tmpl">
+﻿<script id="containerTemplate" type="text/x-jquery-tmpl">
+    <table class="table">
+        {{each Items tmpl="#itemTemplate"}}
+        <tr class="load-more">
+            <td colspan="2"><a href="#">Load more...</a></td>
+        </tr>
+    </table>
+</script>
+<script id="moreTemplate" type="text/x-jquery-tmpl">
+    {{each Items tmpl="#itemTemplate"}}
+    <tr class="load-more">
+        <td colspan="2"><a href="#">Load more...</a></td>
+    </tr>
+</script>
+<script id="itemTemplate" type="text/x-jquery-tmpl">
         <tr class="item">
             <td style="width: 25px">
                 <img src="../../Public/img/icon-{{toItemType ItemType}}.png" alt="{{=ItemType}}" />
@@ -36,10 +40,10 @@
                 </div>
             </td>
         </tr>    
-    </script>
-    <script id="tagTemplate" type="text/x-jquery-tmpl">
+</script>
+<script id="tagTemplate" type="text/x-jquery-tmpl">
         <span class="label">{{=$data}}</span>
-    </script>
-    <script type="text/javascript">
-        Templates.registerJsRenderHelpers();
-    </script>
+</script>
+<script type="text/javascript">
+    Templates.registerJsRenderHelpers();
+</script>

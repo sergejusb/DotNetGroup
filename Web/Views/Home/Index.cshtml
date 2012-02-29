@@ -2,14 +2,19 @@
     ViewBag.Title = "#ltnet - All development news, links and posts on the single page";
     Layout = "../Shared/_Layout.cshtml";
 }
-<div id="container" class="container" style="margin-top: 50px"></div>
-
+<div id="container" class="container" style="margin-top: 50px">
+</div>
 @{ Html.RenderPartial("Templates"); }
-
 <script type="text/javascript">
-    Items.setApiUrl("@System.Configuration.ConfigurationManager.AppSettings["api.url"]");
-    Items.bind($(".nav:first"), $("#container"));
+    var apiUrl = "@System.Configuration.ConfigurationManager.AppSettings["api.url"]";
+    
+    function render(data) {
+        $("#container").html($("#containerTemplate").render(data));
+    };
 
+    Nav.bindNavigation(apiUrl, render);
+    Nav.bindMenu();
+    
 //    (function loop() {
 //        Items.load($("#container"));
 //        window.setTimeout(loop, 60000);
