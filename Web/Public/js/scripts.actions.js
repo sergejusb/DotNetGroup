@@ -25,7 +25,7 @@
                 var type = $(this).data("item-type");
                 var query = Api.buildQuery(type);
                 if (!type) query = query.remove("type");
-                
+
                 window.location.hash = decodeURIComponent(query.toString());
             });
 
