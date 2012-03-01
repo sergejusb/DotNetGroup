@@ -1,11 +1,11 @@
 ﻿(function (global, undefined) {
     global.Items = {
         get: function (url, callback) {
-            var isCompleted = false;
-            
+            var isCompleted = false;         
+
             setTimeout(function () {
                 if (!isCompleted) {
-                    $("body").spin();
+                    $("#spinner").spin();
                 }
             }, 500);
 
@@ -14,7 +14,7 @@
                 result.Items = items;
                 callback(result);
 
-                $("body").spin(false);
+                $("#spinner").spin(false);
                 isCompleted = true;
             });
         }
