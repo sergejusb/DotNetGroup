@@ -36,18 +36,21 @@
         {
             var item = this.streamStorage.Get(filter.Id);
 
-            return string.IsNullOrEmpty(filter.Callback) ?
-                    Json(item, JsonRequestBehavior.AllowGet) :
-                    Jsonp(item, JsonRequestBehavior.AllowGet);
+            return this.JsonOrJsonp(item, filter.Callback);
         }
 
         public ActionResult Stream(StreamFilter filter)
         {
             var items = this.streamStorage.GetLatest(filter.Type, filter.From, filter.To, filter.Limit);
 
-            return string.IsNullOrEmpty(filter.Callback) ? 
-                    Json(items, JsonRequestBehavior.AllowGet) : 
-                    Jsonp(items, JsonRequestBehavior.AllowGet);
+            return this.JsonOrJsonp(items, filter.Callback);
+        }
+
+        public ActionResult Count(StreamFilter filter)
+        {
+            var count = this.streamStorage.Count(filter.Type, filter.From, filter.To, filter.Limit);
+
+            return this.JsonOrJsonp(count, filter.Callback);
         }
     }
 }

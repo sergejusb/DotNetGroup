@@ -2,10 +2,8 @@
 {
     using System;
     using System.Configuration;
-    using System.Web.Mvc;
 
     using global::Api.Controllers;
-    using global::Api.Extensions;
     using global::Api.Models;
 
     using MongoDB.Driver;
@@ -77,54 +75,7 @@
         }
 
         [Test]
-        public void Given_Date_Api_Returns_Items()
-        {
-            var filter = new StreamFilter
-            {
-                From = DateTime.UtcNow.AddDays(-1)
-            };
-            var fakeStorage = new Mock<IStreamStorage>();
-            var streamApi = new StreamApiController(fakeStorage.Object);
-
-            streamApi.Stream(filter);
-
-            fakeStorage.Verify(s => s.GetLatest(filter.Type, filter.From, filter.To, filter.Limit), Times.Once());
-        }
-
-        [Test]
-        public void Given_Date_Api_Returns_Rss_Items()
-        {
-            var filter = new StreamFilter
-            {
-                Type = ItemType.Rss,
-                From = DateTime.UtcNow.AddDays(-1)
-            };
-            var fakeStorage = new Mock<IStreamStorage>();
-            var streamApi = new StreamApiController(fakeStorage.Object);
-
-            streamApi.Stream(filter);
-
-            fakeStorage.Verify(s => s.GetLatest(filter.Type, filter.From, filter.To, filter.Limit), Times.Once());
-        }
-
-        [Test]
-        public void Given_Date_And_Limit_Api_Returns_Limited_Number_Of_Items()
-        {
-            var filter = new StreamFilter
-            {
-                From = DateTime.UtcNow.AddDays(-1),
-                Limit = 10
-            };
-            var fakeStorage = new Mock<IStreamStorage>();
-            var streamApi = new StreamApiController(fakeStorage.Object);
-
-            streamApi.Stream(filter);
-
-            fakeStorage.Verify(s => s.GetLatest(filter.Type, filter.From, filter.To, filter.Limit), Times.Once());
-        }
-
-        [Test]
-        public void Given_Date_And_Limit_Api_Returns_Limited_Number_Of_Tweets()
+        public void Given_Stream_Filter_Api_Returns_Items()
         {
             var filter = new StreamFilter
             {
@@ -139,59 +90,22 @@
 
             fakeStorage.Verify(s => s.GetLatest(filter.Type, filter.From, filter.To, filter.Limit), Times.Once());
         }
-
+        
         [Test]
-        public void Given_No_Callback_For_Get_Json_Result_Is_Returned()
-        {
-            var filter = new GetFilter();
-            var fakeStorage = new Mock<IStreamStorage>();
-            var streamApi = new StreamApiController(fakeStorage.Object);
-
-            var result = streamApi.Get(filter);
-
-            Assert.IsInstanceOf<JsonResult>(result);
-        }
-
-        [Test]
-        public void Given_Callback_For_Get_Jsonp_Result_Is_Returned()
-        {
-            var filter = new GetFilter
-            {
-                Callback = "callback"
-            };
-            var fakeStorage = new Mock<IStreamStorage>();
-            var streamApi = new StreamApiController(fakeStorage.Object);
-
-            var result = streamApi.Get(filter);
-
-            Assert.IsInstanceOf<JsonpResult>(result);
-        }
-
-        [Test]
-        public void Given_No_Callback_For_Stream_Json_Result_Is_Returned()
-        {
-            var filter = new StreamFilter();
-            var fakeStorage = new Mock<IStreamStorage>();
-            var streamApi = new StreamApiController(fakeStorage.Object);
-
-            var result = streamApi.Stream(filter);
-
-            Assert.IsInstanceOf<JsonResult>(result);
-        }
-
-        [Test]
-        public void Given_Callback_For_Stream_Jsonp_Result_Is_Returned()
+        public void Given_Stream_Filter_Api_Returns_Items_Count()
         {
             var filter = new StreamFilter
             {
-                Callback = "callback"
+                Type = ItemType.Twitter,
+                From = DateTime.UtcNow.AddDays(-1),
+                Limit = 10
             };
             var fakeStorage = new Mock<IStreamStorage>();
             var streamApi = new StreamApiController(fakeStorage.Object);
 
-            var result = streamApi.Stream(filter);
+            streamApi.Count(filter);
 
-            Assert.IsInstanceOf<JsonpResult>(result);
+            fakeStorage.Verify(s => s.Count(filter.Type, filter.From, filter.To, filter.Limit), Times.Once());
         }
     }
 }

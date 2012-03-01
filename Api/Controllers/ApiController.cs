@@ -14,5 +14,12 @@
                 JsonRequestBehavior = behavior
             };
         }
+
+        public ActionResult JsonOrJsonp(object data, string callback = null)
+        {
+            return string.IsNullOrEmpty(callback) ?
+                Json(data, JsonRequestBehavior.AllowGet) :
+                this.Jsonp(data, JsonRequestBehavior.AllowGet);
+        }
     }
 }
