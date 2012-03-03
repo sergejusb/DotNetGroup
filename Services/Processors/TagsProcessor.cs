@@ -13,7 +13,7 @@
                 item.Tags = item.Tags
                                 .Select(t => t.ToLowerInvariant())
                                 .Where(t => !t.Equals("ltnet"))
-                                .ToList();
+                                .ToArray();
             }
         }
     }

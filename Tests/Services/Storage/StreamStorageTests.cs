@@ -201,7 +201,7 @@
             var existingItems = this.Items.AsQueryable().ToList();
             foreach (var item in existingItems)
             {
-                item.Tags.Add("test");
+                item.Tags = new[] { "test" };
             }
 
             var newItems = BuildItems(count: 5);
@@ -224,7 +224,7 @@
             var items = this.Items.AsQueryable().ToList();
             foreach (var item in items)
             {
-                item.Tags.Add("test");
+                item.Tags = new[] { "test" };
             }
 
             var storage = new StreamStorage(ConnectionString, DatabaseName);

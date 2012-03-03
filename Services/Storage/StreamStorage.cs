@@ -66,7 +66,8 @@ namespace Services.Storage
 
         public int Count(ItemType? type, DateTime? fromDate, DateTime? toDate, int? limit)
         {
-            return this.GetItemsQuery(type, fromDate, toDate, limit).Count();
+            // this is workaround due to the fact MongoDB cannot do count with filtering without using map/reduce
+            return this.GetItemsQuery(type, fromDate, toDate, limit).Select(i => i.Id).ToList().Count();
         }
 
         public void Save(IEnumerable<Item> items)

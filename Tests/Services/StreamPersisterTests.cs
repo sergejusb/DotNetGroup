@@ -123,7 +123,7 @@
             return new Fixture()
                 .Build<Item>()
                 .Without(i => i.Id)
-                .With(i => i.Tags, new List<string> { "ltnet" })
+                .With(i => i.Tags, new[] { "test" })
                 .With(i => i.Published, date)
                 .With(i => i.ItemType, ItemType.Rss)
                 .CreateAnonymous();
@@ -136,7 +136,7 @@
             items.AddRange(new Fixture()
                 .Build<Item>()
                 .Without(i => i.Id)
-                .With(i => i.Tags, new List<string> { "ASP.NET MVC", "Windows Azure" })
+                .With(i => i.Tags, new[] { "ASP.NET MVC", "Windows Azure" })
                 .With(i => i.Published, DateTime.Now.AddDays(new Random().Next(numberOfFeeds)))
                 .With(i => i.ItemType, ItemType.Rss)
                 .CreateMany(numberOfFeeds));
@@ -144,7 +144,7 @@
             items.AddRange(new Fixture()
                 .Build<Item>()
                 .Without(i => i.Id)
-                .With(i => i.Tags, new List<string> { "Hadoop 1.0", "Windows Azure" })
+                .With(i => i.Tags, new[] { "Hadoop 1.0", "Windows Azure" })
                 .With(i => i.Published, DateTime.Now.AddDays(new Random().Next(numberOfTweets)))
                 .With(i => i.ItemType, ItemType.Twitter)
                 .CreateMany(numberOfTweets));

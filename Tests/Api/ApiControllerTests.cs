@@ -4,7 +4,7 @@
 
     using global::Api.Controllers;
 
-    using global::Api.Extensions;
+    using Mvc.Jsonp;
 
     using NUnit.Framework;
 

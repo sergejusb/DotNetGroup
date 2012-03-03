@@ -1,7 +1,6 @@
 ﻿namespace Services.Model
 {
     using System;
-    using System.Collections.Generic;
 
     using MongoDB.Bson;
 
@@ -12,7 +11,7 @@
         public Item()
         {
             this.id = ObjectId.GenerateNewId();
-            this.Tags = new List<string>();
+            this.Tags = new string[0];
         }
 
         public string Id
@@ -44,7 +43,7 @@
 
         public string Content { get; set; }
 
-        public IList<string> Tags { get; set; }
+        public string[] Tags { get; set; }
 
         public ItemType ItemType { get; set; }
     }

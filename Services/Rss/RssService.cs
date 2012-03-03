@@ -29,7 +29,7 @@
                         AuthorUri = i.Authors[0].Uri,
                         Title = i.Title.Text,
                         Content = ((TextSyndicationContent)i.Content).Text,
-                        Tags = i.Categories.Select(c => c.Name).ToList(),
+                        Tags = i.Categories.Select(c => c.Name).ToArray(),
                         ItemType = ItemType.Rss
                     }).TakeWhile(i => i.Published > fromDate).ToList();
                 }
