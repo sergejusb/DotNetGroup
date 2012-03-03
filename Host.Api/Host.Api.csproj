@@ -34,10 +34,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="ApiServer.cs" />
     <Compile Include="Formatters\JsonpFormatter.cs" />
-    <Compile Include="StreamFilter.cs" />
+    <Compile Include="Controllers\StreamFilter.cs" />
     <Compile Include="Program.cs" />
-    <Compile Include="StreamController.cs" />
+    <Compile Include="Controllers\StreamController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />

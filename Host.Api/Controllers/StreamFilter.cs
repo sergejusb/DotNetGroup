@@ -1,4 +1,4 @@
-namespace Host.Api
+namespace Host.Api.Controllers
 {
     using System;
 
@@ -41,7 +41,5 @@ namespace Host.Api
                 this.limit = value;
             }
         }
-
-        public string Callback { get; set; }
     }
 }

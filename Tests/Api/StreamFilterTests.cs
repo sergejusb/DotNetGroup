@@ -1,8 +1,8 @@
 namespace Tests.Api
 {
-    using NUnit.Framework;
-
     using global::Api.Models;
+
+    using NUnit.Framework;
 
     [TestFixture]
     public class StreamFilterTests

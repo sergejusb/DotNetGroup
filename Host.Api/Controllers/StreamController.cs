@@ -1,8 +1,10 @@
-﻿namespace Host.Api
+﻿namespace Host.Api.Controllers
 {
     using System;
     using System.Collections.Generic;
     using System.Configuration;
+    using System.Globalization;
+    using System.Net;
     using System.Net.Http;
     using System.Web.Http;
 
@@ -38,16 +40,22 @@
             if (!string.IsNullOrEmpty(filter.Id))
             {
                 var item = this.streamStorage.Get(filter.Id);
-                return new HttpResponseMessage<Item>(item);
+                return item == null ?
+                        new HttpResponseMessage(HttpStatusCode.NotFound) :
+                        new HttpResponseMessage<Item>(item);
             }
 
             var items = this.streamStorage.GetLatest(filter.Type, filter.From, filter.To, filter.Limit);
             return new HttpResponseMessage<IEnumerable<Item>>(items);
         }
 
-        public int Count(StreamFilter filter)
+        [AcceptVerbs("HEAD")]
+        public HttpResponseMessage Head(StreamFilter filter)
         {
-            return this.streamStorage.Count(filter.Type, filter.From, filter.To, filter.Limit);
+            var count = this.streamStorage.Count(filter.Type, filter.From, filter.To, filter.Limit);
+            var response = new HttpResponseMessage();
+            response.Headers.Add("X-Result-Count", count.ToString(CultureInfo.InvariantCulture));
+            return response;
         }
     }
 }
