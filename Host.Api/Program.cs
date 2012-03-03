@@ -2,6 +2,7 @@
 {
     using System;
     using System.Configuration;
+    using System.Threading;
     using System.Web.Http;
     using System.Web.Http.Routing;
     using System.Web.Http.SelfHost;
@@ -33,8 +34,8 @@
             var server = new HttpSelfHostServer(config);
             server.OpenAsync().Wait();
             
-            Console.WriteLine("API is running in {0}...", baseAddress);
-            Console.ReadKey();
+            Console.WriteLine("API is running on {0}...", baseAddress);
+            Thread.Sleep(-1);
         }
     }
 }
