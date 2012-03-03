@@ -6,12 +6,15 @@
     using System.Web.Http.Routing;
     using System.Web.Http.SelfHost;
 
+    using Host.Api.Formatters;
+
     public class Program
     {
         public static void Main(string[] args)
         {
             var baseAddress = ConfigurationManager.AppSettings["host.address"];
             var config = new HttpSelfHostConfiguration(baseAddress);
+            config.Formatters.Insert(0, new JsonpMediaTypeFormatter());
 
             var streamCountRouteDefaults = new HttpRouteValueDictionary
             {
