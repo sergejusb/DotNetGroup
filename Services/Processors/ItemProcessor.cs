@@ -1,3 +1,5 @@
+using System.Configuration;
+
 namespace Services.Processors
 {
     using System;
@@ -14,7 +16,7 @@ namespace Services.Processors
         private readonly IItemProcessor[] itemProcessors;
 
         public ItemProcessor()
-            : this(new UrlContentProcessor(), new TagsProcessor(), new FacebookProcessor())
+            : this(new UrlContentProcessor(), new TagsProcessor(), new FacebookProcessor(), new LuceneProcessor(ConfigurationManager.AppSettings["lucene.indexPath"]))
         {
         }
 
