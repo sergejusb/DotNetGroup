@@ -1,7 +1,7 @@
 ﻿(function (global, undefined) {
-    global.Items = {
+    global.Stream = {
         get: function (url, callback) {
-            var isCompleted = false;         
+            var isCompleted = false;
 
             setTimeout(function () {
                 if (!isCompleted) {
@@ -10,9 +10,7 @@
             }, 500);
 
             $.getJSON(url, function (items) {
-                var result = {};
-                result.Items = items;
-                callback(result);
+                callback(items);
 
                 $("#spinner").spin(false);
                 isCompleted = true;

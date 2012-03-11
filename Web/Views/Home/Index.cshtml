@@ -7,14 +7,22 @@
 @{ Html.RenderPartial("Templates"); }
 <script type="text/javascript">
     var apiUrl = '@System.Configuration.ConfigurationManager.AppSettings["api.url"]';
-    
-    function render(data) {
-        $("#container").html($("#containerTemplate").render(data));
+
+    function render(items) {
+        var result = {};
+        result.Items = items;
+        $("#container").html($("#containerTemplate").render(result));
     };
 
-    Nav.bindNavigation(apiUrl, render);
-    Nav.bindMenu();
-    Nav.bindLoadMore();
+    View.setRendering(render);
+    View.bindMenuClick(render);
+    View.bindLoadMore(apiUrl, render);
+
+    Stream.get(Api.getUrl(apiUrl), function (items) {
+        Model.Items = items;
+        View.setActiveMenu(View.getActiveItem());
+        $(window).trigger("hashchange");
+    });
     
 //    (function loop() {
 //        Items.load($("#container"));

@@ -16,6 +16,7 @@
         getUrl: function (baseUrl, query) {
             if (!baseUrl) baseUrl = apiUrl;
             if (!query) query = this.buildQuery();
+            query = query.remove("type");
             query = query.set("callback", "?");
             return baseUrl + decodeURIComponent(query.toString());
         }

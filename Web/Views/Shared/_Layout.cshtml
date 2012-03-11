@@ -19,7 +19,7 @@
             .Add("~/Public/js/lib/jsrender.js")
             .Add("~/Public/js/lib/spin.js")            
             .Add("~/Public/js/scripts.api.js")
-            .Add("~/Public/js/scripts.items.js")
+            .Add("~/Public/js/scripts.stream.js")
             .Add("~/Public/js/scripts.actions.js")
             .Add("~/Public/js/scripts.templates.js")
             .Render("~/Public/scripts_#.js"))
@@ -30,15 +30,15 @@
     <div class="navbar navbar-fixed-top">
         <div class="navbar-inner">
             <div class="container">
-                <a class="brand" href="#">#ltnet</a>
+                <a class="brand" href="">#ltnet</a>
                 <div class="nav-collapse">
                     <ul class="nav">
-                        <li class="active"><a id="item-stream" href="#" data-item-type="">Stream</a></li>
-                        <li><a href="#" data-item-type="rss">Rss</a></li>
-                        <li><a href="#" data-item-type="twitter">Twitter</a></li>
+                        <li><a href="#" data-menu-item="">Stream</a></li>
+                        <li><a href="#" data-menu-item="rss">RSS</a></li>
+                        <li><a href="#" data-menu-item="twitter">Twitter</a></li>
                     </ul>
                     <ul class="nav pull-right">
-                        <li><a href="#" style="font-size: .8em">by dotnetgroup.lt</a></li>
+                        <li><a href="" style="font-size: .8em">by dotnetgroup.lt</a></li>
                     </ul>
                 </div>
             </div>

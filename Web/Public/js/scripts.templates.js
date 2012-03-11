@@ -8,9 +8,9 @@
                 toItemType: function (value) {
                     switch (value) {
                         case 1:
-                            return "RSS";
+                            return "rss";
                         case 2:
-                            return "Twitter";
+                            return "twitter";
                         default:
                             return "";
                     }

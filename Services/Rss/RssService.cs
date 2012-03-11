@@ -10,7 +10,7 @@
 
     public interface IRssService
     {
-        IEnumerable<Item> GetFeeds(string url, DateTime fromDate); 
+        IEnumerable<Item> GetFeeds(string url, DateTime fromDate);
     }
 
     public class RssService : IRssService
@@ -24,7 +24,7 @@
                     return SyndicationFeed.Load(reader).Items.Select(i => new Item
                     {
                         Url = i.Id,
-                        Published = i.LastUpdatedTime.UtcDateTime,
+                        Published = GetPublishDate(i),
                         AuthorName = i.Authors[0].Name,
                         AuthorUri = i.Authors[0].Uri,
                         Title = i.Title.Text,
@@ -38,6 +38,11 @@
             {
                 return new List<Item>();
             }
+        }
+
+        private static DateTime GetPublishDate(SyndicationItem item)
+        {
+            return (item.PublishDate > item.LastUpdatedTime ? item.PublishDate : item.LastUpdatedTime).UtcDateTime;
         }
     }
 }

@@ -1,46 +1,78 @@
 ﻿(function (global, undefined) {
-    var setActiveMenu = function () {
-        var type = $.query.load(window.location.hash).get("type");
-        var nav = $(".nav");
-        var li = nav.find("a[data-item-type=" + type + "]");
-        nav.find("li.active").removeClass("active");
-        (li.length ? li.parent() : nav.find("li:first")).addClass("active");
+    var toItemTypeEnum = function (itemType) {
+        switch (itemType) {
+            case 1:
+                return "rss";
+            case 2:
+                return "twitter";
+            default:
+                return "";
+        }
     };
-    var load = function (baseUrl, callback) {
-        var url = Api.getUrl(baseUrl);
-        Items.get(url, function (data) {
-            callback(data);
-            setActiveMenu();
-        });
+    var filter = function (items, predicate) {
+        if (!predicate) return items;
+        var filteredItems = [];
+        for (var i = 0; i < items.length; i++) {
+            if (predicate(items[i])) {
+                filteredItems.push(items[i]);
+            }
+        }
+        return filteredItems;
     };
-    global.Nav = {
-        bindNavigation: function (baseUrl, callback) {
-            $(window).bind("hashchange", function () {
-                load(baseUrl, callback);
+    global.Model = {
+        getVisibleItems: function (items, itemType) {
+            if (!itemType) return items;
+            return filter(items, function (item) {
+                return toItemTypeEnum(item.ItemType) == itemType;
+            });
+        }
+    };
+    global.Model.Items = {};
+
+    global.View = {
+        setRendering: function (render) {
+            $(window).on("hashchange", function () {
+                render(Model.getVisibleItems(Model.Items, View.getActiveItem()));
             });
         },
-        bindMenu: function () {
+        getActiveItem: function () {
+            return $.query.load(window.location.hash).get("type");
+        },
+        setActiveMenu: function (menuItem) {
+            var nav = $(".nav");
+            var li = nav.find("a[data-menu-item=" + menuItem + "]").parent();
+            nav.find("li.active").removeClass("active");
+            (li.length ? li : nav.find("li:first")).addClass("active");
+
+            var query = $.query.load(window.location.hash);
+            query = menuItem ? query.set("type", menuItem) : query.remove("type");
+            window.location.hash = decodeURIComponent(query.toString());
+        },
+        bindMenuClick: function () {
             $(".nav:first a").click(function (e) {
                 e.preventDefault();
-                var type = $(this).data("item-type");
-                var query = Api.buildQuery(type);
-                if (!type) query = query.remove("type");
 
-                window.location.hash = decodeURIComponent(query.toString());
+                var menuItem = $(this).data("menu-item");
+                View.setActiveMenu(menuItem);
             });
-
-            $(window).trigger("hashchange");
         },
-        bindLoadMore: function () {
+        bindLoadMore: function (baseUrl) {
             $(".load-more a").live("click", function (e) {
                 e.preventDefault();
-                var from = $.query.load(window.location.hash).get("from");
-                if (!from) from = $("tr.item:last .item-date").text();
-                from = from ? Date.parse(from) : new Date();
-                from = from.add(-7).days();
-                var query = Api.buildQuery(/*type*/null, $.format.date(from, "yyyy-MM-dd"));
+                var to = $.query.load(window.location.hash).get("from");
+                if (!to) to = $("tr.item:last .item-date").text();
+                to = to ? Date.parse(to) : new Date();
+                var from = to.clone().add(-7).days();
 
-                window.location.hash = decodeURIComponent(query.toString());
+                var query = Api.buildQuery(/*type*/null, $.format.date(from, "yyyy-MM-dd"));
+                var apiQuery = query.set("to", $.format.date(to, "yyyy-MM-dd HH:mm:ss"));
+                var url = Api.getUrl(baseUrl, apiQuery);
+                Stream.get(url, function (items) {
+                    for (var i = 0; i < items.length; i++) {
+                        Model.Items.push(items[i]);
+                    }
+                    window.location.hash = decodeURIComponent(query.toString());
+                });
             });
         }
     };
