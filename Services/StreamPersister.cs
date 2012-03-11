@@ -1,4 +1,6 @@
-﻿namespace Services
+﻿using System.Collections.Generic;
+
+namespace Services
 {
     using System;
     using System.Linq;
@@ -54,15 +56,18 @@
             var latestItem = this.streamStorage.Top() ?? new Item();
             var items = this.streamAggregator.GetLatest(latestItem.Published).ToList();
 
-            Parallel.ForEach(items, item => this.streamProcessor.Process(item));
-
-            this.streamStorage.Save(items);
-        }
+            ProcessAndPersist(items);
+        }      
 
         public void Reprocess()
         {
             var items = this.streamStorage.GetLatest(type: null, fromDate: null, toDate: null, limit: null).ToList();
 
+            ProcessAndPersist(items);
+        }
+
+        private void ProcessAndPersist(List<Item> items)
+        {
             Parallel.ForEach(items, item => this.streamProcessor.Process(item));
 
             this.streamStorage.Save(items);
