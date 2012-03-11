@@ -1,9 +1,10 @@
-using Lucene.Net.Documents;
-using Lucene.Net.Index;
-using SimpleLucene;
-
 namespace Services.Model
 {
+    using Lucene.Net.Documents;
+    using Lucene.Net.Index;
+
+    using SimpleLucene;
+
     public class ItemIndexDefinition : IIndexDefinition<Item>
     {
         public Document Convert(Item entity)

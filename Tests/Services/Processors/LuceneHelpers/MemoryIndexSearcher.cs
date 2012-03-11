@@ -1,9 +1,10 @@
-﻿using Lucene.Net.Search;
-using Lucene.Net.Store;
-using SimpleLucene;
-
-namespace Tests.Services.Processors.LuceneHelpers
+﻿namespace Tests.Services.Processors.LuceneHelpers
 {
+    using Lucene.Net.Search;
+    using Lucene.Net.Store;
+
+    using SimpleLucene;
+
     public class MemoryIndexSearcher : IIndexSearcher
     {
         private readonly bool readOnly;
@@ -17,7 +18,7 @@ namespace Tests.Services.Processors.LuceneHelpers
 
         public Searcher Create()
         {
-            return new IndexSearcher(directory, readOnly);
+            return new IndexSearcher(this.directory, this.readOnly);
         }
     }
 }

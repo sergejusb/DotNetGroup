@@ -1,10 +1,12 @@
-using System.IO;
-using Services.Model;
-using SimpleLucene;
-using SimpleLucene.Impl;
-
 namespace Services.Processors
 {
+    using System.IO;
+
+    using Services.Model;
+
+    using SimpleLucene;
+    using SimpleLucene.Impl;
+
     public class LuceneProcessor : IItemProcessor
     {
         private readonly IIndexWriter indexWriter;
@@ -17,14 +19,14 @@ namespace Services.Processors
 
         public LuceneProcessor(string indexPath) 
         {       
-            indexWriter = new DirectoryIndexWriter(new DirectoryInfo(indexPath));            
+            this.indexWriter = new DirectoryIndexWriter(new DirectoryInfo(indexPath));            
         }        
 
         public void Process(Item item)
         {
-            lock (lockingObject)
+            lock (this.lockingObject)
             {
-                using (var indexService = new IndexService(indexWriter))
+                using (var indexService = new IndexService(this.indexWriter))
                 {
                     indexService.IndexEntity(item, new ItemIndexDefinition());
                 }
