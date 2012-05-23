@@ -49,8 +49,9 @@
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
       <Private>True</Private>
     </Reference>
-    <Reference Include="Mvc.Jsonp">
-      <HintPath>..\packages\Mvc.Jsonp.1.0.0.2\lib\net40\Mvc.Jsonp.dll</HintPath>
+    <Reference Include="Mvc.Jsonp, Version=1.0.0.4, Culture=neutral, PublicKeyToken=45526fb5857849ba, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Mvc.Jsonp.1.0.0.4\lib\net40\Mvc.Jsonp.dll</HintPath>
     </Reference>
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
