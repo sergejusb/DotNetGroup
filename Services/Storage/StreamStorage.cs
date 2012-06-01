@@ -3,10 +3,9 @@ namespace Services.Storage
     using System;
     using System.Collections.Generic;
     using System.Linq;
-
-    using FluentMongo.Linq;
-
+    
     using MongoDB.Driver;
+    using MongoDB.Driver.Linq;
 
     using Services.Model;
 
@@ -66,8 +65,7 @@ namespace Services.Storage
 
         public int Count(ItemType? type, DateTime? fromDate, DateTime? toDate, int? limit)
         {
-            // this is workaround due to the fact MongoDB cannot do count with filtering without using map/reduce
-            return this.GetItemsQuery(type, fromDate, toDate, limit).Select(i => i.Id).ToList().Count();
+            return this.GetItemsQuery(type, fromDate, toDate, limit).Count();
         }
 
         public void Save(IEnumerable<Item> items)

@@ -5,9 +5,8 @@
     using System.Configuration;
     using System.Linq;
 
-    using FluentMongo.Linq;
-
     using MongoDB.Driver;
+    using MongoDB.Driver.Linq;
 
     using NUnit.Framework;
 
