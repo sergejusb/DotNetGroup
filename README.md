@@ -1,4 +1,4 @@
-# DotNetGroup.lt
+﻿# DotNetGroup.lt
 
 DotNetGroup.lt is a social aggregation platform. Our moto is - all development news, links and posts on the single page.
 
@@ -20,7 +20,7 @@ Next, to get the project running, go through these steps:
 
     * Running `Set-ExecutionPolicy 'Unrestricted'` in PowerShell.
 
-    * Using 64bit PowerShell (C:\Windows\SysNative\WindowsPowerShell\v1.0\powershell.exe) on 64bit machines.
+    * Using 64bit PowerShell (C:\Windows\system32\WindowsPowerShell\v1.0\powershell.exe) on 64bit machines.
 
 2.  Add read security permissions for IUSR and IIS_IUSRS users on DotNetGroup folder.
 

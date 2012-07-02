@@ -64,7 +64,7 @@ function Create-WebSite() {
 		Write-Host "$siteName already exists, skipping..."
     }	
 	
-	Addto-HostsFile "127.0.0.1" $siteName	
+	AddTo-HostsFile "127.0.0.1" $siteName	
 }
 
 if ((Test-Path -path iis:) -ne $True)
