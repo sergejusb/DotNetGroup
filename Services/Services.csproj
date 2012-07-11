@@ -60,6 +60,7 @@
     <Compile Include="StreamPersister.cs" />
     <Compile Include="Twitter\QueryConfigProvider.cs" />
     <Compile Include="Twitter\TwitterAggregator.cs" />
+    <Compile Include="Twitter\TwitterSearchEntryExtensions.cs" />
     <Compile Include="Twitter\TwitterService.cs" />
     <Compile Include="Processors\UrlContentProcessor.cs" />
     <Compile Include="Web\JsonClient.cs" />

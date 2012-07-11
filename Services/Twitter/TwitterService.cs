@@ -3,7 +3,6 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Text.RegularExpressions;
 
     using LinqToTwitter;
 
@@ -17,7 +16,6 @@
     public class TwitterService : ITwitterService
     {
         private const int Count = 100;
-        private static readonly Regex HashtagPattern = new Regex("#(\\w+)", RegexOptions.Compiled);
 
         public IEnumerable<Item> GetTweets(string query, DateTime fromDate)
         {
@@ -41,14 +39,14 @@
 
                     return result.Select(t => new Item
                     {
-                        Url = GetTweetUrl(t.FromUser, t.ID),
+                        Url = t.GetStatusUrl(),
                         Published = t.CreatedAt.LocalDateTime,
                         AuthorImage = t.ProfileImageUrl,
                         AuthorName = t.FromUserName,
-                        AuthorUri = GetUserUrl(t.FromUser),
+                        AuthorUri = t.GetUserUrl(),
                         Title = string.Empty,
-                        Content = t.Text,
-                        Tags = ExtractTags(t.Text),
+                        Content = t.GetStatusHtml(),
+                        Tags = t.GetHashtags(),
                         ItemType = ItemType.Twitter
                     }).ToList();
                 }
@@ -57,22 +55,6 @@
             {
                 return new List<Item>();
             }
-        }
-
-        private static string GetTweetUrl(string userName, object tweetId)
-        {
-            return string.Format("https://twitter.com/{0}/status/{1}", userName, tweetId);
-        }
-
-        private static string GetUserUrl(string userName)
-        {
-            return string.Format("https://twitter.com/{0}", userName);
-        }
-
-        private static string[] ExtractTags(string content)
-        {
-            var matches = HashtagPattern.Matches(content);
-            return matches.Count > 0 ? matches.Cast<Match>().Select(m => m.Groups[1].Value).Distinct().ToArray() : new string[0];
         }
     }
 }
