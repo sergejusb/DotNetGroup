@@ -29,6 +29,8 @@ _ReSharper*/
 *.dotCover
 *.ReSharper
 *.ncrunchproject
+*.ncrunchsolution
+_NCrunch_*
 packages
 !.nuget/NuGet.exe
 #ignore bundled javascript and css files
