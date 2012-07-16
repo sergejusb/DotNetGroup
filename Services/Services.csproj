@@ -59,6 +59,8 @@
     <Compile Include="Storage\StreamStorage.cs" />
     <Compile Include="StreamPersister.cs" />
     <Compile Include="Twitter\QueryConfigProvider.cs" />
+    <Compile Include="Twitter\TwitterSearchEntryHelper.cs" />
+    <Compile Include="Twitter\TweetParser.cs" />
     <Compile Include="Twitter\TwitterAggregator.cs" />
     <Compile Include="Twitter\TwitterSearchEntryExtensions.cs" />
     <Compile Include="Twitter\TwitterService.cs" />

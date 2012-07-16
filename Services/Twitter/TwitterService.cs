@@ -35,18 +35,18 @@
                                   select search).First().Results;
 
                     // due to the aforementioned limitation need to perform additional filtering
-                    result = result.Where(t => t.CreatedAt.LocalDateTime > fromDate).ToList();
+                    result = result.Where(tweet => tweet.CreatedAt.LocalDateTime > fromDate).ToList();
 
-                    return result.Select(t => new Item
+                    return result.Select(tweet => new Item
                     {
-                        Url = t.GetStatusUrl(),
-                        Published = t.CreatedAt.LocalDateTime,
-                        AuthorImage = t.ProfileImageUrl,
-                        AuthorName = t.FromUserName,
-                        AuthorUri = t.GetUserUrl(),
+                        Url = tweet.Helper().GetStatusUrl(),
+                        Published = tweet.CreatedAt.LocalDateTime,
+                        AuthorImage = tweet.ProfileImageUrl,
+                        AuthorName = tweet.FromUserName,
+                        AuthorUri = tweet.Helper().GetUserUrl(),
                         Title = string.Empty,
-                        Content = t.GetStatusHtml(),
-                        Tags = t.GetHashtags(),
+                        Content = tweet.Helper().GetStatusHtml(),
+                        Tags = tweet.Helper().GetHashtags(),
                         ItemType = ItemType.Twitter
                     }).ToList();
                 }

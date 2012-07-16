@@ -76,7 +76,9 @@
     <Compile Include="Services\Rss\RssAggregatorTests.cs" />
     <Compile Include="Services\Rss\RssServiceTests.cs" />
     <Compile Include="Services\Twitter\QueryConfigProviderTests.cs" />
+    <Compile Include="Services\Twitter\TweetParserTests.cs" />
     <Compile Include="Services\Twitter\TwitterAggregatorTests.cs" />
+    <Compile Include="Services\Twitter\TwitterSearchEntryHelperTests.cs" />
     <Compile Include="Services\Twitter\TwitterServiceTests.cs" />
     <Compile Include="Services\Processors\UrlContentProcessorTests.cs" />
     <Compile Include="Services\Web\UrlResolverTests.cs" />
@@ -93,6 +95,10 @@
     <Reference Include="AutoMapper, Version=2.1.267.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\AutoMapper.2.1.267\lib\net40\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="LinqToTwitter, Version=2.0.27.0, Culture=neutral, PublicKeyToken=957107be965c25d9, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\LinqToTwitter.2.0.27\lib\net40\LinqToTwitter.dll</HintPath>
     </Reference>
     <Reference Include="Lucene.Net">
       <HintPath>..\packages\Lucene.Net.2.9.4.1\lib\net40\Lucene.Net.dll</HintPath>
