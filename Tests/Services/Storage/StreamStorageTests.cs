@@ -238,19 +238,6 @@
             }
         }
 
-        [DB, Test]
-        public void Given_Existing_10_Items_Count_Returns_Same_Number()
-        {
-            var count = 10;
-            this.Items.InsertBatch(BuildItems(count));
-
-            var storage = new StreamStorage(ConnectionString, DatabaseName);
-
-            var actualCount = storage.Count(null, null, null, null);
-
-            Assert.That(actualCount, Is.EqualTo(count));
-        }
-
         private static IList<Item> BuildItems(int count)
         {
             return new Fixture()

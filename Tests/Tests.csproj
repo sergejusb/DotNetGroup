@@ -49,9 +49,8 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Api\ApiControllerTests.cs" />
     <Compile Include="Api\RoutingTests.cs" />
-    <Compile Include="Api\StreamApiControllerTests.cs" />
+    <Compile Include="Api\StreamControllerTests.cs" />
     <Compile Include="Api\StreamFilterTests.cs" />
     <Compile Include="Fakes\FakeControllerContext.cs" />
     <Compile Include="Fakes\FakeHttpContext.cs" />
@@ -103,6 +102,10 @@
     <Reference Include="Lucene.Net">
       <HintPath>..\packages\Lucene.Net.2.9.4.1\lib\net40\Lucene.Net.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
     <Reference Include="MongoDB.Bson, Version=1.5.0.4566, Culture=neutral, PublicKeyToken=f686731cfb9cc103, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\mongocsharpdriver.1.5\lib\net35\MongoDB.Bson.dll</HintPath>
@@ -114,9 +117,8 @@
     <Reference Include="Moq">
       <HintPath>..\packages\Moq.4.0.10827\lib\NET40\Moq.dll</HintPath>
     </Reference>
-    <Reference Include="Mvc.Jsonp, Version=1.0.0.4, Culture=neutral, PublicKeyToken=45526fb5857849ba, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Mvc.Jsonp.1.0.0.4\lib\net40\Mvc.Jsonp.dll</HintPath>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.4.5.7\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="nunit.framework, Version=2.6.0.12051, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -126,19 +128,28 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\AutoFixture.2.11.4\lib\Ploeh.AutoFixture.dll</HintPath>
     </Reference>
-    <Reference Include="Ploeh.SemanticComparison, Version=2.11.4.0, Culture=neutral, PublicKeyToken=b24654c590009d4f, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\AutoFixture.2.11.4\lib\Ploeh.SemanticComparison.dll</HintPath>
-    </Reference>
     <Reference Include="SimpleLucene">
       <HintPath>..\packages\SimpleLucene.1.0.0.1\lib\4.0\SimpleLucene.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Runtime.Caching" />
+    <Reference Include="System.Net.Http, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Net.Http.2.0.20505.0\lib\net40\System.Net.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.4.0.20505.0\lib\net40\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Net.Http.2.0.20505.0\lib\net40\System.Net.Http.WebRequest.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web" />
-    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.4.0.20505.0\lib\net40\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.4.0.20505.0\lib\net40\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
   </ItemGroup>
   <ItemGroup>
@@ -153,10 +164,6 @@
     <ProjectReference Include="..\Web.Mobile\Web.Mobile.csproj">
       <Project>{F7ACDA42-418F-4EAE-AC08-62C4EC93AACA}</Project>
       <Name>Web.Mobile</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Web\Web.csproj">
-      <Project>{1B3B0EA5-CDDC-4BBA-A829-209A9355466C}</Project>
-      <Name>Web</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

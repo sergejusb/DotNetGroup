@@ -12,6 +12,8 @@ namespace Api.Models
         private DateTime? from;
         private int? limit;
 
+        public string Id { get; set; }
+
         public ItemType? Type { get; set; }
 
         public DateTime? To { get; set; }
@@ -22,6 +24,7 @@ namespace Api.Models
             {
                 return this.from ?? DateTime.UtcNow.AddDays(-PastDays).Date;
             }
+
             set
             {
                 this.from = value;
@@ -34,6 +37,7 @@ namespace Api.Models
             {
                 return this.limit ?? MaxItems;
             }
+
             set
             {
                 this.limit = value;

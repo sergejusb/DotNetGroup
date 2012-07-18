@@ -1,6 +1,7 @@
 ﻿namespace Api
 {
     using System.Web;
+    using System.Web.Http;
     using System.Web.Mvc;
     using System.Web.Routing;
 
@@ -15,15 +16,10 @@
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
-            routes.MapRoute(
-                "GetById",
-                "get/{id}",
-                new { controller = "StreamApi", action = "Get" });
-
-            routes.MapRoute(
-                "GetStream",
-                "{controller}/{action}",
-                new { controller = "StreamApi", action = "Stream" });
+            routes.MapHttpRoute(
+                name: "StreamApi",
+                routeTemplate: "v1/{controller}/{id}",
+                defaults: new { id = RouteParameter.Optional });
         }
 
         protected void Application_Start()
@@ -32,6 +28,10 @@
 
             RegisterGlobalFilters(GlobalFilters.Filters);
             RegisterRoutes(RouteTable.Routes);
-        }
+
+#if DEBUG
+            GlobalConfiguration.Configuration.IncludeErrorDetailPolicy = IncludeErrorDetailPolicy.Always;
+#endif
+            }
     }
 }

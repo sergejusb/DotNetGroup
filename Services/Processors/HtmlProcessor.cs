@@ -35,7 +35,7 @@
             var length = 0;
             var node = html.DocumentNode.FirstChild;
 
-            if (!allowedTags.Contains(node.Name))
+            if (!this.allowedTags.Contains(node.Name))
             {
                 return content;
             }
@@ -43,10 +43,10 @@
             var loop = true;
             while (loop && node != null)
             {
-                if (allowedTags.Contains(node.Name))
+                if (this.allowedTags.Contains(node.Name))
                 {
                     length += node.InnerText.Length;
-                    if (length >= limit)
+                    if (length >= this.limit)
                     {
                         node.ChildNodes.Append(HtmlNode.CreateNode("[...]"));
                         loop = false;

@@ -20,7 +20,7 @@ namespace Tests.Api
         {
             var filter = new StreamFilter();
 
-            Assert.IsNotNull(filter.From);
+            Assert.IsNotNull(filter.Limit);
         }
     }
 }

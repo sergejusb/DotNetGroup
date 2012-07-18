@@ -13,8 +13,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web.Mobile", "Web.Mobile\We
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web", "Web\Web.csproj", "{1B3B0EA5-CDDC-4BBA-A829-209A9355466C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Host.Api", "Host.Api\Host.Api.csproj", "{B89952DF-A4A6-404B-A764-DBDF08F27026}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{C06C8927-D0B7-4308-980A-7A038DFE548B}"
 	ProjectSection(SolutionItems) = preProject
 		.nuget\packages.config = .nuget\packages.config
@@ -70,16 +68,6 @@ Global
 		{A993818E-11DF-4A9E-907C-50317D8D7A27}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{A993818E-11DF-4A9E-907C-50317D8D7A27}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{A993818E-11DF-4A9E-907C-50317D8D7A27}.Release|x86.ActiveCfg = Release|Any CPU
-		{B89952DF-A4A6-404B-A764-DBDF08F27026}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B89952DF-A4A6-404B-A764-DBDF08F27026}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B89952DF-A4A6-404B-A764-DBDF08F27026}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{B89952DF-A4A6-404B-A764-DBDF08F27026}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{B89952DF-A4A6-404B-A764-DBDF08F27026}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{B89952DF-A4A6-404B-A764-DBDF08F27026}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B89952DF-A4A6-404B-A764-DBDF08F27026}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B89952DF-A4A6-404B-A764-DBDF08F27026}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{B89952DF-A4A6-404B-A764-DBDF08F27026}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{B89952DF-A4A6-404B-A764-DBDF08F27026}.Release|x86.ActiveCfg = Release|Any CPU
 		{C7C38FF4-00A5-4AE9-867D-CAC6D227C09C}.Debug|Any CPU.ActiveCfg = Debug|x86
 		{C7C38FF4-00A5-4AE9-867D-CAC6D227C09C}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
 		{C7C38FF4-00A5-4AE9-867D-CAC6D227C09C}.Debug|Mixed Platforms.Build.0 = Debug|x86

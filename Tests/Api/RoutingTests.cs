@@ -1,5 +1,6 @@
 ﻿namespace Tests.Api
 {
+    using System.Web.Http;
     using System.Web.Routing;
 
     using global::Api;
@@ -12,22 +13,21 @@
     public class RoutingTests
     {
         [Test]
-        public void Given_Get_Slash_Id_Path_Then_StreamApi_Get_Action_Is_Called()
+        public void Given_Stream_Slash_Id_Path_Then_Stream_Get_Action_Is_Called()
         {
-            var routeData = GetRouteDataForUrl("~/get/1");
+            var routeData = GetRouteDataForUrl("~/v1/stream/1");
 
-            Assert.AreEqual("StreamApi", routeData.Values["controller"]);
-            Assert.AreEqual("Get", routeData.Values["action"]);
+            Assert.AreEqual("stream", routeData.Values["controller"]);
             Assert.AreEqual("1", routeData.Values["id"]);
         }
 
         [Test]
-        public void Given_Root_Path_Then_StreamApi_Stream_Action_Is_Called()
+        public void Given_Stream_Path_Then_Stream_Get_Action_Is_Called()
         {
-            var routeData = GetRouteDataForUrl("~/");
+            var routeData = GetRouteDataForUrl("~/v1/stream");
 
-            Assert.AreEqual("StreamApi", routeData.Values["controller"]);
-            Assert.AreEqual("Stream", routeData.Values["action"]);
+            Assert.AreEqual("stream", routeData.Values["controller"]);
+            Assert.AreEqual(RouteParameter.Optional, routeData.Values["id"]);
         }
 
         private static RouteData GetRouteDataForUrl(string relativeUrl)

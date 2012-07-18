@@ -108,6 +108,7 @@ namespace Services.Storage
             {
                 query = query.Take(limit.Value);
             }
+
             return query;
         }
     }
