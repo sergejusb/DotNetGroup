@@ -1,18 +1,16 @@
-namespace Tests.Services.Processors
+namespace DotNetGroup.Tests.Services.Processors
 {
     using System.Linq;
+
+    using DotNetGroup.Services.Model;
+    using DotNetGroup.Services.Processors;
+    using DotNetGroup.Tests.Services.Processors.LuceneHelpers;
 
     using Lucene.Net.Search;
 
     using NUnit.Framework;
 
-    using global::Services.Model;
-
-    using global::Services.Processors;
-
     using SimpleLucene.Impl;
-
-    using Tests.Services.Processors.LuceneHelpers;
 
     [TestFixture]
     public class LuceneProcessorTests

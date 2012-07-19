@@ -1,8 +1,15 @@
-﻿namespace Tests.Services
+﻿namespace DotNetGroup.Tests.Services
 {
     using System;
     using System.Collections.Generic;
     using System.Configuration;
+
+    using DotNetGroup.Services;
+    using DotNetGroup.Services.Generic;
+    using DotNetGroup.Services.Model;
+    using DotNetGroup.Services.Processors;
+    using DotNetGroup.Services.Storage;
+    using DotNetGroup.Tests.Helpers;
 
     using MongoDB.Driver;
 
@@ -11,18 +18,6 @@
     using NUnit.Framework;
 
     using Ploeh.AutoFixture;
-
-    using global::Services;
-
-    using global::Services.Generic;
-
-    using global::Services.Model;
-
-    using global::Services.Processors;
-
-    using global::Services.Storage;
-
-    using Tests.Helpers;
 
     [TestFixture]
     public class StreamPersisterTests

@@ -1,11 +1,11 @@
-﻿namespace Tests.Services.Web
+﻿namespace DotNetGroup.Tests.Services.Web
 {
     using System.Collections.Generic;
 
-    using NUnit.Framework;
+    using DotNetGroup.Services.Model;
+    using DotNetGroup.Services.Web;
 
-    using global::Services.Model;
-    using global::Services.Web;
+    using NUnit.Framework;
 
     [TestFixture]
     public class JsonClientTests

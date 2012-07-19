@@ -1,9 +1,13 @@
-﻿namespace Tests.Services.Storage
+﻿namespace DotNetGroup.Tests.Services.Storage
 {
     using System;
     using System.Collections.Generic;
     using System.Configuration;
     using System.Linq;
+
+    using DotNetGroup.Services.Model;
+    using DotNetGroup.Services.Storage;
+    using DotNetGroup.Tests.Helpers;
 
     using MongoDB.Driver;
     using MongoDB.Driver.Linq;
@@ -11,12 +15,6 @@
     using NUnit.Framework;
 
     using Ploeh.AutoFixture;
-
-    using global::Services.Model;
-
-    using global::Services.Storage;
-
-    using Tests.Helpers;
 
     [TestFixture]
     public class StreamStorageTests

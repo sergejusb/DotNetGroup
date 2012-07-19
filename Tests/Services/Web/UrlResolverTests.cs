@@ -1,8 +1,8 @@
-﻿namespace Tests.Services.Web
+﻿namespace DotNetGroup.Tests.Services.Web
 {
-    using NUnit.Framework;
+    using DotNetGroup.Services.Web;
 
-    using global::Services.Web;
+    using NUnit.Framework;
 
     [TestFixture]
     public class UrlResolverTests

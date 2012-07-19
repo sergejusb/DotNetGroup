@@ -1,20 +1,18 @@
-﻿namespace Tests.Services.Twitter
+﻿namespace DotNetGroup.Tests.Services.Twitter
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
+
+    using DotNetGroup.Services.Generic;
+    using DotNetGroup.Services.Model;
+    using DotNetGroup.Services.Twitter;
 
     using Moq;
 
     using NUnit.Framework;
 
     using Ploeh.AutoFixture;
-
-    using global::Services.Generic;
-
-    using global::Services.Model;
-
-    using global::Services.Twitter;
 
     [TestFixture]
     public class TwitterAggregatorTests

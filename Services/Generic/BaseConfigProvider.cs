@@ -1,4 +1,4 @@
-﻿namespace Services.Generic
+﻿namespace DotNetGroup.Services.Generic
 {
     using System.Collections.Generic;
     using System.Configuration;

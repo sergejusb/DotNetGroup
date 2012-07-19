@@ -1,9 +1,9 @@
-namespace Api.Models
+namespace DotNetGroup.Api.Models
 {
     using System;
 
-    using Services.Helper;
-    using Services.Model;
+    using DotNetGroup.Services.Helper;
+    using DotNetGroup.Services.Model;
 
     public class StreamFilter
     {

@@ -1,4 +1,4 @@
-﻿namespace Api.Controllers
+﻿namespace DotNetGroup.Api.Controllers
 {
     using System;
     using System.Configuration;
@@ -6,9 +6,8 @@
     using System.Net.Http;
     using System.Web.Http;
 
-    using Api.Models;
-
-    using Services.Storage;
+    using DotNetGroup.Api.Models;
+    using DotNetGroup.Services.Storage;
 
     public class StreamController : ApiController
     {
@@ -31,20 +30,20 @@
 
         public HttpResponseMessage Get([FromUri] StreamFilter filter)
         {
-            var response = Request.CreateResponse(HttpStatusCode.NotFound);
+            var response = this.Request.CreateResponse(HttpStatusCode.NotFound);
 
             if (!string.IsNullOrEmpty(filter.Id))
             {
                 var item = this.streamStorage.Get(filter.Id);
                 if (item != null)
                 {
-                    response = Request.CreateResponse(HttpStatusCode.OK, item);
+                    response = this.Request.CreateResponse(HttpStatusCode.OK, item);
                 }
             }
             else
             {
                 var stream = this.streamStorage.GetLatest(filter.Type, filter.From, filter.To, filter.Limit);
-                response = Request.CreateResponse(HttpStatusCode.OK, stream);
+                response = this.Request.CreateResponse(HttpStatusCode.OK, stream);
             }
 
             return response;

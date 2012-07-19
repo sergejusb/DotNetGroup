@@ -1,11 +1,11 @@
-﻿namespace Tests.Services.Twitter
+﻿namespace DotNetGroup.Tests.Services.Twitter
 {
     using System.Configuration;
     using System.Linq;
 
-    using NUnit.Framework;
+    using DotNetGroup.Services.Twitter;
 
-    using global::Services.Twitter;
+    using NUnit.Framework;
 
     [TestFixture]
     public class QueryConfigProviderTests

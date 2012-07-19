@@ -1,4 +1,4 @@
-﻿namespace Services.Rss
+﻿namespace DotNetGroup.Services.Rss
 {
     using System;
     using System.Collections.Generic;
@@ -6,7 +6,7 @@
     using System.ServiceModel.Syndication;
     using System.Xml;
 
-    using Services.Model;
+    using DotNetGroup.Services.Model;
 
     public interface IRssService
     {

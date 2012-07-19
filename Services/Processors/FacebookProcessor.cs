@@ -1,8 +1,8 @@
-﻿namespace Services.Processors
+﻿namespace DotNetGroup.Services.Processors
 {
-    using HtmlAgilityPack;
+    using DotNetGroup.Services.Model;
 
-    using Services.Model;
+    using HtmlAgilityPack;
 
     public class FacebookProcessor : IItemProcessor
     {

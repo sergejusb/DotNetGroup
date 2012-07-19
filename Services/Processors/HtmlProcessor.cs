@@ -1,11 +1,11 @@
-﻿namespace Services.Processors
+﻿namespace DotNetGroup.Services.Processors
 {
     using System.Collections.Generic;
     using System.Linq;
 
-    using HtmlAgilityPack;
+    using DotNetGroup.Services.Model;
 
-    using Services.Model;
+    using HtmlAgilityPack;
 
     public class HtmlProcessor : IItemProcessor
     {

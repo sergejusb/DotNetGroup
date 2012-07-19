@@ -1,4 +1,4 @@
-﻿namespace Tests.Services.Processors.LuceneHelpers
+﻿namespace DotNetGroup.Tests.Services.Processors.LuceneHelpers
 {
     using Lucene.Net.Search;
     using Lucene.Net.Store;

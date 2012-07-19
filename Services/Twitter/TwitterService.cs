@@ -1,12 +1,12 @@
-﻿namespace Services.Twitter
+﻿namespace DotNetGroup.Services.Twitter
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
 
-    using LinqToTwitter;
+    using DotNetGroup.Services.Model;
 
-    using Services.Model;
+    using LinqToTwitter;
 
     public interface ITwitterService
     {

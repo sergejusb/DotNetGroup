@@ -1,12 +1,12 @@
-namespace Services.Generic
+namespace DotNetGroup.Services.Generic
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
 
-    using Services.Model;
-    using Services.Rss;
-    using Services.Twitter;
+    using DotNetGroup.Services.Model;
+    using DotNetGroup.Services.Rss;
+    using DotNetGroup.Services.Twitter;
 
     public interface IItemAggregator
     {

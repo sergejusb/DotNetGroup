@@ -1,12 +1,12 @@
-﻿namespace Tests.Services.Rss
+﻿namespace DotNetGroup.Tests.Services.Rss
 {
     using System;
     using System.Configuration;
     using System.Linq;
 
-    using NUnit.Framework;
+    using DotNetGroup.Services.Rss;
 
-    using global::Services.Rss;
+    using NUnit.Framework;
 
     [TestFixture]
     public class RssServiceTests

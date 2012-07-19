@@ -1,4 +1,4 @@
-﻿namespace Services.Model
+﻿namespace DotNetGroup.Services.Model
 {
     using System;
 

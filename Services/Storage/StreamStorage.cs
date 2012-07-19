@@ -1,13 +1,13 @@
-namespace Services.Storage
+namespace DotNetGroup.Services.Storage
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    
+
+    using DotNetGroup.Services.Model;
+
     using MongoDB.Driver;
     using MongoDB.Driver.Linq;
-
-    using Services.Model;
 
     public interface IStreamStorage
     {

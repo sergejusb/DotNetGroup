@@ -1,11 +1,11 @@
-﻿namespace Services.Processors
+﻿namespace DotNetGroup.Services.Processors
 {
     using System;
 
-    using HtmlAgilityPack;
+    using DotNetGroup.Services.Model;
+    using DotNetGroup.Services.Web;
 
-    using Services.Model;
-    using Services.Web;
+    using HtmlAgilityPack;
 
     public class UrlContentProcessor : IItemProcessor
     {

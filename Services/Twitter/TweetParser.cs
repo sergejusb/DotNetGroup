@@ -1,4 +1,4 @@
-namespace Services.Twitter
+namespace DotNetGroup.Services.Twitter
 {
     using System.Collections.Generic;
     using System.Linq;

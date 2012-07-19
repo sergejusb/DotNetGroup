@@ -1,8 +1,8 @@
-namespace Services.Processors
+namespace DotNetGroup.Services.Processors
 {
     using System.IO;
 
-    using Services.Model;
+    using DotNetGroup.Services.Model;
 
     using SimpleLucene;
     using SimpleLucene.Impl;

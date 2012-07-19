@@ -1,4 +1,4 @@
-﻿namespace Tests.Api
+﻿namespace DotNetGroup.Tests.Api
 {
     using System;
     using System.Collections.Generic;
@@ -6,16 +6,14 @@
     using System.Web.Http;
     using System.Web.Http.Hosting;
 
-    using global::Api.Controllers;
-    using global::Api.Models;
+    using DotNetGroup.Api.Controllers;
+    using DotNetGroup.Api.Models;
+    using DotNetGroup.Services.Model;
+    using DotNetGroup.Services.Storage;
 
     using Moq;
 
     using NUnit.Framework;
-
-    using global::Services.Model;
-
-    using global::Services.Storage;
 
     [TestFixture]
     public class StreamControllerTests

@@ -1,10 +1,9 @@
-using System.Configuration;
-
-namespace Services.Processors
+namespace DotNetGroup.Services.Processors
 {
+    using System.Configuration;
     using System;
 
-    using Services.Model;
+    using DotNetGroup.Services.Model;
 
     public interface IItemProcessor
     {

@@ -1,11 +1,11 @@
-namespace Services.Twitter
+namespace DotNetGroup.Services.Twitter
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
 
-    using Services.Generic;
-    using Services.Model;
+    using DotNetGroup.Services.Generic;
+    using DotNetGroup.Services.Model;
 
     public class TwitterAggregator : IItemAggregator
     {

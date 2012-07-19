@@ -1,6 +1,6 @@
-﻿namespace Services.Rss
+﻿namespace DotNetGroup.Services.Rss
 {
-    using Services.Generic;
+    using DotNetGroup.Services.Generic;
 
     public class UrlConfigProvider : BaseConfigProvider
     {

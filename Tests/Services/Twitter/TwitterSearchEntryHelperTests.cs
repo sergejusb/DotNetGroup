@@ -1,10 +1,10 @@
-﻿namespace Tests.Services.Twitter
+﻿namespace DotNetGroup.Tests.Services.Twitter
 {
+    using DotNetGroup.Services.Twitter;
+
     using LinqToTwitter;
 
     using NUnit.Framework;
-
-    using global::Services.Twitter;
 
     [TestFixture]
     public class TwitterSearchEntryHelperTests

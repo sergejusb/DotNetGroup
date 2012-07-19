@@ -1,8 +1,8 @@
-﻿namespace Services.Processors
+﻿namespace DotNetGroup.Services.Processors
 {
     using System.Linq;
 
-    using Services.Model;
+    using DotNetGroup.Services.Model;
 
     public class TagsProcessor : IItemProcessor
     {

@@ -1,10 +1,10 @@
-﻿namespace Tests.Services.Model
+﻿namespace DotNetGroup.Tests.Services.Model
 {
     using System;
 
-    using NUnit.Framework;
+    using DotNetGroup.Services.Model;
 
-    using global::Services.Model;
+    using NUnit.Framework;
 
     [TestFixture]
     public class ItemTests

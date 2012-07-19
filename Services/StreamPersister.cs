@@ -1,14 +1,14 @@
-﻿namespace Services
+﻿namespace DotNetGroup.Services
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
 
-    using Services.Generic;
-    using Services.Model;
-    using Services.Processors;
-    using Services.Storage;
+    using DotNetGroup.Services.Generic;
+    using DotNetGroup.Services.Model;
+    using DotNetGroup.Services.Processors;
+    using DotNetGroup.Services.Storage;
 
     public interface IStreamPersister
     {

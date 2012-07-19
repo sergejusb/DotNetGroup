@@ -1,4 +1,4 @@
-﻿namespace Api
+﻿namespace DotNetGroup.Api
 {
     using System.Web;
     using System.Web.Http;

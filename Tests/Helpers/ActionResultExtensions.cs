@@ -1,4 +1,4 @@
-﻿namespace Tests.Helpers
+﻿namespace DotNetGroup.Tests.Helpers
 {
     using System;
     using System.Web.Mvc;

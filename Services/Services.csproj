@@ -8,7 +8,7 @@
     <ProjectGuid>{561C89BF-11C5-431B-B847-DCBE97D5E26A}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Services</RootNamespace>
+    <RootNamespace>DotNetGroup.Services</RootNamespace>
     <AssemblyName>Services</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>

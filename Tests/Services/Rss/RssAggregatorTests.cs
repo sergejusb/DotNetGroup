@@ -1,20 +1,18 @@
-﻿namespace Tests.Services.Rss
+﻿namespace DotNetGroup.Tests.Services.Rss
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
+
+    using DotNetGroup.Services.Generic;
+    using DotNetGroup.Services.Model;
+    using DotNetGroup.Services.Rss;
 
     using Moq;
 
     using NUnit.Framework;
 
     using Ploeh.AutoFixture;
-
-    using global::Services.Generic;
-
-    using global::Services.Model;
-
-    using global::Services.Rss;
 
     [TestFixture]
     public class RssAggregatorTests

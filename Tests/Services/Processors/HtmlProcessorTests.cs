@@ -1,9 +1,9 @@
-﻿namespace Tests.Services.Processors
+﻿namespace DotNetGroup.Tests.Services.Processors
 {
-    using NUnit.Framework;
+    using DotNetGroup.Services.Model;
+    using DotNetGroup.Services.Processors;
 
-    using global::Services.Model;
-    using global::Services.Processors;
+    using NUnit.Framework;
 
     [TestFixture]
     public class HtmlProcessorTests

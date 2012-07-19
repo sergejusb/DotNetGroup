@@ -1,6 +1,6 @@
-namespace Tests.Api
+namespace DotNetGroup.Tests.Api
 {
-    using global::Api.Models;
+    using DotNetGroup.Api.Models;
 
     using NUnit.Framework;
 

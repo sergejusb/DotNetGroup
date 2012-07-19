@@ -1,4 +1,4 @@
-﻿namespace Services.Configuration
+﻿namespace DotNetGroup.Services.Configuration
 {
     using System.Collections.Specialized;
     using System.Configuration;

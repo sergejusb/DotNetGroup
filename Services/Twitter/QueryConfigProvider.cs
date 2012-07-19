@@ -1,6 +1,6 @@
-﻿namespace Services.Twitter
+﻿namespace DotNetGroup.Services.Twitter
 {
-    using Services.Generic;
+    using DotNetGroup.Services.Generic;
 
     public class QueryConfigProvider : BaseConfigProvider
     {

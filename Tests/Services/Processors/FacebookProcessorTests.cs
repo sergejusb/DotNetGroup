@@ -1,10 +1,9 @@
-﻿namespace Tests.Services.Processors
+﻿namespace DotNetGroup.Tests.Services.Processors
 {
+    using DotNetGroup.Services.Model;
+    using DotNetGroup.Services.Processors;
+
     using NUnit.Framework;
-
-    using global::Services.Model;
-
-    using global::Services.Processors;
 
     [TestFixture]
     public class FacebookProcessorTests

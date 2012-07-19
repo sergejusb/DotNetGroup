@@ -1,13 +1,12 @@
-﻿namespace Tests.Api
+﻿namespace DotNetGroup.Tests.Api
 {
     using System.Web.Http;
     using System.Web.Routing;
 
-    using global::Api;
+    using DotNetGroup.Api;
+    using DotNetGroup.Tests.Fakes;
 
     using NUnit.Framework;
-
-    using Tests.Fakes;
 
     [TestFixture]
     public class RoutingTests

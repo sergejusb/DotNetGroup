@@ -1,18 +1,17 @@
-﻿namespace Tests.Services.Generic
+﻿namespace DotNetGroup.Tests.Services.Generic
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
+
+    using DotNetGroup.Services.Generic;
+    using DotNetGroup.Services.Model;
 
     using Moq;
 
     using NUnit.Framework;
 
     using Ploeh.AutoFixture;
-
-    using global::Services.Generic;
-
-    using global::Services.Model;
 
     [TestFixture]
     public class StreamAggregatorTests

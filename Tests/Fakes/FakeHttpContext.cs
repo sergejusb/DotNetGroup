@@ -3,7 +3,7 @@
  * The source code has been taken from his MVC Tip blog series http://stephenwalther.com/blog/archive/2008/07/02/asp-net-mvc-tip-13-unit-test-your-custom-routes.aspx
  */
 
-namespace Tests.Fakes
+namespace DotNetGroup.Tests.Fakes
 {
     using System.Collections.Specialized;
     using System.Security.Principal;

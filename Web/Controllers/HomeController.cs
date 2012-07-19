@@ -1,4 +1,4 @@
-﻿namespace Web.Controllers
+﻿namespace DotNetGroup.Web.Controllers
 {
     using System.Web.Mvc;
 
@@ -6,7 +6,7 @@
     {
         public ActionResult Index()
         {
-            return View("Index");
+            return this.View("Index");
         }
     }
 }

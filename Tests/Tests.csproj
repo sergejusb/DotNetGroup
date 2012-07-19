@@ -8,7 +8,7 @@
     <ProjectGuid>{C7C38FF4-00A5-4AE9-867D-CAC6D227C09C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Tests</RootNamespace>
+    <RootNamespace>DotNetGroup.Tests</RootNamespace>
     <AssemblyName>Tests</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>
@@ -81,14 +81,8 @@
     <Compile Include="Services\Twitter\TwitterServiceTests.cs" />
     <Compile Include="Services\Processors\UrlContentProcessorTests.cs" />
     <Compile Include="Services\Web\UrlResolverTests.cs" />
-    <Compile Include="Web.Mobile\AutoMapperTests.cs" />
-    <Compile Include="Web.Mobile\HomeControllerTests.cs" />
-    <Compile Include="Web.Mobile\SampleContentResolverTests.cs" />
     <Compile Include="Services\Web\JsonClientTests.cs" />
     <Compile Include="Services\Web\UrlBuilderTests.cs" />
-    <Compile Include="Web.Mobile\StreamServiceTests.cs">
-      <SubType>Code</SubType>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="AutoMapper, Version=2.1.267.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
@@ -160,10 +154,6 @@
     <ProjectReference Include="..\Services\Services.csproj">
       <Project>{561C89BF-11C5-431B-B847-DCBE97D5E26A}</Project>
       <Name>Services</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Web.Mobile\Web.Mobile.csproj">
-      <Project>{F7ACDA42-418F-4EAE-AC08-62C4EC93AACA}</Project>
-      <Name>Web.Mobile</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

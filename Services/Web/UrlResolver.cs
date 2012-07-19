@@ -1,4 +1,4 @@
-﻿namespace Services.Web
+﻿namespace DotNetGroup.Services.Web
 {
     using System.Net;
 

@@ -1,4 +1,4 @@
-﻿namespace Tests.Services.Processors.LuceneHelpers
+﻿namespace DotNetGroup.Tests.Services.Processors.LuceneHelpers
 {
     using Lucene.Net.Analysis.Standard;
     using Lucene.Net.Index;
