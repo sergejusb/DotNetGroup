@@ -1,8 +1,7 @@
-﻿using System.Collections.Generic;
-
-namespace Services
+﻿namespace Services
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
 
@@ -56,14 +55,14 @@ namespace Services
             var latestItem = this.streamStorage.Top() ?? new Item();
             var items = this.streamAggregator.GetLatest(latestItem.Published).ToList();
 
-            ProcessAndPersist(items);
+            this.ProcessAndPersist(items);
         }      
 
         public void Reprocess()
         {
             var items = this.streamStorage.GetLatest(type: null, fromDate: null, toDate: null, limit: null).ToList();
 
-            ProcessAndPersist(items);
+            this.ProcessAndPersist(items);
         }
 
         private void ProcessAndPersist(List<Item> items)
