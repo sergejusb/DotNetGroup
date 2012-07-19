@@ -45,6 +45,7 @@
     <Compile Include="Configuration\ConfigurationManagerWrapper.cs" />
     <Compile Include="Generic\StreamAggregator.cs" />
     <Compile Include="Generic\BaseConfigProvider.cs" />
+    <Compile Include="Helper\SystemDateTime.cs" />
     <Compile Include="LuceneSearcher.cs" />
     <Compile Include="Model\Item.cs" />
     <Compile Include="Model\ItemType.cs" />

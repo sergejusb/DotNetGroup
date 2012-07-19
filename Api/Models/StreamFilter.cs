@@ -2,6 +2,7 @@ namespace Api.Models
 {
     using System;
 
+    using Services.Helper;
     using Services.Model;
 
     public class StreamFilter
@@ -22,7 +23,7 @@ namespace Api.Models
         {
             get
             {
-                return this.from ?? DateTime.UtcNow.AddDays(-PastDays).Date;
+                return this.from ?? SystemDateTime.UtcNow().AddDays(-PastDays).Date;
             }
 
             set
