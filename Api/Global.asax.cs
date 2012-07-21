@@ -5,6 +5,8 @@
     using System.Web.Mvc;
     using System.Web.Routing;
 
+    using WebApiContrib.Formatting;
+
     public class MvcApplication : HttpApplication
     {
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
@@ -29,9 +31,8 @@
             RegisterGlobalFilters(GlobalFilters.Filters);
             RegisterRoutes(RouteTable.Routes);
 
-#if DEBUG
+            GlobalConfiguration.Configuration.Formatters.Insert(0, new JsonpMediaTypeFormatter());
             GlobalConfiguration.Configuration.IncludeErrorDetailPolicy = IncludeErrorDetailPolicy.Always;
-#endif
-            }
+        }
     }
 }
