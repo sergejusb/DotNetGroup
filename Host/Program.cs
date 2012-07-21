@@ -1,46 +1,59 @@
 ﻿namespace DotNetGroup.Host
 {
     using System;
-    using System.Configuration;
+    using System.Configuration.Install;
+    using System.IO;
     using System.Linq;
-    using System.Threading;
+    using System.Reflection;
 
-    using DotNetGroup.Services;
+    using log4net;
+    using log4net.Config;
 
     public class Program
     {
         public static void Main(string[] args)
         {
+            XmlConfigurator.Configure();
+            var logger = LogManager.GetLogger(typeof(HostService).Name);
+
             try
             {
-                var reprocessArgs = new[] { "-r", "-reprocess" };
-                var refreshPeriod =
-                    TimeSpan.FromSeconds(int.Parse(ConfigurationManager.AppSettings["sys.refreshPeriodInSec"] ?? "60"));
-                var connectionString = ConfigurationManager.AppSettings["db.connection"];
-                var database = ConfigurationManager.AppSettings["db.database"];
-                var streamPersister = new StreamPersister(connectionString, database);
-
-                if (args != null && args.Length == 1 && reprocessArgs.Contains(args[0].ToLower()))
+                if (args != null && args.Length > 0)
                 {
-                    streamPersister.Reprocess();
-                }
-                else
-                {
-                    while (true)
+                    for (var i = 0; i < args.Length; i++)
                     {
-                        Console.WriteLine("Running...");
+                        args[i] = args[i].Trim().ToLowerInvariant();
+                    }
 
-                        streamPersister.PersistLatest();
-
-                        Console.WriteLine("Sleeping for " + refreshPeriod.TotalSeconds + " sec");
-                        Thread.Sleep(refreshPeriod);
+                    var exeName = Path.GetFileName(Assembly.GetEntryAssembly().Location);
+                    if (!string.IsNullOrEmpty(exeName))
+                    {
+                        if (args.Contains("uninstall"))
+                        {
+                            using (var installer = new AssemblyInstaller(exeName, null) { UseNewContext = true })
+                            {
+                                installer.Uninstall(null);
+                                return;
+                            }
+                        }
+                        
+                        if (args.Contains("install"))
+                        {
+                            using (var installer = new AssemblyInstaller(exeName, null) { UseNewContext = true })
+                            {
+                                installer.Install(null);
+                                installer.Commit(null);
+                                return;
+                            }
+                        }   
                     }
                 }
+
+                new HostService(logger).Start(args);
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.Message);
-                Console.WriteLine(e.StackTrace);
+                logger.Error("An exception has occurred during startup!", e);
             }
         }
     }
