@@ -32,6 +32,7 @@ _ReSharper*/
 *.ncrunchsolution
 _NCrunch_*
 packages
+deploy
 !.nuget/NuGet.exe
 #ignore bundled javascript and css files
 scripts_*.js
