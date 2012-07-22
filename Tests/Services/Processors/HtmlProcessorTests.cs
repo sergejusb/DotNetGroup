@@ -85,5 +85,18 @@
 
             Assert.AreEqual("<p>This is just [...]</p>", item.Content);
         }
+        
+        [Test]
+        public void Given_Text_Has_Already_Been_Process_Original_Content_Is_Returned()
+        {
+            var limit = 10;
+            var content = "<p>This text has already been processed[...]</p>";
+
+            var item = new Item { Content = content };
+
+            new HtmlProcessor(limit).Process(item);
+
+            Assert.AreEqual(content, item.Content);
+        }
     }
 }

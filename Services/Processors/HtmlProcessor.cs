@@ -9,6 +9,8 @@
 
     public class HtmlProcessor : IItemProcessor
     {
+        private const string MoreContentSymbol = "[...]";
+
         private readonly string[] allowedTags = new[] { "p", "h1", "h2", "h3", "h4", "h5", "h6" };
         private readonly int limit;
 
@@ -40,6 +42,12 @@
                 return content;
             }
 
+            if (node.InnerText.EndsWith(MoreContentSymbol))
+            {
+                // content is already processed
+                return content;
+            }
+
             var loop = true;
             while (loop && node != null)
             {
@@ -48,7 +56,7 @@
                     length += node.InnerText.Length;
                     if (length >= this.limit)
                     {
-                        node.ChildNodes.Append(HtmlNode.CreateNode("[...]"));
+                        node.ChildNodes.Append(HtmlNode.CreateNode(MoreContentSymbol));
                         loop = false;
                     }
 
@@ -62,7 +70,7 @@
                 }
                 else
                 {
-                    summary.Last().ChildNodes.Append(HtmlNode.CreateNode("[...]"));
+                    summary.Last().ChildNodes.Append(HtmlNode.CreateNode(MoreContentSymbol));
                     loop = false;
                 }
             }

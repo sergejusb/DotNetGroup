@@ -51,7 +51,12 @@ namespace DotNetGroup.Host
 
                 if (HasReprocessArgument(args))
                 {
-                    this.task = Task.Factory.StartNew(() => this.streamPersister.Reprocess());
+                    this.task = Task.Factory.StartNew(() =>
+                    {
+                        this.logger.Info("Reprocessing...");
+                        this.streamPersister.Reprocess();
+                        this.logger.Info("Reprocess finished!");
+                    });
                 }
                 else
                 {
