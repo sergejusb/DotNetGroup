@@ -67,7 +67,7 @@
             {
                 multiQuery = parser.Parse(keywords);
             }
-            catch(ParseException ex)
+            catch
             {
                 multiQuery = parser.Parse(QueryParser.Escape(keywords));
             }

@@ -88,6 +88,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\shared\SharedAssemblyInfo.cs">
+      <Link>Properties\SharedAssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

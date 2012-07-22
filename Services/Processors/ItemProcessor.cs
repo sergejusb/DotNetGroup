@@ -1,7 +1,7 @@
 namespace DotNetGroup.Services.Processors
 {
-    using System.Configuration;
     using System;
+    using System.Configuration;
 
     using DotNetGroup.Services.Model;
 
