@@ -7,7 +7,6 @@
 
   <Target Name="Run">
     <CallTarget Targets="Build;PublishApi;PublishHost" />
-    
   </Target>
 
   <Target Name="Build">
@@ -17,15 +16,31 @@
   </Target>
 
   <Target Name="PublishApi">
+    <MSBuild Projects="$(MSBuildProjectDirectory)\$(MSBuildThisFile)"
+             Properties="Path=$(ApiPublishPath)"
+             Targets="RemoveContent" />
+
     <MSBuild Projects="API\API.csproj" 
              Properties="Configuration=Release;WebProjectOutputDir=$(ApiPublishPath)\;OutDir=$(ApiPublishPath)\bin\"
              Targets="ResolveReferences;_CopyWebApplication" />
   </Target>
 
   <Target Name="PublishHost">
+    <MSBuild Projects="$(MSBuildProjectDirectory)\$(MSBuildThisFile)"
+             Properties="Path=$(HostPublishPath)"
+             Targets="RemoveContent" />
+    
     <MSBuild Projects="Host\Host.csproj"
              Properties="Configuration=Release;OutDir=$(HostPublishPath)"
              Targets="ResolveReferences;" />
+  </Target>
+
+  <Target Name="RemoveContent">
+    <CreateItem Include="$(Path)\**\*">
+      <Output TaskParameter="Include" ItemName="ExistingFiles"/>
+    </CreateItem>
+    <Delete Files="%(ExistingFiles.Identity)" />
+    <RemoveDir Directories="$(Path)" />
   </Target>
 
 </Project>
