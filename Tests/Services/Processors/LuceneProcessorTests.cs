@@ -28,6 +28,7 @@ namespace DotNetGroup.Tests.Services.Processors
 
             var item = new Item
             {
+                Url = "http://dotnetgroup.lt",
                 Tags = new[] { "c#", "dotnet" },
                 Content = "<b>sample content</b>",
                 Title = "title",

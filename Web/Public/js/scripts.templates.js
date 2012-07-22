@@ -16,7 +16,7 @@
                     }
                 },
                 toDate: function (value) {
-                    var date = new Date(parseInt(value.substr(6)));
+                    var date = new Date(value);
                     return $.format.date(date, "yyyy-MM-dd hh:mm:ss");
                 }
             });

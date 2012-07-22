@@ -1,4 +1,4 @@
-﻿namespace DotNetGroup.Services.Helper
+﻿namespace DotNetGroup.Services.Utililty
 {
     using System;
 

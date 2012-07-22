@@ -3,9 +3,7 @@ namespace DotNetGroup.Services.Storage
     using System;
     using System.Collections.Generic;
     using System.Linq;
-
     using DotNetGroup.Services.Model;
-
     using MongoDB.Driver;
     using MongoDB.Driver.Linq;
 
@@ -72,13 +70,6 @@ namespace DotNetGroup.Services.Storage
         {
             foreach (var item in items)
             {
-                // if item with same URL already exists, update existing item instead of inserting new
-                var publishedEarlier = this.Items.AsQueryable().SingleOrDefault(i => i.Url == item.Url);
-                if (publishedEarlier != null)
-                {
-                    item.Id = publishedEarlier.Id;
-                }
-
                 this.Items.Save(item);
             }
         }

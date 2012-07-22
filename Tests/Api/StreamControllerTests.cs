@@ -35,7 +35,7 @@
         [Test]
         public void Given_Valid_Id_Api_Returns_Item()
         {
-            var filter = new StreamFilter { Id = new Item().Id };
+            var filter = new StreamFilter { Id = (new Item { Url = "http://dotnetgroup.lt", }).Id };
             var fakeStorage = new Mock<IStreamStorage>();
             fakeStorage.Setup(s => s.Get(It.IsAny<string>())).Returns(new Item());
             var streamApi = this.BuildStreamController(fakeStorage.Object);

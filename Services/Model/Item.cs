@@ -2,15 +2,20 @@
 {
     using System;
 
-    using MongoDB.Bson;
+    using DotNetGroup.Services.Utililty;
 
     public class Item
     {
-        private ObjectId id;
+        private readonly IHashProvider hashProvider;
 
         public Item()
+            : this(new HashProvider())
         {
-            this.id = ObjectId.GenerateNewId();
+        }
+
+        public Item(IHashProvider hashProvider)
+        {
+            this.hashProvider = hashProvider;
             this.Tags = new string[0];
         }
 
@@ -18,14 +23,18 @@
         {
             get
             {
-                return this.id.ToString();
+                if (string.IsNullOrEmpty(this.Url))
+                {
+                    throw new NullReferenceException("Item URL is not set");
+                }
+
+                return this.hashProvider.ComputeHash(this.Url);
             }
+
             set
             {
-                if (!ObjectId.TryParse(value, out this.id))
-                {
-                    throw new ArgumentException("ID is of not valid format", "value");
-                }
+                // XML serializer requires to have both public getter and setter
+                // MongoDB driver requires Id property to have both getter and setter
             }
         }
 

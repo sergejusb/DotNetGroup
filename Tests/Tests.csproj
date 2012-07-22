@@ -80,6 +80,7 @@
     <Compile Include="Services\Twitter\TwitterSearchEntryHelperTests.cs" />
     <Compile Include="Services\Twitter\TwitterServiceTests.cs" />
     <Compile Include="Services\Processors\UrlContentProcessorTests.cs" />
+    <Compile Include="Services\Utility\HashProviderTests.cs" />
     <Compile Include="Services\Web\UrlResolverTests.cs" />
     <Compile Include="Services\Web\JsonClientTests.cs" />
     <Compile Include="Services\Web\UrlBuilderTests.cs" />
