@@ -22,7 +22,7 @@
 
     <MSBuild Projects="API\API.csproj" 
              Properties="Configuration=Release;WebProjectOutputDir=$(ApiPublishPath)\;OutDir=$(ApiPublishPath)\bin\"
-             Targets="Build;_CopyWebApplication" />
+             Targets="Build;ResolveReferences;_CopyWebApplication" />
   </Target>
 
   <Target Name="PublishHost">
