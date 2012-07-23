@@ -13,11 +13,15 @@ namespace DotNetGroup.Services.Storage
 
         Item Get(string id);
 
-        IEnumerable<Item> GetLatest(ItemType? type, DateTime? fromDate, DateTime? toDate, int? limit);
+        IEnumerable<Item> GetLatest(int limit);
 
-        int Count(ItemType? type, DateTime? fromDate, DateTime? toDate, int? limit);
+        IEnumerable<Item> GetNewer(Item item, int limit);
+
+        IEnumerable<Item> GetOlder(Item item, int limit);
 
         void Save(IEnumerable<Item> items);
+
+        IEnumerable<Item> GetLatest(ItemType? type, DateTime? fromDate, DateTime? toDate, int? limit);
     }
 
     public class StreamStorage : IStreamStorage
@@ -53,17 +57,32 @@ namespace DotNetGroup.Services.Storage
 
         public Item Get(string id)
         {
-            return this.Items.AsQueryable().SingleOrDefault(i => i.Id == id);
+            return this.Items.AsQueryable()
+                             .SingleOrDefault(i => i.Id == id);
         }
 
-        public IEnumerable<Item> GetLatest(ItemType? type, DateTime? fromDate, DateTime? toDate, int? limit)
+        public IEnumerable<Item> GetLatest(int limit)
         {
-           return this.GetItemsQuery(type, fromDate, toDate, limit).ToList();
+            return this.Items.AsQueryable()
+                             .OrderByDescending(i => i.Published)
+                             .Take(limit)
+                             .ToList();
         }
 
-        public int Count(ItemType? type, DateTime? fromDate, DateTime? toDate, int? limit)
+        public IEnumerable<Item> GetNewer(Item item, int limit)
         {
-            return this.GetItemsQuery(type, fromDate, toDate, limit).Count();
+            return this.Items.AsQueryable()
+                             .OrderByDescending(i => i.Published)
+                             .Where(i => i.Published > item.Published)
+                             .ToList();
+        }
+
+        public IEnumerable<Item> GetOlder(Item item, int limit)
+        {
+            return this.Items.AsQueryable()
+                             .OrderByDescending(i => i.Published)
+                             .Where(i => i.Published < item.Published)
+                             .ToList();
         }
 
         public void Save(IEnumerable<Item> items)
@@ -74,7 +93,7 @@ namespace DotNetGroup.Services.Storage
             }
         }
 
-        private IQueryable<Item> GetItemsQuery(ItemType? type, DateTime? fromDate, DateTime? toDate, int? limit)
+        public IEnumerable<Item> GetLatest(ItemType? type, DateTime? fromDate, DateTime? toDate, int? limit)
         {
             var query = this.Items.AsQueryable();
 
@@ -100,7 +119,7 @@ namespace DotNetGroup.Services.Storage
                 query = query.Take(limit.Value);
             }
 
-            return query;
+            return query.ToList();
         }
     }
 }
