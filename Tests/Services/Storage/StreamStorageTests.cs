@@ -52,7 +52,8 @@
         [DB, Test]
         public void Given_MongoDB_Is_Running_ItemStorage_Can_Successfully_Connect()
         {
-            new StreamStorage(ConnectionString, DatabaseName);
+            var storage = new StreamStorage(ConnectionString, DatabaseName);
+            Assert.IsNotNull(storage);
         }
 
         [DB, Test]
@@ -80,107 +81,156 @@
         }
 
         [DB, Test]
-        public void Given_Existing_10_Items_GetLatest_Returns_All_10_Items()
-        {
-            var items = BuildItems(count: 10);
-            this.Items.InsertBatch(items);
-
-            var storage = new StreamStorage(ConnectionString, DatabaseName);
-
-            var gotItems = storage.GetLatest(null, null, null, null).ToList();
-
-            Assert.That(items.Count, Is.EqualTo(gotItems.Count));
-        }
-
-        [DB, Test]
-        public void Given_Existing_10_Items_GetLatest_Returns_Them_Sorted_By_Date_Descending()
-        {
-            var items = BuildItems(count: 10);
-            this.Items.InsertBatch(items);
-
-            var storage = new StreamStorage(ConnectionString, DatabaseName);
-
-            var gotItems = storage.GetLatest(null, null, null, null).ToList();
-
-            Assert.That(gotItems, Is.Ordered.Descending.By("Published"));
-        }
-
-        [DB, Test]
-        public void Given_Existing_10_Items_GetLatest_Returns_Rss_Items_Only()
-        {
-            var items = BuildItems(count: 10).OrderBy(i => i.Published);
-            var numberOfRssItems = items.Count(i => i.ItemType == ItemType.Rss);
-            this.Items.InsertBatch(items);
-
-            var storage = new StreamStorage(ConnectionString, DatabaseName);
-
-            var gotItems = storage.GetLatest(ItemType.Rss, null, null, null).ToList();
-
-            Assert.AreEqual(numberOfRssItems, gotItems.Count);
-        }
-
-        [DB, Test]
-        public void Given_Existing_10_Items_GetLatest_Returns_Items_Newer_Than_Given_Date()
-        {
-            var items = BuildItems(count: 10).OrderBy(i => i.Published);
-            var fromDate = items.First().Published;
-            var numberOfItems = items.Count(i => i.Published > fromDate);
-            this.Items.InsertBatch(items);
-
-            var storage = new StreamStorage(ConnectionString, DatabaseName);
-
-            var gotItems = storage.GetLatest(null, fromDate, null, null).ToList();
-
-            Assert.AreEqual(numberOfItems, gotItems.Count);
-        }
-
-        [DB, Test]
-        public void Given_Existing_10_Items_GetLatest_Returns_Items_Older_Than_Given_Date()
-        {
-            var items = BuildItems(count: 10).OrderByDescending(i => i.Published);
-            var toDate = items.First().Published;
-            var numberOfItems = items.Count(i => i.Published < toDate);
-            this.Items.InsertBatch(items);
-
-            var storage = new StreamStorage(ConnectionString, DatabaseName);
-
-            var gotItems = storage.GetLatest(null, null, toDate, null).ToList();
-
-            Assert.AreEqual(numberOfItems, gotItems.Count);
-        }
-
-        [DB, Test]
-        public void Given_Existing_10_Items_GetLatest_Returns_Limited_Number_Of_Items()
-        {
-            var limit = 1;
-            var items = BuildItems(count: 10).OrderBy(i => i.Published);
-            this.Items.InsertBatch(items);
-
-            var storage = new StreamStorage(ConnectionString, DatabaseName);
-
-            var gotItems = storage.GetLatest(null, null, null, limit).ToList();
-
-            Assert.AreEqual(limit, gotItems.Count);
-        }
-
-        [DB, Test]
         public void Given_Existing_10_Items_Top_Returns_Most_Recent_Item()
         {
-            var items = BuildItems(count: 10).OrderBy(i => i.Published);
-            var recentItem = items.Last();
+            var items = BuildItems(count: 10);
+            var latestItem = items.Last();
             this.Items.InsertBatch(items);
 
             var storage = new StreamStorage(ConnectionString, DatabaseName);
 
             var gotItem = storage.Top();
 
-            Assert.AreEqual(recentItem.Url, gotItem.Url);
+            Assert.That(latestItem.Id, Is.EqualTo(gotItem.Id));
+        }
+
+        [DB, Test]
+        public void Given_Existing_10_Items_GetLatest_Returns_All_10_Items()
+        {
+            var noLimit = int.MaxValue;
+            var items = BuildItems(count: 10);
+            this.Items.InsertBatch(items);
+
+            var storage = new StreamStorage(ConnectionString, DatabaseName);
+
+            var gotItems = storage.GetLatest(noLimit).ToList();
+
+            Assert.That(items.Count, Is.EqualTo(gotItems.Count));
+        }
+
+        [DB, Test]
+        public void Given_Existing_10_Items_GetLatest_Returns_Limited_Number_Of_5_Items()
+        {
+            var limit = 5;
+            var items = BuildItems(count: 10);
+            this.Items.InsertBatch(items);
+
+            var storage = new StreamStorage(ConnectionString, DatabaseName);
+
+            var gotItems = storage.GetLatest(limit).ToList();
+
+            Assert.AreEqual(limit, gotItems.Count);
+        }
+
+        [DB, Test]
+        public void Given_Existing_10_Items_GetLatest_Returns_Them_Sorted_By_Date_Descending()
+        {
+            var noLimit = int.MaxValue;
+            var items = BuildItems(count: 10);
+            this.Items.InsertBatch(items);
+
+            var storage = new StreamStorage(ConnectionString, DatabaseName);
+
+            var gotItems = storage.GetLatest(noLimit).ToList();
+
+            Assert.That(gotItems, Is.Ordered.Descending.By("Published"));
+        }
+
+        [DB, Test]
+        public void Given_Existing_10_Items_GetNewer_Returns_Items_Newer_Than_Given_Oldest_Item()
+        {
+            var items = BuildItems(count: 10);
+            var oldestItem = items.First();
+            var numberOfItems = items.Count - 1;
+            this.Items.InsertBatch(items);
+
+            var storage = new StreamStorage(ConnectionString, DatabaseName);
+
+            var gotItems = storage.GetNewer(oldestItem, items.Count).ToList();
+
+            Assert.AreEqual(numberOfItems, gotItems.Count);
+        }
+
+        [DB, Test]
+        public void Given_Existing_10_Items_GetNewer_Returns_Limited_Number_Of_5_Items_Newer_Than_Given_Oldest_Item()
+        {
+            var limit = 5;
+            var items = BuildItems(count: 10);
+            var oldestItem = items.First();
+            this.Items.InsertBatch(items);
+
+            var storage = new StreamStorage(ConnectionString, DatabaseName);
+
+            var gotItems = storage.GetNewer(oldestItem, limit).ToList();
+
+            Assert.AreEqual(limit, gotItems.Count);
+        }
+
+        [DB, Test]
+        public void Given_Existing_10_Items_GetNewer_Returns_Them_Sorted_By_Date_Descending()
+        {
+            var noLimit = int.MaxValue;
+            var items = BuildItems(count: 10);
+            var oldestItem = items.First();
+            this.Items.InsertBatch(items);
+
+            var storage = new StreamStorage(ConnectionString, DatabaseName);
+
+            var gotItems = storage.GetNewer(oldestItem, noLimit).ToList();
+
+            Assert.That(gotItems, Is.Ordered.Descending.By("Published"));
+        }
+
+        [DB, Test]
+        public void Given_Existing_10_Items_GetOlder_Returns_Items_Older_Than_Given_Newest_Item()
+        {
+            var items = BuildItems(count: 10);
+            var newestItem = items.Last();
+            var numberOfItems = items.Count - 1;
+            this.Items.InsertBatch(items);
+
+            var storage = new StreamStorage(ConnectionString, DatabaseName);
+
+            var gotItems = storage.GetOlder(newestItem, items.Count).ToList();
+
+            Assert.AreEqual(numberOfItems, gotItems.Count);
+        }
+
+        [DB, Test]
+        public void Given_Existing_10_Items_GetOlder_Returns_Limited_Number_Of_5_Items_Older_Than_Given_Newest_Item()
+        {
+            var limit = 5;
+            var items = BuildItems(count: 10);
+            var newestItem = items.Last();
+            this.Items.InsertBatch(items);
+
+            var storage = new StreamStorage(ConnectionString, DatabaseName);
+
+            var gotItems = storage.GetOlder(newestItem, limit).ToList();
+
+            Assert.AreEqual(limit, gotItems.Count);
+        }
+
+        [DB, Test]
+        public void Given_Existing_10_Items_GetOlder_Returns_Them_Sorted_By_Date_Descending()
+        {
+            var noLimit = int.MaxValue;
+            var items = BuildItems(count: 10);
+            var newestItem = items.Last();
+            this.Items.InsertBatch(items);
+
+            var storage = new StreamStorage(ConnectionString, DatabaseName);
+
+            var gotItems = storage.GetOlder(newestItem, noLimit).ToList();
+
+            Assert.That(gotItems, Is.Ordered.Descending.By("Published"));
         }
 
         [DB, Test]
         public void ItemStorage_Can_Save_10_New_Items()
         {
             var items = BuildItems(count: 10);
+
             var storage = new StreamStorage(ConnectionString, DatabaseName);
 
             storage.Save(items);
@@ -245,6 +295,7 @@
                 .Do(i => i.ItemType = (ItemType)(1 + new Random().Next(1)))
                 .Do(i => i.Published = DateTime.Now.AddDays(new Random().Next(count)).AddHours(new Random().Next(count)))
                 .CreateMany(count)
+                .OrderBy(i => i.Published)
                 .ToList();
         }
     }

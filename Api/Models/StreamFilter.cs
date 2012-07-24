@@ -7,13 +7,18 @@ namespace DotNetGroup.Api.Models
 
     public class StreamFilter
     {
+        internal const int MaxAllowedLimit = 100;
+        internal const int DefaultLimit = 25;
         private const int PastDays = 14;
-        private const int MaxItems = 100;
 
         private DateTime? from;
-        private int? limit;
+        private int limit;
 
         public string Id { get; set; }
+
+        public string Max_Id { get; set; }
+
+        public string Min_Id { get; set; }
 
         public ItemType? Type { get; set; }
 
@@ -32,11 +37,11 @@ namespace DotNetGroup.Api.Models
             }
         }
 
-        public int? Limit
+        public int Limit
         {
             get
             {
-                return this.limit ?? MaxItems;
+                return Math.Min(this.limit == 0 ? DefaultLimit : this.limit, MaxAllowedLimit);
             }
 
             set
