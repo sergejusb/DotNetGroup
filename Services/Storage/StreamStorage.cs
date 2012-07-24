@@ -74,6 +74,7 @@ namespace DotNetGroup.Services.Storage
             return this.Items.AsQueryable()
                              .OrderByDescending(i => i.Published)
                              .Where(i => i.Published > item.Published)
+                             .Take(limit)
                              .ToList();
         }
 
@@ -82,6 +83,7 @@ namespace DotNetGroup.Services.Storage
             return this.Items.AsQueryable()
                              .OrderByDescending(i => i.Published)
                              .Where(i => i.Published < item.Published)
+                             .Take(limit)
                              .ToList();
         }
 
