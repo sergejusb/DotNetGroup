@@ -34,9 +34,10 @@ namespace DotNetGroup.Services.Generic
 
         public IEnumerable<Item> GetLatest(DateTime fromDate)
         {
-            return this.itemAggregators.SelectMany(a => a.GetLatest(fromDate))
-                .OrderBy(i => i.Published)
-                .ToList();
+            return this.itemAggregators
+                       .SelectMany(a => a.GetLatest(fromDate))
+                       .OrderBy(i => i.Published)
+                       .ToList();
         }
     }
 }
