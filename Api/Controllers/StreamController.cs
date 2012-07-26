@@ -8,6 +8,7 @@
 
     using DotNetGroup.Api.Models;
     using DotNetGroup.Services.Storage;
+    using DotNetGroup.Services.Utililty;
 
     public class StreamController : ApiController
     {
@@ -58,9 +59,15 @@
                     response = this.Request.CreateResponse(HttpStatusCode.OK, stream);
                 }
             }
+            else if (filter.Type.HasValue || filter.From != SystemDateTime.UtcNow().AddDays(-StreamFilter.PastDays).Date || filter.To.HasValue)
+            {
+                // this is temp branch for backwards compatibility, will be removed
+                var stream = this.streamStorage.GetLatest(filter.Type, filter.From, filter.To, filter.Limit);
+                response = this.Request.CreateResponse(HttpStatusCode.OK, stream);
+            }
             else
             {
-                var stream = this.streamStorage.GetLatest(filter.Type, filter.From, filter.To, filter.Limit);
+                var stream = this.streamStorage.GetLatest(filter.Limit);
                 response = this.Request.CreateResponse(HttpStatusCode.OK, stream);
             }
 

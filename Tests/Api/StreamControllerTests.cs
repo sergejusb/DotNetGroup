@@ -33,9 +33,9 @@
         }
 
         [Test]
-        public void Given_Valid_Id_Api_Returns_Item()
+        public void Given_Filter_With_Id_Get_Is_Called()
         {
-            var filter = new StreamFilter { Id = (new Item { Url = "http://dotnetgroup.lt", }).Id };
+            var filter = new StreamFilter { Id = "Id" };
             var fakeStorage = new Mock<IStreamStorage>();
             fakeStorage.Setup(s => s.Get(It.IsAny<string>())).Returns(new Item());
             var streamApi = this.BuildStreamController(fakeStorage.Object);
@@ -46,33 +46,46 @@
         }
 
         [Test]
-        public void With_No_Arguments_Api_Returns_Items()
+        public void Given_Empty_Filter_GetLatest_Is_Called()
         {
             var filter = new StreamFilter();
             var fakeStorage = new Mock<IStreamStorage>();
-            fakeStorage.Setup(s => s.GetLatest(filter.Type, filter.From, filter.To, filter.Limit)).Returns(new List<Item>());
+            fakeStorage.Setup(s => s.GetLatest(It.IsAny<int>())).Returns(new List<Item>());
             var streamApi = this.BuildStreamController(fakeStorage.Object);
 
             streamApi.Get(filter);
 
-            fakeStorage.Verify(s => s.GetLatest(filter.Type, filter.From, filter.To, filter.Limit), Times.Once());
+            fakeStorage.Verify(s => s.GetLatest(filter.Limit), Times.Once());
         }
 
         [Test]
-        public void Given_Stream_Filter_Api_Returns_Items()
+        public void Given_Filter_With_Max_Id_GetOlder_Is_Called()
         {
-            var filter = new StreamFilter
-            {
-                Type = ItemType.Twitter,
-                From = DateTime.UtcNow.AddDays(-1),
-                Limit = 10
-            };
+            var item = new Item();
+            var filter = new StreamFilter { Max_Id = "Max_Id" };
             var fakeStorage = new Mock<IStreamStorage>();
+            fakeStorage.Setup(s => s.Get(It.IsAny<string>())).Returns(item);
+            fakeStorage.Setup(s => s.GetOlder(It.IsAny<Item>(), It.IsAny<int>())).Returns(new List<Item>());
             var streamApi = this.BuildStreamController(fakeStorage.Object);
 
             streamApi.Get(filter);
 
-            fakeStorage.Verify(s => s.GetLatest(filter.Type, filter.From, filter.To, filter.Limit), Times.Once());
+            fakeStorage.Verify(s => s.GetOlder(item, filter.Limit), Times.Once());
+        }
+
+        [Test]
+        public void Given_Filter_With_Min_Id_GetNewer_Is_Called()
+        {
+            var item = new Item();
+            var filter = new StreamFilter { Min_Id = "Min_Id" };
+            var fakeStorage = new Mock<IStreamStorage>();
+            fakeStorage.Setup(s => s.Get(It.IsAny<string>())).Returns(item);
+            fakeStorage.Setup(s => s.GetNewer(It.IsAny<Item>(), It.IsAny<int>())).Returns(new List<Item>());
+            var streamApi = this.BuildStreamController(fakeStorage.Object);
+
+            streamApi.Get(filter);
+
+            fakeStorage.Verify(s => s.GetNewer(item, filter.Limit), Times.Once());
         }
 
         private StreamController BuildStreamController(IStreamStorage fakeStorage)

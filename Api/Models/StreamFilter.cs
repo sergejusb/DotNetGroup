@@ -9,7 +9,7 @@ namespace DotNetGroup.Api.Models
     {
         internal const int MaxAllowedLimit = 100;
         internal const int DefaultLimit = 25;
-        private const int PastDays = 14;
+        internal const int PastDays = 14;
 
         private DateTime? from;
         private int limit;
