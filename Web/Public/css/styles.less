@@ -1,52 +1,10 @@
 ﻿.font {
 	font-family: SegoeWPRegular;
-    font-size: 1.1em;
 }
 
 .navbar {
     .font;
-}
-
-.item {
-	.item-author-image {
-		float: left;
-		padding-right: 10px;
-		img {
-			width: 48px;
-			height: 48px;
-		}
-	}
-	.item-author-info span {
-		font-size: .9em;
-	}
-	.item-author-info span {
-		font-size: .9em;
-	}
-	.item-read-more {
-		float: right;
-	}
-	.item-date {
-	}
-	.item-tags {
-	}
-	.item-content {
-		clear: both;
-	}
-}
-
-.load-more td {
-	text-align: center;
-	a {
-		display: block;
-	}
-}
-
-.label {
-    padding-top: 2px;
-}
-
-.item .author-info, .item .tags {
-    .font;
+	height: 20px;
 }
 
 #spinner {
@@ -54,4 +12,82 @@
 	width: 100%; 
 	height: 85%;
 	z-index: -99999;
+}
+
+body {
+	background-color: #eee;
+}
+
+@default-padding: 7px;
+
+#stream {
+	position: relative;
+	top: 40px;
+	margin: 10px;
+	padding: @default-padding;
+	padding-top: 0px;
+
+	background-color: #fff;
+	border: 1px solid #ccc;
+	.border-radius(5px);
+}
+
+.item {
+	padding-top: @default-padding;
+	border-bottom: 1px solid #ccc;
+
+	.item-header {
+		height: 25px;
+	}
+	
+	.item-author-img {
+		float:left;
+		margin-right: @default-padding;
+		margin-bottom: @default-padding;
+	}
+
+	.item-author-name { }
+
+	.item-time {
+		font-size: .9em;
+		color: #999;
+		float: right;
+	}
+		
+	.item-hover {
+		display: inline-block;
+		vertical-align: top;
+		.list-item(@default-padding);
+		b {
+			font-weight: normal;
+		}
+	}
+
+	.item-tags {
+		.list-item(@default-padding);
+	}
+	
+	.item-content {
+		clear: both;
+	}
+		
+	.item-img {
+		float: left;
+		margin-right: @default-padding;
+		margin-bottom: @default-padding;
+	}
+}
+
+.list-item(@space) {
+	li {
+		float: left;
+		list-style: none;
+		margin-right: @space;
+	}
+}
+
+.border-radius(@radius) {
+  -webkit-border-radius: @radius;
+     -moz-border-radius: @radius;
+          border-radius: @radius;
 }

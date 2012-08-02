@@ -1,0 +1,6 @@
+﻿@model IEnumerable<DotNetGroup.Web.ViewModels.StreamItem>
+
+@foreach (var item in Model)
+{
+    Html.RenderPartial("Item", item);
+}

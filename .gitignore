@@ -25,6 +25,7 @@ Thumbs.db
 obj/
 [Rr]elease*/
 _ReSharper*/
+.[Dd]ot[Ss]ettings
 [Tt]est[Rr]esult*
 *.dotCover
 *.ReSharper

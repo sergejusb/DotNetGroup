@@ -1,0 +1,9 @@
+﻿@model IEnumerable<DotNetGroup.Web.ViewModels.StreamItem>
+@{
+    //ViewBag.Title = "title";
+}
+@{
+    <div id="stream" class="container-fluid">
+        @{ Html.RenderPartial("Stream", Model); }
+    </div>
+}

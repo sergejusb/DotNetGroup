@@ -2,14 +2,10 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <title>@ViewBag.Title</title>
+    <title>@(ViewBag.Title ?? "DotNetGroup")</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    @Html.Raw(SquishIt.Framework.Bundle.Css()
-            .Add("~/Public/css/bootstrap.css")
-            .Add("~/Public/css/bootstrap-responsive.css")
-            .Add("~/Public/css/fonts.css")
-            .Add("~/Public/css/styles.less")
-            .Render("~/Public/styles_#.css"))
+    @Styles.Render("~/Public/css")
+    @*
     @Html.Raw(SquishIt.Framework.Bundle.JavaScript()
             .AddRemote("~/Public/js/lib/jquery-1.7.1.js", "http://code.jquery.com/jquery-1.7.1.min.js")
             .Add("~/Public/js/lib/jquery.dateFormat.js")
@@ -22,25 +18,25 @@
             .Add("~/Public/js/scripts.stream.js")
             .Add("~/Public/js/scripts.actions.js")
             .Add("~/Public/js/scripts.templates.js")
-            .Render("~/Public/scripts_#.js"))
-
+            .Render("~/Public/scripts_#.js"))*@
     @{ Html.RenderPartial("GoogleAnalytics"); }
 </head>
-<body data-offset="50">
-    <div class="navbar navbar-fixed-top">
+<body>
+    <div class="navbar navbar-fixed-top font">
         <div class="navbar-inner">
             <div class="container">
-                <a class="brand" href="">#ltnet</a>
-                <div class="nav-collapse">
+                <a class="brand" href="#">DotNetGroup</a>
+                <ul class="nav">
+                    <li><a href="@Url.Action("Index", "Stream")">Stream</a></li>
+                </ul>
+                @*<div class="nav-collapse">
                     <ul class="nav">
-                        <li><a href="#" data-menu-item="">Stream</a></li>
-                        <li><a href="#" data-menu-item="rss">RSS</a></li>
-                        <li><a href="#" data-menu-item="twitter">Twitter</a></li>
+                        <li><a href="@Url.Action("Index", "Stream")">Stream</a></li>
                     </ul>
                     <ul class="nav pull-right">
-                        <li><a href="" style="font-size: .8em">by dotnetgroup.lt</a></li>
+                        <li></li>
                     </ul>
-                </div>
+                </div>*@
             </div>
         </div>
     </div>
@@ -48,5 +44,4 @@
     @RenderBody()
 </body>
 @{ Html.RenderPartial("UserVoice"); }
-
 </html>

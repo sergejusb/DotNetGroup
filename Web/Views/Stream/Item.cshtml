@@ -1,0 +1,34 @@
+﻿@model DotNetGroup.Web.ViewModels.StreamItem
+<div class="row-fluid">
+    <div class="span12 item border-radius">
+        <div class="item-header">
+            <a class="item-author-img" href="@Model.AuthorUri" title="@Model.AuthorUri" target="_blank">
+                <img src="@Model.AuthorImage" alt="@Model.AuthorName"/>
+            </a>
+            <a class="item-author-name" href="@Model.AuthorUri" title="@Model.AuthorUri" target="_blank">
+                <span>@Model.AuthorName</span>
+            </a>
+            <ul class="item-hover">
+                <li class="item-read">
+                    <a href="@Model.Url" title="Read original at @Model.Url" target="_blank">
+                        <i class="icon-share-alt"></i>
+                        <b>Read original</b>
+                    </a>
+                </li>
+            </ul>
+            <span class="item-time">
+                @Model.Published
+            </span>
+        </div>
+        <ul class="item-tags">
+            @foreach (var tag in Model.Tags)
+            {
+                <li><span class="label">@tag</span></li>
+            }
+        </ul>
+        <p class="item-content">
+            <img class="item-img" src="@Url.Content("~/Public/img/icon-" + Model.ItemType + ".png")" alt="@Model.ItemType"/>
+            @Html.Raw(Model.Content)
+        </p>
+    </div>
+</div>

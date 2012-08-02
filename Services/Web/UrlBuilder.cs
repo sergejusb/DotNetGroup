@@ -3,7 +3,16 @@ namespace DotNetGroup.Services.Web
     using System;
     using System.Collections.Generic;
 
-    public class UrlBuilder
+    public interface IUrlBuilder
+    {
+        string Build();
+
+        UrlBuilder WithParameter(string name, object value);
+
+        UrlBuilder WithPart(object value);
+    }
+
+    public class UrlBuilder : IUrlBuilder
     {
         private readonly Uri baseUrl;
         private readonly IList<string> relativeUrlParts;
@@ -35,6 +44,9 @@ namespace DotNetGroup.Services.Web
             {
                 Query = queryString
             };
+
+            this.relativeUrlParts.Clear();
+            this.queryStringParameters.Clear();
 
             return uriBuilder.Uri.AbsoluteUri;
         }

@@ -7,8 +7,8 @@
     <ProductVersion>
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{1B3B0EA5-CDDC-4BBA-A829-209A9355466C}</ProjectGuid>
-    <ProjectTypeGuids>{E53F8FEA-EAE0-44A6-8774-FFD645390401};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <ProjectGuid>{E6C01391-DC00-4E94-9916-270CA61B08E8}</ProjectGuid>
+    <ProjectTypeGuids>{E3E379DF-F4C6-4180-9B81-6769533ABE47};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>DotNetGroup.Web</RootNamespace>
@@ -16,16 +16,13 @@
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>false</UseIISExpress>
-    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\DotNetGroup\</SolutionDir>
-    <RestorePackages>true</RestorePackages>
-    <FileUpgradeFlags>
-    </FileUpgradeFlags>
-    <OldToolsVersion>4.0</OldToolsVersion>
-    <UpgradeBackupLocation />
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -45,64 +42,106 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AjaxMin, Version=4.58.4566.27257, Culture=neutral, PublicKeyToken=21ef50ce11b5d80f, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\AjaxMin.4.58.4566.27257\lib\net20\AjaxMin.dll</HintPath>
+    <Reference Include="Antlr3.Runtime">
+      <HintPath>..\packages\WebGrease.1.0.0\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
-    <Reference Include="dotless.Core, Version=1.3.0.4, Culture=neutral, PublicKeyToken=96b446c9e63eae34, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\dotless.1.3.0.4\lib\dotless.Core.dll</HintPath>
+    <Reference Include="dotless.Core">
+      <HintPath>..\packages\dotless.1.3.0.5\lib\dotless.Core.dll</HintPath>
     </Reference>
-    <Reference Include="EcmaScript.NET, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\YUICompressor.NET.2.0.0.0\lib\NET20\EcmaScript.NET.dll</HintPath>
-    </Reference>
-    <Reference Include="Iesi.Collections, Version=1.0.1.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\YUICompressor.NET.2.0.0.0\lib\NET20\Iesi.Collections.dll</HintPath>
-    </Reference>
-    <Reference Include="Jurassic">
-      <HintPath>..\packages\Jurassic.2.1.1\lib\Jurassic.dll</HintPath>
-    </Reference>
-    <Reference Include="SquishIt.Framework, Version=0.8.7.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\SquishIt.0.8.7\lib\SquishIt.Framework.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
-    <Reference Include="System.Web.WebPages, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
-    <Reference Include="System.Web.Helpers, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Web.DynamicData" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.0.0-beta3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.Routing" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
-    <Reference Include="Yahoo.Yui.Compressor, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\YUICompressor.NET.2.0.0.0\lib\NET20\Yahoo.Yui.Compressor.dll</HintPath>
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.4.5.1\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Net.Http.2.0.20505.0\lib\net40\System.Net.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.4.0.20505.0\lib\net40\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Net.Http.2.0.20505.0\lib\net40\System.Net.Http.WebRequest.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20505.0\lib\net40\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.4.0.20505.0\lib\net40\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.4.0.20505.0\lib\net40\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.4.0.20505.0\lib\net40\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.2.0.20505.0\lib\net40\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20505.0\lib\net40\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20505.0\lib\net40\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20505.0\lib\net40\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="WebGrease">
+      <HintPath>..\packages\WebGrease.1.0.0\lib\WebGrease.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\shared\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="Bundles\LessTransform.cs" />
+    <Compile Include="Controllers\StreamController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\StreamItem.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
-    <None Include="Public\css\styles.less" />
     <Content Include="Public\css\bootstrap-responsive.css" />
-    <Content Include="Public\css\fonts.css" />
     <Content Include="Public\css\bootstrap.css" />
+    <Content Include="Public\css\fonts.css" />
     <Content Include="Public\fonts\segeo-wp-semibold-webfont.svg" />
     <Content Include="Public\fonts\segeo-wp-semilight-webfont.svg" />
     <Content Include="Public\fonts\segeo-wp-webfont.svg" />
@@ -115,27 +154,36 @@
     <Content Include="Public\img\icon-rss.png" />
     <Content Include="Public\img\icon-tags.png" />
     <Content Include="Public\img\icon-twitter.png" />
+    <Content Include="Public\js\lib\bootstrap.js" />
     <Content Include="Public\js\lib\date.js" />
+    <None Include="Public\js\lib\jquery-1.7.1-vsdoc.js" />
+    <Content Include="Public\js\lib\jquery-1.7.1.js" />
+    <Content Include="Public\js\lib\jquery.dateFormat.js" />
+    <Content Include="Public\js\lib\jquery.query.js" />
+    <Content Include="Public\js\lib\jsrender.js" />
     <Content Include="Public\js\lib\spin.js" />
     <Content Include="Public\js\lib\underscore.js" />
+    <Content Include="Public\js\scripts.actions.js" />
     <Content Include="Public\js\scripts.api.js" />
     <Content Include="Public\js\scripts.stream.js" />
     <Content Include="Public\js\scripts.templates.js" />
-    <Content Include="Public\js\lib\jquery.query.js" />
-    <Content Include="Public\js\scripts.actions.js" />
-    <Content Include="Public\js\lib\jquery.dateFormat.js" />
-    <Content Include="Public\js\lib\bootstrap.js" />
-    <Content Include="Public\js\lib\jquery-1.7.1-vsdoc.js" />
-    <Content Include="Public\js\lib\jquery-1.7.1.js" />
-    <Content Include="Public\js\lib\jsrender.js" />
     <Content Include="Public\js\tests.scripts.api.js" />
-    <Content Include="Web.config">
-      <SubType>Designer</SubType>
+    <Content Include="Web.config" />
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
     </Content>
     <Content Include="Views\Web.config" />
-    <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\GoogleAnalytics.cshtml" />
+    <Content Include="Views\Shared\UserVoice.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Stream\Index.cshtml" />
+    <Content Include="Views\Stream\Stream.cshtml" />
+    <Content Include="Views\Stream\Item.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Services\Services.csproj">
@@ -144,33 +192,24 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Home\Index.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <ItemGroup />
-  <ItemGroup>
-    <Content Include="Views\Shared\UserVoice.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Shared\GoogleAnalytics.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="packages.config" />
-    <None Include="Public\fonts\segeo-wp-semibold-webfont.eot" />
-    <None Include="Public\fonts\segeo-wp-semibold-webfont.svgz" />
-    <None Include="Public\fonts\segeo-wp-semibold-webfont.ttf" />
-    <None Include="Public\fonts\segeo-wp-semibold-webfont.woff" />
-    <None Include="Public\fonts\segeo-wp-semilight-webfont.eot" />
-    <None Include="Public\fonts\segeo-wp-semilight-webfont.svgz" />
-    <None Include="Public\fonts\segeo-wp-semilight-webfont.ttf" />
-    <None Include="Public\fonts\segeo-wp-semilight-webfont.woff" />
-    <None Include="Public\fonts\segeo-wp-webfont.eot" />
-    <None Include="Public\fonts\segeo-wp-webfont.svgz" />
-    <None Include="Public\fonts\segeo-wp-webfont.ttf" />
-    <None Include="Public\fonts\segeo-wp-webfont.woff" />
-    <Content Include="Views\Home\Templates.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Public\css\styles.less" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Public\fonts\segeo-wp-semibold-webfont.eot" />
+    <Content Include="Public\fonts\segeo-wp-semibold-webfont.svgz" />
+    <Content Include="Public\fonts\segeo-wp-semibold-webfont.ttf" />
+    <Content Include="Public\fonts\segeo-wp-semibold-webfont.woff" />
+    <Content Include="Public\fonts\segeo-wp-semilight-webfont.eot" />
+    <Content Include="Public\fonts\segeo-wp-semilight-webfont.svgz" />
+    <Content Include="Public\fonts\segeo-wp-semilight-webfont.ttf" />
+    <Content Include="Public\fonts\segeo-wp-semilight-webfont.woff" />
+    <Content Include="Public\fonts\segeo-wp-webfont.eot" />
+    <Content Include="Public\fonts\segeo-wp-webfont.svgz" />
+    <Content Include="Public\fonts\segeo-wp-webfont.ttf" />
+    <Content Include="Public\fonts\segeo-wp-webfont.woff" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -179,12 +218,6 @@
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target> -->
   <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
     <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
   </Target>
@@ -194,7 +227,7 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>6237</DevelopmentServerPort>
+          <DevelopmentServerPort>52245</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>http://dotnetgroup.dev</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
@@ -207,4 +240,10 @@
     </VisualStudio>
   </ProjectExtensions>
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
 </Project>
