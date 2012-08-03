@@ -1,6 +1,8 @@
 ﻿@model IEnumerable<DotNetGroup.Web.ViewModels.StreamItem>
-
 @foreach (var item in Model)
 {
     Html.RenderPartial("Item", item);
 }
+<div id="load-more" style="text-align: center; line-height: 20px">
+    <a href="@Url.Action("Older", "Stream", new { Model.Last().Id })">Load older...</a>
+</div>

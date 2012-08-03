@@ -45,8 +45,10 @@
             var url = string.Format("{0}/?max_id={1}", this.apiUrl, id);
             var stream = this.Get(url);
 
-            return this.PartialView("Stream", stream);
-        } 
+            return Request.IsAjaxRequest()
+                       ? this.PartialView("Stream", stream)
+                       : (ActionResult)this.View("Index", stream);
+        }
 
         private IEnumerable<StreamItem> Get(string url)
         {

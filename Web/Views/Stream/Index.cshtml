@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<DotNetGroup.Web.ViewModels.StreamItem>
 @{
-    //ViewBag.Title = "title";
+            //ViewBag.Title = "title";
 }
 @{
     <div id="stream" class="container-fluid">
@@ -8,8 +8,9 @@
     </div>
 }
 
-<script>
-    $(function() {
+<script type="text/javascript">
+    $(function () {
         Stream.attachActions();
+        Stream.attachLoadMore();
     });
 </script>

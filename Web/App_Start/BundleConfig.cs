@@ -18,6 +18,9 @@
             var js = new Bundle("~/Public/js", new JsMinify());
             js.Include("~/Public/js/lib/jquery-1*")
               .Include("~/Public/js/lib/bootstrap.js")
+              .Include("~/Public/js/lib/spin.js")
+              .Include("~/Public/js/lib/jquery-spin.js")
+              .Include("~/Public/js/lib/waypoints.js")
               .Include("~/Public/js/scripts.js");
             bundles.Add(js);
         }
