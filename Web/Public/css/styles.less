@@ -1,5 +1,6 @@
 ﻿.font {
 	font-family: SegoeWPRegular;
+	font-size: 1.1em;
 }
 
 .navbar {
@@ -23,7 +24,7 @@ body {
 #stream {
 	position: relative;
 	top: 40px;
-	margin: 10px;
+	margin: 2 * @default-padding;
 	padding: @default-padding;
 	padding-top: 0px;
 
@@ -37,13 +38,15 @@ body {
 	border-bottom: 1px solid #ccc;
 
 	.item-header {
-		height: 25px;
+		height: 21px;
 	}
 	
 	.item-author-img {
 		float:left;
 		margin-right: @default-padding;
 		margin-bottom: @default-padding;
+		width: 48px;
+		height: 48px;
 	}
 
 	.item-author-name { }
@@ -56,6 +59,7 @@ body {
 		
 	.item-hover {
 		display: inline-block;
+		display: none;
 		vertical-align: top;
 		.list-item(@default-padding);
 		b {
@@ -69,12 +73,18 @@ body {
 	
 	.item-content {
 		clear: both;
+		
+		b {
+			font-size: 1.1em;
+		}
 	}
 		
 	.item-img {
 		float: left;
 		margin-right: @default-padding;
 		margin-bottom: @default-padding;
+		width: 18px;
+		height: 18px;
 	}
 }
 

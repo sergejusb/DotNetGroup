@@ -156,18 +156,15 @@
     <Content Include="Public\img\icon-twitter.png" />
     <Content Include="Public\js\lib\bootstrap.js" />
     <Content Include="Public\js\lib\date.js" />
-    <None Include="Public\js\lib\jquery-1.7.1-vsdoc.js" />
-    <Content Include="Public\js\lib\jquery-1.7.1.js" />
+    <Content Include="Public\js\lib\jquery-1.7.2.js" />
     <Content Include="Public\js\lib\jquery.dateFormat.js" />
     <Content Include="Public\js\lib\jquery.query.js" />
     <Content Include="Public\js\lib\jsrender.js" />
     <Content Include="Public\js\lib\spin.js" />
     <Content Include="Public\js\lib\underscore.js" />
-    <Content Include="Public\js\scripts.actions.js" />
-    <Content Include="Public\js\scripts.api.js" />
+    <Content Include="Public\js\scripts.js" />
     <Content Include="Public\js\scripts.stream.js" />
-    <Content Include="Public\js\scripts.templates.js" />
-    <Content Include="Public\js\tests.scripts.api.js" />
+    <Content Include="Public\js\tests.scripts.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

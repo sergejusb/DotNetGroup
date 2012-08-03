@@ -4,21 +4,10 @@
     <meta charset="utf-8" />
     <title>@(ViewBag.Title ?? "DotNetGroup")</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     @Styles.Render("~/Public/css")
-    @*
-    @Html.Raw(SquishIt.Framework.Bundle.JavaScript()
-            .AddRemote("~/Public/js/lib/jquery-1.7.1.js", "http://code.jquery.com/jquery-1.7.1.min.js")
-            .Add("~/Public/js/lib/jquery.dateFormat.js")
-            .Add("~/Public/js/lib/jquery.query.js")
-            .Add("~/Public/js/lib/date.js")
-            .Add("~/Public/js/lib/bootstrap.js")
-            .Add("~/Public/js/lib/jsrender.js")
-            .Add("~/Public/js/lib/spin.js")            
-            .Add("~/Public/js/scripts.api.js")
-            .Add("~/Public/js/scripts.stream.js")
-            .Add("~/Public/js/scripts.actions.js")
-            .Add("~/Public/js/scripts.templates.js")
-            .Render("~/Public/scripts_#.js"))*@
+    @Scripts.Render("~/Public/js")
+
     @{ Html.RenderPartial("GoogleAnalytics"); }
 </head>
 <body>

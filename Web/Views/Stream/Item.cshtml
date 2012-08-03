@@ -11,8 +11,7 @@
             <ul class="item-hover">
                 <li class="item-read">
                     <a href="@Model.Url" title="Read original at @Model.Url" target="_blank">
-                        <i class="icon-share-alt"></i>
-                        <b>Read original</b>
+                        <i class="icon-file"></i><b>Read original</b>
                     </a>
                 </li>
             </ul>
@@ -28,6 +27,7 @@
         </ul>
         <p class="item-content">
             <img class="item-img" src="@Url.Content("~/Public/img/icon-" + Model.ItemType + ".png")" alt="@Model.ItemType"/>
+            <b>@Html.Raw(Model.Title)</b>
             @Html.Raw(Model.Content)
         </p>
     </div>
