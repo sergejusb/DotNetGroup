@@ -23,8 +23,9 @@
 
                 var url = $("#load-more a").attr("href");
                 $("#load-more").remove();
-                $.get(url).success(function(html) {
+                $.get(url).done(function (html) {
                     $("#stream").append(html);
+                }).always(function () {
                     $("#spinner").spin(false);
                     isCompleted = true;
                 });
