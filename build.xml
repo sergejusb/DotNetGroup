@@ -2,11 +2,12 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Run">
   <PropertyGroup>
     <ApiPublishPath>$(MSBuildProjectDirectory)\deploy\api</ApiPublishPath>
+    <WebPublishPath>$(MSBuildProjectDirectory)\deploy\web</WebPublishPath>
     <HostPublishPath>$(MSBuildProjectDirectory)\deploy\host</HostPublishPath>
   </PropertyGroup>
 
   <Target Name="Run">
-    <CallTarget Targets="Build;PublishApi;PublishHost" />
+    <CallTarget Targets="Build;PublishApi;PublishWeb;PublishHost" />
   </Target>
 
   <Target Name="Build">
@@ -22,6 +23,16 @@
 
     <MSBuild Projects="API\API.csproj" 
              Properties="Configuration=Release;WebProjectOutputDir=$(ApiPublishPath)\;OutDir=$(ApiPublishPath)\bin\"
+             Targets="Build;ResolveReferences;_CopyWebApplication" />
+  </Target>
+
+  <Target Name="PublishWeb">
+    <MSBuild Projects="$(MSBuildProjectDirectory)\$(MSBuildThisFile)"
+             Properties="Path=$(WebPublishPath)"
+             Targets="_RemoveContent" />
+
+    <MSBuild Projects="Web\Web.csproj" 
+             Properties="Configuration=Release;WebProjectOutputDir=$(WebPublishPath)\;OutDir=$(WebPublishPath)\bin\"
              Targets="Build;ResolveReferences;_CopyWebApplication" />
   </Target>
 
