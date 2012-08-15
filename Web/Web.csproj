@@ -155,7 +155,7 @@
     <Content Include="Public\img\icon-tags.png" />
     <Content Include="Public\img\icon-twitter.png" />
     <Content Include="Public\js\lib\bootstrap.js" />
-    <Content Include="Public\js\lib\jquery-spin.js" />
+    <Content Include="Public\js\lib\jquery.spin.js" />
     <Content Include="Public\js\lib\jquery-1.7.2.js" />
     <Content Include="Public\js\lib\spin.js" />
     <Content Include="Public\js\scripts.js" />
