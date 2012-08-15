@@ -5,7 +5,7 @@
     using System.Web.Mvc;
     using System.Web.Routing;
 
-    using WebApiContrib.Formatting;
+    using WebApiContrib.Formatting.Jsonp;
 
     public class MvcApplication : HttpApplication
     {
