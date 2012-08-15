@@ -163,12 +163,6 @@
     <Content Include="Public\js\scripts.js" />
     <Content Include="Public\js\tests.scripts.js" />
     <Content Include="Web.config" />
-    <Content Include="Web.Debug.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </Content>
-    <Content Include="Web.Release.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </Content>
     <Content Include="Views\Web.config" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\GoogleAnalytics.cshtml" />
@@ -204,6 +198,9 @@
     <Content Include="Public\fonts\segeo-wp-webfont.svgz" />
     <Content Include="Public\fonts\segeo-wp-webfont.ttf" />
     <Content Include="Public\fonts\segeo-wp-webfont.woff" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Web.substitution.config" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

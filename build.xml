@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Run">
   <PropertyGroup>
+    <MSBuildCommunityTasksPath>$(MSBuildProjectDirectory)\Build\</MSBuildCommunityTasksPath>
     <ApiPublishPath>$(MSBuildProjectDirectory)\deploy\api</ApiPublishPath>
     <WebPublishPath>$(MSBuildProjectDirectory)\deploy\web</WebPublishPath>
     <HostPublishPath>$(MSBuildProjectDirectory)\deploy\host</HostPublishPath>
   </PropertyGroup>
+
+  <Import Project="$(MSBuildCommunityTasksPath)\MSBuild.Community.Tasks.Targets" />
 
   <Target Name="Run">
     <CallTarget Targets="Build;PublishApi;PublishWeb;PublishHost" />
@@ -16,7 +19,7 @@
              Targets="Rebuild" />
   </Target>
 
-  <Target Name="PublishApi">
+  <Target Name="PublishApi" DependsOnTargets="Build">
     <MSBuild Projects="$(MSBuildProjectDirectory)\$(MSBuildThisFile)"
              Properties="Path=$(ApiPublishPath)"
              Targets="_RemoveContent" />
@@ -26,7 +29,7 @@
              Targets="Build;ResolveReferences;_CopyWebApplication" />
   </Target>
 
-  <Target Name="PublishWeb">
+  <Target Name="PublishWeb" DependsOnTargets="Build">
     <MSBuild Projects="$(MSBuildProjectDirectory)\$(MSBuildThisFile)"
              Properties="Path=$(WebPublishPath)"
              Targets="_RemoveContent" />
@@ -34,9 +37,14 @@
     <MSBuild Projects="Web\Web.csproj" 
              Properties="Configuration=Release;WebProjectOutputDir=$(WebPublishPath)\;OutDir=$(WebPublishPath)\bin\"
              Targets="Build;ResolveReferences;_CopyWebApplication" />
+
+    <XmlMassUpdate ContentFile="$(WebPublishPath)\Web.config"
+                   ContentRoot="/configuration"
+                   SubstitutionsFile="Web\Web.substitution.config"
+                   SubstitutionsRoot="/substitutions/production" />
   </Target>
 
-  <Target Name="PublishHost">
+  <Target Name="PublishHost" DependsOnTargets="Build">
     <MSBuild Projects="$(MSBuildProjectDirectory)\$(MSBuildThisFile)"
              Properties="Path=$(HostPublishPath)"
              Targets="_RemoveContent" />
