@@ -5,8 +5,9 @@
     <title>@(ViewBag.Title ?? "DotNetGroup")</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    @Styles.Render("~/Public/css")
-    @Scripts.Render("~/Public/js")
+    @Styles.Render("~/public/static/css")
+    @Styles.Render("~/public/static/less")
+    @Scripts.Render("~/public/static/js")
 
     @{ Html.RenderPartial("GoogleAnalytics"); }
 </head>
