@@ -16,11 +16,12 @@ Next, to get the project running, go through these steps:
 
     * Running PowerShell as Administrator.
 
-    * Running `get-module -listAvailable | import-module` in PowerShell.
+    * Using 64bit PowerShell (C:\Windows\system32\WindowsPowerShell\v1.0\powershell.exe) on 64bit machines.
 
     * Running `Set-ExecutionPolicy 'Unrestricted'` in PowerShell.
 
-    * Using 64bit PowerShell (C:\Windows\system32\WindowsPowerShell\v1.0\powershell.exe) on 64bit machines.
+    * Running `get-module -listAvailable | import-module` in PowerShell.
+
 
 2.  Add read security permissions for IUSR and IIS_IUSRS users on DotNetGroup folder.
 
