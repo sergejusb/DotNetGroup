@@ -13,16 +13,18 @@
     {
         private readonly string apiUrl;
         private readonly IJsonClient jsonClient;
+        private readonly IStreamItemMapper mapper;
 
         public StreamController()
-            : this(ConfigurationManager.AppSettings["api.url"], new JsonClient())
+            : this(ConfigurationManager.AppSettings["api.url"], new JsonClient(), new StreamItemMapper())
         {
         }
 
-        public StreamController(string apiUrl, IJsonClient jsonClient)
+        public StreamController(string apiUrl, IJsonClient jsonClient, IStreamItemMapper mapper)
         {
             this.apiUrl = apiUrl;
             this.jsonClient = jsonClient;
+            this.mapper = mapper;
         }
 
         public ActionResult Index()
@@ -52,7 +54,7 @@
 
         private IEnumerable<StreamItem> Get(string url)
         {
-            return this.jsonClient.Get<IEnumerable<Item>>(url).Select(i => new StreamItem(i));
+            return this.jsonClient.Get<IEnumerable<Item>>(url).Select(item => this.mapper.MapFrom(item));
         }
     }
 }

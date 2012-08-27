@@ -10,11 +10,6 @@
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
-            routes.MapHttpRoute(
-                name: "DefaultApi",
-                routeTemplate: "api/{controller}/{id}",
-                defaults: new { id = RouteParameter.Optional });
-
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",

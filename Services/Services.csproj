@@ -75,15 +75,15 @@
     <Compile Include="Web\JsonClient.cs" />
     <Compile Include="Web\UrlBuilder.cs" />
     <Compile Include="Web\UrlResolver.cs" />
+    <Compile Include="Web\ContentFormatter.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="HtmlAgilityPack, Version=1.4.6.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\HtmlAgilityPack.1.4.6\lib\Net40\HtmlAgilityPack.dll</HintPath>
     </Reference>
-    <Reference Include="LinqToTwitter, Version=2.0.28.0, Culture=neutral, PublicKeyToken=957107be965c25d9, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\LinqToTwitter.2.0.28\lib\net40\LinqToTwitter.dll</HintPath>
+    <Reference Include="LinqToTwitter">
+      <HintPath>..\packages\LinqToTwitter.2.0.29\lib\net40\LinqToTwitter.dll</HintPath>
     </Reference>
     <Reference Include="Lucene.Net">
       <HintPath>..\packages\Lucene.Net.2.9.4.1\lib\net40\Lucene.Net.dll</HintPath>
