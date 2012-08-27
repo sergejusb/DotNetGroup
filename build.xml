@@ -27,6 +27,11 @@
     <MSBuild Projects="API\API.csproj" 
              Properties="Configuration=Release;WebProjectOutputDir=$(ApiPublishPath)\;OutDir=$(ApiPublishPath)\bin\"
              Targets="Build;ResolveReferences;_CopyWebApplication" />
+
+    <XmlMassUpdate ContentFile="$(ApiPublishPath)\Web.config"
+                   ContentRoot="/configuration"
+                   SubstitutionsFile="API\Web.substitution.config"
+                   SubstitutionsRoot="/substitutions/production" />
   </Target>
 
   <Target Name="PublishWeb" DependsOnTargets="Build">
