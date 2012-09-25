@@ -185,6 +185,9 @@
     <Content Include="Public\fonts\segeo-wp-webfont.woff" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
     <None Include="Web.substitution.config" />
   </ItemGroup>
   <PropertyGroup>
