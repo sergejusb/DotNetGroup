@@ -41,3 +41,5 @@ styles_*.css
 #ignore compiled javascript and css files
 *.debug.js
 *.debug.css
+#ignore publishing profiles
+*/Properties/PublishProfiles
