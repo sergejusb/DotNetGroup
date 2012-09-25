@@ -10,8 +10,8 @@
         {
             var css = new Bundle("~/public/static/css", new CssMinify());
             css.Include("~/Public/css/bootstrap.css")
-                .Include("~/Public/css/bootstrap-responsive.css")
-                .Include("~/Public/css/fonts.css");
+               .Include("~/Public/css/bootstrap-responsive.css")
+               .Include("~/Public/css/fonts.css");
             bundles.Add(css);
 
             var less = new Bundle("~/public/static/less", new LessTransform(), new CssMinify());
