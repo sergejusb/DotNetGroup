@@ -185,8 +185,6 @@
     <Content Include="Public\fonts\segeo-wp-webfont.woff" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Properties\PublishProfiles\ltnet - FTP.pubxml" />
-    <None Include="Properties\PublishProfiles\ltnet - Web Deploy.pubxml" />
     <None Include="Web.substitution.config" />
   </ItemGroup>
   <PropertyGroup>
