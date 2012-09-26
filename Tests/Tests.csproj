@@ -1,24 +1,21 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
-    <ProductVersion>8.0.30703</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{C7C38FF4-00A5-4AE9-867D-CAC6D227C09C}</ProjectGuid>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{928A7EE1-D109-41B5-9EA5-55B7973C390A}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>DotNetGroup.Tests</RootNamespace>
-    <AssemblyName>Tests</AssemblyName>
+    <AssemblyName>DotNetGroup.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <TargetFrameworkProfile>
-    </TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
-    <BuildPackage>true</BuildPackage>
     <RestorePackages>true</RestorePackages>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
@@ -28,7 +25,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
@@ -41,17 +38,6 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
-    <None Include="App.config">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="packages.config">
-      <SubType>Designer</SubType>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="..\shared\SharedAssemblyInfo.cs">
-      <Link>Properties\SharedAssemblyInfo.cs</Link>
-    </Compile>
     <Compile Include="Api\RoutingTests.cs" />
     <Compile Include="Api\StreamControllerTests.cs" />
     <Compile Include="Api\StreamFilterTests.cs" />
@@ -64,6 +50,7 @@
     <Compile Include="Helpers\ActionResultExtensions.cs" />
     <Compile Include="Helpers\DBAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\Generic\StreamAggregatorTests.cs" />
     <Compile Include="Services\Model\ItemTests.cs" />
     <Compile Include="Services\Processors\FacebookProcessorTests.cs" />
     <Compile Include="Services\Processors\HtmlProcessorTests.cs" />
@@ -71,29 +58,48 @@
     <Compile Include="Services\Processors\LuceneHelpers\MemoryIndexSearcher.cs" />
     <Compile Include="Services\Processors\LuceneHelpers\MemoryIndexWriter.cs" />
     <Compile Include="Services\Processors\LuceneProcessorTests.cs" />
-    <Compile Include="Services\StreamPersisterTests.cs" />
     <Compile Include="Services\Processors\TagsProcessorTests.cs" />
-    <Compile Include="Services\Generic\StreamAggregatorTests.cs" />
-    <Compile Include="Services\Storage\StreamStorageTests.cs" />
-    <Compile Include="Services\Rss\UrlConfigProviderTests.cs" />
+    <Compile Include="Services\Processors\UrlContentProcessorTests.cs" />
     <Compile Include="Services\Rss\RssAggregatorTests.cs" />
     <Compile Include="Services\Rss\RssServiceTests.cs" />
+    <Compile Include="Services\Rss\UrlConfigProviderTests.cs" />
+    <Compile Include="Services\Storage\StreamStorageTests.cs" />
+    <Compile Include="Services\StreamPersisterTests.cs" />
     <Compile Include="Services\Twitter\QueryConfigProviderTests.cs" />
     <Compile Include="Services\Twitter\TweetParserTests.cs" />
     <Compile Include="Services\Twitter\TwitterAggregatorTests.cs" />
     <Compile Include="Services\Twitter\TwitterSearchEntryHelperTests.cs" />
     <Compile Include="Services\Twitter\TwitterServiceTests.cs" />
-    <Compile Include="Services\Processors\UrlContentProcessorTests.cs" />
     <Compile Include="Services\Utility\HashProviderTests.cs" />
     <Compile Include="Services\Web\ContentFormatterTests.cs" />
-    <Compile Include="Services\Web\UrlResolverTests.cs" />
     <Compile Include="Services\Web\JsonClientTests.cs" />
     <Compile Include="Services\Web\UrlBuilderTests.cs" />
+    <Compile Include="Services\Web\UrlResolverTests.cs" />
     <Compile Include="Web\ViewModels\StreamItemMapperTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="LinqToTwitter, Version=2.0.29.0, Culture=neutral, PublicKeyToken=957107be965c25d9, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Api\Api.csproj">
+      <Project>{1cad1d77-83df-4904-b855-7861fe2fb909}</Project>
+      <Name>Api</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Services\Services.csproj">
+      <Project>{9fd9f9a2-0da2-4081-a995-36299ea5cc14}</Project>
+      <Name>Services</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Web\Web.csproj">
+      <Project>{9260919a-c7fa-44ac-9b6c-8c11410e42c0}</Project>
+      <Name>Web</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="ICSharpCode.SharpZipLib">
+      <HintPath>..\packages\SharpZipLib.0.86.0\lib\20\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="LinqToTwitter">
       <HintPath>..\packages\LinqToTwitter.2.0.29\lib\net40\LinqToTwitter.dll</HintPath>
     </Reference>
     <Reference Include="Lucene.Net">
@@ -103,26 +109,22 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
     </Reference>
-    <Reference Include="MongoDB.Bson, Version=1.5.0.4566, Culture=neutral, PublicKeyToken=f686731cfb9cc103, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\mongocsharpdriver.1.5\lib\net35\MongoDB.Bson.dll</HintPath>
+    <Reference Include="MongoDB.Bson">
+      <HintPath>..\packages\mongocsharpdriver.1.6\lib\net35\MongoDB.Bson.dll</HintPath>
     </Reference>
-    <Reference Include="MongoDB.Driver, Version=1.5.0.4566, Culture=neutral, PublicKeyToken=f686731cfb9cc103, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\mongocsharpdriver.1.5\lib\net35\MongoDB.Driver.dll</HintPath>
+    <Reference Include="MongoDB.Driver">
+      <HintPath>..\packages\mongocsharpdriver.1.6\lib\net35\MongoDB.Driver.dll</HintPath>
     </Reference>
     <Reference Include="Moq">
       <HintPath>..\packages\Moq.4.0.10827\lib\NET40\Moq.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.4.5.8\lib\net40\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\packages\Newtonsoft.Json.4.5.9\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="nunit.framework, Version=2.6.1.12217, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="nunit.framework">
       <HintPath>..\packages\NUnit.2.6.1\lib\nunit.framework.dll</HintPath>
     </Reference>
-    <Reference Include="Ploeh.AutoFixture, Version=2.12.0.0, Culture=neutral, PublicKeyToken=b24654c590009d4f, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="Ploeh.AutoFixture">
       <HintPath>..\packages\AutoFixture.2.12.0\lib\Ploeh.AutoFixture.dll</HintPath>
     </Reference>
     <Reference Include="Ploeh.SemanticComparison">
@@ -144,36 +146,39 @@
       <HintPath>..\packages\Microsoft.Net.Http.2.0.20710.0\lib\net40\System.Net.Http.WebRequest.dll</HintPath>
     </Reference>
     <Reference Include="System.Web" />
+    <Reference Include="System.Web.Helpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.Helpers.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.4.0.20710.0\lib\net40\System.Web.Http.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.Http.WebHost, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.4.0.20710.0\lib\net40\System.Web.Http.WebHost.dll</HintPath>
     </Reference>
-    <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Api\Api.csproj">
-      <Project>{A993818E-11DF-4A9E-907C-50317D8D7A27}</Project>
-      <Name>Api</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Services\Services.csproj">
-      <Project>{561C89BF-11C5-431B-B847-DCBE97D5E26A}</Project>
-      <Name>Services</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Web\Web.csproj">
-      <Project>{E6C01391-DC00-4E94-9916-270CA61B08E8}</Project>
-      <Name>Web</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Web\JavaScript\" />
+    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.4.0.20710.0\lib\net40\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.2.0.20710.0\lib\net40\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" />
+  <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
