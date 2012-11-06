@@ -65,6 +65,7 @@
     <Compile Include="Services\Rss\UrlConfigProviderTests.cs" />
     <Compile Include="Services\Storage\StreamStorageTests.cs" />
     <Compile Include="Services\StreamPersisterTests.cs" />
+    <Compile Include="Services\StreamReprocessorTests.cs" />
     <Compile Include="Services\Twitter\QueryConfigProviderTests.cs" />
     <Compile Include="Services\Twitter\TweetParserTests.cs" />
     <Compile Include="Services\Twitter\TwitterAggregatorTests.cs" />

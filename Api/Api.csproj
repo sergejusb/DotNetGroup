@@ -125,7 +125,6 @@
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
-    <None Include="Web.substitution.config" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />

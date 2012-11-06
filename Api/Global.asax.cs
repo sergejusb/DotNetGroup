@@ -1,9 +1,13 @@
 ﻿namespace DotNetGroup.Api
 {
+    using System;
+    using System.Configuration;
     using System.Web;
     using System.Web.Http;
     using System.Web.Mvc;
     using System.Web.Routing;
+
+    using DotNetGroup.Services;
 
     using WebApiContrib.Formatting.Jsonp;
 
@@ -33,6 +37,11 @@
 
             GlobalConfiguration.Configuration.Formatters.Insert(0, new JsonpMediaTypeFormatter());
             GlobalConfiguration.Configuration.IncludeErrorDetailPolicy = IncludeErrorDetailPolicy.Always;
+
+            new PeriodicStreamPersister(
+                    ConfigurationManager.AppSettings["db.connection"],
+                    ConfigurationManager.AppSettings["db.database"],
+                    TimeSpan.Parse(ConfigurationManager.AppSettings["sys.refresh"] ?? "00:01:00")).Start();
         }
     }
 }

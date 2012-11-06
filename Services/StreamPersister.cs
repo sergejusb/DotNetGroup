@@ -1,7 +1,6 @@
 ﻿namespace DotNetGroup.Services
 {
     using System;
-    using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
 
@@ -13,8 +12,6 @@
     public interface IStreamPersister
     {
         void PersistLatest();
-
-        void Reprocess();
     }
 
     public class StreamPersister : IStreamPersister
@@ -55,18 +52,6 @@
             var latestItem = this.streamStorage.Top() ?? new Item();
             var items = this.streamAggregator.GetLatest(latestItem.Published).ToList();
 
-            this.ProcessAndPersist(items);
-        }      
-
-        public void Reprocess()
-        {
-            var items = this.streamStorage.GetLatest(type: null, fromDate: null, toDate: null, limit: null).ToList();
-
-            this.ProcessAndPersist(items);
-        }
-
-        private void ProcessAndPersist(List<Item> items)
-        {
             Parallel.ForEach(items, item => this.streamProcessor.Process(item));
 
             this.streamStorage.Save(items);

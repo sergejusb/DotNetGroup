@@ -48,6 +48,7 @@
     <Compile Include="Model\Item.cs" />
     <Compile Include="Model\ItemIndexDefinition.cs" />
     <Compile Include="Model\ItemType.cs" />
+    <Compile Include="PeriodicStreamPersister.cs" />
     <Compile Include="Processors\FacebookProcessor.cs" />
     <Compile Include="Processors\HtmlProcessor.cs" />
     <Compile Include="Processors\ItemProcessor.cs" />
@@ -60,6 +61,7 @@
     <Compile Include="Rss\UrlConfigProvider.cs" />
     <Compile Include="Storage\StreamStorage.cs" />
     <Compile Include="StreamPersister.cs" />
+    <Compile Include="StreamReprocessor.cs" />
     <Compile Include="Twitter\QueryConfigProvider.cs" />
     <Compile Include="Twitter\TweetParser.cs" />
     <Compile Include="Twitter\TwitterAggregator.cs" />
@@ -98,6 +100,7 @@
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.Caching" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml" />
