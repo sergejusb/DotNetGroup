@@ -99,6 +99,9 @@
     </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
+    <Reference Include="WebActivator">
+      <HintPath>..\packages\WebActivator.1.5.2\lib\net40\WebActivator.dll</HintPath>
+    </Reference>
     <Reference Include="WebApiContrib.Formatting.Jsonp, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\WebApiContrib.Formatting.Jsonp.0.9.3\lib\net40\WebApiContrib.Formatting.Jsonp.dll</HintPath>
@@ -114,6 +117,8 @@
     </Compile>
     <Compile Include="Models\StreamFilter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Worker\JobHost.cs" />
+    <Compile Include="Worker\PeriodicStreamPersister.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Shared\Error.cshtml" />

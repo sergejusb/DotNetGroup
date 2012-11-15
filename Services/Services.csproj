@@ -48,7 +48,6 @@
     <Compile Include="Model\Item.cs" />
     <Compile Include="Model\ItemIndexDefinition.cs" />
     <Compile Include="Model\ItemType.cs" />
-    <Compile Include="PeriodicStreamPersister.cs" />
     <Compile Include="Processors\FacebookProcessor.cs" />
     <Compile Include="Processors\HtmlProcessor.cs" />
     <Compile Include="Processors\ItemProcessor.cs" />
