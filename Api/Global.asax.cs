@@ -19,6 +19,11 @@
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapHttpRoute(
+                name: "SystemApi",
+                routeTemplate: "system/{action}",
+                defaults: new { controller = "System" });
+
+            routes.MapHttpRoute(
                 name: "StreamApi",
                 routeTemplate: "v1/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional });

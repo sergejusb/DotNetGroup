@@ -1,4 +1,4 @@
-﻿namespace DotNetGroup.Services
+﻿ namespace DotNetGroup.Services
 {
     using System;
     using System.Linq;
