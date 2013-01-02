@@ -27,7 +27,7 @@
             this.streamPersister = streamPersister;
         }
 
-        [HttpPost, HttpGet]
+        [HttpPost]
         public HttpResponseMessage UpdateStream()
         {
             this.streamPersister.PersistLatest();
