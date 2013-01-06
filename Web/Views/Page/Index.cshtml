@@ -4,7 +4,7 @@
 
 <!doctype html>
 <html>
-  <head>
+<head>
     <title>Lietuvos .net naudotojų grupė</title>
     <link href="public/css/bootstrap.min.css" rel="stylesheet" media="screen">
     <!--[if lt IE 9]>
@@ -12,212 +12,233 @@
     <![endif]-->
     <!-- <link rel="shortcut icon" href="public/favicon.png"> -->
     <style>
-      #logo {
-        position: relative;
-        top: -1em;
-        padding-right: 2em;
-      }
+        #logo {
+            position: relative;
+            top: -1em;
+            padding-right: 2em;
+        }
     </style>
-  </head>
-  <body id="home">
+    @{ Html.RenderPartial("GoogleAnalytics"); }
+</head>
+<body id="home">
     <div class="container">
 
-      <div>
-        <ul class="nav nav-pills pull-right">
-          <li><a href="/stream"><strong>#ltnet</strong> programavimo naujienos &raquo;</a></li>
+        <div>
+            <ul class="nav nav-pills pull-right">
+                <li><a href="/stream"><strong>#ltnet</strong> programavimo naujienos &raquo;</a></li>
+            </ul>
+            <h3>&nbsp;</h3>
+        </div>
+
+        <div class="hero-unit">
+            <img id="logo" src="public/img/logo.png" alt="dotnetgroup.lt logo" class="pull-left" />
+            <h1>Lietuvos <strong>.net</strong> naudotojų grupė</h1>
+            <p></p>
+            <p>Programuotojų, testuotojų, architektų ir kitų entuziastų grupė, dirbanti su <strong>.net</strong> technologijomis</p>
+        </div>
+        <!-- .hero-unit -->
+
+        <div class="row">
+            <div class="span4">
+                <h2>Artimiausi susitikimai</h2>
+                <ul class="unstyled">
+                    <p class="muted">Sustikimai dar nėra suplanuoti :(</p>
+                    <p>Galėtum padaryti pranešimą? <a href="mailto:seriog@yahoo.com?subject=dotnetgroup-pranesejas">Pranešk mums!</a></p>
+                </ul>
+            </div>
+            <div class="span4">
+                <h2>Ankstesni susitikimai</h2>
+                <ul class="unstyled">
+                    <li><a href="#v18">2012-10-17 | susitikimas Vilniuje #18</a></li>
+                    <li><a href="#k14">2012-10-16 | susitikimas Kaune #14</a></li>
+                    <li><a href="#k13">2012-03-22 | susitikimas Kaune #13</a></li>
+                    <li><a href="#v17">2012-03-21 | susitikimas Vilniuje #17</a></li>
+                </ul>
+                <p><a href="#events">pilnas sąrašas &raquo;</a></p>
+            </div>
+            <div class="span4">
+                <h2>Apie grupę</h2>
+                <p>Pagrindinis šios grupės tikslas - suburti su <strong>.net</strong> technologijomis dirbančius žmones vienoje vietoje, taip pagerinant tarpusavio komunikaciją ir išplečiant pažinčių tinklą.</p>
+            </div>
+
+        </div>
+        <!-- .row -->
+
+        <div class="row">
+            <div class="span8">
+                <h2>Rėmėjai</h2>
+                <div class="row">
+                    <div class="span4">
+                        <a href="http://microsoft.com" target="_blank">
+                            <img src="public/img/microsoft.png" alt="Microsoft" />
+                        </a>
+                    </div>
+                    <div class="span4">
+                        <a href="http://adform.com" target="_blank">
+                            <img src="public/img/adform.png" alt="Adform" />
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="span2">
+                <h2>Draugai</h2>
+                <ul class="unstyled">
+                    <li><a href="http://itishnikai.lt" target="_blank">ITishnikai</a></li>
+                    <li><a href="http://sergejus.blogas.lt" target="_blank">Sergejus apie .NET</a></li>
+                    <li><a href="http://vilniusjs.lt" target="_blank">Vilnius JS</a></li>
+                </ul>
+            </div>
+            <div class="span2">
+                <h2>&nbsp;</h2>
+                <ul class="unstyled">
+                    <li><a href="http://www.vilniusphp.lt" target="_blank">Vilnius PHP</li>
+                    <li><a href="http://www.vilnius-jug.lt" target="_blank">Vilnius JUG</li>
+                </ul>
+            </div>
+        </div>
+        <!-- .row -->
+
+        <h1>&nbsp;</h1>
+
+        <div class="page-header" id="events">
+            <h1>Susitikimai</h1>
+        </div>
+
+        <ul class="thumbnails">
+            <li class="span4">
+                <div class="thumbnail">
+                    <h3 id="v18">Susitikimas Vilniuje #18</h3>
+                    <p>2012-10-17, daugiau informacijos: <a href="http://ltnet18v.eventbrite.com/" target="_blank">Eventbrite</a></p>
+                    <p>
+                        Rimas Šaltis
+                        <br />
+                        Real-time Web programming using SignalR
+                    </p>
+                    <p>
+                        Audrius Kovalenko
+                        <br />
+                        Security of Web applications: top 6 risks
+                    </p>
+                </div>
+            </li>
+            <li class="span4">
+                <div class="thumbnail">
+                    <h3 id="k14">Susitikimas Kaune #14</h3>
+                    <p>2012-10-16, daugiau informacijos: <a href="http://ltnet14k.eventbrite.com/" target="_blank">Eventbrite</a></p>
+                    <p>
+                        Rimas Šaltis
+                        <br />
+                        Real-time Web programming using SignalR
+                    </p>
+                    <p>
+                        Audrius Kovalenko
+                        <br />
+                        Security of Web applications: top 6 risks
+                    </p>
+                </div>
+            </li>
+            <li class="span4">
+                <div class="thumbnail">
+                    <h3 id="k13">Susitikimas Kaune #13</h3>
+                    <p>2012-03-22, daugiau informacijos: <a href="http://ltnet13k.eventbrite.com/" target="_blank">Eventbrite</a></p>
+                    <p>
+                        Donatas Mažionis
+                        <br />
+                        WCF greitaveikos optimizavimas
+                    </p>
+                    <p>
+                        Mindaugas Mozūras
+                        <br />
+                        Įvadas į GIT
+                    </p>
+                </div>
+            </li>
+            <li class="span4">
+                <div class="thumbnail">
+                    <h3 id="v17">Susitikimas Vilniuje #17</h3>
+                    <p>2012-03-21, daugiau informacijos: <a href="http://ltnet17v.eventbrite.com/" target="_blank">Eventbrite</a></p>
+                    <p>
+                        Donatas Mažionis
+                        <br />
+                        WCF greitaveikos optimizavimas
+                    </p>
+                    <p>
+                        Mindaugas Mozūras
+                        <br />
+                        Įvadas į GIT
+                    </p>
+                </div>
+            </li>
+            <li class="span4">
+                <div class="thumbnail">
+                    <h3 id="k12">Susitikimas Kaune #12</h3>
+                    <p>2011-11-24, daugiau informacijos: <a href="http://ltnet12k.eventbrite.com/" target="_blank">Eventbrite</a></p>
+                    <p>
+                        Rokas Balevičius
+                        <br />
+                        Visual Studio LightSwitch
+                    </p>
+                    <p>
+                        Donatas Mačiūnas
+                        <br />
+                        Asinchroninis programavimas su C# 5.0
+                    </p>
+                </div>
+            </li>
+            <li class="span4">
+                <div class="thumbnail">
+                    <h3 id="v16">Susitikimas Vilniuje #16</h3>
+                    <p>2011-11-23, daugiau informacijos: <a href="http://ltnet16v.eventbrite.com/" target="_blank">Eventbrite</a></p>
+                    <p>
+                        Rokas Balevičius
+                        <br />
+                        Visual Studio LightSwitch
+                    </p>
+                    <p>
+                        Donatas Mačiūnas
+                        <br />
+                        Asinchroninis programavimas su C# 5.0
+                    </p>
+                </div>
+            </li>
+            <li class="span4">
+                <div class="thumbnail">
+                    <h3 id="v15">Susitikimas Vilniuje #15</h3>
+                    <p>2011-08-30, daugiau informacijos: <a href="http://ltnet15v.eventbrite.com/" target="_blank">Eventbrite</a></p>
+                    <p>
+                        Romualdas Stonkus
+                        <br />
+                        SQL Server 2012 naujovės programuotojams
+                    </p>
+                    <p>
+                        Domantas Jovaišas
+                        <br />
+                        ASP.NET MVC 3 naujovės ir tips & tricks
+                    </p>
+                </div>
+            </li>
+            <li class="span4">
+                <div class="thumbnail">
+                    <h3 id="k11">Susitikimas Kaune #11</h3>
+                    <p>2011-08-29, daugiau informacijos: <a href="http://ltnet11k.eventbrite.com/" target="_blank">Eventbrite</a></p>
+                    <p>
+                        Romualdas Stonkus
+                        <br />
+                        SQL Server 2012 naujovės programuotojams
+                    </p>
+                    <p>
+                        Domantas Jovaišas
+                        <br />
+                        ASP.NET MVC 3 naujovės ir tips & tricks
+                    </p>
+                </div>
+            </li>
         </ul>
-        <h3>&nbsp;</h3>
-      </div>
 
-      <div class="hero-unit">
-        <img id="logo" src="public/img/logo.png" alt="dotnetgroup.lt logo" class="pull-left" />
-        <h1>Lietuvos <strong>.net</strong> naudotojų grupė</h1>
-        <p></p>
-        <p>Programuotojų, testuotojų, architektų ir kitų entuziastų grupė, dirbanti su <strong>.net</strong> technologijomis</p>
-      </div><!-- .hero-unit -->
-
-      <div class="row">
-        <div class="span4">
-          <h2>Artimiausi susitikimai</h2>
-          <ul class="unstyled">
-            <p class="muted">Sustikimai dar nėra suplanuoti :(</p> 
-            <p>Galėtum padaryti pranešimą? <a href="mailto:seriog@yahoo.com?subject=dotnetgroup-pranesejas">Pranešk mums!</a></p>
-          </ul>
-        </div>
-        <div class="span4">
-          <h2>Ankstesni susitikimai</h2>
-          <ul class="unstyled">
-            <li><a href="#v18">2012-10-17 | susitikimas Vilniuje #18</a></li>
-            <li><a href="#k14">2012-10-16 | susitikimas Kaune #14</a></li>
-            <li><a href="#k13">2012-03-22 | susitikimas Kaune #13</a></li>
-            <li><a href="#v17">2012-03-21 | susitikimas Vilniuje #17</a></li>
-          </ul>
-          <p><a href="#events">pilnas sąrašas &raquo;</a></p>
-        </div>
-        <div class="span4">
-          <h2>Apie grupę</h2>
-          <p>Pagrindinis šios grupės tikslas - suburti su <strong>.net</strong> technologijomis dirbančius žmones vienoje vietoje, taip pagerinant tarpusavio komunikaciją ir išplečiant pažinčių tinklą.</p>
-        </div>
-
-      </div><!-- .row -->     
-
-      <div class="row">
-        <div class="span8">
-          <h2>Rėmėjai</h2>
-          <div class="row">
-            <div class="span4">
-              <a href="http://microsoft.com" target="_blank">
-                <img src="public/img/microsoft.png" alt="Microsoft" />
-              </a>
-            </div>
-            <div class="span4">
-              <a href="http://adform.com" target="_blank">
-                <img src="public/img/adform.png" alt="Adform" />
-              </a>
-            </div>
-          </div>
-        </div>
-        <div class="span2">
-          <h2>Draugai</h2>
-          <ul class="unstyled">
-            <li><a href="http://itishnikai.lt" target="_blank">ITishnikai</a></li>
-            <li><a href="http://sergejus.blogas.lt" target="_blank">Sergejus apie .NET</a></li>
-            <li><a href="http://vilniusjs.lt" target="_blank">Vilnius JS</a></li>
-          </ul>
-        </div>
-        <div class="span2">
-          <h2>&nbsp;</h2>
-          <ul class="unstyled">
-            <li><a href="http://www.vilniusphp.lt" target="_blank">Vilnius PHP</li>
-            <li><a href="http://www.vilnius-jug.lt" target="_blank">Vilnius JUG</li>
-          </ul>
-        </div>
-      </div><!-- .row -->
-
-      <h1>&nbsp;</h1>
-
-      <div class="page-header" id="events">
-        <h1>Susitikimai</h1>
-      </div>
-
-      <ul class="thumbnails">
-        <li class="span4">
-          <div class="thumbnail">
-            <h3 id="v18">Susitikimas Vilniuje #18</h3>
-            <p>2012-10-17, daugiau informacijos: <a href="http://ltnet18v.eventbrite.com/" target="_blank">Eventbrite</a></p>
-            <p>
-              Rimas Šaltis <br/>
-              Real-time Web programming using SignalR
-            </p>
-            <p>
-              Audrius Kovalenko <br/>
-              Security of Web applications: top 6 risks
-            </p>       
-          </div>
-        </li>
-        <li class="span4">
-          <div class="thumbnail">
-            <h3 id="k14">Susitikimas Kaune #14</h3>
-            <p>2012-10-16, daugiau informacijos: <a href="http://ltnet14k.eventbrite.com/" target="_blank">Eventbrite</a></p>
-            <p>
-              Rimas Šaltis <br/>
-              Real-time Web programming using SignalR
-            </p>
-            <p>
-              Audrius Kovalenko <br/>
-              Security of Web applications: top 6 risks
-            </p>  
-          </div>
-        </li>
-        <li class="span4">
-          <div class="thumbnail">
-            <h3 id="k13">Susitikimas Kaune #13</h3>
-            <p>2012-03-22, daugiau informacijos: <a href="http://ltnet13k.eventbrite.com/" target="_blank">Eventbrite</a></p>
-            <p>
-              Donatas Mažionis <br/>
-              WCF greitaveikos optimizavimas
-            </p>
-            <p>
-              Mindaugas Mozūras <br/>
-              Įvadas į GIT
-            </p>         
-          </div>
-        </li>
-        <li class="span4">
-          <div class="thumbnail">
-            <h3 id="v17">Susitikimas Vilniuje #17</h3>
-            <p>2012-03-21, daugiau informacijos: <a href="http://ltnet17v.eventbrite.com/" target="_blank">Eventbrite</a></p>
-            <p>
-              Donatas Mažionis <br/>
-              WCF greitaveikos optimizavimas
-            </p>
-            <p>
-              Mindaugas Mozūras <br/>
-              Įvadas į GIT
-            </p>         
-          </div>
-        </li>
-        <li class="span4">
-          <div class="thumbnail">
-            <h3 id="k12">Susitikimas Kaune #12</h3>
-            <p>2011-11-24, daugiau informacijos: <a href="http://ltnet12k.eventbrite.com/" target="_blank">Eventbrite</a></p>
-            <p>
-              Rokas Balevičius <br/>
-              Visual Studio LightSwitch
-            </p>
-            <p>
-              Donatas Mačiūnas <br/>
-              Asinchroninis programavimas su C# 5.0
-            </p>         
-          </div>
-        </li>
-        <li class="span4">
-          <div class="thumbnail">
-            <h3 id="v16">Susitikimas Vilniuje #16</h3>
-            <p>2011-11-23, daugiau informacijos: <a href="http://ltnet16v.eventbrite.com/" target="_blank">Eventbrite</a></p>
-            <p>
-              Rokas Balevičius <br/>
-              Visual Studio LightSwitch
-            </p>
-            <p>
-              Donatas Mačiūnas <br/>
-              Asinchroninis programavimas su C# 5.0
-            </p>           
-          </div>
-        </li>
-        <li class="span4">
-          <div class="thumbnail">
-            <h3 id="v15">Susitikimas Vilniuje #15</h3>
-            <p>2011-08-30, daugiau informacijos: <a href="http://ltnet15v.eventbrite.com/" target="_blank">Eventbrite</a></p>
-            <p>
-              Romualdas Stonkus <br/>
-              SQL Server 2012 naujovės programuotojams
-            </p>
-            <p>
-              Domantas Jovaišas <br/>
-              ASP.NET MVC 3 naujovės ir tips & tricks
-            </p>           
-          </div>
-        </li>
-        <li class="span4">
-          <div class="thumbnail">
-            <h3 id="k11">Susitikimas Kaune #11</h3>
-            <p>2011-08-29, daugiau informacijos: <a href="http://ltnet11k.eventbrite.com/" target="_blank">Eventbrite</a></p>
-            <p>
-              Romualdas Stonkus <br/>
-              SQL Server 2012 naujovės programuotojams
-            </p>
-            <p>
-              Domantas Jovaišas <br/>
-              ASP.NET MVC 3 naujovės ir tips & tricks
-            </p>           
-          </div>
-        </li>
-      </ul>
-    
-    </div><!-- .container -->
+    </div>
+    <!-- .container -->
 
     <script src="http://code.jquery.com/jquery-latest.js"></script>
     <script src="public/js/bootstrap.min.js"></script>
-  </body>
+</body>
 </html>
