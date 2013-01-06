@@ -6,11 +6,11 @@
 <html>
 <head>
     <title>Lietuvos .net naudotojų grupė</title>
-    <link href="public/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="@Url.Content("~/Public/css/bootstrap.min.css")" rel="stylesheet" media="screen">
     <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-    <!-- <link rel="shortcut icon" href="public/favicon.png"> -->
+    <link rel="shortcut icon" href="@Url.Content("~/favicon.ico")">
     <style>
         #logo {
             position: relative;
@@ -27,13 +27,13 @@
 
         <div>
             <ul class="nav nav-pills pull-right">
-                <li><a href="/stream"><strong>#ltnet</strong> programavimo naujienos &raquo;</a></li>
+                <li><a href="@Url.Action("Index", "Stream")"><strong>#ltnet</strong> programavimo naujienos &raquo;</a></li>
             </ul>
             <h3>&nbsp;</h3>
         </div>
 
         <div class="hero-unit">
-            <img id="logo" src="public/img/logo.png" alt="dotnetgroup.lt logo" class="pull-left" />
+            <img id="logo" src="@Url.Content("~/Public/img/logo.png")" alt="dotnetgroup.lt logo" class="pull-left" />
             <h1>Lietuvos <strong>.net</strong> naudotojų grupė</h1>
             <p></p>
             <p>Programuotojų, testuotojų, architektų ir kitų entuziastų grupė, dirbanti su <strong>.net</strong> technologijomis</p>
@@ -72,12 +72,12 @@
                 <div class="row">
                     <div class="span4">
                         <a href="http://microsoft.com" target="_blank">
-                            <img src="public/img/microsoft.png" alt="Microsoft" />
+                            <img src="@Url.Content("~/Public/img/microsoft.png")" alt="Microsoft" />
                         </a>
                     </div>
                     <div class="span4">
                         <a href="http://adform.com" target="_blank">
-                            <img src="public/img/adform.png" alt="Adform" />
+                            <img src="@Url.Content("~/Public/img/adform.png")" alt="Adform" />
                         </a>
                     </div>
                 </div>
@@ -241,6 +241,6 @@
     <!-- .container -->
 
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-    <script src="public/js/lib/bootstrap.min.js"></script>
+    <script src="@Url.Content("~/Public/js/lib/bootstrap.min.js")"></script>
 </body>
 </html>
