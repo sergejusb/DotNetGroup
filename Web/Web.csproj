@@ -112,10 +112,12 @@
     <Content Include="Global.asax" />
     <Content Include="Public\css\bootstrap-responsive.css" />
     <Content Include="Public\css\bootstrap.css" />
+    <Content Include="Public\css\bootstrap.min.css" />
     <Content Include="Public\css\fonts.css" />
     <Content Include="Public\fonts\segeo-wp-semibold-webfont.svg" />
     <Content Include="Public\fonts\segeo-wp-semilight-webfont.svg" />
     <Content Include="Public\fonts\segeo-wp-webfont.svg" />
+    <Content Include="Public\img\adform.png" />
     <Content Include="Public\img\glyphicons-halflings-white.png" />
     <Content Include="Public\img\glyphicons-halflings.png" />
     <Content Include="Public\img\icon-email.png" />
@@ -125,7 +127,11 @@
     <Content Include="Public\img\icon-rss.png" />
     <Content Include="Public\img\icon-tags.png" />
     <Content Include="Public\img\icon-twitter.png" />
+    <Content Include="Public\img\logo.png" />
+    <Content Include="Public\img\logo_300.png" />
+    <Content Include="Public\img\microsoft.png" />
     <Content Include="Public\js\lib\bootstrap.js" />
+    <Content Include="Public\js\lib\bootstrap.min.js" />
     <Content Include="Public\js\lib\jquery-1.7.2.js" />
     <Content Include="Public\js\lib\jquery.spin.js" />
     <Content Include="Public\js\lib\spin.js" />
