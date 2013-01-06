@@ -12,24 +12,6 @@
     @{ Html.RenderPartial("GoogleAnalytics"); }
 </head>
 <body>
-    <div class="navbar navbar-fixed-top font">
-        <div class="navbar-inner">
-            <div class="container">
-                <a class="brand" href="#">DotNetGroup</a>
-                <ul class="nav">
-                    <li><a href="@Url.Action("Index", "Stream")">Stream</a></li>
-                </ul>
-                @*<div class="nav-collapse">
-                    <ul class="nav">
-                        <li><a href="@Url.Action("Index", "Stream")">Stream</a></li>
-                    </ul>
-                    <ul class="nav pull-right">
-                        <li></li>
-                    </ul>
-                </div>*@
-            </div>
-        </div>
-    </div>
     <div id="spinner"></div>
     @RenderBody()
 </body>
