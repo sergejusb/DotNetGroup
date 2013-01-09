@@ -124,9 +124,12 @@
     <Content Include="Public\img\icon-facebook.png" />
     <Content Include="Public\img\icon-github.png" />
     <Content Include="Public\img\icon-googleplus.png" />
+    <Content Include="Public\img\icon-linkedin.png" />
     <Content Include="Public\img\icon-rss.png" />
     <Content Include="Public\img\icon-tags.png" />
     <Content Include="Public\img\icon-twitter.png" />
+    <Content Include="Public\img\icon-vimeo.png" />
+    <Content Include="Public\img\icon-youtube.png" />
     <Content Include="Public\img\logo.png" />
     <Content Include="Public\img\logo_300.png" />
     <Content Include="Public\img\microsoft.png" />
