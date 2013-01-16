@@ -19,9 +19,8 @@
             width: 150px;
             height: 150px;
         }
-        img.small {
-            width: 16px;
-            height: 16px;
+        .icon-small a:hover {
+            text-decoration: none;
         }
     </style>
     @{ Html.RenderPartial("GoogleAnalytics"); }
@@ -130,47 +129,56 @@
         </div>
 
         <ul class="thumbnails">
-            <li class="span6">
-                <div class="thumbnail">
-                    <h3 id="v19">Susitikimas Vilniuje #19</h3>
-                    <p>2013-01-31, daugiau informacijos: <a href="http://ltnet19v.eventbrite.com/" target="_blank">Eventbrite</a></p>
+            <li class="span1"></li>
+            <li class="span5">
+                <div class="thumbnail" style="vert-align: top">
+                    <h3 id="v19">2013-01-31 | Susitikimas Vilniuje #19</h3>
                     <p>
-                        Paulius Norkus
-                        <a href="http://linkedin.com/pub/paulius-norkus/1a/52a/551">
-                            <img class="small" src="@Url.Content("~/Public/img/icon-linkedin.png")" alt="LinkedIn" />
+                        <a href="http://linkedin.com/pub/paulius-norkus/1a/52a/551" target="_blank">Paulius Norkus</a>
+                        <a class="icon-small" href="http://linkedin.com/pub/paulius-norkus/1a/52a/551" target="_blank">
+                            <img src="@Url.Content("~/Public/img/icon-linkedin.png")" alt="LinkedIn" />
                         </a>
                         <br />
                         Žaidimų kūrimas su MonoGame
                     </p>
                     <p>
-                        Alius Petraška 
-                        <a href="http://linkedin.com/pub/alius-petra%C5%A1ka/33/197/b02">
-                            <img class="small" src="@Url.Content("~/Public/img/icon-linkedin.png")" alt="LinkedIn" />
+                        <a href="http://linkedin.com/pub/alius-petra%C5%A1ka/33/197/b02" target="_blank">Alius Petraška</a>
+                        <a class="icon-small" href="http://linkedin.com/pub/alius-petra%C5%A1ka/33/197/b02" target="_blank">
+                            <img src="@Url.Content("~/Public/img/icon-linkedin.png")" alt="LinkedIn" />
                         </a>
                         <br />
                         Windows 8: Designing the Metro Experience
+                    </p>
+                    <p style="text-align: center">
+                        <a href="http://ltnet19v.eventbrite.com" target="_blank">
+                            <img src="http://www.eventbrite.com/custombutton?eid=5250323860" alt="Eventbrite registracija" />
+                        </a>
                     </p>
                 </div>
             </li>
-            <li class="span6">
+            <li class="span5">
                 <div class="thumbnail">
-                    <h3 id="k15">Susitikimas Kaune #15</h3>
-                    <p>2013-01-30, daugiau informacijos: <a href="http://ltnet15k.eventbrite.com/" target="_blank">Eventbrite</a></p>
+                    <h3 id="k15">2013-01-30 | Susitikimas Kaune #15</h3>
                     <p>
-                        Paulius Norkus
-                        <a href="http://linkedin.com/pub/paulius-norkus/1a/52a/551">
-                            <img class="small" src="@Url.Content("~/Public/img/icon-linkedin.png")" alt="LinkedIn" />
+                        <a href="http://linkedin.com/pub/paulius-norkus/1a/52a/551" target="_blank">Paulius Norkus</a>
+                        <a class="icon-small" href="http://linkedin.com/pub/paulius-norkus/1a/52a/551" target="_blank">
+                            <img src="@Url.Content("~/Public/img/icon-linkedin.png")" alt="LinkedIn" />
                         </a>
                         <br />
                         Žaidimų kūrimas su MonoGame
                     </p>
                     <p>
-                        Alius Petraška
-                        <a href="http://linkedin.com/pub/alius-petra%C5%A1ka/33/197/b02">
-                            <img class="small" src="@Url.Content("~/Public/img/icon-linkedin.png")" alt="LinkedIn" />
+                        <a href="http://linkedin.com/pub/alius-petra%C5%A1ka/33/197/b02" target="_blank">Alius Petraška</a>
+                        <a class="icon-small" href="http://linkedin.com/pub/alius-petra%C5%A1ka/33/197/b02" target="_blank">
+                            <img src="@Url.Content("~/Public/img/icon-linkedin.png")" alt="LinkedIn" />
                         </a>
                         <br />
                         Windows 8: Designing the Metro Experience
+                    </p>
+                    <p style="text-align: center">
+                        <a href="http://ltnet15k.eventbrite.com" target="_blank">
+                            <img src="http://www.eventbrite.com/custombutton?eid=5250323860" alt="Eventbrite registracija" />
+                        </a>
                     </p>
                 </div>
             </li>
