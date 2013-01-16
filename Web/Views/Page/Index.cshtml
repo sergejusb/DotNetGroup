@@ -19,6 +19,10 @@
             width: 150px;
             height: 150px;
         }
+        img.small {
+            width: 16px;
+            height: 16px;
+        }
     </style>
     @{ Html.RenderPartial("GoogleAnalytics"); }
 </head>
@@ -44,11 +48,11 @@
             <div class="span4">
                 <h2>Artimiausi susitikimai</h2>
                 <ul class="unstyled">
-                    <li><a href="http://ltnet19v.eventbrite.com/" target="_blank">2013-01-31 | susitikimas Vilniuje #19</a></li>
-                    <li><a href="http://ltnet15k.eventbrite.com/" target="_blank">2013-01-30 | susitikimas Kaune #15</a></li>
+                    <li><a href="#v19">2013-01-31 | susitikimas Vilniuje #19</a></li>
+                    <li><a href="#k15">2013-01-30 | susitikimas Kaune #15</a></li>
                     <!-- <p class="muted">Sustikimai dar nėra suplanuoti :(</p> -->
-                    <p>Galėtum padaryti pranešimą? <a href="mailto:seriog@yahoo.com?subject=dotnetgroup-pranesejas">Pranešk mums!</a></p>
                 </ul>
+                <p>Galėtum padaryti pranešimą? <a href="mailto:seriog@yahoo.com?subject=dotnetgroup-pranesejas">Pranešk mums!</a></p>
             </div>
             <div class="span4">
                 <h2>Ankstesni susitikimai</h2>
@@ -126,6 +130,50 @@
         </div>
 
         <ul class="thumbnails">
+            <li class="span6">
+                <div class="thumbnail">
+                    <h3 id="v19">Susitikimas Vilniuje #19</h3>
+                    <p>2013-01-31, daugiau informacijos: <a href="http://ltnet19v.eventbrite.com/" target="_blank">Eventbrite</a></p>
+                    <p>
+                        Paulius Norkus
+                        <a href="http://linkedin.com/pub/paulius-norkus/1a/52a/551">
+                            <img class="small" src="@Url.Content("~/Public/img/icon-linkedin.png")" alt="LinkedIn" />
+                        </a>
+                        <br />
+                        Žaidimų kūrimas su MonoGame
+                    </p>
+                    <p>
+                        Alius Petraška 
+                        <a href="http://linkedin.com/pub/alius-petra%C5%A1ka/33/197/b02">
+                            <img class="small" src="@Url.Content("~/Public/img/icon-linkedin.png")" alt="LinkedIn" />
+                        </a>
+                        <br />
+                        Windows 8: Designing the Metro Experience
+                    </p>
+                </div>
+            </li>
+            <li class="span6">
+                <div class="thumbnail">
+                    <h3 id="k15">Susitikimas Kaune #15</h3>
+                    <p>2013-01-30, daugiau informacijos: <a href="http://ltnet15k.eventbrite.com/" target="_blank">Eventbrite</a></p>
+                    <p>
+                        Paulius Norkus
+                        <a href="http://linkedin.com/pub/paulius-norkus/1a/52a/551">
+                            <img class="small" src="@Url.Content("~/Public/img/icon-linkedin.png")" alt="LinkedIn" />
+                        </a>
+                        <br />
+                        Žaidimų kūrimas su MonoGame
+                    </p>
+                    <p>
+                        Alius Petraška
+                        <a href="http://linkedin.com/pub/alius-petra%C5%A1ka/33/197/b02">
+                            <img class="small" src="@Url.Content("~/Public/img/icon-linkedin.png")" alt="LinkedIn" />
+                        </a>
+                        <br />
+                        Windows 8: Designing the Metro Experience
+                    </p>
+                </div>
+            </li>
             <li class="span4">
                 <div class="thumbnail">
                     <h3 id="v18">Susitikimas Vilniuje #18</h3>
