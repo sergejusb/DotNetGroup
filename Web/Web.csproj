@@ -133,6 +133,7 @@
     <Content Include="Public\img\logo.png" />
     <Content Include="Public\img\logo_300.png" />
     <Content Include="Public\img\microsoft.png" />
+    <Content Include="Public\img\visma.png" />
     <Content Include="Public\js\lib\bootstrap.js" />
     <Content Include="Public\js\lib\bootstrap.min.js" />
     <Content Include="Public\js\lib\jquery-1.7.2.js" />
