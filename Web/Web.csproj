@@ -136,6 +136,7 @@
     <Content Include="Public\img\visma.png" />
     <Content Include="Public\img\jetbrains.png" />
     <Content Include="Public\img\pluralsight.png" />
+    <Content Include="Public\img\telerik.png" />
     <Content Include="Public\js\lib\bootstrap.js" />
     <Content Include="Public\js\lib\bootstrap.min.js" />
     <Content Include="Public\js\lib\jquery-1.7.2.js" />
